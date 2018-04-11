@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
+    $('#menuSascha').load('https://api-sascha.herokuapp.com/menu.html');
 });
