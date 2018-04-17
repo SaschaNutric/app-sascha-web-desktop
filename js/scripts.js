@@ -260,16 +260,26 @@
 
 
         $('.panel .tools .fa').click(function () {
-            var el = $(this).parents(".panel").children(".panel-body");
+            var el = $(this).parent().parent().parent().children(".panel-body");
             if ($(this).hasClass("fa-chevron-down")) {
                 $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
                 el.slideUp(200);
-            } else {
+            } else if($(this).hasClass("fa-chevron-up")){
                 $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
                 el.slideDown(200); }
         });
 
 
+        // $('.panel-collapse .tools .fa').click(function () {
+        //     var el = $(this).parents(".panel-collapse").children(".panel-body");
+        //     console.log(el);
+        //     if ($(this).hasClass("fa-chevron-down")) {
+        //         $(this).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+        //         el.slideUp(200);
+        //     } else {
+        //         $(this).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+        //         el.slideDown(200); }
+        // });
 
         $('.panel .tools .fa-times').click(function () {
             $(this).parents(".panel").parent().remove();

@@ -20,6 +20,7 @@ var cantidades = ["250g", "100g", "2 unidades"];
 for(var i = 0; i < plan.length; i++) {
 	//creando el panel
     var panel = document.createElement('section');
+    panel.setAttribute('id','comida-'+i);
     panel.className='panel';
     //creando el header del panel
     var panelHeading = document.createElement('header');
