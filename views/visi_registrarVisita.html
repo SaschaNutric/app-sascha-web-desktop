@@ -29,12 +29,12 @@
         <div id="menuSascha"></div>
         <section id="main-content">
             <section class="wrapper">
-                <h3>Registrar Visita</h3>
+                <h3>Primera Visita</h3>
                 <div class="row">
                     <div class="col-md-8">
                         <section class="panel">   
                             <header class="panel-heading">
-                                Cliente
+                                Cliente - Ana Victoria De Palma
                             </header>
                             <section class="panel-body">
                                 <div class="row">
@@ -62,23 +62,53 @@
                                 </div>
                             </section>
                         </section>
+                        <section class="panel">
+                        <header class="panel-heading">Visita</header>
+                        <section class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Tipo:</label> <span>Primera Visita</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Fecha:</label> <span>18/04/2018</span>
+                            </div>
+                            </div>
+                        </section>
+                        </section>
                     </div>
                     <div class="col-md-4">     
                         <section class="panel">   
                             <header class="panel-heading">
-                                Servicio
+                                Servicio - Adelgazar 
                             </header>
                             <section class="panel-body">
+                                <div class="row col-md-12" style="text-align: justify;">
+                                    <p>Este servicio es ideal para personas con obesidad</p>
+                                </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <label for="avanceCliente">Avance:</label>
-                                        <div id="avanceCliente" class="progress progress-striped progress-md" style="width: 80%; float: right;">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span class="sr-only">40% Complete (success)</span>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6" >
+                                        <label class="control-label">Duración:</label> <span> 12 Visitas</span> 
+                                    </div>
+                                    <div class="col-md-6" style="text-align: right;">
+                                        <label class="control-label">Precio</label> <span>200.000 bs</span>
                                     </div>
                                 </div>
+                                <div  style="padding: 20px">
+                                    <div class="row">
+                                        <i class="fa fa-asterisk"></i>
+                                        <label>Dieta:</label> <span>Hipocalórica</span>
+                                    </div>
+                                    <div class="row">
+                                        <i class="fa fa-asterisk"></i>
+                                        <label>Plan de Suplemento:</label> <span>Suplementos 1</span>
+                                    </div>
+                                    <div class="row">
+                                     <i class="fa fa-asterisk"></i>
+                                     <label>Plan de Entrenamiento:</label> <span>Ejercicios básicos</span>
+                                    </div>
+
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                      <label>Meta: </label>
@@ -126,7 +156,7 @@
                                      </div>
                                  </div>
                              </form> 
-                             
+
                              <table class="table table-striped table-hover table-bordered dataTable"  id="dtPerfil">
                                 <thead>
                                     <tr role="row">
@@ -146,7 +176,6 @@
                             <div class="row" style="border-bottom: solid 1px;">
                                 <h4>Dieta Hipocalorica</h4>
                             </div>
-                            <br>
                             <div class="row">
                                 <h5> Baja en calorias. Ideal para perder peso</h5>
                             </div>
@@ -280,7 +309,7 @@
                         <label class="col-md-5 control-label" for="cmbParametro">Parametro:</label>
                         <div class="col-md-4">
                          <select id="cmbParametro" class="form-control"> </select>
-                         
+
                      </div>
                  </div>
                  <div class="form-group">
@@ -289,6 +318,36 @@
                         <input id="txtValorMeta" type="number" class="form-control"/>
                     </div>
                 </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+            <button class="btn btn-info" type="button">Aceptar</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="agregarAlimentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Agregar Alimentos</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Grupo Alimenticio:</label>
+                        <div class="col-md-5"><input class="form-control" type="text" disabled="disabled" name="" value="Proteina"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>
+                        <div class="col-md-9">
+                         <select id="ms_alimentos" class="form-control"> </select>
+
+                     </div>
+                 </div>
             </form>
         </div>
         <div class="modal-footer">
