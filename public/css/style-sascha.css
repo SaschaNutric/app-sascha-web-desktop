@@ -1,0 +1,134 @@
+/*registar incidencia*/
+#label-inc-visit
+{
+    top:5px;
+    left:110px;
+
+}
+
+#comb-inc-visit
+{
+top:1px;
+ left:120px;
+
+}
+
+#label2-inc-visit
+{
+    top:12px;
+    left:110px;
+
+}
+#comb2-inc-visit
+{
+top:8px;
+ left:135px;
+}
+
+
+/*fin de registar incidencia*/
+
+#btnladoderecho
+{
+
+top: -10px;
+left: 430px;
+}
+
+#btnladoderechoabajo
+{
+
+top: 4px;
+left: 160px;
+}
+
+
+.event-calendar {
+    background:#117c66;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+    min-height:474px;
+}
+
+
+#btnladoderecho
+{
+
+top: -10px;
+left: 930px;
+}
+
+
+/*panel*/
+.panel {
+    border: none;
+    box-shadow: none;
+}
+
+.panel-heading {
+    border-color:#17AA8B;
+    font-size: 24px;
+    color:#FFFFFF;
+    font-weight: 400;
+    background: #FFFFFF;
+    text-transform: uppercase;
+    padding: 15px;
+    color:#000000;
+}
+.btn-cancelar
+{
+     background-color: #ED4046;
+    border-color: #ED4046;
+    color: #FFFFFF;
+}
+.btn-sblanco
+{
+   
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    margin-left: 0;
+    position: relative;
+}
+.btn-stransparent
+{ 
+ background-color: transparent;
+ border-color: transparent;
+}
+.btn-snegro
+{
+    background-color: #FFFFFF;
+    border-color: #000000;
+    color: #00000;
+
+}
+.btn-vclaro
+ {
+    background-color: #17AA8B;
+    border-color: #17AA8B;
+    color: #FFFFFF;
+    
+}
+
+.btn-voscuro
+ {
+    background-color: #117666;
+    border-color: #117666;
+    color: #FFFFFF;
+    
+}
+
+
+.panel-heading {
+    border-color:#17AA8B;
+    font-size: 24px;
+    color:#FFFFFF;
+    font-weight: 400;
+    background: #FFFFFF;
+    text-transform: uppercase;
+    padding: 15px;
+    color:#000000;
+}
+
+
