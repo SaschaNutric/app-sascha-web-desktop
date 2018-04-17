@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#menuSascha').load('https://api-sascha.herokuapp.com/menu.html');
+    $('#menuSascha').load('menu.html');
 });
 
 var tipo_parametro = ["Antropometrico","Patologia", "Examen", "Condicion", "Actividad Fisica", "Alergia", "Medicamento"];     
