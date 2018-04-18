@@ -26,6 +26,37 @@ top:8px;
 }
 
 
+#label-canal-escucha
+{
+    top:30px;
+    left:100px;
+
+}
+#comb-canal-escucha
+{
+top:2px;
+ left:200px;
+}
+
+
+
+#label-reclamos
+{
+top:6px;
+ left:170px;
+
+}
+#comb-reclamos
+{
+top:0px;
+ left:280px;
+
+}
+
+
+
+
+
 /*fin de registar incidencia*/
 
 #btnladoderecho
@@ -66,15 +97,14 @@ left: 930px;
     box-shadow: none;
 }
 
-.panel-heading {
-    border-color:#17AA8B;
-    font-size: 24px;
-    color:#FFFFFF;
+.panel-heading 
+{
+ border-color:#eff2f7 ;
+    font-size: 13px;
     font-weight: 400;
-    background: #FFFFFF;
+    background: #fafafa;
     text-transform: uppercase;
     padding: 15px;
-    color:#000000;
 }
 .btn-cancelar
 {
