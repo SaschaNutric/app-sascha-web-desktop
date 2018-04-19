@@ -14,11 +14,10 @@ a:hover {
 }
 
 .panel-heading {
-    border-color:#eff2f7 ;
-    font-size: 13px;
+    border-color:#f6f6f6 ;
+    font-size: 24px;
     font-weight: 400;
     background: #fafafa;
-    text-transform: uppercase;
     padding: 15px;
 }
 
@@ -131,7 +130,7 @@ a:hover {
 
 .form-horizontal .control-label {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 input, textarea, select, button {
