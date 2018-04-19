@@ -32,11 +32,14 @@ border-color: #17aa8b;
     border-color: #519F8F;
     color: #FFFFFF;
 }
-.panel-collapse{
 
-	margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 4px;
-    border: none;
-    box-shadow: none;
+.dataTables_filter {
+    float:left ;
+    text-align: left ;
+    margin-top: -50px;
+}
+
+
+.btn-agregar{
+    padding-top: 20px;
 }
