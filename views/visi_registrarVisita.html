@@ -147,8 +147,7 @@
             <div class="tab-content">
                 <div id="perfil" class="tab-pane active"> 
                     <div class="container" style="padding-top: 20px">
-                        <div class="row" style="border-bottom: solid 1px;">
-                            <h4>Configurar Perfil</h4></div>
+                        
                             <form class="form-horizontal" style="padding-top: 20px; padding-bottom: 40px">
                                 <div class="form-group">
                                     <div class="col-md-3 control-label"  >   
@@ -165,9 +164,10 @@
                          <table class="display table table-bordered table-striped " id="dtPerfil">
                             <thead>
                                 <tr >
+                                    <th id=tipoParametro style="display: none"> </th>
                                     <th style="width: 45%;">Parametro</th>
                                     <th  style="width: 45%;">Valor</th>
-                                    <th  style="width: 10%;">Editar</th>                     
+                                    <th  style="width: 10%; display: none;">Editar</th>                     
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -343,7 +343,11 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Grupo Alimenticio:</label>
-                        <div class="col-md-5"><input class="form-control" type="text" disabled="disabled" name="" value="Proteina"/> </div>
+                        <div class="col-md-7"><input class="form-control" type="text" disabled="disabled" name="" value="Proteina"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Cantidad:</label>
+                        <div class="col-md-7"><input class="form-control" type="number"  name="" /> </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>

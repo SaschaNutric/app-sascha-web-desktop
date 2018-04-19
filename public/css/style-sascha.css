@@ -131,4 +131,18 @@ left: 930px;
     color:#000000;
 }
 
+.btn-agregarServ
+{
+        color: #ffffff;
+    background-color: #17AA8B;
+     top: -10px;
+}
 
+
+
+
+.dataTables_filter {
+    float:left ;
+    text-align: left ;
+    margin-top: -50px;
+}

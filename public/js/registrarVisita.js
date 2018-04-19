@@ -15,12 +15,19 @@ for(var i = 0; i < alimentos.length; i++) {
 
 
 var tipo_parametro = ["Antropometrico","Patologia", "Examen", "Condicion", "Actividad Fisica", "Alergia", "Medicamento"];     
+var parametro = ["Peso","Diabetes","Glicemia","Fumador", "Yoga","Maní", "Eutirox"];
 var sel = document.getElementById('cmbTipoParametro');
 for(var i = 0; i < tipo_parametro.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = tipo_parametro[i];
     opt.value = tipo_parametro[i];
     sel.appendChild(opt);
+}
+
+var tablaDieta = document.getElementById('dtPerfil');
+for(var s=0; s<tipo_parametro; s++){
+
+
 }
 
 
@@ -88,7 +95,7 @@ function crearTabla(id,grupos, cantidades, body){
 
     editar.innerHTML = "<a id='btn"+i+tabla.id+"'  class='btn btn-white' data-toggle='modal' href='#agregarAlimentos' ><i class='fa fa-pencil'/></a>";
     grupo.innerHTML = grupos[i];
-    cant.innerHTML = "<input class='form-control' type='number' id='txt"+tabla.id+"-"+i+"'/>";
+    cant.innerHTML = cantidades[i];
     for(var j=0; j<alimentos.length; j++){
         alim.innerHTML += alimentos[j] + ', ';
     }
@@ -322,7 +329,7 @@ $(document).ready(function() {
 
     $('#dtPerfil').dataTable( {
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [ 2 ] }
+        { "bSortable": false, "aTargets": [ 3 ] }
         ],
         "sDom": "ftp",
         "oLanguage": {
