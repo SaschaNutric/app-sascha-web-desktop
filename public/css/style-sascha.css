@@ -37,24 +37,55 @@ top:8px;
 top:2px;
  left:200px;
 }
+#label-tiporeclamos
+{
+top:6px;
+ left:200px;
 
+}
+#comb-tiporeclamos
+{
+top:px;
+ left:280px;
+}
+#label-motireclamos
+{
+top:6px;
+ left:115px;
+
+}
+#comb-motireclamos
+{
+top:px;
+ left:170px;
+}
 
 
 #label-reclamos
 {
 top:6px;
- left:170px;
+ left:200px;
 
 }
 #comb-reclamos
 {
-top:0px;
+top:px;
  left:280px;
 
 }
+#imput-rol
+{
+    top:0px;
+ left:70px;
 
+}
 
+#label-rol
+{
+    top:18px;
+ left:40px;
 
+}
 
 
 /*fin de registar incidencia*/
@@ -95,16 +126,6 @@ left: 930px;
 .panel {
     border: none;
     box-shadow: none;
-}
-
-.panel-heading 
-{
- border-color:#eff2f7 ;
-    font-size: 13px;
-    font-weight: 400;
-    background: #fafafa;
-    text-transform: uppercase;
-    padding: 15px;
 }
 .btn-cancelar
 {
@@ -151,14 +172,30 @@ left: 930px;
 
 
 .panel-heading {
-    border-color:#17AA8B;
+    border-color:#f6f6f6;
     font-size: 24px;
     color:#FFFFFF;
     font-weight: 400;
     background: #FFFFFF;
-    text-transform: uppercase;
     padding: 15px;
-    color:#000000;
+    color:#767676;
 }
+
+#panel-h
+{
+     border-color:#f6f6f6;
+    font-size: 24px;
+    color:#FFFFFF;
+    font-weight: 400;
+    padding: 15px;
+    color:#767676;
+}
+
+
+.dataTables_filter 
+{   
+float:left ;  
+text-align: left ;   
+margin-top: -107px; }
 
 
