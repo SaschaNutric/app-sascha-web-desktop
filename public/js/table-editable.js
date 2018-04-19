@@ -47,69 +47,25 @@ var EditableTable = function () {
                 oTable.fnDraw();
             }
 
-
-            jQuery('#editable-sample_wrapper .dataTables_filter input').addClass("form-control medium"); // modify table search input
-            jQuery('#editable-sample_wrapper .dataTables_length select').addClass("form-control xsmall"); // modify table per page dropdown
-
-            var nEditing = null;
-
-            $('#editable-sample_new').click(function (e) {
-                e.preventDefault();
-                var aiNew = oTable.fnAddData(['', '', '', '',
-                        '<a class="edit" href="">Edit</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
-                ]);
-                var nRow = oTable.fnGetNodes(aiNew[0]);
-                editRow(oTable, nRow);
-                nEditing = nRow;
+            var oTable = $('#editable-sample').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-6'i><'col-lg-6'p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [0]
+                    }
+                ]
             });
-
-            $('#editable-sample a.delete').live('click', function (e) {
-                e.preventDefault();
-
-                if (confirm("Are you sure to delete this row ?") == false) {
-                    return;
-                }
-
-                var nRow = $(this).parents('tr')[0];
-                oTable.fnDeleteRow(nRow);
-                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
-            });
-
-            $('#editable-sample a.cancel').live('click', function (e) {
-                e.preventDefault();
-                if ($(this).attr("data-mode") == "new") {
-                    var nRow = $(this).parents('tr')[0];
-                    oTable.fnDeleteRow(nRow);
-                } else {
-                    restoreRow(oTable, nEditing);
-                    nEditing = null;
-                }
-            });
-
-            $('#editable-sample a.edit').live('click', function (e) {
-                e.preventDefault();
-
-                /* Get the row as a parent of the link that was clicked on */
-                var nRow = $(this).parents('tr')[0];
-
-                if (nEditing !== null && nEditing != nRow) {
-                    /* Currently editing - but not this row - restore the old before continuing to edit mode */
-                    restoreRow(oTable, nEditing);
-                    editRow(oTable, nRow);
-                    nEditing = nRow;
-                } else if (nEditing == nRow && this.innerHTML == "Save") {
-                    /* Editing this row and want to save it */
-                    saveRow(oTable, nEditing);
-                    nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
-                } else {
-                    /* No edit in progress - let's start one */
-                    editRow(oTable, nRow);
-                    nEditing = nRow;
-                }
-            });
-        }
-
-    };
-
-}();

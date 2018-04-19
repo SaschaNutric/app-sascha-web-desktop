@@ -1,0 +1,13 @@
+.modal-dieta{
+	width: 800px;
+}
+
+.btn-agregar{
+	padding-top: 20px;
+}
+
+.dataTables_filter {
+    float:left ;
+    text-align: left ;
+    margin-top: -50px;
+}
