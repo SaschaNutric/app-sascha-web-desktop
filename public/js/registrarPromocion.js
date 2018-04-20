@@ -3,7 +3,7 @@ $('#menuSascha').load('menu.html');
 
 	$('#dtParametros').dataTable( {
 		"aoColumnDefs": [
-		{ "bSortable": false, "aTargets": [ 4 ] }
+		{ "bSortable": false, "aTargets": [ 2 ] }
 		],
 		"sDom": "ftp",
 		"oLanguage": {
@@ -14,7 +14,7 @@ $('#menuSascha').load('menu.html');
 				"sPrevious": "Anterior",
 				"sNext": "Siguiente"
 			},
-			"sEmptyTable": "No se encontraron parametros"
+			"sEmptyTable": "No se encontraron roles"
 		},
 	} );
 });

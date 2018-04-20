@@ -8,7 +8,7 @@ $(document).ready(function() {
 		],
 		"sDom": "ftp",
 		"oLanguage": {
-			"sZeroRecords":"No se encontraron servicios",
+			
 			"sLengthMenu": "",
 			"sSearch": "Buscar:",
 			"oPaginate":{

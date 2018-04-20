@@ -14,7 +14,7 @@ body {
     font-family:'Open Sans',sans-serif;
     padding:0px !important;
     margin:0px !important;
-    font-size:13px;
+    font-size:15px;
     text-rendering:optimizeLegibility;
 }
 ul, .list-unstyled {
@@ -230,7 +230,7 @@ ul.sidebar-menu li ul.sub li {
     margin-right:0;
 }
 ul.sidebar-menu li ul.sub li a {
-    font-size:12px;
+    font-size:14px;
     padding-top:13px;
     padding-bottom:13px;
     -webkit-transition:all 0.3s ease;
@@ -267,7 +267,7 @@ ul.sidebar-menu li a {
     text-decoration:none;
     display:block;
     padding:18px 0 18px 25px;
-    font-size:12px;
+    font-size:14px;
     outline:none;
     -webkit-transition:all 0.3s ease;
     -moz-transition:all 0.3s ease;
@@ -286,7 +286,7 @@ ul.sidebar-menu li a.active,ul.sidebar-menu li a:hover,ul.sidebar-menu li a:focu
     transition:all 0.3s ease;
 }
 ul.sidebar-menu li a i {
-    font-size:15px;
+    font-size:15px !important;
     padding-right:6px;
 }
 ul.sidebar-menu li a:hover i,ul.sidebar-menu li a:focus i {
@@ -327,7 +327,7 @@ ul.sidebar-menu li a.active i {
 .fixed-top {
     position:fixed;
     box-shadow:1px 0 3px rgba(0,0,0,.15);
-    background:#17aa8b;
+    background:#FFFFFF;
 }
 .wrapper {
     display:inline-block;
@@ -337,7 +337,7 @@ ul.sidebar-menu li a.active i {
 
 }
 .brand {
-    background:#17aa8b;
+    background:#FFFFFF;
     float:left;
     width:240px;
     height:80px;
@@ -347,7 +347,7 @@ a.logo {
     font-size:21px;
     color:#2e2e2e;
     float:left;
-    margin:20px 0 0 25px;
+    margin:5px 0 0 25px;
     text-transform:uppercase;
 }
 a.logo:hover,a.logo:focus {
@@ -526,7 +526,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 .top-nav {
     margin-top:20px;
-     background:#17aa8b;
+     background:#FFFFFF;
 }
 .top-nav img {
     border-radius:50%;
@@ -2737,7 +2737,9 @@ ul.amounts li {
     padding:0 15px;
 }
 .dataTables_filter {
-    float:right;
+    float:left;
+    text-align: left;
+    width: 70%;
 }
 .dataTables_length select {
     width:65px;
@@ -3959,9 +3961,8 @@ td.details table tr td,.dataTable tr:last-child {
     background-color:#FFFFFF;
 }
 .adv-table .dataTables_filter label input {
-    float:right;
     margin-left:10px;
-    width:78%;
+    width:50%;
 }
 .adv-table .dataTables_filter label {
     line-height:33px;

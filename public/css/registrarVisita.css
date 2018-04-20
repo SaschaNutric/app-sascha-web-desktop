@@ -37,6 +37,12 @@ border-color: #17aa8b;
     float:left ;
     text-align: left ;
     margin-top: -50px;
+    width: 70%;
+
+}
+
+.dataTables_filter label input{
+    width: 50% !important;
 }
 
 

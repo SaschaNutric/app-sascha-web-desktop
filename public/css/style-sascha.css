@@ -199,8 +199,8 @@ left: 930px;
 }
 
 
-.dataTables_filter {
-    float:left ;
-    text-align: left ;
-    margin-top: -50px;
+
+.dataTables_filter label input{
+
+width: 50% !important;
 }

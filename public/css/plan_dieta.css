@@ -6,8 +6,19 @@
 	padding-top: 20px;
 }
 
-.dataTables_filter {
-    float:left ;
-    text-align: left ;
-    margin-top: -50px;
+.dataTables_filter label input{
+
+width: 50% !important;
+}
+
+.btn-info{
+background-color: #17aa8b;
+border-color: #17aa8b;
+
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+    background-color: #6BC8B5;
+    border-color: #6BC8B5;
+    color: #FFFFFF;
 }

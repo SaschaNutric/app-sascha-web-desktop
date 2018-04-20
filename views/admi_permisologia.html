@@ -1,824 +1,771 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="ThemeBucket">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="ThemeBucket">
 
-        <title>Sascha</title>
+      <title>Sascha</title>
 
-        <!--Core CSS -->
-        <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-reset.css" rel="stylesheet">
-        <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
-        <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
-        <link href="css/style-sascha.css" rel="stylesheet">
+      <!--Core CSS -->
+      <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/bootstrap-reset.css" rel="stylesheet">
+      <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
+      <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
+      <link href="css/style-sascha.css" rel="stylesheet">
 
 
-        <!--external css-->
-        <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
-        <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+      <!--external css-->
+      <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
+      <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
 
-        <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-responsive.css" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="css/style.css" rel="stylesheet">
+      <link href="css/style-responsive.css" rel="stylesheet" />
+      <link href="css/admi_permisologia.css" rel="stylesheet">
 
     </head>       
     <body>
-        <div id="menuSascha"></div>
-        <section id="main-content">
-            <section class="wrapper">
-               <header class="panel-h">
-                            Permisologia
-                    </header>
+      <div id="menuSascha"></div>
+      <section id="main-content">
+        <section class="wrapper">
+         <h3>
+          Permisologia
+        </h3>
 
-               
+        
 
-            <section class="panel">
-                       
+        <section class="panel">
+         <header class="panel-heading tab-bg-dark-navy-blue ">
+          <ul class="nav nav-tabs" style="text-align: center;">
+            <li class="active" style="width: 50%">
+              <a data-toggle="tab" href="#roles" aria-expanded="false">roles</a>
+            </li>
+            <li class="" style="width: 50%">
+              <a data-toggle="tab" href="#usuarios" aria-expanded="false">usuarios</a>
+            </li>
+          </ul>
+        </header>
+        <!-- termina ambas pamtallas-->
+        <section class="panel-body">
 
+          <div class="tab-content">
 
-               <header class="panel-heading tab-bg-dark-navy-blue ">
-                <ul class="nav nav-tabs" style="text-align: center;">
-                    <li class="active" style="width: 50%">
-                        <a data-toggle="tab" href="#roles" aria-expanded="false">roles</a>
-                    </li>
-                    <li class="" style="width: 50%">
-                        <a data-toggle="tab" href="#usuarios" aria-expanded="false">usuarios</a>
-                    </li>
-                </ul>
-            </header>
-
-
-             <!-- termina ambas pamtallas-->
-                <section class="panel-body">
-
-                                  <div class="tab-content">
-
-                                                  <!--roles-->
-                                                  <div id="roles" class="tab-pane active"> 
-                                                    <!--todo dentro-->
-                                                           <div class="container" style="padding-top: 0px">
-                                                                <div class="btn-group pull-right">
-                                                                    <button class="ver btn btn-vclaro" data-target="#myModal" data-toggle="modal" title="Agregar Nuevo" type="button"> <i></i>
-                                                                          Agregar
-                                                                     </button>
-                                                                </div>
-
-                                                                 <!-- INICIO Modal AGREGAR NUEVO USUARIO -->
-                                                                 <div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
-                                                                          <div class="modal-dialog" role="document">
-                                                                               <div class="modal-content">
-                                                                                   <div class="modal-header">
-                                                                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                                                                             <span aria-hidden="true">×</span>
-                                                                                        </button>
-                                                                                             <h4 class="modal-title" id="myModalLabel">
-                                                                                                   Agregar Rol
-                                                                                             </h4>
-                                                                                    </div>
-                                                                                     <div class="modal-body">
-                                                                                               <section>
-                                                                                                     <form class="form-horizontal">
-                                                                                                             <div class="form-group">
-                                                                                                                <label class="col-md-2 control-label" id="label-rol">
-                                                                                                                         Nombre:</label>
-                                                                                                                        <br>
-                                                                                                                    <div class="col-md-8" id="imput-rol" >
-                                                                                                                        <input type="text" class="form-control" placeholder="Nombre">
-                                                                                                                    </div>
-                                                                                                             </div>
+            <!--roles-->
+            <div id="roles" class="tab-pane active"> 
+              <!--todo dentro-->
+              <div class="container" style="padding-top: 0px">
+                <div class="btn-group pull-right">
+                  <button class="ver btn btn-vclaro" data-target="#myModal" data-toggle="modal" title="Agregar Nuevo" type="button"> <i></i>
+                    Agregar
+                  </button>
+                </div>
+                <br>
+                <br>
+                <br>
 
 
+                <!-- tabla-->
+                <table class="table table-striped table-hover table-bordered" id="dtRoles">
+                 <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th style="width: 15%">Acciones</th>
+                  </tr>
+                </thead>
+                <tr class="">
+                  <td>Gerente</td>
+                  <td>Gerente</td>
+                  <!--Botones de las acciones-->
+                  <td>
+                   <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
+                     <i class="fa fa-eye">
+                     </i>
+                   </button>
+                   <button class="edit btn btn-stransparent" data-target="#modal-editar" data-toggle="modal" title="Editar" type="button">
+                    <i class="fa fa-pencil">
+                    </i>
+                  </button>
+                  <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
+                   <i class="fa fa-trash-o">
+                   </i>
+                 </button>
+               </td>
+               <!--Fin de los botones de las acciones-->
+             </tr>
 
-                                                                                                             <div class="form-group">
-                                                                                                                 <label id="label-rol" class="col-md-2 control-label">
-                                                                                                                  
-                                                                                                                       Descripcion:</label>
-                                                                                                                   <br>
-                                                                                                                   <div class="col-md-8" id="imput-rol" >
-                                                                                                                   
-                                                                                                                          <input type="text" class="form-control" placeholder="Descripcion">
-                                                                                                                  </div>
-                                                                                                            </div>
-                                                                                                     </form>
-                                                                                                 </section>
-                                                                                     </div>
-                                                                                     <br>
-                                                                                      <div class="modal-footer">
-                                                                                             <button class="btn btn-cancelar" data-dismiss="modal" type="button">
-                                                                                                Cancelar
-                                                                                             </button>
-                                                                                             <button class="btn btn-vclaro" type="button">
-                                                                                              Registrar
-                                                                                              </button>
-                                                                                      </div>
-                                                                                    
-                                                                                </div>
-                                                                          </div>
-                                                                     </div>
-                                                                     <!-- fin Modal AGREGAR NUEVO USUARIO -->
-                                                                     <br>
-                                                                     <br>
-                                                                     <br>
+             <tr class="">
+               <td>Gerente</td>
+               <td>Gerente</td>
+               <!--Botones de las acciones-->
+               <td>
+                <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
+                  <i class="fa fa-eye">
+                  </i>
+                </button>
+                <button class="edit btn btn-stransparent" data-target="#modal-editar" data-toggle="modal" title="Editar" type="button">
+                 <i class="fa fa-pencil">
+                 </i>
+               </button>
+               <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
+                <i class="fa fa-trash-o">
+                </i>
+              </button>
+            </td>
+            <!--Fin de los botones de las acciones-->
+          </tr>
+          <tr class="">
+           <td>Secretaria</td>
+           <td>Secretaria</td>
+           <!--Botones de las acciones-->
+           <td>
+            <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
+              <i class="fa fa-eye">
+              </i>
+            </button>
+            <button class="edit btn btn-stransparent" data-target ="#modal-editar" data-toggle="modal" title="Editar" type="button">
+             <i class="fa fa-pencil">
+             </i>
+           </button>
+           <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
+            <i class="fa fa-trash-o">
+            </i>
+          </button>
+        </td>
+        <!--Fin de los botones de las acciones-->
+      </tr>
 
-                                                                     <!-- tabla-->
-                                                                    <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                                                                                 <thead>
-                                                                                      <tr>
-                                                                                          <th>Nombre</th>
-                                                                                          <th>Descripción</th>
-                                                                                          <th style="width: 15%">Acciones</th>
-                                                                                     </tr>
-                                                                                </thead>
-                                                                                <tr class="">
-                                                                                      <td>Gerente</td>
-                                                                                      <td>Gerente</td>
-                                                                                      <!--Botones de las acciones-->
-                                                                                       <td>
-                                                                                       <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
-                                                                                       <i class="fa fa-eye">
-                                                                                        </i>
-                                                                                       </button>
-                                                                                       <button class="edit btn btn-stransparent" data-target="#modal-editar" data-toggle="modal" title="Editar" type="button">
-                                                                                            <i class="fa fa-pencil">
-                                                                                            </i>
-                                                                                      </button>
-                                                                                      <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
-                                                                                       <i class="fa fa-trash-o">
-                                                                                       </i>
-                                                                                    </button>
-                                                                                     </td>
-                                                                                       <!--Fin de los botones de las acciones-->
-                                                                                </tr>
+      <tr class="">
+       <td>Nutricionista</td>
+       <td>Nutricionista</td>
+       <!--Botones de las acciones-->
+       <td>
+        <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
+         <i class="fa fa-eye">
+         </i>
+       </button>
+       <button class="edit btn btn-stransparent" data-target="#modal-editar" data-toggle="modal" title="Editar" type="button">
+        <i class="fa fa-pencil">
+        </i>
+      </button>
+      <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
+        <i class="fa fa-trash-o">
+        </i>
+      </button>
+    </td>
+    <!--Fin de los botones de las acciones-->
+  </tr> 
+</table>
+<!-- fin tabla-->
+</div> 
+<!--fin todo dentro-->
+</div>
+<!--fin roles-->
 
-                                                                                <tr class="">
-                                                                                     <td>Gerente</td>
-                                                                                     <td>Gerente</td>
-                                                                                      <!--Botones de las acciones-->
-                                                                                      <td>
-                                                                                          <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
-                                                                                          <i class="fa fa-eye">
-                                                                                          </i>
-                                                                                          </button>
-                                                                                           <button class="edit btn btn-stransparent" data-target="#modal-editar" data-toggle="modal" title="Editar" type="button">
-                                                                                             <i class="fa fa-pencil">
-                                                                                             </i>
-                                                                                           </button>
-                                                                                            <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
-                                                                                              <i class="fa fa-trash-o">
-                                                                                              </i>
-                                                                                              </button>
-                                                                                              </td>
-                                                                                               <!--Fin de los botones de las acciones-->
-                                                                                              </tr>
-                                                                                 <tr class="">
-                                                                                         <td>Secretaria</td>
-                                                                                         <td>Secretaria</td>
-                                                                                         <!--Botones de las acciones-->
-                                                                                          <td>
-                                                                                              <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
-                                                                                                <i class="fa fa-eye">
-                                                                                                </i>
-                                                                                              </button>
-                                                                                              <button class="edit btn btn-stransparent" data-target ="#modal-editar" data-toggle="modal" title="Editar" type="button">
-                                                                                             <i class="fa fa-pencil">
-                                                                                              </i>
-                                                                                             </button>
-                                                                                              <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
-                                                                                                <i class="fa fa-trash-o">
-                                                                                                </i>
-                                                                                              </button>
-                                                                                           </td>
-                                                                                           <!--Fin de los botones de las acciones-->
-                                                                                </tr>
+<!--comienza usuarios-->
+<div id="usuarios" class="tab-pane"> 
 
-                                                                                <tr class="">
-                                                                                           <td>Nutricionista</td>
-                                                                                           <td>Nutricionista</td>
-                                                                                           <!--Botones de las acciones-->
-                                                                                           <td>
-                                                                                                <button class="ver btn btn-stransparent" data-target="#modal-ver" data-toggle="modal" title="Ver Más" type="button">
-                                                                                                 <i class="fa fa-eye">
-                                                                                                </i>
-                                                                                                </button>
-                                                                                                 <button class="edit btn btn-stransparent" data-target="#modal-editar" data-toggle="modal" title="Editar" type="button">
-                                                                                                    <i class="fa fa-pencil">
-                                                                                                    </i>
-                                                                                                </button>
-                                                                                                 <button class="ver btn btn-stransparent" data-target="#modal-confirmar" data-toggle="modal" title="Eliminar" type="button">
-                                                                                                    <i class="fa fa-trash-o">
-                                                                                                    </i>
-                                                                                                  </button>
-                                                                                            </td>
-                                                                                           <!--Fin de los botones de las acciones-->
-                                                                                  </tr> 
-                                                                    </table>
-                                                                     <!-- fin tabla-->
+  <!--desde aca-->
+  <div class="container" style="padding-top: 0px">
+
+    <div class="row">
+      <div class="col-md-1" style="text-align: right;">
+        <label class="control-label">Rol:<label/>
+        </div>
+        <div class="col-md-5">
+          <select class="form-control" id="selectC">
+            <option value="Todos" selected>Todos</option>
+            <option value="Administrador">Gerente</option>  
+            <option value="Nutricionista">Nutricionista</option>
+            <option value="Secretaria">Secretaria</option>
+            <option></option>
+          </select>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button type='button' class='ver btn  btn-vclaro' data-toggle="modal" data-target="#myModal-agregar" title='Agregar Nuevo'><i ></i>Agregar</button>
+        </div>
 
 
-                                                                     <!--Modal Ver mas -->
-                                                                    <div class="modal fade bs-example-modal-md" id="modal-ver" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                                                           <div class="modal-dialog modal-md" role="document">
-                                                                               <div class="modal-content">
-                                                                                  <div class="modal-header">
-                                                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                      <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Datos de Rol</h4>
-                                                                                      </div>
-                                                                                          <section>
-                                                                                                <form class="form-horizontal">
-                                                                                                      <div class="form-group">
-                                                                                                         <label class="col-md-2 control-label" id="label-rol">
-                                                                                                             
-                                                                                                               Nombre:</label>
-                                                                                                               <br>
-                                                                                                            <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Nombre">
-                                                                                                            </div>
-                                                                                                      </div>
+      </div>      
+      <br>
+      <!--comienza la tabla-->
+      <table class="table table-striped table-hover table-bordered" id="table-usuarios">
 
-                                                                                                       <div class="form-group">
-                                                                                                           
-                                                                                                              <label class="col-md-2 control-label" id="label-rol">
-                                                                                                                Descripcion:</label>
-                                                                                                                <br>
-                                                                                  
-                                                                                                             <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Descripcion">
-                                                                                                             </div>
-                                                                                                       </div>
-                                                                                                  </form>
-                                                                                             </section>
-                                                                                             <br><br><br>
+        <tr id="HeadRow">
+          <th class="col-md-2">Codigo</th>
+          <th class="col-md-3">Nombre</th>
+          <th class="col-md-3">Rol</th>
+          <th class="col-md-2">Estatus</th>
+          <th style="width: 15%" class="col-md-2">Acciones</th>   
+        </thead>
 
-                                                                                             <div class="modal-footer">
-                                                                                                   <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
-                                                                                            </div>
-                                                                              </div>
-                                                                            </div>
-                                                                     </div>
-                                                                     <!--Fin Modal Ver mas-->
-
-                                                                     <!--Modal Editar -->
-                                                                      <div class="modal fade bs-example-modal-md" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                                                             <div class="modal-dialog modal-md" role="document">
-                                                                                   <div class="modal-content">
-                                                                                           <div class="modal-header">
-                                                                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                                       <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Editar Roles</h4>
-                                                                                           </div>
-                                                                                           <section>
-                                                                                                 <form class="form-horizontal">
-                                                                                                        <div class="form-group">
-                                                                                                            <label class="col-md-2 control-label" id="label-rol">
-                                                                                                           Nombre:</label>
-                                                                                                            <br>
-                                                                                                            <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Nombre">
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                         <div class="form-group">
-                                                                                                                <label class="col-md-2 control-label" id="label-rol">
-                                                                                                                 Descripcion:</label>
-                                                                                                                 <br>
-                                                                                                                <div class="col-md-8" id="imput-rol">
-                                                                                                                     <input type="text" class="form-control" placeholder="Descripcion">
-                                                                                                                </div> 
-                                                                                                        </div>
-                                                                                                  </form>
-                                                                                          </section>
-                                                                                              <br>
-                                                                                              <div class="modal-footer">
-                                                                                                  <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
-                                                                                                   <button type="button" class="btn btn-vclaro">Guardar</button>
-                                                                                             </div>
-                                                                                                                                                                                   
-                                                                                   </div>
-                                                                              </div>
-                                                                       </div>
-                                                                       <!--Fin Modal Editar-->
-
-                                                                       <!--inicio de la modal eliminar -->
-                                                                        <div aria-labelledby="mySmallModalLabel" class="modal fade bs-example-modal-sm" id="modal-confirmar" role="dialog" tabindex="-1">
-                                                                              <div class="modal-dialog modal-sm" role="document">
-                                                                                     <div class="modal-content">
-                                                                                           <div class="modal-header">
-                                                                                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                                                                                     <span aria-hidden="true">x</span>
-                                                                                                        </button>
-                                                                                                           <h4 class="modal-title" id="gridSystemModalLabel">
-                                                                                                              <i>
-                                                                                                              </i>
-                                                                                                              Confirmar Acción
-                                                                                                             </h4>
-                                                                                             </div>
-                                                                                              <div class="modal-body">
-                                                                                                    <h3 style="text-align: center;">
-                                                                                                        ¿Está seguro de eliminar Rol?
-                                                                                                     </h3>
-                                                                                             </div>
-                                                                                             <div class="modal-footer">
-                                                                                                   <button class="btn btn-cancelar" data-dismiss="modal" type="button">
-                                                                                                        No
-                                                                                                   </button>
-                                                                                                    <button class="btn btn-vclaro" type="button">
-                                                                                                       Sí
-                                                                                                   </button>
-                                                                                            </div>
-                                                                                     </div>
-                                                                              </div>
-                                                                         </div>
-                                                                       <!--fin de la modal eliminar-->
-                                                           </div> 
-                                                     <!--fin todo dentro-->
-                                                  </div>
-                                                  <!--fin roles-->
-
-                                                  
-
-                                                  <!--comienza usuarios-->
-                                                 <div id="usuarios" class="tab-pane"> 
-
-                                                          <!--desde aca-->
-                                                          <div class="container" style="padding-top: 0px">
-
-                                                                  <div class="btn-group col-md-8">   
-                                                                       <header class="panel-">Rol:</header>
-                                                                       <br>
-                                                                        <select class="ver btn  btn-vclaro" id="selectC">
-                                                                            <option value="Todos" selected>Todos</option>
-                                                                            <option value="Administrador">Gerente</option>  
-                                                                            <option value="Nutricionista">Nutricionista</option>
-                                                                            <option value="Secretaria">Secretaria</option>
-                                                                             <option></option>
-                                                                        </select>
-                                                                  </div>
-
-                                                                   <div class="btn-group">   
-                                                                             <header class="panel-">Usuario:</header>
-                                                                             <br>
-                                                                              <button type='button' class='ver btn  btn-vclaro' data-toggle="modal" data-target="#myModal-agregar" title='Agregar Nuevo'><i ></i>Agregar Nuevo </button>
-                                                                               <br>
-                                                                              <br>
-                                                                   
-                                                                    <!-- INICIO Modal AGREGAR NUEVO USUARIO -->
-                                                                    <div class="modal fade" id="myModal-agregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                    <div class="modal-content">
-                                                                                             <div class="modal-header">
-                                                                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                                    <h4 class="modal-title" id="myModalLabel">Agregar nuevo</h4>
-                                                                                               </div>
-                                                                                    <div class="modal-body">
-
-                                                                                      <section>
-                                                                                         <form class="form-horizontal">
-                                                                                             <div class="form-group">
-                                                                                                   <label class="col-md-2 control-label" id="label-rol">
-                                                                                                          
-                                                                                                           Cedula:</label>
-                                                                                                          <br>
-                                                                                                           <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Cedula">
-                                                                                                          </div>
-                                                                                              </div>
-
-                                                                                              <div class="form-group">
-                                                                                                   <label class="col-md-2 control-label" id="label-rol">
-                                                                                                          
-                                                                                                           Nombre:</label>
-                                                                                                          <br>
-                                                                                                           <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Nombre">
-                                                                                                          </div>
-                                                                                              </div>
-
-                                                                                               <div class="form-group">
-                                                                                                   <label class="col-md-2 control-label" id="label-rol">
-                                                                                                          
-                                                                                                           Apellido:</label>
-                                                                                                          <br>
-                                                                                                           <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Apellido">
-                                                                                                          </div>
-                                                                                              </div>
-
-                                                                                              <div class="form-group">
-                                                                                                   <label class="col-md-2 control-label" id="label-rol">
-                                                                                                          
-                                                                                                           Dirección:</label>
-                                                                                                          <br>
-                                                                                                           <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Direccion">
-                                                                                                          </div>
-                                                                                              </div>
-
-                                                                                              <div class="form-group">
-                                                                                                   <label class="col-md-2 control-label" id="label-rol">
-                                                                                                          
-                                                                                                           Apellido:</label>
-                                                                                                          <br>
-                                                                                                           <div class="col-md-8" id="imput-rol">
-                                                                                                                 <input type="text" class="form-control" placeholder="Apellido">
-                                                                                                          </div>
-                                                                                              </div>
-
-                                                                                               <div class="form-group">
-                                                                                                       <label class="col-md-2 control-label" id="label-rol">
-                                                                                                       
-                                                                                                            Correo:</label>
-                                                                                                         <br>
-                                                                                                         <div class="col-md-8" id="imput-rol">
-                                                                                                             <input type="text" class="form-control"  placeholder="Correo">
-                                                                                                         </div>
-                                                                                                </div>
-                                                                                                 <div class="form-group">
-                                                                                                        <label class="col-md-2 control-label" id="label-rol">
-                                                                                                         
-                                                                                                          Rol:</label>
-                                                                                                         <br>
-                                                                                                         <div class="col-md-8" id="imput-rol">
-                                                                                                               <select class="form-control m-bot15">
-                                                                                                                    <option>Seleccionar Rol</option>
-                                                                                                                    <option>Gerente</option>
-                                                                                                                    <option>Nutricionista</option>
-                                                                                                                    <option>Secretari@</option>
-                                                                                                                    <option></option>
-                                                                                                                </select>
-                                                                                                         </div>
-                                                                                                  </div>
-
-                                                                                                   <div class="form-group">
-                                                                                                         <label class="col-md-2 control-label" id="label-rol">
-                                                                                                          
-                                                                                                         Contraseña:</label>
-                                                                                                         <br>
-                                                                                                         <div class="col-md-8" id="imput-rol">
-                                                                                                               <input type="text" class="form-control" placeholder="Contraseña">
-                                                                                                         </div>
-                                                                                                  </div>
-                                                                                                   <div class="form-group">
-                                                                                                  <label class="col-md-2 control-label" id="label-rol">
-                                                                                                    
-                                                                                                    Repetir Contraseña:</label>
-                                                                                                    <br>
-                                                                                                   <div class="col-md-8" id="imput-rol">
-                                                                                                   <input type="text" class="form-control" placeholder="Contraseña">
-                                                                                                  </div>
-                                                                                                  </div>
-
-                                                                                             </form>
-                                                                                         </section>
-                                                                                    </div>
-                                                                                     <br>
-                                                                                    <div class="modal-footer">
-                                                                                          <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
-                                                                                          <button type="button" class="btn btn-vclaro">Registrar</button>
-                                                                                     </div>
-                                                                              </div>
-                                                                       </div>
-                                                                </div>
-                                                                </div>
-                                                                <!--fin modal-->
-                                                                  <br><br><br><br><br>
-
-<!--comienza la tabla-->
-
-                                   <table class="table table-striped table-hover table-bordered" id="table-usuarios">
-                                    
-                                        <tr id="HeadRow">
-                                            <th class="col-md-2">Codigo</th>
-                                            <th class="col-md-3">Nombre</th>
-                                            <th class="col-md-3">Rol</th>
-                                            <th class="col-md-2">Estatus</th>
-                                            <th style="width: 15%" class="col-md-2">Acciones</th>   
-                                    </thead>
-                                    
-                                        <tr position="Administrador">
-                                            <td>001</td>
-                                            <td>Smith</td>
-                                            <td>Gerente</td>
-                                            <td class="center">Activo</td>
-                                            <!--Botones de las acciones-->
-                                            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
-                                            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
-                                            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
-                                            <!--Fin de los botones de las acciones-->
-                                        </tr>               
+        <tr position="Administrador">
+          <td>001</td>
+          <td>Smith</td>
+          <td>Gerente</td>
+          <td class="center">Activo</td>
+          <!--Botones de las acciones-->
+          <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
+            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
+            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
+            <!--Fin de los botones de las acciones-->
+          </tr>               
 
 
 
-                                        <tr position="Nutricionista">
-                                            <td>002</td>
-                                            <td>Patric</td>
-                                            <td>Nutricionista</td>
-                                            <td class="center">Activo</td>
-                                           <!--Botones de las acciones-->
-                                            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
-                                            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
-                                            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
-                                            <!--Fin de los botones de las acciones-->
-                                        </tr>  
+          <tr position="Nutricionista">
+            <td>002</td>
+            <td>Patric</td>
+            <td>Nutricionista</td>
+            <td class="center">Activo</td>
+            <!--Botones de las acciones-->
+            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
+              <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
+              <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
+              <!--Fin de los botones de las acciones-->
+            </tr>  
 
 
-                                        <tr position="Administrador">
-                                            <td>003</td>
-                                            <td>patricia</td>
-                                            <td>Gerente</td>
-                                            <td class="center">Activo</td>
-                                            <!--Botones de las acciones-->
-                                            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
-                                            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
-                                            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
-                                            <!--Fin de los botones de las acciones-->
-                                        </tr>  
+            <tr position="Administrador">
+              <td>003</td>
+              <td>patricia</td>
+              <td>Gerente</td>
+              <td class="center">Activo</td>
+              <!--Botones de las acciones-->
+              <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
+                <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
+                <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
+                <!--Fin de los botones de las acciones-->
+              </tr>  
 
-                                        <tr position="Administrador">
-                                            <td>004</td>
-                                            <td>Ronaldo</td>
-                                            <td>Gerente</td>
-                                            <td class="center">Activo</td>
-                                          <!--Botones de las acciones-->
-                                            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
-                                            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
-                                            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
-                                            <!--Fin de los botones de las acciones-->
-                                        </tr>     
-
-
-                                        <tr position="Secretaria">
-                                            <td>005</td>
-                                            <td>Fernanda</td>
-                                            <td>Secretaria</td>
-                                            <td class="center">Activo</td>
-                                         <!--Botones de las acciones-->
-                                            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
-                                            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
-                                            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
-                                            <!--Fin de los botones de las acciones-->
-                                        </tr>    
+              <tr position="Administrador">
+                <td>004</td>
+                <td>Ronaldo</td>
+                <td>Gerente</td>
+                <td class="center">Activo</td>
+                <!--Botones de las acciones-->
+                <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
+                  <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
+                  <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
+                  <!--Fin de los botones de las acciones-->
+                </tr>     
 
 
-                                        <tr position="Secretaria">
-                                            <td>006</td>
-                                            <td>Maria</td>
-                                            <td>Secretaria</td>
-                                            <td class="center">Activo</td>
-                                         <!--Botones de las acciones-->
-                                            <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
-                                            <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
-                                            <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
-                                            <!--Fin de los botones de las acciones-->
-                                        </tr>                                                     
+                <tr position="Secretaria">
+                  <td>005</td>
+                  <td>Fernanda</td>
+                  <td>Secretaria</td>
+                  <td class="center">Activo</td>
+                  <!--Botones de las acciones-->
+                  <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
+                    <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
+                    <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
+                    <!--Fin de los botones de las acciones-->
+                  </tr>    
+
+
+                  <tr position="Secretaria">
+                    <td>006</td>
+                    <td>Maria</td>
+                    <td>Secretaria</td>
+                    <td class="center">Activo</td>
+                    <!--Botones de las acciones-->
+                    <td><button type='button' class='ver btn  btn-stransparent' data-toggle="modal" data-target="#modal-ver-1" title='Ver Más'><i class='fa fa-eye'></i></button>
+                      <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar-1"  title='Editar'><i class='fa fa-pencil'></i></button>
+                      <button type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button></td>
+                      <!--Fin de los botones de las acciones-->
+                    </tr>                                                     
 
 
 
-                                        </tr>
-                                    
-                                </table>
+                  </tr>
+
+                </table>
+
+                <!--hasta aca-->
+              </div>
+            </div>
+            <!--fin usuarios-->
+          </div>
+        </section>
+        <!-- termina ambas pamtallas-->
+
+      </section>
+    </section>
+  </section>
 
 
-<!--fin de la tabla-->
-
-
-<!--comienzo  botones de acciones que van dentro  de la tabla-->
-
-
- <!--Inicio de la modal de los botones-->
-    <!--Modal Ver mas -->
-<div class="modal fade bs-example-modal-md" id="modal-ver-1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content">
-     <div class="modal-header">
+  <!--Modal Ver mas -->
+  <div class="modal fade bs-example-modal-md" id="modal-ver-1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Datos de Usuario</h4>
       </div>
       <section>
-                                <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Nombre:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Nombre">
-                                            </div>
-                                        </div>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-md-2 control-label" id="label-rol">
+
+              Nombre:</label>
+              <br>
+              <div class="col-md-8" id="imput-rol">
+                <input type="text" class="form-control" placeholder="Nombre">
+              </div>
+            </div>
 
 
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Apellido:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Apellido">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Direccion:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Direccion">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Correo:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Correo">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Rol:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Rol Usuario">
-                                            </div>
-                                        </div>
-                                    </form>
-                            </section>
+            <div class="form-group">
+              <label class="col-md-2 control-label" id="label-rol">
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-vclaro" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-    <!--Fin Modal Ver mas-->
-
-     <!--Modal Editar -->
-<div class="modal fade bs-example-modal-md" id="modal-editar-1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content">
-     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Editar Datos de Usuario</h4>
-      </div>
-
-
-
-      <section>
-                                <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Nombre:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Nombre">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Apellido:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Apellido">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Direccion:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Direccion">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Correo:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <input type="text" class="form-control" placeholder="Correo">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label" id="label-rol">
-                                            
-                                            Rol:</label>
-                                            <br>
-                                            <div class="col-md-8" id="imput-rol">
-                                                <select class="form-control m-bot15">
-                                                    <option>Seleccionar Rol</option>
-                                                    <option>Gerente</option>
-                                                    <option>Nutricionista</option>
-                                                    <option>Secretari@</option>
-                                                    <option></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                            </section>
-                  <br>
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-vclaro">Guardar</button>
-                 </div>
+                Apellido:</label>
+                <br>
+                <div class="col-md-8" id="imput-rol">
+                  <input type="text" class="form-control" placeholder="Apellido">
                 </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-2 control-label" id="label-rol">
+
+                  Direccion:</label>
+                  <br>
+                  <div class="col-md-8" id="imput-rol">
+                    <input type="text" class="form-control" placeholder="Direccion">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-2 control-label" id="label-rol">
+
+                    Correo:</label>
+                    <br>
+                    <div class="col-md-8" id="imput-rol">
+                      <input type="text" class="form-control" placeholder="Correo">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" id="label-rol">
+
+                      Rol:</label>
+                      <br>
+                      <div class="col-md-8" id="imput-rol">
+                        <input type="text" class="form-control" placeholder="Rol Usuario">
+                      </div>
+                    </div>
+                  </form>
+                </section>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-vclaro" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Fin Modal Ver mas-->
+
+          <!--Modal Editar -->
+          <div class="modal fade bs-example-modal-md" id="modal-editar-1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md" role="document">
+              <div class="modal-content">
+               <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Editar Datos de Usuario</h4>
+              </div>
+
+
+
+              <section>
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" id="label-rol">
+
+                      Nombre:</label>
+                      <br>
+                      <div class="col-md-8" id="imput-rol">
+                        <input type="text" class="form-control" placeholder="Nombre">
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" id="label-rol">
+
+                        Apellido:</label>
+                        <br>
+                        <div class="col-md-8" id="imput-rol">
+                          <input type="text" class="form-control" placeholder="Apellido">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-2 control-label" id="label-rol">
+
+                          Direccion:</label>
+                          <br>
+                          <div class="col-md-8" id="imput-rol">
+                            <input type="text" class="form-control" placeholder="Direccion">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label" id="label-rol">
+
+                            Correo:</label>
+                            <br>
+                            <div class="col-md-8" id="imput-rol">
+                              <input type="text" class="form-control" placeholder="Correo">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-md-2 control-label" id="label-rol">
+
+                              Rol:</label>
+                              <br>
+                              <div class="col-md-8" id="imput-rol">
+                                <select class="form-control m-bot15">
+                                  <option>Seleccionar Rol</option>
+                                  <option>Gerente</option>
+                                  <option>Nutricionista</option>
+                                  <option>Secretari@</option>
+                                  <option></option>
+                                </select>
+                              </div>
+                            </div>
+                          </form>
+                        </section>
+                        <br>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
+                          <button type="button" class="btn btn-vclaro">Guardar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Fin Modal Editar-->
+
+                  <!--inicio de la modal eliminar -->
+                  <div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+                        </div>
+                        <div class="modal-body">
+                          <h3 style="text-align: center;">¿Está seguro que desea eliminar al Usuario?</h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-cancelar" data-dismiss="modal">No</button>
+                          <button type="button" class="btn btn-vclaro">Sí</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--fin de la modal eliminar-->
+                  <!-- INICIO Modal AGREGAR NUEVO USUARIO -->
+                  <div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                         <span aria-hidden="true">×</span>
+                       </button>
+                       <h4 class="modal-title" id="myModalLabel">
+                         Agregar Rol
+                       </h4>
+                     </div>
+                     <div class="modal-body">
+                       <section>
+                         <form class="form-horizontal">
+                           <div class="form-group">
+                            <label class="col-md-2 control-label" id="label-rol">
+                             Nombre:</label>
+                             <br>
+                             <div class="col-md-8" id="imput-rol" >
+                              <input type="text" class="form-control" placeholder="Nombre">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                           <label id="label-rol" class="col-md-2 control-label">
+
+                             Descripcion:</label>
+                             <br>
+                             <div class="col-md-8" id="imput-rol" >
+
+                              <input type="text" class="form-control" placeholder="Descripcion">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                           <label id="label-rol" class="col-md-2 control-label">
+
+                             Funcionalidades:</label>
+                             <br>
+                             <div class="col-md-8" id="imput-rol" >
+
+                              <select class="form-control" id="ms_funcionalidades">
+                                <option>Visitas</option>
+                                <option>Configuración</option>
+                                <option>Parámetros</option>
+                                <option>Administración del Sistema</option>
+
+                              </select>
+                            </div>
+                          </div>
+                        </form>
+                      </section>
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                     <button class="btn btn-cancelar" data-dismiss="modal" type="button">
+                      Cancelar
+                    </button>
+                    <button class="btn btn-vclaro" type="button">
+                      Registrar
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- fin Modal AGREGAR NUEVO USUARIO -->
+            <!-- INICIO Modal AGREGAR NUEVO USUARIO -->
+            <div class="modal fade" id="myModal-agregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <h4 class="modal-title" id="myModalLabel">Agregar nuevo</h4>
                  </div>
-</div>
-    <!--Fin Modal Editar-->
+                 <div class="modal-body">
+
+                  <section>
+                   <form class="form-horizontal">
+                     <div class="form-group">
+                       <label class="col-md-2 control-label" id="label-rol">
+
+                         Cedula:</label>
+                         <br>
+                         <div class="col-md-8" id="imput-rol">
+                           <input type="text" class="form-control" placeholder="Cedula">
+                         </div>
+                       </div>
+
+                       <div class="form-group">
+                         <label class="col-md-2 control-label" id="label-rol">
+
+                           Nombre:</label>
+                           <br>
+                           <div class="col-md-8" id="imput-rol" >
+                             <input type="text" class="form-control" placeholder="Nombre" disabled="disabled">
+                           </div>
+                         </div>
+                         <div class="form-group">
+                           <label class="col-md-2 control-label" id="label-rol">
+
+                            Correo:</label>
+                            <br>
+                            <div class="col-md-8" id="imput-rol">
+                             <input type="text" class="form-control"  placeholder="Correo">
+                           </div>
+                         </div>
+                         <div class="form-group">
+                          <label class="col-md-2 control-label" id="label-rol">
+
+                            Rol:</label>
+                            <br>
+                            <div class="col-md-8" id="imput-rol">
+                             <select class="form-control m-bot15">
+                              <option>Seleccionar Rol</option>
+                              <option>Gerente</option>
+                              <option>Nutricionista</option>
+                              <option>Secretari@</option>
+                              <option></option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                         <label class="col-md-2 control-label" id="label-rol">
+
+                           Contraseña:</label>
+                           <br>
+                           <div class="col-md-8" id="imput-rol">
+                             <input type="text" class="form-control" placeholder="Contraseña">
+                           </div>
+                         </div>
+                         <div class="form-group">
+                          <label class="col-md-2 control-label" id="label-rol">
+
+                            Repetir Contraseña:</label>
+                            <br>
+                            <div class="col-md-8" id="imput-rol">
+                             <input type="text" class="form-control" placeholder="Contraseña">
+                           </div>
+                         </div>
+
+                       </form>
+                     </section>
+                   </div>
+                   <br>
+                   <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-vclaro">Registrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fin modal-->
+          <!--Modal Ver mas -->
+          <div class="modal fade bs-example-modal-md" id="modal-ver" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+           <div class="modal-dialog modal-md" role="document">
+             <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Datos de Rol</h4>
+              </div>
+              <section>
+                <form class="form-horizontal">
+                  <div class="form-group">
+                   <label class="col-md-2 control-label" id="label-rol">
+
+                     Nombre:</label>
+                     <br>
+                     <div class="col-md-8" id="imput-rol">
+                       <input type="text" class="form-control" placeholder="Nombre">
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+
+                    <label class="col-md-2 control-label" id="label-rol">
+                      Descripcion:</label>
+                      <br>
+
+                      <div class="col-md-8" id="imput-rol">
+                       <input type="text" class="form-control" placeholder="Descripcion">
+                     </div>
+                   </div>
+                 </form>
+               </section>
+               <br><br><br>
+
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
+               </div>
+             </div>
+           </div>
+         </div>
+         <!--Fin Modal Ver mas-->
+         <!--Modal Editar -->
+         <div class="modal fade bs-example-modal-md" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+           <div class="modal-dialog modal-md" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Editar Roles</h4>
+               </div>
+               <section>
+                 <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" id="label-rol">
+                     Nombre:</label>
+                     <br>
+                     <div class="col-md-8" id="imput-rol">
+                       <input type="text" class="form-control" placeholder="Nombre">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                    <label class="col-md-2 control-label" id="label-rol">
+                     Descripcion:</label>
+                     <br>
+                     <div class="col-md-8" id="imput-rol">
+                       <input type="text" class="form-control" placeholder="Descripcion">
+                     </div> 
+                   </div>
+                 </form>
+               </section>
+               <br>
+               <div class="modal-footer">
+                <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-vclaro">Guardar</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!--Fin Modal Editar-->
 
         <!--inicio de la modal eliminar -->
-    <div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
-      </div>
-      <div class="modal-body">
-        <h3 style="text-align: center;">¿Está seguro que desea eliminar al Usuario?</h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-cancelar" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-vclaro">Sí</button>
-      </div>
-    </div>
-  </div>
-</div>
-    <!--fin de la modal eliminar-->
-
-<!--comienzo  botones de acciones que van dentro  de la tabla-->
-
-
-
-
-                            
-
-
-
-                                                            <!--hasta aca-->
-                                                           </div>
-                                                </div>
-                                                   <!--fin usuarios-->
-
-              
-
-                
-                   
-        </div>
-   </section>
-   <!-- termina ambas pamtallas-->
-
-</section>
-</section>
-</section>
+        <div aria-labelledby="mySmallModalLabel" class="modal fade bs-example-modal-sm" id="modal-confirmar" role="dialog" tabindex="-1">
+          <div class="modal-dialog modal-sm" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+              <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+               <span aria-hidden="true">x</span>
+             </button>
+             <h4 class="modal-title" id="gridSystemModalLabel">
+              <i>
+              </i>
+              Confirmar Acción
+            </h4>
+          </div>
+          <div class="modal-body">
+            <h3 style="text-align: center;">
+              ¿Está seguro de eliminar Rol?
+            </h3>
+          </div>
+          <div class="modal-footer">
+           <button class="btn btn-cancelar" data-dismiss="modal" type="button">
+            No
+          </button>
+          <button class="btn btn-vclaro" type="button">
+           Sí
+         </button>
+       </div>
+     </div>
+   </div>
+ </div>
+ <!--fin de la modal eliminar-->
 
 
+ <!-- Placed js at the end of the document so the pages load faster -->
+ <!--Core js-->
+ <script src="js/jquery.js"></script>
+ <script src="js/jquery-1.8.3.min.js"></script>
+ <script src="bs3/js/bootstrap.min.js"></script>
+ <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+ <script src="js/jquery.scrollTo.min.js"></script>
+ <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+ <script src="js/jquery.nicescroll.js"></script>
 
-<!-- Placed js at the end of the document so the pages load faster -->
-<!--Core js-->
-<script src="js/jquery.js"></script>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-
-<script src="js/bootstrap-switch.js"></script>
-<script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
-<script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+ <script src="js/bootstrap-switch.js"></script>
+ <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+ <script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
+ <script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+ <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+ <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+ <script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 
 
-<!--common script init for all pages-->
+ <!--common script init for all pages-->
 
-<script src="js/toggle-init.js"></script>
+ <script src="js/toggle-init.js"></script>
 
-<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
-<!--script for this page-->
+ <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+ <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+ <!--script for this page-->
 
-<!--script for this page-->
+ <!--script for this page-->
 
-<script type="text/javascript" src="js/users.js"></script>
+ <script type="text/javascript" src="js/users.js"></script>
 
-<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
 
-<!--common script init for all pages-->
-<!--script for this page only-->
-<script src="js/table-editable.js"></script>
+ <!--common script init for all pages-->
+ <!--script for this page only-->
 
-<script src="js/menu.js" type="text/javascript"></script>
+ <script src="js/admi_permisologia.js" type="text/javascript"></script>
 
 </body>
 </html>

@@ -1,0 +1,659 @@
+</!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="images/favicon.png">
+
+	<title>Sascha</title>
+
+    <!--Core CSS -->
+    <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="css/conf_parametros.css">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<section id="menuSascha"></section>
+<section id="container" >
+
+    <!--main content start-->
+        <section id="main-content">
+        <section class="wrapper">
+        <h3>Configuración de Parámetros</h3>
+        <!-- Inicio pagina parametros_unidad-->
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Unidad
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-up"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                    <!-- Tabla de medidas -->
+                        <div class="row subtitulo">
+                            <div class="col-sm-12">
+                            <h4>Medidas</h4>
+                                <div class="adv-table">
+                                <div class="row">
+                                    <div class="pull-right">
+                                        <a href="#modal-agregar-medida" data-toggle="modal" class="btn btn-agregar">
+                                            Agregar
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <table  class="table table-striped table-hover table-bordered" id="dtConfUnidadMedida">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Abreviatura</th>
+                                        <th class="ancho-columna">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="">
+                                        <td>miligramos</td>
+                                        <td>mg</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-medida" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a> 
+                                             </div>
+                                             <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                             </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td>gramos</td>
+                                        <td>g</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-medida" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                             </div>
+                                             <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                             </div>
+                                        </td>
+                                    </tr>              
+                                    </tbody>
+                                </table>
+                            </div> 
+                            <!-- Fin tabla de medidas -->                           
+                            </div>
+                        </div>
+
+                        <!-- Tabla de Tiempos -->
+                        <div class="row subtitulo">
+                            <div class="col-sm-12">                                
+                            <h4>Tiempos</h4>
+                                <div class="adv-table">
+                                <div class="clearfix">
+                                <div class="row">
+                                    <div class="pull-right">
+                                        <a href="#modal-agregar-tiempo" data-toggle="modal" class="btn btn-agregar">
+                                            Agregar
+                                        </a>
+                                    </div>
+                                </div>
+                                    
+                                </div>
+                                <div class="space15"></div>
+                                <table  class="table table-bordered table-striped" id="dtConfUnidadTiempo">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Abreviatura</th>
+                                        <th class="ancho-columna">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="">
+                                        <td>Semana</td>
+                                        <th>Semana</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-tiempo" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                             </div>
+                                             <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                             </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td>Mes</td>
+                                        <th>Mes</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-tiempo" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                             </div>
+                                             <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                             </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td>Minuto</td>
+                                        <th>min</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-tiempo" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                             </div>
+                                             <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                             </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td>Hora</td>
+                                        <th>h</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-tiempo" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                             </div>
+                                             <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                             </div>
+                                        </td>
+                                    </tr>           
+                                    </tbody>
+                                </table>
+                            </div> 
+                            <!-- Fin tabla de tiempos -->                           
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- Fin pagina parametros_unidad-->
+
+        <!-- Inicio pagina parametros_perfil-->
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Perfil
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-up"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <!-- Tabla de Tipo de parametros -->
+                        <div class="row subtitulo">
+                            <div class="col-sm-12">
+                            <h4>Tipo de Parámetros</h4>
+                                <div class="adv-table">
+                                <div class="clearfix">
+                                <div class="row">
+                                    <div class="pull-right">
+                                        <!-- modal agregar tipo parametro -->
+                                        <a href="#modal-agregar-tipo-parametro" data-toggle="modal" class="btn btn-agregar">
+                                                Agregar
+                                            </a>
+                                    </div>
+                                </div>
+                                    
+                                </div>
+                                <div class="space15"></div>
+                                <table class="table table-bordered table-striped" id="dtConfPerfilTipoParamatros">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="ancho-columna">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="">
+                                        <td>Antropométrico</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-tipo-parametro" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td>Patología</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-tipo-parametro" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>              
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- fin tabla tipo de parametro -->
+
+                        <!-- Tabla de parametro -->
+                        <div class="row subtitulo">
+                            <div class="col-sm-12">
+                                <h4>Parámetros</h4>
+                                    <div class="adv-table">
+                                        <div class="clearfix">
+                                        <div class="row">
+                                            <div class="pull-right">
+                                                <a href="#modal-agregar-parametro" data-toggle="modal" class="btn btn-agregar">
+                                                    Agregar
+                                                </a>
+                                            </div>
+                                        </div>
+                                            
+                                        </div>
+                                        <div class="space15"></div>
+                                        <table class="table table-bordered table-striped" id="dtConfPerfilParamatros">
+                                            <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Tipo Parámetro</th>
+                                                <th>Tipo de valor</th>
+                                                <th>Unidad</th>
+                                                <th class="ancho-columna">Acciones</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="">
+                                                <th>Peso</th>
+                                                <td>Antropométrico</td>
+                                                <th>Real</th>
+                                                <th>Kg</th>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                                     </div>
+                                                     <div class="btn-group">
+                                                        <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                                     </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="">
+                                                <th>Diabetes</th>
+                                                <td>Patología</td>
+                                                <th>Nominal</th>
+                                                <th>-</th>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
+                                                     </div>
+                                                     <div class="btn-group">
+                                                        <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
+                                                     </div>
+                                                </td>
+                                            </tr>              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- Fin pagina parametros_perfil-->
+
+        <!-- Modales de agregar y editar -->
+        <!-- Modal Agregar medida -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-agregar-medida" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Agregar medida</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="agregar-nombre-medida">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Abreviatura</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="agregar-abreviatura-medida">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal agregar medida -->
+
+        <!-- Modal editar medida -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-medida" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Editar medida</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" id="editar-nombre-medida-1" value="Miligramos">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Abreviatura</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="editar-abreviatura-medida" value="mg">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal editar medida -->
+
+        <!-- Modal Agregar tiempo -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-agregar-tiempo" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Editar tiempo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" id="editar-nombre-tiempo">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Abreviatura</label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" id="editar-nombre-tiempo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal agregar tiempo -->
+
+        <!-- Modal editar tiempo -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-tiempo" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Editar tiempo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" id="editar-nombre-tiempo" value="Semana">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Abreviatura</label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" id="editar-nombre-tiempo" value="Semana">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal editar tiempo -->
+
+        <!-- Modal Agregar tipo parametro -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-agregar-tipo-parametro" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Agregar tipo de parametro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="agregar-nombre-tipo parametro">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal agregar tipo parametro -->
+
+        <!-- Modal editar tipo de parametro -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-tipo-parametro" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Editar Tipo de parametro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" id="editar-nombre-tipo-parametro" value="Antropométrico">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal editar tipo de parametro -->
+
+        <!-- Modal Agregar parametro -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-agregar-parametro" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Agregar parametro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="agregar-nombre-tipo parametro" style="width: 100%">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Tipo de Parámetro</label>
+                                <div class="col-lg-6">
+                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">Antropométrico</option>
+                                        <option value="02">Patología</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Tipo de Valor</label>
+                                <div class="col-lg-6">
+                                    <select id="select-tipo-valor" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">Real</option>
+                                        <option value="02">Nominal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Unidad</label>
+                                <div class="col-lg-6">
+                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">miligramos</option>
+                                        <option value="02">gramos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal agregar parametro -->
+
+        <!-- Modal editar parametro -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-parametro" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Editar parametro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nombre</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="editar-nombre-parametro" value="peso">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Tipo de Parámetro</label>
+                                <div class="col-lg-6">
+                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">Antropométrico</option>
+                                        <option value="02">Patología</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Tipo de Valor</label>
+                                <div class="col-lg-6">
+                                    <select id="select-tipo-valor" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">Real</option>
+                                        <option value="02">Nominal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Unidad</label>
+                                <div class="col-lg-6">
+                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">miligramos</option>
+                                        <option value="02">gramos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal editar parametro -->
+    </section>
+    </section>
+    <!--main content end-->
+</section>
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+
+<!--Core js-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="bs3/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/bootstrap-switch.js"></script>
+
+<!-- tablas editables -->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+
+
+
+<!--script for this page only-->
+<script src="js/conf_parametros.js" type="text/javascript"></script>
+<!-- END JAVASCRIPTS -->
+
+</body>
+</html>
