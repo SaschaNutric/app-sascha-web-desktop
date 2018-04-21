@@ -17,22 +17,208 @@
     <link href="css/style-responsive.css" rel="stylesheet" />
 </head>
 <body>
-<div id="menuSascha"></div>
-<!-- Placed js at the end of the document so the pages load faster -->
-<!--Core js-->
-<script src="js/jquery.js"></script>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
-<!--common script init for all pages-->
-<script src="js/scripts.js"></script>
-<script type="text/javascript" src="js/menu.js"></script>
-<!--script for this page-->
-<script src="js/gritter.js" type="text/javascript"></script>
+
+    <div>
+        <aside id='sidebar'>
+            <div class="nav-collapse">
+                <!-- sidebar menu start-->            
+                <div class="leftside-navigation">
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <li>
+                            <button class="btn-menu" id="menu-dashboard" class="active" onclick="content.location='dashboard.html'">
+                                <i class="fa fa-leaf"></i>
+                                <span>Dashboard</span>
+                            </button>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-cogs"></i>
+                                <span>Configuración</span>
+                            </a>
+                            <ul class="sub">
+                                <li><button class="btn-sub-menu" id="menu-parametros" onclick="content.location='conf_parametros.html'">
+                                    <i class="fa fa-chevron-right"></i>
+                                    <span>Parámetros</span>
+                                    </button>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="javascript:;">
+                                        <i class="fa fa-chevron-right"></i>
+                                        <span>Sistema</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li><button class="btn-sub-menu" id="menu-mensajes" onclick="content.location='conf_sist_mensajes.html'" >Mensajes</button ></li>
+                                        <li><button class="btn-sub-menu" id="menu-notificacion"onclick="content.location='conf_sist_notificacion.html'" >Notificaciones</button ></li>
+                                        <li><button class="btn-sub-menu" id="menu-agenda" onclick="content.location='conf_agenda.html'" >Agenda</button ></li>
+                                        <li><button class="btn-sub-menu" id="menu-filtros" onclick="content.location='conf_sist_filtros.html'" >Filtros</button ></li>         
+                                    </ul>
+                                </li>
+                                <li><button class="btn-sub-menu" id="menu-servicios" onclick="content.location='conf_servicios.html'">
+                                        <i class="fa fa-chevron-right"></i>
+                                        <span>Servicios</span>
+                                    </button>
+                                </li> 
+                                <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-chevron-right"></i>
+                                            <span>Planes</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><button class="btn-sub-menu" id="menu-dietas" onclick="content.location='conf_plan_dieta.html'">Dietas</button></li>
+                                            <li><button  class="btn-sub-menu" id="menu-planSuplementos" onclick="content.location='conf_plan_suplemento.html'"> Plan de Suplemento </button></li>
+                                            <li><button  class="btn-sub-menu" id="menu-planEntrenamiento" onclick="content.location='conf_plan_actividad.html'">Planes de Entrenamiento</button></li>        
+                                        </ul>
+                                </li>
+
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a id="menu-visitas" href="javascript:;">
+                            <i class="fa fa-calendar"></i>
+                            <span>Visitas</span>
+                        </a>
+                        <ul class="sub">
+                            <li><button class="btn-sub-menu"  onclick="content.location='visitas.html'">
+                                <i class="fa fa-chevron-right"></i>
+                                <span>Atender</span>
+                            </button>
+                            </li>
+                            <li><button class="btn-sub-menu" onclick="content.location=''">
+                                 <i class="fa fa-chevron-right"></i>
+                                <span>Incidencias</span>
+                            </button>
+                            </li>                          
+                        </ul>
+                    </li>
+                    <li >
+                        <button class="btn-menu" id="menu-ofertasYPromociones" onclick="content.location='ofertasYPromociones.html'">
+                            <i class="fa fa-tags"></i>
+                            <span>Ofertas y promociones</span>
+                        </button>
+                    </li>               
+                    <li>
+                        <button class="btn-menu" id="menu-reportes" onclick="content.location='reportes.html'" >
+                            <i class="fa fa-bar-chart-o"></i>
+                            <span>Reportes</span>
+                        </button>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-wrench"></i>
+                            <span>Administración del Sistema</span>
+                        </a>
+                        <ul class="sub">
+                            <li>
+                                <button class="btn-sub-menu" id="menu-permisologia"  onclick="content.location='admi_permisologia.html'">
+                                    <i class="fa fa-chevron-right"></i>  
+                                    <span>Permisología</span> 
+                                </button>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-chevron-right"></i>
+                                    <span>Portal Web</span>
+                                </a>
+                                <ul class="sub">
+                                    <li><button class="btn-sub-menu" id="menu-negocio" onclick="content.location='admi_portalWeb-negocio.html'">Negocio</button></li>
+                                    <li><button class="btn-sub-menu" id="menu-contenido"  onclick="content.location=''">Contenido</button></li>
+                                    <li><button class="btn-sub-menu" id="menu-preguntas" href="" onclick="content.location=''">Preguntas Frecuentes</button></li>        
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                   <i class="fa fa-chevron-right"></i>
+                                   <span>Comunicación</span>
+                               </a>
+                               <ul class="sub">
+                                    <li><button class="btn-sub-menu" id="menu-reclamos" onclick="content.location='reclamos.html'">Reclamos</button></li>
+                                    <li><button class="btn-sub-menu" id="menu-canalEscucha"  onclick="content.location='canal_escucha.html'">Canal de Escucha</button></li>        
+                                </ul>
+                             </li>
+                        </ul>
+                    </li>
+
+            </div>
+        </div>
+</aside>
+        <!--header start-->
+        <header class="header fixed-top clearfix">
+            <!--logo start-->
+            <div class="brand">
+
+                <a href="index.html" class="logo">
+                    <img style="max-height: 75px; max-width: 200px" src="images/l2Sascha.png" alt="">
+                </a>
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars"></div>
+                </div>
+            </div>
+            <!--logo end-->
+
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+
+
+                    <!-- notification Icono-->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                            <i class="fa fa-bell-o"></i>
+                            <span class="badge bg-warning">3</span>
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="top-nav clearfix">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="images/avatar1_small.jpg">
+                            <span class="username">John Doe</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <li><a href="#"><i class=" fa fa-user"></i>Mi Cuenta</a></li>
+                            <li><a href="login.html"><i class="fa fa-key"></i>Salir</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+
+        <section id="main-content">
+            <section class="wrapper">
+                <iframe  id="content" name="content" src=""></iframe>
+            </section>
+        </section>
+
+
+    </div>
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!--Core js-->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+    <!--common script init for all pages-->
+    <script src="js/scripts.js"></script>
+    <!--script for this page-->
+    <script src="js/gritter.js" type="text/javascript"></script>
 </body>
 </html>
 

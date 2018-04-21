@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
+      
     /* tabla medidas */
 	$('#dtConfUnidadMedida').dataTable({ 
 		"aoColumnDefs": [

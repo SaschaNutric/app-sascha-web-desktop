@@ -49,3 +49,8 @@ border-color: #17aa8b;
 .btn-agregar{
     padding-top: 20px;
 }
+
+.dropdown-menu{
+
+    z-index: 1100 !important;
+}

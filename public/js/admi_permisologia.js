@@ -1,5 +1,5 @@
 $(document).ready(function() {
-$('#menuSascha').load('menu.html');
+  
 
 	$('#dtRoles').dataTable( {
 		"aoColumnDefs": [

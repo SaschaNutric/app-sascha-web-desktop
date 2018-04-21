@@ -1,6 +1,6 @@
 /* tabla filtros */
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
+      
     $('#dtFiltros').dataTable({ 
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [2] }

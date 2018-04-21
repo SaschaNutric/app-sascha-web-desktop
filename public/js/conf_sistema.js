@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
+      
     /* tabla Comentarios */
 	$('#dtMotivos').dataTable({ 
 		"aoColumnDefs": [

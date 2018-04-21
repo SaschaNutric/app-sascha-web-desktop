@@ -1,5 +1,5 @@
 $(document).ready(function() {
-$('#menuSascha').load('menu.html');
+  
 
 	$('#dtParametros').dataTable( {
 		"aoColumnDefs": [
