@@ -33,216 +33,207 @@
     </head>       
     <body>
 
-        <h3>Primera Visita</h3>
+        <h3>Registrar Visita</h3>
         <div class="row">
             <div class="col-md-8">
-                <section class="panel">   
-                    <header class="panel-heading">
-                        Cliente - Ana Victoria De Palma
-                    </header>
-                    <section class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Telefono: </label> <span>02324242</span>              
-                            </div>
-                            <div class="col-md-6">
-                                <label>Correo:</label> <span>anavdepalma@gmail.com</span>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Edad:</label> <span>12 anios</span>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Estado:</label> <span>Lara</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Direccion:</label> <span>Av Los Leones con calle republica</span>
-                            </div>
-                        </div>
-                    </section>
-                </section>
                 <section class="panel">
-                    <header class="panel-heading">Visita</header>
-                    <section class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Tipo:</label> <span>Primera Visita</span>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Fecha:</label> <span>18/04/2018</span>
-                            </div>
-                        </div>
-                    </section>
-                </section>
-            </div>
-            <div class="col-md-4">     
-                <section class="panel">   
-                    <header class="panel-heading">
-                        Servicio - Adelgazar 
-                    </header>
-                    <section class="panel-body">
-                        <div class="row col-md-12" style="text-align: justify;">
-                            <p>Este servicio es ideal para personas con obesidad</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6" >
-                                <label class="control-label">Duración:</label> <span> 12 Visitas</span> 
-                            </div>
-                            <div class="col-md-6" style="text-align: right;">
-                                <label class="control-label">Precio</label> <span>200.000 bs</span>
-                            </div>
-                        </div>
-                        <div  style="padding: 20px">
-                            <div class="row">
-                                <i class="fa fa-asterisk"></i>
-                                <label>Dieta:</label> <span>Hipocalórica</span>
-                            </div>
-                            <div class="row">
-                                <i class="fa fa-asterisk"></i>
-                                <label>Plan de Suplemento:</label> <span>Suplementos 1</span>
-                            </div>
-                            <div class="row">
-                             <i class="fa fa-asterisk"></i>
-                             <label>Plan de Entrenamiento:</label> <span>Ejercicios básicos</span>
-                         </div>
+                 <header class="panel-heading tab-bg-dark-navy-blue ">
+                    <ul class="nav nav-tabs" style="text-align: center;">
+                        <li class="active" style="width: 25%">
+                            <a data-toggle="tab" href="#perfil" aria-expanded="false">Perfil</a>
+                        </li>
+                        <li class="" style="width: 25%">
+                            <a data-toggle="tab" href="#dieta" aria-expanded="false">Dieta</a>
+                        </li>
+                        <li class="" style="width: 25%">
+                            <a data-toggle="tab" href="#suplementos" aria-expanded="false">Suplementos</a>
+                        </li>
+                        <li class="" style="width: 25%">
+                            <a data-toggle="tab" href="#actividades" aria-expanded="false">Entrenamiento</a>
+                        </li>
+                    </ul>
+                </header>
+                <section class="panel-body">
+                    <div class="tab-content">
+                        <div id="perfil" class="tab-pane active"> 
+                            <div class="plan-panel" " style="padding-top: 20px">
+                                <form class="form-horizontal" style="padding-top: 20px; padding-bottom: 40px">
+                                    <div class="form-group">
+                                        <div class="col-sm-3 control-label"  >   
+                                            <label for="cmbTipoParametro">Tipo de Parametro:</label>
+                                        </div>     
+                                        <div class="col-sm-7">
+                                           <select  id="cmbTipoParametro" class="form-control xsmall">
+                                               <option value="Todos" selected="selected" >Todos</option>
+                                           </select>            
+                                       </div>
+                                   </div>
+                               </form> 
 
-                     </div>
+                               <table class="display table table-bordered table-striped " id="dtPerfil">
+                                <thead>
+                                    <tr >
+                                        <th id=tipoParametro style="display: none"> </th>
+                                        <th style="width: 45%;">Parametro</th>
+                                        <th  style="width: 45%;">Valor</th>
+                                        <th  style="width: 10%; display: none;">Editar</th>                     
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table> 
+                        </div>
+                    </div>                                          
+                    <div id="dieta" class="tab-pane"> 
 
-                     <div class="row">
-                        <div class="col-md-6">
-                         <label>Meta: </label>
-                     </div>
-                     <div class="col-md-6"  style="text-align: right;">              
-                        <a href="#definirMeta" data-toggle="modal" class="btn btn-info">Definir Meta</a>
-                    </div>           
+                        <div class="plan-panel" style="padding-top: 20px">
+                            <div class="row" style="border-bottom: solid 1px;">
+                                <h4>Dieta Hipocalorica</h4>
+                            </div>
+                            <div class="row">
+                                <h5> Baja en calorias. Ideal para perder peso</h5>
+                            </div>
+                            <div class="row" id='comidas'></div>
+
+
+                        </div>
+                    </div>
+                    <div  id="suplementos" class="tab-pane">
+                        <div class="plan-panel" style="padding-top: 20px">
+                            <div class="row" style="border-bottom: solid 1px;">
+                                <h4>Plan de Suplementos 1</h4>
+                            </div>
+                            <div class="row">
+                                <h5>Deficiencia de Cacio y vitaminas</h5>
+                            </div>
+
+                            <table id="dtSuplementos" class="display table table-bordered table-striped" style="padding-top: 20px">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Suplemento</th>
+                                        <th width="20%">Cantidad</th>
+                                        <th width="30%">Frecuencia</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="actividades" class="tab-pane">
+                       <div class="plan-panel" style="padding-top: 20px">
+                        <div class="row" style="border-bottom: solid 1px;">
+                            <h4>Plan de Ejercicios Basico</h4>
+                        </div>
+                        <div class="row">
+                            <h5> Ejercicios para personas que no acostumbran a realizar actividad fisica</h5>
+                        </div>
+                        <br>
+                        <table id="dtEjercicios" class="display table table-bordered table-striped" style="padding-top: 20px">
+                            <thead>
+                                <tr>
+                                    <th width="50%">Ejercicio</th>
+                                    <th width="20%">Cantidad</th>
+                                    <th width="30%">Frecuencia</th>
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
-            </section>
-        </section>
-    </div>
-</div>
-<section class="panel">
-   <header class="panel-heading tab-bg-dark-navy-blue ">
-    <ul class="nav nav-tabs" style="text-align: center;">
-        <li class="active" style="width: 25%">
-            <a data-toggle="tab" href="#perfil" aria-expanded="false">Perfil</a>
-        </li>
-        <li class="" style="width: 25%">
-            <a data-toggle="tab" href="#dieta" aria-expanded="false">Dieta</a>
-        </li>
-        <li class="" style="width: 25%">
-            <a data-toggle="tab" href="#suplementos" aria-expanded="false">Suplementos</a>
-        </li>
-        <li class="" style="width: 25%">
-            <a data-toggle="tab" href="#actividades" aria-expanded="false">Entrenamiento</a>
-        </li>
-    </ul>
-</header>
-<section class="panel-body">
-    <div class="tab-content">
-        <div id="perfil" class="tab-pane active"> 
-            <div class="container" style="padding-top: 20px">
-
-                <form class="form-horizontal" style="padding-top: 20px; padding-bottom: 40px">
-                    <div class="form-group">
-                        <div class="col-md-3 control-label"  >   
-                            <label for="cmbTipoParametro">Tipo de Parametro:</label>
-                        </div>     
-                        <div class="col-md-7">
-                         <select  id="cmbTipoParametro" class="form-control xsmall">
-                             <option value="Todos" selected="selected" >Todos</option>
-                         </select>            
-                     </div>
-                 </div>
-             </form> 
-
-             <table class="display table table-bordered table-striped " id="dtPerfil">
-                <thead>
-                    <tr >
-                        <th id=tipoParametro style="display: none"> </th>
-                        <th style="width: 45%;">Parametro</th>
-                        <th  style="width: 45%;">Valor</th>
-                        <th  style="width: 10%; display: none;">Editar</th>                     
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table> 
-        </div>                                          
-    </div>
-    <div id="dieta" class="tab-pane"> 
-
-        <div class="container" style="padding-top: 20px">
-            <div class="row" style="border-bottom: solid 1px;">
-                <h4>Dieta Hipocalorica</h4>
-            </div>
-            <div class="row">
-                <h5> Baja en calorias. Ideal para perder peso</h5>
-            </div>
-            <div class="row" id='comidas'></div>
-
-
-        </div>
-    </div>
-    <div id="suplementos" class="tab-pane">
-        <div class="container" style="padding-top: 20px">
-            <div class="row" style="border-bottom: solid 1px;">
-                <h4>Plan de Suplementos 1</h4>
-            </div>
-            <div class="row">
-                <h5>Deficiencia de Cacio y vitaminas</h5>
             </div>
             <br>
-            <table id="dtSuplementos" class="display table table-bordered table-striped" style="padding-top: 20px">
-                <thead>
-                    <tr>
-                        <th width="50%">Suplemento</th>
-                        <th width="20%">Cantidad</th>
-                        <th width="30%">Frecuencia</th>
-
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        </section>
+            <div class="row" style="padding: 30px;">
+                <div class="position-left col-md-6">           
+                    <a  href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
+                </div>   
+                <div class="pull-right col-md-6" style="text-align: right;">
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar</button>  
+                </div>
+            </div>
+    </section>
+</div>
+<div class="col-md-4">     
+    <div class="mini-stat clearfix">
+        <span class="mini-stat-icon light-green"><i class="fa  fa-stethoscope"></i></span>
+        <div class="mini-stat-info">
+            <span>23 de Abril 2018</span>
+            <h4>Primera Visita</h4> 
         </div>
     </div>
-    <div id="actividades" class="tab-pane">
-     <div class="container" style="padding-top: 20px">
-        <div class="row" style="border-bottom: solid 1px;">
-            <h4>Plan de Ejercicios Basico</h4>
+    <section class="panel">   
+        <header class="panel-heading">
+            Cliente
+        </header>
+        <section class="panel-body">
+            <h3 style="text-align: center; margin: 0px 0px 20px 0px;">Ana Victoria De Palma</h3>
+
+            <div class="row">
+               <label class="control-label col-md-3 ">Telefono:</label>
+               <div class="col-md-9"><span >02324242</span> </div>
+           </div>
+           <div class=" row">
+               <label class="control-label col-md-3 ">Edad:</label>
+               <div class="col-md-9"><span >12 años</span> </div>
+           </div>
+           <div class="row">
+               <label class="control-label col-md-3 ">Direccion:</label>
+               <div class="col-md-9"><span >Av Los Leones con calle republica</span> </div>
+           </div>
+       </section>
+   </section>
+   <section class="panel">   
+    <header class="panel-heading">
+        Servicio
+    </header>
+    <section class="panel-body">
+        <h3 style="text-align: center; margin: 0px 0px 20px 0px;">Adelgazar</h3>
+        <div class=" row">
+            <label class="control-label col-md-3 ">Estado:</label>
+            <div class="col-md-9" >                                
+               <div class="progress progress-xs">
+                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                    <span class="sr-only">10% Complete</span>
+                </div>
+            </div> 
+            <span class="pull-right">1 de 12 visitas</span>
+        </div>
+
+    </div>
+
+    <div  style="padding: 20px">
+        <div class="row">
+            <i class="fa fa-asterisk"></i>
+            <label>Dieta:</label> <span>Hipocalórica</span>
         </div>
         <div class="row">
-            <h5> Ejercicios para personas que no acostumbran a realizar actividad fisica</h5>
+            <i class="fa fa-asterisk"></i>
+            <label>Plan de Suplemento:</label> <span>Suplementos 1</span>
         </div>
-        <br>
-        <table id="dtEjercicios" class="display table table-bordered table-striped" style="padding-top: 20px">
-            <thead>
-                <tr>
-                    <th width="50%">Ejercicio</th>
-                    <th width="20%">Cantidad</th>
-                    <th width="30%">Frecuencia</th>
+        <div class="row">
+           <i class="fa fa-asterisk"></i>
+           <label>Plan de Entrenamiento:</label> <span>Ejercicios básicos</span>
+       </div>
 
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+   </div>
+</section>
+</section>
+<section class="panel">
+    <header class="panel-heading">Meta</header>
+    <section class="panel-body">
+       <div class="col-md-12"  >              
+            <a href="#definirMeta" data-toggle="modal" class="btn btn-info" style="width: 100%;">Definir Meta</a>
+        </div>           
+</section>
+</section>
+
+</div>
 </div>
 
 
-</div>
-<div class="row" style="padding: 30px;">
-    <div class="position-left col-md-6">           
-        <a  href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
-    </div>   
-    <div class="position-right col-md-6" style="text-align: right;">
-        <button type="button" class="btn btn-danger">Cancelar</button>
-        <button type="button" class="btn btn-primary">Registrar</button>  
-    </div>
-</div>
+<!-- MODALES -->
 
 <div class="modal fade" id="proximaVisita"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -257,7 +248,7 @@
                         <label for= "dtpFecha" class="col-md-4 control-label">Fecha:</label>
                         <div class="col-md-4">
 
-                        <div  data-date-viewmode="days" data-date-format="dd-mm-yyyy" data-date="27-04-2018" class="input-append date dpYears">
+                            <div  data-date-viewmode="days" data-date-format="dd-mm-yyyy" data-date="27-04-2018" class="input-append date dpYears">
                                 <input type="text" readonly="" size="16" class="form-control">
                                 <span class="input-group-btn add-on">
                                     <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
@@ -287,13 +278,6 @@
 </div>
 
 
-</section>
-
-
-
-
-
-
 
 <div class="modal fade" id="definirMeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -313,11 +297,11 @@
                     <div class="form-group">
                         <label class="col-md-5 control-label" for="cmbParametro">Parametro:</label>
                         <div class="col-md-4">
-                         <select id="cmbParametro" class="form-control"> </select>
+                           <select id="cmbParametro" class="form-control"> </select>
 
-                     </div>
-                 </div>
-                 <div class="form-group">
+                       </div>
+                   </div>
+                   <div class="form-group">
                     <label class="col-md-5 control-label" for="txtValorMeta">Valor:</label>
                     <div class="col-md-4">
                         <input id="txtValorMeta" type="number" class="form-control"/>
@@ -353,13 +337,13 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>
                         <div class="col-md-9">
-                         <select id="ms_alimentos" class="form-control"> </select>
+                           <select id="ms_alimentos" class="form-control"> </select>
 
-                     </div>
-                 </div>
-             </form>
-         </div>
-         <div class="modal-footer">
+                       </div>
+                   </div>
+               </form>
+           </div>
+           <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
             <button class="btn btn-info" type="button">Aceptar</button>
         </div>

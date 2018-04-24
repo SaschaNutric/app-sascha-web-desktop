@@ -135,43 +135,7 @@
 
 
 
-        if ($.fn.plot) {
-            var datatPie = [30, 50];
-            // DONUT
-            $.plot($(".target-sell"), datatPie, {
-                series: {
-                    pie: {
-                        innerRadius: 0.6,
-                        show: true,
-                        label: {
-                            show: false
-
-                        },
-                        stroke: {
-                            width: .01,
-                            color: '#fff'
-
-                        }
-                    }
-
-
-
-
-                },
-
-                legend: {
-                    show: true
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: true
-                },
-
-                colors: ["#ff6d60", "#cbcdd9"]
-            });
-        }
-
-
+      
 
         /*==Collapsible==*/
         $('.widget-head').click(function (e) {
@@ -284,6 +248,44 @@
 
 
     });
+
+  if ($.fn.plot) {
+            var datatPie = [30, 50];
+            // DONUT
+            $.plot($(".target-sell"), datatPie, {
+                series: {
+                    pie: {
+                        innerRadius: 0.6,
+                        show: true,
+                        label: {
+                            show: false
+
+                        },
+                        stroke: {
+                            width: .01,
+                            color: '#fff'
+
+                        }
+                    }
+
+
+
+
+                },
+
+                legend: {
+                    show: true
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true
+                },
+
+                colors: ["#ff6d60", "#cbcdd9"]
+            });
+        }
+
+
 
 
 })(jQuery);

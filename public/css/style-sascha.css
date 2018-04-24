@@ -129,8 +129,8 @@ left: 930px;
 }
 .btn-cancelar
 {
-     background-color: #ED4046;
-    border-color: #ED4046;
+     background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
 }
 .btn-sblanco
@@ -164,22 +164,13 @@ left: 930px;
 
 .btn-voscuro
  {
-    background-color: #117666;
-    border-color: #117666;
+    background-color: #7ab740;
+    border-color: #7ab740;
     color: #FFFFFF;
     
 }
 
 
-.panel-heading {
-    border-color:#f6f6f6;
-    font-size: 24px;
-    color:#FFFFFF;
-    font-weight: 400;
-    background: #FFFFFF;
-    padding: 15px;
-    color:#767676;
-}
 
 #panel-h
 {
@@ -203,4 +194,8 @@ left: 930px;
 .dataTables_filter label input{
 
 width: 50% !important;
+}
+
+.control-span{
+    padding-top: 5px;
 }

@@ -16,7 +16,7 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="js/bootstrap-fileupload/bootstrap-fileupload.css" />
-
+    <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
 
 
@@ -28,168 +28,156 @@
 </head>
 
 <body>
- 
+
     <!-- Comienzo del Registro-->
     <h3>Registrar Servicio</h3>
     <section class="panel">
-     
-       <div class="panel-body">
-          <form class="form-horizontal" method="get">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Descripcion:</label>
-                <div class="col-sm-8">
-                    <textarea rows="3" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Plan de Dieta:</label>
-                <div class="col-md-4">
-                    <select class="form-control" id="dietas">
-                        <option>Seleccione</option>
-                        <option>Aumento Masa Muscular</option>
-                        <option>Dieta Para Deportes</option> 
-                        <option>Dieta para Viejos</option>
-                    </select>
-                </div>
-                <label class="col-sm-1 control-label">Precio:</label>
-                <div class="col-sm-3">
-                    <input type="number" class="form-control">
-                </div>
+        <header class="panel-heading tab-bg-dark-navy-blue ">
+            <ul class="nav nav-tabs" style="text-align: center;">
+                <li class="active" style="width: 33%">
+                    <a data-toggle="tab" href="#datos" aria-expanded="false">Información Básica</a>
+                </li>
+                <li class="" style="width: 33%">
+                    <a data-toggle="tab" href="#parametros" aria-expanded="false">Características</a>
+                </li>
+                <li class="" style="width: 33%">
+                    <a data-toggle="tab" href="#garantia" aria-expanded="false">Garantía</a>
+                </li>
+            </ul>
 
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Plan de Entrenamiento:</label>
-                <div class="col-md-4" >
-                  <select class="form-control"  id="planEjercicio">
-                    <option>Seleccione</option>
-                    <option>Cardio</option>
-                    <option>Bailoterapia</option> 
-                    <option>Caminata</option>
-                </select>
+        </header>
+        <div class="panel-body">
+            <div class="tab-content">
+                <div id="datos" class="tab-pane active">
+                   <form class="form-horizontal" >
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Nombre:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Descripcion:</label>
+                        <div class="col-sm-8">
+                            <textarea rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Plan de Dieta:</label>
+                        <div class="col-md-4">
+                            <select class="form-control" id="dietas">
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label">Precio:</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control">
+                        </div>
 
-            </div>
-            <label class="col-sm-1 control-label">Duración:</label>
-            <div class="col-sm-3">
-                <input type="number" class="form-control"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Plan de Suplemento:</label>
-            <div class="col-md-4">
-              <select class="form-control"  id="planSuplementos">
-                <option>Seleccione</option>
-                <option>Carbohidratos</option>
-                <option>Proteinas</option> 
-                <option>Calcio</option>
-            </select>
-        </div>
-    </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Plan de Entrenamiento:</label>
+                        <div class="col-md-4" >
+                          <select class="form-control"  id="planEjercicio">
+                          </select>
 
-    <div class="form-group last">
-        <label class="control-label col-md-2">Imagen:</label>
-        <div class="col-md-10">
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="fileupload-new thumbnail" style="width: 400px; height: 300px;">
-                    <img src="http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Agregar+imagen" alt="" />
+                      </div>
+                      <label class="col-sm-1 control-label">Duración:</label>
+                      <div class="col-sm-3">
+                        <input type="number" class="form-control"/>
+                    </div>
                 </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 400px; max-height: 300px; line-height: 20px;"></div>
-                <div>
-                 <span class="btn btn-white btn-file">
-                     <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Seleccionar imagen</span>
-                     <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
-                     <input type="file" class="default" />
-                 </span>
-                 <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Eliminar</a>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Plan de Suplemento:</label>
+                    <div class="col-md-4">
+                      <select class="form-control"  id="planSuplementos">
+                      </select>
+                  </div>
+                  <label class="col-sm-1 control-label">Especialidad:</label>
+                  <div class="col-md-3">
+                      <select class="form-control"  id="especialidades">
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group last">
+                <label class="control-label col-md-2">Imagen:</label>
+                <div class="col-md-10">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="fileupload-new thumbnail" style="width: 400px; height: 300px;">
+                            <img src="http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Agregar+imagen" alt="" />
+                        </div>
+                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 400px; max-height: 300px; line-height: 20px;"></div>
+                        <div>
+                         <span class="btn btn-white btn-file">
+                             <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Seleccionar imagen</span>
+                             <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
+                             <input type="file" class="default" />
+                         </span>
+                         <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Eliminar</a>
+                     </div>
+                 </div>
              </div>
          </div>
-     </div>
+     </form> 
  </div>
+ <div id="parametros" class="tab-pane">
 
+     <div class="pull-right" style="padding-bottom: 20px"  >
+        <a href="#myModal" data-toggle="modal" class="btn btn-vclaro">
+            Agregar 
+        </a>
+    </div>
 
+    <table class="table table-striped table-hover table-bordered" id="dtParametros">
+        <thead>
+            <tr>
+                <th width="25%">Tipo de Parametros</th>
+                <th width="25%">Parametro</th>
+                <th width="20%">Valor Minimo</th>
+                <th width="20%">Valor Maximo</th>
+                <th width="10%">Acciones</th>
 
-</form> 
-<h3>Parametros del Servicio</h3>
-<div class="pull-right" style="padding-bottom: 20px"  >
-    <a href="#myModal" data-toggle="modal" class="btn btn-vclaro">
-        Agregar 
-    </a>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Antropometrico</td>
+                <td>Peso</td>
+                <td>90kg</td>
+                <td>120kg</td>
+                <td>
+                    <!--Botones de las acciones-->
+                    <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar"  title='Editar'><i class='fa fa-pencil'></i></button>
+                    <button type='button' class='ver btn  btn-stransparent'    data-toggle='modal' data-target="#modal-eliminar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                </td>
+                <!--Fin de los botones de las acciones-->
+            </tr>
+            <tr>
+                <td>Patologico</td>
+                <td>Diabtes</td>
+                <td>-</td>
+                <td>-</td>
+                <td>
+                    <!--Botones de las acciones-->
+                    <button type='button' class='edit btn  btn-stransparent'  data-toggle="modal" data-target="#modal-editar"  title='Editar'><i class='fa fa-pencil'></i></button>
+                    <button type='button' class='ver btn  btn-stransparent'    data-toggle='modal' data-target="#modal-eliminar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                </td>
+                <!--Fin de los botones de las acciones-->
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+<div id="garantia" class="tab-pane">
+    <div class="position-center">
+      <h4 >Condiciones:</h4>
+      <div class="col-md-12">
+        <select id="ms_condiciones" class="form-control"></select>
+    </div>
+
+</div>
 </div>
 
-<table class="table table-striped table-hover table-bordered" id="dtParametros">
-    <thead>
-        <tr>
-            <th width="25%">Tipo de Parametros</th>
-            <th width="25%">Parametro</th>
-            <th width="20%">Valor Minimo</th>
-            <th width="20%">Valor Maximo</th>
-            <th width="10%">Acciones</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Antropometrico</td>
-            <td>Peso</td>
-            <td>90kg</td>
-            <td>120kg</td>
-            <td>
-                <!--Botones de las acciones-->
-                <button type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#modal-editar"  title='Editar'><i class='fa fa-pencil'></i></button>
-                <button type='button' class='ver btn  btn-stransparent'    data-toggle='modal' data-target="#modal-eliminar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-            </td>
-            <!--Fin de los botones de las acciones-->
-        </tr>
-        <tr>
-            <td>Patologico</td>
-            <td>Diabtes</td>
-            <td>-</td>
-            <td>-</td>
-            <td>
-                <!--Botones de las acciones-->
-                <button type='button' class='edit btn  btn-stransparent'  data-toggle="modal" data-target="#modal-editar"  title='Editar'><i class='fa fa-pencil'></i></button>
-                <button type='button' class='ver btn  btn-stransparent'    data-toggle='modal' data-target="#modal-eliminar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-            </td>
-            <!--Fin de los botones de las acciones-->
-
-        </tr>
-        <tr>
-            <td>Antropometrico </td>
-            <td> Peso</td>
-            <td>60kg</td>
-            <td>80kg</td>
-            <td>
-                <!--Botones de las acciones-->
-                <button type='button' class='edit btn  btn-stransparent'    data-toggle="modal" data-target="#modal-editar"  title='Editar'><i class='fa fa-pencil'></i></button>
-                <button type='button' class='ver btn  btn-stransparent'    data-toggle='modal' data-target="#modal-eliminar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-            </td>
-            <!--Fin de los botones de las acciones-->
-
-        </tr>
-        <tr >
-            <td>Patologico</td>
-            <td>Hepatitis</td>
-            <td>-</td>
-            <td>-</td>
-            <td>
-
-
-                <!--Botones de las acciones-->
-                <button type='button' class='edit btn  btn-stransparent'    data-toggle="modal" data-target="#modal-editar"  title='Editar'><i class='fa fa-pencil'></i></button>
-                <button type='button' class='ver btn  btn-stransparent'    data-toggle='modal' data-target="#modal-eliminar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-            </td>
-            <!--Fin de los botones de las acciones-->
-        </tr> 
-
-    </tbody>
-
-</table>
-
+</div>
 <div class="position-right col-md-12" style="text-align: right; padding-bottom: 30px">
     <button class="btn btn-cancelar" type="button">Cancelar</button>
     <button class="btn btn-voscuro" type="submit">Registar</button>
@@ -210,9 +198,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Editar Datos de los Parametros</h4>
     </div>
-
-
-
     <section>
         <form class="form-horizontal">
 
@@ -277,12 +262,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
                         <button type="button" class="btn btn-vclaro" id="btn-regis">Registrar</button>
-
-
                     </div>
-
-
-
                 </form>
             </div>
         </div>
@@ -420,6 +400,10 @@
 
     <!--common script init for all pages-->
     <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+
+
     <!--common script init for all pages-->
     <script src="js/scripts.js"></script>
     <!--script for this page-->
