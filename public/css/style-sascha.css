@@ -199,3 +199,66 @@ width: 50% !important;
 .control-span{
     padding-top: 5px;
 }
+
+#btn-Agregar-incidencia
+{
+    background-color: #17AA8B;
+    border-color: #17AA8B;
+    color: #FFFFFF;   
+}
+#btnCerrar
+{     background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+}
+#btnGuardar
+{
+ background-color: #17AA8B;
+ border-color: #17AA8B;
+ color: #FFFFFF;
+}
+
+#btnRechazar
+{
+       background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+}
+#btnAtender
+{
+ background-color: #17AA8B;
+ border-color: #17AA8B;
+ color: #FFFFFF;
+}
+#btnCancelar
+{
+     background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+}
+
+#btnEnviar
+{
+    background-color: #7ab740;
+    border-color: #7ab740;
+    color: #FFFFFF;
+}
+#btnResponder
+{
+ background-color:transparent;
+ border-color: transparent;
+}
+#txtMotivo
+{
+ border-color: #000000;
+}
+.control-span
+{
+    padding-top: 5px;
+}
+#btnAprobar
+{
+ background-color: #17AA8B;
+ border-color: #17AA8B;
+ color: #FFFFFF;
+}

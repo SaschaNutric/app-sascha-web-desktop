@@ -1,5 +1,5 @@
 $ (document).ready(function(){
-    $('#tssvisita').dataTable({
+    $('#dtvisita').dataTable({
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [ 3 ] }
         ],
@@ -14,7 +14,7 @@ $ (document).ready(function(){
                  },
               } );
 
-    $('#treclamos').dataTable({
+    $('#dtreclamos').dataTable({
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [ 4 ] }
         ],
@@ -29,7 +29,7 @@ $ (document).ready(function(){
                  },
               } );
 
-    $('#tcanalescucha').dataTable({
+    $('#dtcanalescucha').dataTable({
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [ 5 ] }
         ],

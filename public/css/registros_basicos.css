@@ -1,7 +1,3 @@
-.panel-body{
-    display: none;
-}
-
 .subtitulo h4{
     border-bottom: 1px solid #767676;
 }
@@ -40,8 +36,7 @@
     background-color: #17aa8b;
     border-color: #17aa8b;
     color: #FFFFFF;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    display: inline-block;
 }
 
 .btn-agregar:hover, .btn-agregar:focus, .btn-agregar:active, .btn-agregar.active, .open .dropdown-toggle.btn-agregar {
@@ -50,7 +45,7 @@
     color: #FFFFFF;
 }
 
-.btn-acciones{
+.btn-transparente{
     background: none;
 }
 
@@ -89,9 +84,14 @@
 
 .dataTables_filter  label input {
     margin-left: 40px;
+    width:50% !important;
 }
 
 .ancho-columna {
-    width: 10% !important;
+    width: 15% !important;
 }
 
+.adv-table .dataTables_filter label input {
+    margin-left:10px;
+    width:50%;
+}

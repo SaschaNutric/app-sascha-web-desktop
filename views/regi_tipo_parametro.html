@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-    <link rel="shortcut icon" href="images/favicon.png">
 
     <title>Sascha</title>
 
@@ -13,7 +12,7 @@
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+    
     <link rel="stylesheet" href="css/bootstrap-switch.css" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
@@ -21,8 +20,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="css/conf_sistema.css">
-
+    <link rel="stylesheet" href="css/registros_basicos.css">
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
     <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -35,71 +33,79 @@
 </head>
 <body>
 
+
     <section id="container" >
 
         <!--main content start-->
-
-        <h3>Configuración de Filtros</h3>
-
-        <!-- Inicio pagina Filtros-->
+        <h3>Registro de Tipos de Parámetros</h3>
+        <!-- Inicio pagina de Unidades -->
         <section class="panel">
-            <div class="panel-body" style="display: block;">
-                <!-- Tabla de Filtros -->
+            <section class="panel-body">
+                <!-- Tabla de Tipo de parametros -->
                 <div class="adv-table">
                     <div class="pull-right">
-                        <a href="#modal-configurar-filtro" data-toggle="modal" class="btn btn-agregar">
-                            Configurar
+                        <!-- modal agregar tipo parametro -->
+                        <a href="#agregarTipoParametro" data-toggle="modal" class="btn btn-agregar">
+                            Agregar
                         </a>
                     </div>
-                    <table class="table table-striped table-hover table-bordered" id="dtFiltros">
+                    <table class="table table-bordered table-striped" id="dtregiTipoParametros">
                         <thead>
                             <tr>
-                                <th>Tipo de parámetro</th>
+                                <th>Nombre</th>
                                 <th class="ancho-columna">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="">
+                                <td>Antropométrico</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#editarTipoParametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr class="">
                                 <td>Patología</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#modal-editar-filtro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                        <a href="#editarTipoParametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
                                     </div>
                                 </td>
-                            </tr>        
+                            </tr>              
                         </tbody>
                     </table>
                 </div>
-            </div>
+                <!-- fin tabla tipo de parametro -->
+            </section>
         </section>
-        
-        <!-- Fin pagina Filtros -->
 
-        <!-- Inicio de Modales -->
-        <!-- Modal agregar Filtro -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-configurar-filtro" class="modal fade">
+
+    <!-- Inicio de Modales -->
+
+    <!-- Modal Agregar tipo parametro -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoParametro" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Configurar filtro</h4>
+                        <h4 class="modal-title">Agregar Tipo Parámetro</h4>
                     </div>
                     <div class="modal-body">
-
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class= "col-md-4" for="exampleInputEmail1">Tipo de Parámetro</label>
+                                <label class="col-md-4 control-label">Nombre:</label>
                                 <div class="col-md-6">
-                                    <select id="Select-tipo-parametro" class="form-control" style="width: 300px">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Antropomertrico</option>
-                                        <option value="02">Patologia</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="agregarNombreTipoParametro">
                                 </div>
-                            </div>                                      
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -109,28 +115,24 @@
                 </div>
             </div>
         </div>
-        <!-- Fin Modal Configurar Filtro -->
+        <!-- fin Modal agregar tipo parametro -->
 
-        <!-- Modal editar Filtro -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-filtro" class="modal fade">
+    <!-- Modal Agregar tipo parametro -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editarTipoParametro" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Editar filtro</h4>
+                        <h4 class="modal-title">Agregar Tipo Parámetro</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class= "col-md-4" for="exampleInputEmail1">Tipo de Parámetro</label>
+                                <label class="col-md-4 control-label">Nombre:</label>
                                 <div class="col-md-6">
-                                    <select id="Select-tipo-parametro" class="form-control" style="width: 300px">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Antropomertrico</option>
-                                        <option value="02">Patologia</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="agregarNombreTipoParametro" value="Antropométrico">
                                 </div>
-                            </div>                                    
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -140,43 +142,43 @@
                 </div>
             </div>
         </div>
-        <!-- Fin Modal editar Filtro -->
-        <!-- Fin Modales -->
-        <!--main content end-->
+        <!-- fin Modal agregar tipo parametro -->
 
-    </section>
+    <!-- Fin Modales -->
 
+    <!--main content end-->
+    <!--right sidebar start-->
 
-    <!-- Placed js at the end of the document so the pages load faster -->
+    <!--right sidebar end-->
 
-    <!--Core js-->
-
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="bs3/js/bootstrap.min.js"></script>
-    <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/easypiechart/jquery.easypiechart.js"></script>
-    <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-    <script src="js/jquery.nicescroll.js"></script>
-
-    <!--common script init for all pages-->
-    <script src="js/scripts.js"></script>
-    <!--script for this page-->
-    <script src="js/gritter.js" type="text/javascript"></script>
-    <!-- tablas editables -->
-    <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-
-    <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+</section>
 
 
-    <!-- multiselect -->
-    <script src="js/bootstrap-switch.js"></script>
+<!-- Placed js at the end of the document so the pages load faster -->
 
-    <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+<!--Core js-->
 
-    <!--script for this page only-->
-    <script src="js/conf_sist_filtros.js" type="text/javascript"></script>
-    <!-- END JAVASCRIPTS -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="bs3/js/bootstrap.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/easypiechart/jquery.easypiechart.js"></script>
+<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>
+<!--script for this page-->
+<script src="js/gritter.js" type="text/javascript"></script>
+<!-- tablas editables -->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+
+<!--script for this page only-->
+<script src="js/registros_basicos.js" type="text/javascript"></script>
+<!-- END JAVASCRIPTS -->
 </body>
 </html>

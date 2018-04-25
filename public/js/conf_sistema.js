@@ -14,7 +14,7 @@ $(document).ready(function() {
             	"sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
@@ -31,7 +31,7 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
@@ -67,7 +67,7 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 

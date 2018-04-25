@@ -39,53 +39,44 @@
     <section id="container" >
 
         <!--main content start-->
-        <h3>Configuración de Notificaciones</h3>
+        <h3>Configurar Notificaciones</h3>
         <!-- Inicio pagina Respuestas-->
-        <div class="row">
-            <div class="col-sm-12">
-                <section class="panel">
-                    <div class="panel-body" style="display: block;">
+        
+        <section class="panel">
+            <div class="panel-body" style="display: block;">
 
-                        <!-- Tabla de Notificacion  -->
-                        <div class="adv-table">
-                            <div class="clearfix">
-                                <div class="row">
-                                    <div class="pull-right">
-                                        <a href="#modal-agregar-notificacion" data-toggle="modal" class="btn btn-agregar">
-                                            Agregar
-                                        </a>
+                <!-- Tabla de Notificacion  -->
+                <div class="adv-table">
+                    <a href="#modal-agregar-notificacion" data-toggle="modal" class="btn btn-agregar pull-right">
+                        Agregar
+                    </a>
+                    <table class="table table-striped table-hover table-bordered" id="dtNotificaciones">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Notificación</th>
+                                <th>Descripción Notificación</th>
+                                <th class="ancho-columna">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <td>Incidencia</td>
+                                <td>Disculpe, estaremos de vacaciones</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#modal-editar-notificacion" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
                                     </div>
-                                </div>    
-                            </div>
-
-                            <table class="table table-striped table-hover table-bordered" id="dtNotificaciones">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo de Notificación</th>
-                                        <th>Descripción Notificación</th>
-                                        <th class="ancho-columna">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="">
-                                        <td>Incidencia</td>
-                                        <td>Disculpe, estaremos de vacaciones</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="#modal-editar-notificacion" data-toggle="modal" class="btn btn-acciones"><i class="fa fa-pencil"></i></a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-acciones"><i class="fa fa-trash-o"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>        
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                    </div>
+                                </td>
+                            </tr>        
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </section>
+        
         <!-- Fin pagina Notificacion -->
         
 

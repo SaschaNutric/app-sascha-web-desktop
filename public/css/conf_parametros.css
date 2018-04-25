@@ -1,7 +1,5 @@
 
-.panel-body{
-    display: none;
-}
+
 
 .subtitulo h4{
     border-bottom: 1px solid #767676;
@@ -82,14 +80,7 @@
     -webkit-border-radius: 0 4px 0 0 !important;
 }
 
-/* tablas */
-.dataTables_filter {
-    margin-top: -50px !important;
-}
 
-.dataTables_filter label input{
-    
-}
 
 
 .ancho-columna {
