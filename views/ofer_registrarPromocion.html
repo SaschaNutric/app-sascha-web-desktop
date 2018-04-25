@@ -30,15 +30,15 @@
     </head>       
     <body>
 
-        <h3>Registrar Promoción</h3>
+    
         <section class="panel">
            <header class="panel-heading tab-bg-dark-navy-blue ">
             <ul class="nav nav-tabs" style="text-align: center;">
                 <li class="active" style="width: 50%">
-                    <a data-toggle="tab" href="#datos" aria-expanded="false">Datos</a>
+                    <a data-toggle="tab" href="#datos" aria-expanded="false">Informacion Basica</a>
                 </li>
                 <li class="" style="width: 50%">
-                    <a data-toggle="tab" href="#parametros" aria-expanded="false">Parametros</a>
+                    <a data-toggle="tab" href="#parametros" aria-expanded="false">Caracteristicas</a>
                 </li>
             </ul>
         </header>
@@ -64,7 +64,7 @@
                                                         Servicio:</label>
                             <div class="col-md-3">
                                 <select class="form-control m-bot15">
-                                    <option>Seleccionar Servicio</option>
+                                    <option>Seleccionar</option>
 
                                     <option></option>
                                 </select>
@@ -120,16 +120,15 @@
  <!--desde aca-->
  <div class="" style="padding-top: 0px">
 
-  <div style="border-bottom:  1px solid;">
-      <h4> Caracteristicas del Cliente</h4>
-  </div>          
+           
 
 
   <div class="position-center" style="padding-top: 20px">
     <form class="form-horizontal">
-        <div class="form-group">
-            <label class="col-md-3 control-label">
-                Estado:</label>
+        <div class="row"> 
+            <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-md-6 control-label">Estado:</label>
                 <div class="col-md-6">
                     <select class="form-control m-bot15">
                         <option>Seleccionar</option>
@@ -138,11 +137,10 @@
                     </select>
                 </div>
             </div>
+            </div>
+            <div class="col-md-6">
             <div class="form-group">
-                <label class="col-md-3 control-label">
-
-                    Estado Civil:</label>
-
+                <label class="col-md-6 control-label">Estado Civil:</label>
                     <div class="col-md-6">
                         <select class="form-control m-bot15">
                             <option>Seleccionar</option>
@@ -150,9 +148,12 @@
                         </select>
                     </div>
                 </div>
-
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-md-3 control-label">
+                    <label class="col-md-6 control-label">
 
                         Rango de Edad:</label>
 
@@ -163,9 +164,11 @@
                             </select>
                         </div>
                     </div>
+            </div>
+            <div class="col-md-6">
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-6 control-label">
 
                             Genero:</label>
 
@@ -177,7 +180,8 @@
                                 </select>
                             </div>
                         </div>
-
+            </div>
+        </div>
                     </form>
                 </div>
                 <div class="btn-group pull-right">
