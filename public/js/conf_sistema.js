@@ -38,7 +38,7 @@ $(document).ready(function() {
     /* tabla Valoracion */
     $('#dtCriterios').dataTable({ 
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
+        { "bSortable": false, "aTargets": [3] }
         ],               
         "sDom": "ftp",
         "oLanguage": {

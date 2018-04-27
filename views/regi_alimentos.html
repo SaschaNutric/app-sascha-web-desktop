@@ -38,12 +38,12 @@
     <section id="container" >
         <!--main content start-->
         <h3>Registro de Alimentos</h3>
-        <!-- Inicio pagina de Unidades -->
+        <!-- Inicio pagina de Aliemtos -->
         <section class="panel">
             <header class="panel-heading tab-bg-dark-navy-blue ">
                 <ul class="nav nav-justified">
                     <li class="active">
-                        <a data-toggle="tab" href="#tabGrupoAlimenticio" aria-expanded="false">Grupos Alimenticios</a>
+                        <a id="btnAgregarGruposAlimenticios" data-toggle="tab" href="#tabGrupoAlimenticio" aria-expanded="false">Grupos Alimenticios</a>
                     </li>
                     <li>
                         <a data-toggle="tab" href="#tabAlimentos" aria-expanded="false">Alimentos</a>
@@ -57,10 +57,11 @@
                             <div class="pull-right">
                                 <a class="btn btn-agregar" data-toggle='modal' href="#agregarGrupoAlimenticio">Agregar</a>
                             </div>
-                            <table id="dtGruposAlimenticios" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
+                            <table id="dtGruposAlimenticios" class="display table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
-                                        <th width="85%">Nombre</th>
+                                        <th width="50%">Nombre</th>
+                                        <th width="35%">Unidad</th>
                                         <th width="15%">Acciones</th>
                                     </tr>
                                 </thead>
@@ -71,9 +72,9 @@
                     <div id="tabAlimentos" class="tab-pane">
                         <div class="">
                             <div class="pull-right"  >
-                                <a class="btn btn-agregar" data-toggle='modal' href="#agregarAlimentos">Agregar</a>
+                                <a id="btnAgregarAlimentos" class="btn btn-agregar" data-toggle='modal' href="#agregarAlimentos">Agregar</a>
                             </div>
-                            <table id="dtAlimentos" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
+                            <table id="dtAlimentos" class="display table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
                                         <th width="50%">Nombre</th>
@@ -90,11 +91,11 @@
 
         </section>
     </section>
-
+    <!-- Fin pagina Alimentos -->
 
     <!-- Inicio de Modales -->
 
-    <!-- Modal Agregar tipo unidad -->
+    <!-- Modal Agregar Grupo Alimenticio -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarGrupoAlimenticio" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -103,25 +104,25 @@
                         <h4 class="modal-title">Agregar Grupo Alimenticio</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="frmAgregarGrupoAlimenticio">
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Nombre:</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="agregarNombreGrupoAlimenticio">
+                                <label class="col-md-3 control-label">Nombre:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="txtNombreGrupoAlimenticio">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnCancelarGrupoAlimenticio" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptarGrupoAlimenticio" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- fin Modal agregar tipo unidad -->
+        <!-- fin Modal agregar Grupo Alimenticio -->
 
-        <!-- Modal Agregar medida -->
+        <!-- Modal Agregar Alimento -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarAlimentos" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -130,19 +131,19 @@
                         <h4 class="modal-title">Agregar Alimento</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="frmAgregarAlimentos">
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Nombre:</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="agregarNombreAlimento">
+                                <label class="col-md-3 control-label">Nombre:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="txtNombreAlimento">
                                 </div>
                             </div>
                             <div class="form-group">
                             <div class="col-md-4 control-label">
-                                <label for="seleGrupoAlimenticio">Unidad:</label>
+                                <label for="selUnidad">Unidad:</label>
                             </div>
                                 <div class="col-md-6">
-                                    <select id="seleGrupoAlimenticio" class="form-control" style="width: 100%">
+                                    <select id="selUnidad" class="form-control" style="width: 100%">
                                         <option value="Seleccione" selected="selected" >Seleccione</option>
                                     </select>
                                 </div>
@@ -150,20 +151,17 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnCancelarAlimento" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptarAlimento" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- fin Modal agregar medida -->
+        <!-- fin Modal agregar Alimento -->
 
     <!-- Fin Modales -->
 
     <!--main content end-->
-    <!--right sidebar start-->
-
-    <!--right sidebar end-->
 
 </section>
 

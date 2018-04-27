@@ -45,7 +45,6 @@
                                 <i class="fa fa-chevron-right"></i>
                                 <span>Tipos de Parámetros</span>
                             </button>
-
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
@@ -54,64 +53,71 @@
                             </a>
                             <ul class="sub">
                                 <li><button class="btn-sub-menu" id="menu-alimentos" onclick="content.location='regi_alimentos.html'">Alimentos</button></li>
+                                <li><button class="btn-sub-menu" id="menu-alimentos" onclick="content.location='regi_comidas.html'">Comidas</button></li>
                                 <li><button  class="btn-sub-menu" id="menu-suplementos" onclick="content.location='regi_suplementos.html'"> Suplementos</button></li>
                                 <li><button  class="btn-sub-menu" id="menu-ejercicios" onclick="content.location='regi_ejercicios.html'">Ejercicios</button></li>        
                             </ul>
                         </li>
-                        <li><button class="btn-sub-menu" id="menu-ejercicios" onclick="content.location='regi_condiciones_garantia.html'">
+                        <li><button class="btn-sub-menu" id="menu-horario" onclick="content.location='regi_horario.html'">
                             <i class="fa fa-chevron-right"></i>
-                            <span>Condiciones de Garantía</span></button>
-                        </li>
-
-                    <li><button class="btn-sub-menu" id="menu-ejercicios" onclick="content.location='regi_horario.html'">
+                            <span>Horario</span>
+                        </button>
+                    </li>
+                    <li><button class="btn-sub-menu" id="menu-condiciones-garantia" onclick="content.location='regi_condiciones_garantia.html'">
                         <i class="fa fa-chevron-right"></i>
-                        <span>Horario</span>
+                        <span>Condiciones de Garantía</span>
                     </button>
-                </li> 
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-cogs"></i>
-                <span>Configuración</span>
-            </a>
-            <ul class="sub">
-                <li><button class="btn-sub-menu" id="menu-parametros" onclick="content.location='conf_parametros.html'">
+                </li>
+                <li><button class="btn-sub-menu" id="menu-criterios-valoracion" onclick="content.location='regi_criterios_valoracion.html'">
                     <i class="fa fa-chevron-right"></i>
-                    <span>Parámetros</span>
+                    <span>Criterios de Valoración</span>
                 </button>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-chevron-right"></i>
-                    <span>Sistema</span>
-                </a>
-                <ul class="sub">
-                    <li><button class="btn-sub-menu" id="menu-mensajes" onclick="content.location='conf_sist_mensajes.html'" >Mensajes</button ></li>
-                    <li><button class="btn-sub-menu" id="menu-notificacion"onclick="content.location='conf_sist_notificacion.html'" >Notificaciones</button ></li>
-                    <li><button class="btn-sub-menu" id="menu-agenda" onclick="content.location='conf_agenda.html'" >Agenda</button ></li>
-                    <li><button class="btn-sub-menu" id="menu-filtros" onclick="content.location='conf_sist_filtros.html'" >Filtros</button ></li>         
-                </ul>
-            </li>
-            <li><button class="btn-sub-menu" id="menu-servicios" onclick="content.location='conf_servicios.html'">
+            </li> 
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Configuración</span>
+        </a>
+        <ul class="sub">
+            <li><button class="btn-sub-menu" id="menu-parametros" onclick="content.location='conf_parametros.html'">
                 <i class="fa fa-chevron-right"></i>
-                <span>Servicios</span>
+                <span>Parámetros</span>
             </button>
-        </li> 
+        </li>
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-chevron-right"></i>
-                <span>Planes</span>
+                <span>Sistema</span>
             </a>
             <ul class="sub">
-                <li><button class="btn-sub-menu" id="menu-dietas" onclick="content.location='conf_plan_dieta.html'">Dietas</button></li>
-                <li><button  class="btn-sub-menu" id="menu-planSuplementos" onclick="content.location='conf_plan_suplemento.html'"> Plan de Suplemento </button></li>
-                <li><button  class="btn-sub-menu" id="menu-planEntrenamiento" onclick="content.location='conf_plan_actividad.html'">Planes de Entrenamiento</button></li>        
+                <li><button class="btn-sub-menu" id="menu-mensajes" onclick="content.location='conf_sist_mensajes.html'" >Mensajes</button ></li>
+                <li><button class="btn-sub-menu" id="menu-notificacion"onclick="content.location='conf_sist_notificacion.html'" >Notificaciones</button ></li>
+                <li><button class="btn-sub-menu" id="menu-agenda" onclick="content.location='conf_agenda.html'" >Agenda</button ></li>
+                <li><button class="btn-sub-menu" id="menu-criterios" onclick="content.location='conf_sist_valoracion.html'" >Criterios de Valoración</button ></li>
+                <li><button class="btn-sub-menu" id="menu-filtros" onclick="content.location='conf_sist_filtros.html'" >Filtros</button ></li>         
             </ul>
         </li>
+        <li><button class="btn-sub-menu" id="menu-servicios" onclick="content.location='conf_servicios.html'">
+            <i class="fa fa-chevron-right"></i>
+            <span>Servicios</span>
+        </button>
+    </li> 
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-chevron-right"></i>
+            <span>Planes</span>
+        </a>
+        <ul class="sub">
+            <li><button class="btn-sub-menu" id="menu-dietas" onclick="content.location='conf_plan_dieta.html'">Dietas</button></li>
+            <li><button  class="btn-sub-menu" id="menu-planSuplementos" onclick="content.location='conf_plan_suplemento.html'"> Plan de Suplemento </button></li>
+            <li><button  class="btn-sub-menu" id="menu-planEntrenamiento" onclick="content.location='conf_plan_actividad.html'">Planes de Entrenamiento</button></li>        
+        </ul>
+    </li>
 
 
-    </ul>
+</ul>
 </li>
 <li class="sub-menu">
     <a id="menu-visitas" href="javascript:;">
@@ -125,9 +131,9 @@
         </button>
     </li>
     <li><button class="btn-sub-menu" onclick="content.location=''">
-       <i class="fa fa-chevron-right"></i>
-       <span>Incidencias</span>
-   </button>
+     <i class="fa fa-chevron-right"></i>
+     <span>Incidencias</span>
+ </button>
 </li>                          
 </ul>
 </li>
@@ -143,9 +149,9 @@
         </button>
     </li>
     <li><button class="btn-sub-menu" onclick="content.location='ofertasYPromocionesReenviar.html'">
-       <i class="fa fa-chevron-right"></i>
-       <span>Reenviar</span>
-   </button>
+     <i class="fa fa-chevron-right"></i>
+     <span>Reenviar</span>
+ </button>
 </li>                          
 </ul>
 </li>          
@@ -161,12 +167,12 @@
         <span>Administración del Sistema</span>
     </a>
     <ul class="sub">
-     <li class="sub-menu">
+       <li class="sub-menu">
         <a href="javascript:;">
-         <i class="fa fa-chevron-right"></i>
-         <span>Permisología</span>
-     </a>
-     <ul class="sub">
+           <i class="fa fa-chevron-right"></i>
+           <span>Permisología</span>
+       </a>
+       <ul class="sub">
         <li><button class="btn-sub-menu" id="menu-roles"  onclick="content.location='permi_roles.html'">Roles</button></li>
         <li><button class="btn-sub-menu" id="menu-usuarios"  onclick="content.location='permi_usuarios.html'">Usuarios</button></li>        
     </ul>
@@ -184,10 +190,10 @@
 </li>
 <li class="sub-menu">
     <a href="javascript:;">
-     <i class="fa fa-chevron-right"></i>
-     <span>Comunicación</span>
- </a>
- <ul class="sub">
+       <i class="fa fa-chevron-right"></i>
+       <span>Comunicación</span>
+   </a>
+   <ul class="sub">
     <li><button class="btn-sub-menu" id="menu-reclamos" onclick="content.location='comu_reclamos.html'">Reclamos</button></li>
     <li><button class="btn-sub-menu" id="menu-canalEscucha"  onclick="content.location='comu_canal_escucha.html'">Canal de Escucha</button></li>        
 </ul>

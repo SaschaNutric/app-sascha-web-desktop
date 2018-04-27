@@ -8,22 +8,22 @@
 
 /*botones*/
 .btn-aceptar {
-    background-color: #117c66;
-    border-color: #117c66;
+    background-color: #7ab740;
+    border-color: #7ab740;
     color: #FFFFFF;
     float: right;
     width: 90px;
 }
 
 .btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
-    background-color: #17aa8b;
-    border-color: #17aa8b;
+    background-color: #7ab740;
+    border-color: #7ab740;
     color: #FFFFFF;
 }
 
 .btn-cancelar {
-    background-color: #ed404c;
-    border-color: #ed404c;
+    background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
     float: right;
     width: 90px;
@@ -31,8 +31,8 @@
 }
 
 .btn-cancelar:hover, .btn-cancelar:focus, .btn-cancelar:active, .btn-cancelar.active, .open .dropdown-toggle.btn-cancelar {
-    background-color: #ec6459;
-    border-color: #ec6459;
+    background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
 }
 
@@ -40,8 +40,7 @@
     background-color: #17aa8b;
     border-color: #17aa8b;
     color: #FFFFFF;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    display: inline-block;
 }
 
 .btn-agregar:hover, .btn-agregar:focus, .btn-agregar:active, .btn-agregar.active, .open .dropdown-toggle.btn-agregar {
@@ -50,7 +49,7 @@
     color: #FFFFFF;
 }
 
-.btn-acciones{
+.btn-transparente{
     background: none;
 }
 
@@ -62,25 +61,6 @@
     color: #797979;
 }
 
-/*nav justified*/
-
-.nav-justified {
-    width: auto !important;
-    background-color: #d3d3d3;
-}
-
-.nav-justified li > a:hover, .nav-justified li > a:focus {
-    border-radius: 0 4px 0 0 !important;
-    -webkit-border-radius: 0 4px 0 0 !important;
-    color: #17aa8b;
-}
-
-
-.nav-justified li:last-child > a:hover, .nav-justified li.active:last-child > a {
-    border-radius: 0 4px 0 0 !important;
-    -webkit-border-radius: 0 4px 0 0 !important;
-}
-
 /* tablas */
 .dataTables_filter {
     float:left ;
@@ -88,10 +68,10 @@
 }
 
 .dataTables_filter  label input {
-    margin-left: 40px;
+    width: 50% !important;
 }
 
 .ancho-columna {
-    width: 10% !important;
+    width: 15% !important;
 }
 

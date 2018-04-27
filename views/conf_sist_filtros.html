@@ -43,11 +43,11 @@
 
         <!-- Inicio pagina Filtros-->
         <section class="panel">
-            <div class="panel-body" style="display: block;">
+            <div class="panel-body" style="display: block">
                 <!-- Tabla de Filtros -->
                 <div class="adv-table">
                     <div class="pull-right">
-                        <a href="#modal-configurar-filtro" data-toggle="modal" class="btn btn-agregar">
+                        <a id="btnAgregarFiltro" href="#modal-configurar-filtro" data-toggle="modal" class="btn btn-agregar">
                             Configurar
                         </a>
                     </div>
@@ -91,8 +91,8 @@
 
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class= "col-md-4" for="exampleInputEmail1">Tipo de Parámetro</label>
-                                <div class="col-md-6">
+                                <label class= "col-md-3" for="exampleInputEmail1">Tipo de Parámetro</label>
+                                <div class="col-md-9">
                                     <select id="Select-tipo-parametro" class="form-control" style="width: 300px">
                                         <option value="00">Seleccione</option>
                                         <option value="01">Antropomertrico</option>
@@ -103,44 +103,13 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Fin Modal Configurar Filtro -->
-
-        <!-- Modal editar Filtro -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-filtro" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Editar filtro</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class= "col-md-4" for="exampleInputEmail1">Tipo de Parámetro</label>
-                                <div class="col-md-6">
-                                    <select id="Select-tipo-parametro" class="form-control" style="width: 300px">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Antropomertrico</option>
-                                        <option value="02">Patologia</option>
-                                    </select>
-                                </div>
-                            </div>                                    
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Fin Modal editar Filtro -->
         <!-- Fin Modales -->
         <!--main content end-->
 

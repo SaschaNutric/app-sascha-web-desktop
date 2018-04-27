@@ -37,64 +37,123 @@
     <section id="container" >
 
         <!--main content start-->
-        <h3>Registro de Criterios de Valoración</h3>
+        <h3>Registro de Tipo de Criterios de Valoración</h3>
         <!-- Inicio pagina de Criterios de Valoración -->
+
         <section class="panel">
             <section class="panel-body">
-                <!-- Tabla de Criterios de Valoración -->
-                <div class="subtitulo">
-                    <div class="">
-                        <div class="adv-table">
-                            <div class="pull-right">
-                                <!-- modal agregar tipo parametro -->
-                                <a href="#agregarCriterioValoracion" data-toggle="modal" class="btn btn-agregar">
-                                    Agregar
-                                </a>
+                    <div id="TipoValoracion">
+                        <div class="">
+                            <div class="pull-right"  >
+                                <a id="btnAgregarTipoValoracion" href="#agregarTipoValoracion" data-toggle="modal" class="btn btn-agregar">Agregar</a>
                             </div>
-                            <table class="table table-bordered table-striped" id="dtCriterioValoracion">
+                            <table id="dtTipoValoracion" class="display table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Criterio</th>
+                                        <th>Descripción</th>
+                                        <th>Valores</th>
                                         <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Descriptiva</th>
+                                        <th>Excelente, Muy Bueno, Bueno, Regular, Malo</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Númerica</th>
+                                        <th>1,2,3,4,5</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Condicional</th>
+                                        <th>SI,NO</th>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
-                    </div>Criterio de Valoración
-                </div>
-                <!-- fin tabla Criterios de Valoración -->
-            </section>
-        </section>
+                    </div>
+            </div>
 
+        </section>
+    </section>
 
     <!-- Inicio de Modales -->
 
-    <!-- Modal Agregar Criterio de Valoración -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarCriterioValoracion" class="modal fade">
+    <!-- Modal Agregar Escala de Valoración -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoloracion" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h4 class="modal-title">Agregar Criterio de Valoración</h4>
+                    <h4 class="modal-title">Agregar Tipo de Valoración</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id=frmagregarEscalaValoracion>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Criterio:</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="agregarNombreSuplemento">
+                            <label class="col-md-3 control-label">Descripción:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="txtDescripcion">
                             </div>
                         </div>
                     </form>
+                    <div class="row" style="border-bottom: solid 1px;">
+                        <h4>Valores</h4>
+                    </div>
+                    <form class="form-horizontal" style="padding-top: 20px" id=frmagregarValor>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Valor:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="txtValor">
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="margin-bottom: 15px">
+                           <button id="btnAgregarValor" type="submit" class="btn btn-agregar pull-right">Agregar Valor</button>
+                       </div>
+                    </form>
+                    <table id="dtValor" class="display table table-bordered table-striped"  >
+                        <thead>
+                            <tr>
+                                <th>Valor</th>
+                                <th class="ancho-columna">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btnCancelarEScala" type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button id="btnAceptarEscala" type="button" class="btn btn-aceptar">Aceptar</button>
                 </div>
+                
             </div>
         </div>
     </div>
-    <!-- fin Modal agregar Criterio de Valoración -->
+    <!-- fin Modal agregar Tipo de Valoración -->
 
     <!-- Fin Modales -->
 

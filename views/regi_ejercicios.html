@@ -48,7 +48,7 @@
                         <div class="adv-table">
                             <div class="pull-right">
                                 <!-- modal agregar Ejercicios -->
-                                <a href="#agregarEjercicio" data-toggle="modal" class="btn btn-agregar">
+                                <a id="btnAgregarEjercicio" href="#agregarEjercicio" data-toggle="modal" class="btn btn-agregar">
                                     Agregar
                                 </a>
                             </div>
@@ -79,18 +79,18 @@
                     <h4 class="modal-title">Agregar Ejercicio</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="frmAgregarEjercicio">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Nombre:</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="agregarNombreEjercicio">
+                            <label class="col-md-3 control-label">Nombre:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="txtNombreEjercicio">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                 </div>
             </div>
         </div>
