@@ -14,9 +14,11 @@
     <link href="css/bootstrap-reset.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
     
-    <link rel="stylesheet" href="css/bootstrap-switch.css" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+
+    <!--responsive table-->
+    <link href="css/table-responsive.css" rel="stylesheet" />
+
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
@@ -35,48 +37,49 @@
 </head>
 <body>
 
-
-    <section id="container" >
-
         <!--main content start-->
         <h3>Configurar Notificaciones</h3>
         <!-- Inicio pagina Respuestas-->
-        
-        <section class="panel">
-            <div class="panel-body" style="display: block;">
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <div class="panel-body" style="display: block;">
 
-                <!-- Tabla de Notificacion  -->
-                <div class="adv-table">
-                    <a href="#modal-agregar-notificacion" data-toggle="modal" class="btn btn-agregar pull-right">
-                        Agregar
-                    </a>
-                    <table class="table table-striped table-hover table-bordered" id="dtNotificaciones">
-                        <thead>
-                            <tr>
-                                <th>Tipo de Notificación</th>
-                                <th>Descripción Notificación</th>
-                                <th class="ancho-columna">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="">
-                                <td>Incidencia</td>
-                                <td>Disculpe, estaremos de vacaciones</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#modal-editar-notificacion" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                    </div>
-                                </td>
-                            </tr>        
-                        </tbody>
-                    </table>
-                </div>
+                        <!-- Tabla de Notificacion  -->
+                        <div class="">
+                            <a id="btnAgregar" href="#modal-agregar-notificacion" data-toggle="modal" class="btn btn-agregar pull-right">
+                                Agregar
+                            </a>
+                            <table class="table table-bordered table-striped" id="dtNotificaciones">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de Notificación</th>
+                                        <th>Descripción Notificación</th>
+                                        <th>Descripción Notificación</th>
+                                        <th class="ancho-columna">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="">
+                                        <td>Incidencia</td>
+                                        <td>Disculpe, estaremos de vacaciones</td>
+                                        <td>Disculpe, estaremos de vacaciones</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="#modal-editar-notificacion" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
-        
+        </div>
         <!-- Fin pagina Notificacion -->
         
 
@@ -91,11 +94,11 @@
                         <h4 class="modal-title">Agregar Notificación</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="frmConfigurarNotificacion">
                             <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Notificación</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                <label class="col-md-3 control-label">Tipo de Notificación</label>
+                                <div class="col-md-9">
+                                    <select id="selTipoNotificacion" class="form-control" style="width: 100%">
                                         <option value="00">Seleccione</option>
                                         <option value="02">Incidencias</option>
                                         <option value="02">Promociones</option>
@@ -105,69 +108,24 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-4 control-label">Descripción Notificación</label>
-                                <div class="col-lg-6">
-                                    <textarea type="text" class="form-control" id="agregar-nombre-notificacion" style="width: 100%"></textarea> 
+                                <label class="col-md-3 control-label">Descripción Notificación</label>
+                                <div class="col-md-9">
+                                    <textarea type="text" class="form-control" id="txtDescripcionNotificacion" style="width: 100%"></textarea> 
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- fin Modal agregar Notificación -->
-
-        <!-- Modal Editar Notificación -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-notificacion" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Editar Notificación</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Notificación</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="02">Incidencias</option>
-                                        <option value="02">Promociones</option>
-                                        <option value="02">Solicitudes</option>
-                                        <option value="02">servicios</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Descripción Notificación</label>
-                                <div class="col-lg-6">
-                                    <textarea type="text" class="form-control" id="editar-nombre-notificacion" style="width: 100%" value="Disculpe, no volvera a repetirse"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin Modal editar Notificación -->
-
         <!-- Fin Modales -->
 
         <!--main content end-->
-        <!--right sidebar start-->
-
-        <!--right sidebar end-->
-
-    </section>
 
 
     <!-- Placed js at the end of the document so the pages load faster -->

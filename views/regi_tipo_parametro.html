@@ -45,7 +45,7 @@
                 <div class="adv-table">
                     <div class="pull-right">
                         <!-- modal agregar tipo parametro -->
-                        <a href="#agregarTipoParametro" data-toggle="modal" class="btn btn-agregar">
+                        <a id="btnAgregarTipoParametro" href="#agregarTipoParametro" data-toggle="modal" class="btn btn-agregar">
                             Agregar
                         </a>
                     </div>
@@ -61,7 +61,7 @@
                                 <td>Antropométrico</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#editarTipoParametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                        <a href="#agregarTipoParametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
@@ -73,7 +73,7 @@
                                 <td>Patología</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#editarTipoParametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                        <a href="#agregarTipoParametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
@@ -99,45 +99,18 @@
                         <h4 class="modal-title">Agregar Tipo Parámetro</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="frmAgregarTipoParametro">
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Nombre:</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="agregarNombreTipoParametro">
+                                <label class="col-md-3 control-label">Nombre:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="txtNombreTipoParametro">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin Modal agregar tipo parametro -->
-
-    <!-- Modal Agregar tipo parametro -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editarTipoParametro" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Agregar Tipo Parámetro</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Nombre:</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="agregarNombreTipoParametro" value="Antropométrico">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>

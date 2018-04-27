@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 
 
-$('#ms_gruposAlimenticios').multiSelect();
+$('#selGruposAlimenticios').multiSelect();
 
 
 $('#dtPlanDieta').dataTable( {

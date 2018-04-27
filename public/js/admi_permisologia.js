@@ -90,9 +90,9 @@ function crearUsuario() {
         },
         error: function (res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);
-            swal(status, respuesta.data.mensaje, 'error');
-            limpiarFormularioSuscripcion();
+            
         }
     })
       
   }
+

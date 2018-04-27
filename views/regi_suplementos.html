@@ -47,7 +47,7 @@
                         <div class="adv-table">
                             <div class="pull-right">
                                 <!-- modal agregar tipo parametro -->
-                                <a href="#agregarSuplemento" data-toggle="modal" class="btn btn-agregar">
+                                <a id="btnAgregarSuplemento" href="#agregarSuplemento" data-toggle="modal" class="btn btn-agregar">
                                     Agregar
                                 </a>
                             </div>
@@ -55,6 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
+                                        <th>Unidad</th>
                                         <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
@@ -70,58 +71,37 @@
     <!-- Inicio de Modales -->
 
     <!-- Modal Agregar Suplemento -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarSuplemento" class="modal fade">
+    <div class="modal fade" id="agregarSuplemento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Agregar Suplemento</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" id="frmAgregarSuplemento">
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Nombre:</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="agregarNombreSuplemento">
-                            </div>
+                            <label class="col-md-3 control-label">Nombre:</label>
+                            <div class="col-md-9"><input id="txtNombre" class="form-control" type="text" name="" value=""/> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Tipo de Unidad:</label>
+                            <div class="col-md-9"><select id="selTipoUnidad" class="form-control"></select> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Unidad:</label>
+                            <div class="col-md-9"><select id="selUnidades" class="form-control"></select> </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- fin Modal agregar Suplemento -->
-
-    <!-- Modal Editar Suplementos -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editarTipoParametro" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h4 class="modal-title">Agregar Suplementos</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Nombre:</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="editarNombreSuplementos" value="">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- fin Modal editar Suplementos -->
 
     <!-- Fin Modales -->
 

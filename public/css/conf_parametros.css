@@ -1,22 +1,19 @@
-
-
-
 .subtitulo h4{
     border-bottom: 1px solid #767676;
 }
 
 /*botones*/
 .btn-aceptar {
-    background-color: #117c66;
-    border-color: #117c66;
+    background-color: #7ab740;
+    border-color: #7ab740;
     color: #FFFFFF;
    	float: right;
    	width: 90px;
 }
 
 .btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
-    background-color: #17aa8b;
-    border-color: #17aa8b;
+    background-color: #7ab740;
+    border-color: #7ab740;
     color: #FFFFFF;
 }
 
@@ -49,7 +46,7 @@
     color: #FFFFFF;
 }
 
-.btn-acciones{
+.btn-transparente{
 	background: none;
 }
 
@@ -80,10 +77,11 @@
     -webkit-border-radius: 0 4px 0 0 !important;
 }
 
-
-
-
+.dataTables_filter label input{
+    width: 50% !important;
+}
+/* tablas */
 .ancho-columna {
-    width: 10% !important;
+    width: 15% !important;
 }
 

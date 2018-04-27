@@ -54,7 +54,7 @@ $(document).ready(function() {
     /* tabla Grupos Alimenticios */
     $('#dtGruposAlimenticios').dataTable({ 
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
+        { "bSortable": false, "aTargets": [2] }
         ],               
         "sDom": "ftp",
         "oLanguage": {
@@ -85,10 +85,43 @@ $(document).ready(function() {
         },        
     });
 
+    /* tabla Comidas */
+    $('#dtComidas').dataTable( {
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 1 ] }
+        ],
+        "sDom": "ftp",
+        "oLanguage": {
+            "sLengthMenu": "",
+            "sSearch": "Buscar:",
+            "oPaginate":{
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente"},
+            "sEmptyTable": "No se encontraron comidas"
+        },
+    } );
+
+    /* tabla Tipos de Comidas */
+    $('#dtTipoComidas').dataTable({ 
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [1] }
+        ],               
+        "sDom": "ftp",
+        "oLanguage": {
+            "sLengthMenu": "",
+            "sSearch": "Buscar:",
+            "oPaginate": {
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente"
+            },
+            "sEmptyTable": "No se encontraron tipos de comidas"
+        },        
+    });
+
     /* tabla Suplementos */
     $('#dtSuplementos').dataTable({ 
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
+        { "bSortable": false, "aTargets": [2] }
         ],               
         "sDom": "ftp",
         "oLanguage": {
@@ -136,23 +169,6 @@ $(document).ready(function() {
         },        
     });
 
-    /* tabla Dias Laborables */
-    $('#dtDiasLaborables').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [2] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron días laborables"
-        },        
-    });
-
     /* tabla Bloque Horario */
     $('#dtBloqueHorario').dataTable({ 
         "aoColumnDefs": [
@@ -170,10 +186,11 @@ $(document).ready(function() {
         },        
     });
 
-    /* tabla Crietrios de Valoracion */
-    $('#dtCriterioValoracion').dataTable({ 
+
+    /* tabla Tipo de Valoracion */
+    $('#dtTipoValoracion').dataTable({ 
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
+        { "bSortable": false, "aTargets": [2] }
         ],               
         "sDom": "ftp",
         "oLanguage": {
@@ -183,9 +200,11 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmptyTable": "No se encontraron bloques horarios"
+            "sEmptyTable": "No se encontraron Tipos de valoración"
         },        
     });
+
+
 });
 
 var tipo_unidad = ["Masa","Tiempo", "Longitud", "Capacidad"];     
@@ -193,9 +212,10 @@ var unidad = ["gramos","kilogramos","hora","semana", "mes","litros", "mililitros
 var abreviatura_unidad = ["g","kg","h","semana", "mes","l", "ml"];
 var tablaDieta = document.getElementById('dtPerfil');
 var sel = document.getElementById('seleTipoUnidad');
+if(sel != null || sel != undefined){
 for(var i = 0; i < tipo_unidad.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = tipo_unidad[i];
     opt.value = tipo_unidad[i];
-    sel.appendChild(opt);
+    sel.appendChild(opt);}
 }

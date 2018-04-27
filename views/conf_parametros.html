@@ -34,63 +34,66 @@
     <![endif]-->
 </head>
 <body>
-    <section id="container" >
+<section id="">
         <h3>Configuración de Parámetros</h3> 
         <!-- Inicio pagina parametros -->
-        <section class="panel">
-            <div class="panel-body">
-                <!-- Tabla de parametro -->
-                <div class="adv-table">
-                    <div class="pull-right">
-                        <a href="#modal-agregar-parametro" data-toggle="modal" class="btn btn-agregar">
-                            Configurar
-                        </a>
-                    </div>
-                    <table class="table table-bordered table-striped" id="dtParametros">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Tipo Parámetro</th>
-                                <th>Tipo de valor</th>
-                                <th>Unidad</th>
-                                <th class="ancho-columna">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="">
-                                <th>Peso</th>
-                                <td>Antropométrico</td>
-                                <th>Real</th>
-                                <th>Kg</th>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <div class="panel-body">
+                        <!-- Tabla de parametro -->
+                        <div class="pull-right">
+                            <a id="btnAgregarParametro" href="#modal-agregar-parametro" data-toggle="modal" class="btn btn-agregar">
+                                Configurar
+                            </a>
+                        </div>
+                        <table class="table table-bordered table-striped table-condensed cf" id="dtParametros">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo Parámetro</th>
+                                    <th>Tipo de valor</th>
+                                    <th>Unidad</th>
+                                    <th class="ancho-columna">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <th>Peso</th>
+                                    <td>Antropométrico</td>
+                                    <th>Real</th>
+                                    <th>Kg</th>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                        </div>
 
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <th>Diabetes</th>
-                                <td>Patología</td>
-                                <th>Nominal</th>
-                                <th>-</th>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                    </div>
-                                </td>
-                            </tr>              
-                        </tbody>
-                    </table>
-                </div>
+                                    </td>
+                                </tr>
+                                <tr class="">
+                                    <th>Diabetes</th>
+                                    <td>Patología</td>
+                                    <th>Nominal</th>
+                                    <th>-</th>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>              
+                            </tbody>
+                        </table>
+
+                    </div>
+                </section>
             </div>
-        </section>
+        </div>
         <!-- Fin pagina parametros -->
 
         <!-- Modales de agregar y editar -->
@@ -104,17 +107,11 @@
                         <h4 class="modal-title">Agregar parametro</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="frmAgregarParametro">
                             <div class="form-group">
-                                <label class="col-lg-4 control-label">Nombre</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="agregar-nombre-tipo parametro" style="width: 100%">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Parámetro</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                <label class="col-md-3 control-label">Tipo de Parámetro:</label>
+                                <div class="col-md-9">
+                                    <select id="selTipoParametro" class="form-control" style="width: 100%">
                                         <option value="00">Seleccione</option>
                                         <option value="01">Antropométrico</option>
                                         <option value="02">Patología</option>
@@ -122,9 +119,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Valor</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-valor" class="form-control" style="width: 100%">
+                                <label class="col-md-3 control-label">Nombre de Parámetro:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="txtNombreParametro" style="width: 100%">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Tipo de Valor:</label>
+                                <div class="col-md-9">
+                                    <select id="selTipoValor" class="form-control" style="width: 100%">
                                         <option value="00">Seleccione</option>
                                         <option value="01">Real</option>
                                         <option value="02">Nominal</option>
@@ -132,11 +135,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-4 control-label">Unidad</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
+                                <label class="col-md-3 control-label">Tipo de Unidad:</label>
+                                <div class="col-md-9">
+                                    <select id="selTipoUnidad" class="form-control" style="width: 100%">
                                         <option value="00">Seleccione</option>
-                                        <option value="01">miligramos</option>
+                                        <option value="01">Masa</option>
+                                        <option value="02">Tiempo</option>
+                                        <option value="03">Longitud</option>
+                                        <option value="04">Cantidad</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Unidad:</label>
+                                <div class="col-md-9">
+                                    <select id="selUnidad" class="form-control" style="width: 100%">
+                                        <option value="00">Seleccione</option>
+                                        <option value="01">kilogramos</option>
                                         <option value="02">gramos</option>
                                     </select>
                                 </div>
@@ -144,74 +159,16 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- fin Modal agregar parametro -->
 
-        <!-- Modal editar parametro -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-editar-parametro" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Editar parametro</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Nombre</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="editar-nombre-parametro" value="peso">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Parámetro</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Antropométrico</option>
-                                        <option value="02">Patología</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Tipo de Valor</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-valor" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Real</option>
-                                        <option value="02">Nominal</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">Unidad</label>
-                                <div class="col-lg-6">
-                                    <select id="select-tipo-parametro" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">miligramos</option>
-                                        <option value="02">gramos</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin Modal editar parametro -->
-
         <!--main content end-->
-    </section>
-
+</section>
 
 <!-- Placed js at the end of the document so the pages load faster -->
 
