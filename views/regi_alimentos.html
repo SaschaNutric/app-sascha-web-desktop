@@ -64,7 +64,7 @@
                                         <th width="50%">Nombre</th>
                                         <th width="0%" style="display: none;">Tipo Unidad</th>
                                         <th width="35%">Unidad</th>
-                                        <th width="15%">Acciones</th>
+                                        <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -198,8 +198,8 @@
                <p style="text-align: center;">¿Está seguro que desea eliminar el grupo alimenticio?</p>
             </div>
             <div class="modal-footer">
-              <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button id="btnEliminarGrupo" data-dismiss="modal" onclick="eliminarGrupo($('#txtIdGrupoEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+              <button id="btnEliminarGrupo" data-dismiss="modal" onclick="eliminarGrupo($('#txtIdGrupoEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+              <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
             </div>
           </div>
         </div>
@@ -219,8 +219,8 @@
                <p style="text-align: center;">¿Está seguro que desea eliminar el alimento?</p>
             </div>
             <div class="modal-footer">
-              <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button id="btnEliminarAlimento" data-dismiss="modal" onclick="eliminarAlimento($('#txtIdAlimentoEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+              <button id="btnEliminarAlimento" data-dismiss="modal" onclick="eliminarAlimento($('#txtIdAlimentoEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+              <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
             </div>
           </div>
         </div>

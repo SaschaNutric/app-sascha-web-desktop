@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
     const tablaUnidad = $('#dtUnidad').DataTable({ 
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [3] }
+        ],
        "language": {
         "lengthMenu": "",
         "search": "Buscar:",
@@ -17,6 +20,9 @@ $(document).ready(function() {
 });
     /* tabla tipo de unidades */
     const tablaTipoUnidad = $('#dtTipoUnidad').DataTable({ 
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [1] }
+        ],
         "language": {
             "lengthMenu": "",
             "search": "Buscar:",

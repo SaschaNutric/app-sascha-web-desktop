@@ -176,8 +176,8 @@
         <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de valoración y todos sus valores asociados?</p>
     </div>
     <div class="modal-footer">
-      <button id="btnCancelarEliminarEscala" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-      <button id="btnEliminarEscala" data-dismiss="modal" onclick="eliminarEscala($('#txtIdEscalaEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+      <button id="btnEliminarEscala" data-dismiss="modal" onclick="eliminarEscala($('#txtIdEscalaEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+      <button id="btnCancelarEliminarEscala" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
   </div>
 </div>
 </div>
@@ -187,7 +187,7 @@
 
 
 <!-- fin Modal eliminar  Valor-->
-<div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade bs-example-modal-sm" id="eliminarValor" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -199,8 +199,8 @@
         <p style="text-align: center;">¿Está seguro que desea eliminar el valor?</p>
     </div>
     <div class="modal-footer">
-      <button id="btnCancelarValor" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-      <button id="btnEliminarValor" data-dismiss="modal" onclick="eliminarValor($('#txtIdValorEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+      <button id="btnEliminarValor" data-dismiss="modal" onclick="eliminarValor($('#txtIdValorEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+      <button id="btnCancelarValor" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
   </div>
 </div>
 </div>

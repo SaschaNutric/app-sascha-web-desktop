@@ -62,7 +62,7 @@
                                 <thead>
                                     <tr>
                                         <th width="85%">Descripción</th>
-                                        <th width="15%">Acciones</th>
+                                        <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -189,8 +189,8 @@
         <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de unidad y todas sus unidades asociadas?</p>
     </div>
     <div class="modal-footer">
-      <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-      <button id="btnEliminar" data-dismiss="modal" onclick="eliminarTipoUnidad($('#txtIdTipoUnidadEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+      <button id="btnEliminar" data-dismiss="modal" onclick="eliminarTipoUnidad($('#txtIdTipoUnidadEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+      <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
   </div>
 </div>
 </div>
@@ -210,8 +210,8 @@
         <p style="text-align: center;">¿Está seguro que desea eliminar la unidad?</p>
     </div>
     <div class="modal-footer">
-      <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-      <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarUnidad($('#txtIdUnidadEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+      <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarUnidad($('#txtIdUnidadEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+      <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
   </div>
 </div>
 </div>
