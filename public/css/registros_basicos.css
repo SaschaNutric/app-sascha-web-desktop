@@ -4,31 +4,32 @@
 
 /*botones*/
 .btn-aceptar {
-    background-color: #117c66;
-    border-color: #117c66;
-    color: #FFFFFF;
-    float: right;
-    width: 90px;
-}
-
-.btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
-    background-color: #17aa8b;
-    border-color: #17aa8b;
-    color: #FFFFFF;
-}
-
-.btn-cancelar {
-    background-color: #ed404c;
-    border-color: #ed404c;
+    background-color: #7ab740;
+    border-color: #7ab740;
     color: #FFFFFF;
     float: right;
     width: 90px;
     margin-left: 5px;
 }
 
+.btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
+
+    background-color: #7ab740;
+    border-color: #7ab740;
+    color: #FFFFFF;
+}
+
+.btn-cancelar {
+    background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+    float: right;
+    width: 90px;
+}
+
 .btn-cancelar:hover, .btn-cancelar:focus, .btn-cancelar:active, .btn-cancelar.active, .open .dropdown-toggle.btn-cancelar {
-    background-color: #ec6459;
-    border-color: #ec6459;
+    background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
 }
 
