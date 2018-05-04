@@ -9,26 +9,27 @@
     color: #FFFFFF;
     float: right;
     width: 90px;
+    margin-left: 5px;
 }
 
 .btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
-     background-color: #7ab740;
+
+    background-color: #7ab740;
     border-color: #7ab740;
     color: #FFFFFF;
 }
 
 .btn-cancelar {
-background-color: #858580;
-border-color: #858580;
+    background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
     float: right;
     width: 90px;
-    margin-left: 5px;
 }
 
 .btn-cancelar:hover, .btn-cancelar:focus, .btn-cancelar:active, .btn-cancelar.active, .open .dropdown-toggle.btn-cancelar {
-    background-color: #ec6459;
-    border-color: #ec6459;
+    background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
 }
 

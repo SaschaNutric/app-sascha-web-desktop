@@ -73,3 +73,4 @@ Morris.Line({
     lineColors:['#7ab740','#17aa8b'],
     parseTime: false
 });
+
