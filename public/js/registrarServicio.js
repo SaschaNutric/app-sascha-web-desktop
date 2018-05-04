@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+let valores = [];
 
 	$('#dtParametros').dataTable( {
 		"aoColumnDefs": [
@@ -45,13 +45,22 @@ $(document).ready(function() {
                 }
             });
         },
-        afterSelect: function () {
+        afterSelect: function (values) {
             this.qs1.cache();
             this.qs2.cache();
+            valores.push(values[0]);
+            console.log(valores)
+        
         },
-        afterDeselect: function () {
+        afterDeselect: function (values) {
             this.qs1.cache();
             this.qs2.cache();
+            const index = valores.indexOf(values[0])
+            if(index != -1){
+                valores.splice(index,1)
+            }
+            console.log(valores)
+
         }
     });
 

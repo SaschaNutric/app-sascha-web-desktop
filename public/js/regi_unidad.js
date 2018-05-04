@@ -262,9 +262,10 @@ $(document).ready(function() {
     }
 
     function editarUnidad(id){
+        console.log($(`#nombre-${id}`).text())
         $('#txtNombreUnidad').val($(`#nombre-${id}`).text());
         $('#txtAbreviaturaUnidad').val($(`#abreviatura-${id}`).text());
-        $('#selTipoUnidad').val($(`#id_tipo_unidad-${id}`));
+        $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').prop('selected',true);
         $('#txtIdUnidad').val(id);
         $('#btnAceptarUnidad').css('display', 'none');
         $('#btnEditarUnidad').css('display', 'inline');
