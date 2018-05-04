@@ -113,7 +113,8 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmptyTable": "No se encontraron unidades"
+            "sEmptyTable": "No se encontraron unidades",
+            "zeroRecords": "No se encontraron unidades"
         },
         "searching": true,
         "ordering": true,
@@ -205,7 +206,7 @@ $(document).ready(function() {
 
         let id = $('#txtIdUnidad').val();
         $.ajax({
-            url: `https://api-sascha.herokuapp.com/tipounidad/${id}`,
+            url: `https://api-sascha.herokuapp.com/unidad/${id}`,
             contentType: 'application/json',
             type: 'PUT',
             data: JSON.stringify(Unidad),
@@ -222,146 +223,6 @@ $(document).ready(function() {
             }
         })
     })
-
-
-    /* tabla Grupos Alimenticios */
-    $('#dtGruposAlimenticios').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [2] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron grupos alimenticios"
-        },        
-    });
-
-    /* tabla Alimentos */
-    $('#dtAlimentos').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [2] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron alimentos"
-        },        
-    });
-
-    /* tabla Comidas */
-    $('#dtComidas').dataTable( {
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [ 1 ] }
-        ],
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate":{
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"},
-            "sEmptyTable": "No se encontraron comidas"
-        },
-    } );
-
-    /* tabla Tipos de Comidas */
-    $('#dtTipoComidas').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron tipos de comidas"
-        },        
-    });
-
-    /* tabla Suplementos */
-    $('#dtSuplementos').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [2] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron suplementos"
-        },        
-    });
-
-    /* tabla Ejercicios */
-    $('#dtEjercicios').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron ejercicios"
-        },        
-    });
-
-    
-
-    /* tabla Bloque Horario */
-    $('#dtBloqueHorario').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron bloques horarios"
-        },        
-    });
-
-
-    /* tabla Tipo de Valoracion */
-    $('#dtTipoValoracion').dataTable({ 
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [2] }
-        ],               
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
-            },
-            "sEmptyTable": "No se encontraron Tipos de valoración"
-        },        
-    });
-
 
 });
 
@@ -403,7 +264,7 @@ $(document).ready(function() {
     function editarUnidad(id){
         $('#txtNombreUnidad').val($(`#nombre-${id}`).text());
         $('#txtAbreviaturaUnidad').val($(`#abreviatura-${id}`).text());
-        $('select[name=tipo_unidad]').val($(`#tipo_unidad-${id}`).text());
+        $('#selTipoUnidad').val($(`#id_tipo_unidad-${id}`));
         $('#txtIdUnidad').val(id);
         $('#btnAceptarUnidad').css('display', 'none');
         $('#btnEditarUnidad').css('display', 'inline');
