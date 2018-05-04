@@ -1,16 +1,17 @@
-Morris.Donut({
-    element: 'graph-donut',
+Morris.Bar({
+    element: 'graph-bar',
     data: [
-        {value: 50, label: 'Completadas', formatted: '50%' },
-        {value: 30, label: 'Reprogramadas', formatted: '30%' },
-        {value: 20, label: 'Reportadas como incidencia', formatted: '20%' }
+        {x: '15 Mar. 2018', y: 3, z: 2, a: 3},
+        {x: '16 Mar. 2018', y: 2, z: 0, a: 1},
+        {x: '17 Mar. 2018', y: 0, z: 2, a: 4},
+        {x: '18 Mar. 2018', y: 4, z: 2, a: 3}
     ],
-    backgroundColor: '#fff',
-    labelColor: '#858580',
-    colors: [
-        '#1c6b34','#7ab740','#cfdd3f'
-    ],
-    formatter: function (x, data) { return data.formatted; }
+    xkey: 'x',
+    ykeys: ['y', 'z', 'a'],
+    labels: ['Completadas', 'Reprogramadas', 'No Completadas'],
+    barColors:['#cfdd3f','#7ab740','#1c6b34']
+
+
 });
 
 $(function(){

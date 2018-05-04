@@ -59,16 +59,17 @@ $(function(){
 });
 
 var day_data = [
-    {"elapsed": "1", "value": 0},
-    {"elapsed": "2", "value": 2},
-    {"elapsed": "3", "value": 6}
+    {x: "Visita 1", y: 0,  z: 7},
+    {x: " Visita 2", y: 2, z: 5},
+    {x: "Visita 3", y: 4, z: 3},
+    {x: "Visita 4", y: 6, z: 1}
 ];
 Morris.Line({
     element: 'graph-line',
     data: day_data,
-    xkey: 'elapsed',
-    ykeys: ['value'],
-    labels: ['value'],
-    lineColors:['#7ab740'],
+    xkey: 'x',
+    ykeys: ['y','z'],
+    labels: ['Alcanzada', 'No alcanzada'],
+    lineColors:['#7ab740','#17aa8b'],
     parseTime: false
 });
