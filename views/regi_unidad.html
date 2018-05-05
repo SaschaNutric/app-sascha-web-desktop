@@ -99,7 +99,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <button aria-hidden="true" data-dismiss="modal" class="close" onclick="limpiarTipoUnidad()" type="button">×</button>
                         <h4 class="modal-title">Tipo Unidad</h4>
                     </div>
                     <div class="modal-body">
@@ -119,7 +119,7 @@
                     <div class="modal-footer">
                         <button id="btnAceptartipoUnidad" data-dismiss="modal" type="button" class="btn btn-aceptar">Aceptar</button>
                         <button id="btnEditartipoUnidad" data-dismiss="modal" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                        <button id="btnCancelarTipoUnidad" data-dismiss="modal" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnCancelarTipoUnidad" onclick="limpiarTipoUnidad()" data-dismiss="modal" type="button" class="btn btn-cancelar">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <button aria-hidden="true" onclick="limpiarUnidad()" data-dismiss="modal" class="close" type="button">×</button>
                         <h4 class="modal-title">Agregar Unidad</h4>
                     </div>
                     <div class="modal-body">
@@ -167,7 +167,7 @@
                     <div class="modal-footer">
                         <button id="btnAceptarUnidad" type="button" class="btn btn-aceptar">Aceptar</button>
                         <button id="btnEditarUnidad" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                        <button id="btnCancelarUnidad" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                        <button id="btnCancelarUnidad" type="button" class="btn btn-cancelar" onclick="limpiarUnidad()"  data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>

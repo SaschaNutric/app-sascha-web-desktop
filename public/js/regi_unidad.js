@@ -27,22 +27,22 @@ $(document).ready(function() {
                 let row = $(`<tr>
                     <td id="nombre-${tipoUnidad.id_tipo_unidad}">${tipoUnidad.nombre}</td>
                     <td>
-                        <button onclick="editarTipoUnidad(${tipoUnidad.id_tipo_unidad})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarTipoUnidad"  title='Editar'><i class='fa fa-pencil'></i></button>
-                        <button onclick="abrirModalEliminarTipoUnidad(${tipoUnidad.id_tipo_unidad})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                    <button onclick="editarTipoUnidad(${tipoUnidad.id_tipo_unidad})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarTipoUnidad"  title='Editar'><i class='fa fa-pencil'></i></button>
+                    <button onclick="abrirModalEliminarTipoUnidad(${tipoUnidad.id_tipo_unidad})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar-1" title='Eliminar'><i class="fa fa-trash-o"></i></button>
                     </td>
-                </tr>
-                `);
+                    </tr>
+                    `);
                 tablaTipoUnidad.row.add(row).draw();
             })
 
         },
         error: function() {
-            
+
         }
     })
 
     $('#btnAceptartipoUnidad').on('click', function() {
-        
+
         if($('#txtNombreTipoUnidad').val() == ""){
             $('#txtNombreTipoUnidad').css('border', '1px solid red');
             return;
@@ -126,23 +126,23 @@ $(document).ready(function() {
         type: 'GET',
         success: function(res, status, xhr) {
             res.data.map(function(unidad) {
-                
+
                 let row = $(`<tr>
                     <td id="nombre-${unidad.id_unidad}">${unidad.nombre}</td>
                     <td id="abreviatura-${unidad.id_unidad}">${unidad.abreviatura}</td>
                     <td id="tipo_unidad-${unidad.id_unidad}">${unidad.tipo_unidad.nombre}</td>
                     <td>
-                        <button onclick="editarUnidad(${unidad.id_unidad})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarUnidad"  title='Editar'><i class='fa fa-pencil'></i></button>
-                        <button onclick="abrirModalEliminarUnidad(${unidad.id_unidad})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarUnidad" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                    <button onclick="editarUnidad(${unidad.id_unidad})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarUnidad"  title='Editar'><i class='fa fa-pencil'></i></button>
+                    <button onclick="abrirModalEliminarUnidad(${unidad.id_unidad})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarUnidad" title='Eliminar'><i class="fa fa-trash-o"></i></button>
                     </td>
-                </tr>
-                `);
+                    </tr>
+                    `);
                 tablaUnidad.row.add(row).draw();
             })
 
         },
         error: function() {
-            
+
         }
     })
 
@@ -175,9 +175,7 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                $('#txtNombreUnidad').val('');
-                $('#txtAbreviaturaUnidad').val('');
-                document.getElementById('tipo_unidad').selectedIndex = 0
+              limpiarUnidad();
             },
             error: function(res, status, xhr) {
                 console.log(res);
@@ -213,9 +211,7 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                $('#txtNombreUnidad').val('');
-                $('#txtAbreviaturaUnidad').val('');
-                document.getElementById('tipo_unidad').selectedIndex = 0
+               limpiarUnidad();
             },
             error: function(res, status, xhr) {
                 console.log(res);
@@ -226,71 +222,83 @@ $(document).ready(function() {
 
 });
 
-    function verTipoUnidad(id){
-        $('#txtNombreTipoUnidad').val($(`#nombre-${id}`).text());
-        $('#txtNombreTipoUnidad').prop('disabled', 'true');
-        $('#btnAceptartipoUnidad').css('display', 'none');
-    }
+function verTipoUnidad(id){
+    $('#txtNombreTipoUnidad').val($(`#nombre-${id}`).text());
+    $('#txtNombreTipoUnidad').prop('disabled', 'true');
+    $('#btnAceptartipoUnidad').css('display', 'none');
+}
 
-    function editarTipoUnidad(id){
-        $('#txtNombreTipoUnidad').val($(`#nombre-${id}`).text());
-        $('#txtIdTipoUnidad').val(id);
-        $('#btnAceptartipoUnidad').css('display', 'none');
-        $('#btnEditartipoUnidad').css('display', 'inline');
-    }
+function editarTipoUnidad(id){
+    $('#txtNombreTipoUnidad').val($(`#nombre-${id}`).text());
+    $('#txtIdTipoUnidad').val(id);
+    $('#btnAceptartipoUnidad').css('display', 'none');
+    $('#btnEditartipoUnidad').css('display', 'inline');
+}
 
-    function abrirModalEliminarTipoUnidad(id){
-        $('#txtIdTipoUnidadEliminar').val(id);
-    }
+function abrirModalEliminarTipoUnidad(id){
+    $('#txtIdTipoUnidadEliminar').val(id);
+}
 
-    function eliminarTipoUnidad(id){
-        $.ajax({
-            url: `https://api-sascha.herokuapp.com/tipounidad/${id}`,
-            contentType: 'application/json',
-            type: 'DELETE',
-            success: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                $('#dtTipoUnidad').DataTable().row($(`#nombre-${id}`).parent()).remove().draw();
-                $('#txtNombreTipoUnidad').val('');
-            },
-            error: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-            }
-        })
-    }
+function eliminarTipoUnidad(id){
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/tipounidad/${id}`,
+        contentType: 'application/json',
+        type: 'DELETE',
+        success: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            $('#dtTipoUnidad').DataTable().row($(`#nombre-${id}`).parent()).remove().draw();
+            $('#txtNombreTipoUnidad').val('');
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+        }
+    })
+}
 
-    function editarUnidad(id){
-        console.log($(`#nombre-${id}`).text())
-        $('#txtNombreUnidad').val($(`#nombre-${id}`).text());
-        $('#txtAbreviaturaUnidad').val($(`#abreviatura-${id}`).text());
-        $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').prop('selected',true);
-        $('#txtIdUnidad').val(id);
-        $('#btnAceptarUnidad').css('display', 'none');
-        $('#btnEditarUnidad').css('display', 'inline');
-    }
+function editarUnidad(id){
+    $('#txtNombreUnidad').val($(`#nombre-${id}`).text());
+    $('#txtAbreviaturaUnidad').val($(`#abreviatura-${id}`).text());
+    $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').prop('selected',true);
+    $('#txtIdUnidad').val(id);
+    $('#btnAceptarUnidad').css('display', 'none');
+    $('#btnEditarUnidad').css('display', 'inline');
+}
 
-    function abrirModalEliminarUnidad(id){
-        $('#txtIdUnidadEliminar').val(id);
-    }
+function abrirModalEliminarUnidad(id){
+    $('#txtIdUnidadEliminar').val(id);
+}
 
-    function eliminarUnidad(id){
-        $.ajax({
-            url: `https://api-sascha.herokuapp.com/unidad/${id}`,
-            contentType: 'application/json',
-            type: 'DELETE',
-            success: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                $('#dtUnidad').DataTable().row($(`#nombre-${id}`).parent()).remove().draw();
-                $('#txtNombreUnidad').val('');
-                $('#txtAbreviaturaUnidad').val('');
-                document.getElementById('tipo_unidad').selectedIndex = 0
-            },
-            error: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-            }
-        })
-    }
+function eliminarUnidad(id){
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/unidad/${id}`,
+        contentType: 'application/json',
+        type: 'DELETE',
+        success: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            $('#dtUnidad').DataTable().row($(`#nombre-${id}`).parent()).remove().draw();
+             $('#txtIdUnidadEliminar').val('');
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            limpiarUnidad();
+        }
+    })
+}
+
+function limpiarUnidad(){
+   $('#txtNombreUnidad').val('');
+    $('#txtIdUnidad').val('');
+   $('#txtAbreviaturaUnidad').val('');
+   document.getElementById('tipo_unidad').selectedIndex(0)
+}
+
+function limpiarTipoUnidad(){
+
+$('#txtNombreTipoUnidad').val('')
+$('#txtIdTipoUnidad').val('')
+
+}
