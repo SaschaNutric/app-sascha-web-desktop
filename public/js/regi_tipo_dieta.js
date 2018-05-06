@@ -64,7 +64,7 @@ $(document).ready(function() {
 
             }
         })
-
+        $('#agregarTipoDieta').modal('hide')
     })
 
     $('#btnEditartipoDieta').on('click', function() {

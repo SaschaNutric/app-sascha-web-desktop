@@ -1,4 +1,20 @@
 $(document).ready(function() {
+
+    const tablaUnidad = $('#dtUnidad').DataTable({ 
+       "language": {
+        "lengthMenu": "",
+        "search": "Buscar:",
+        "paginate": {
+            "previous": "Anterior",
+            "next": "Siguiente"
+        },
+        "emptyTable": "No se encontraron unidades",
+        "zeroRecords": "No se encontraron unidades"
+    },
+    "searching": true,
+    "ordering": true,
+    "paging": true   
+});
     /* tabla tipo de unidades */
     const tablaTipoUnidad = $('#dtTipoUnidad').DataTable({ 
         "language": {
@@ -21,8 +37,6 @@ $(document).ready(function() {
         type: 'GET',
         success: function(res, status, xhr) {
             res.data.map(function(tipoUnidad) {
-                let option = $(`<option value="${tipoUnidad.id_tipo_unidad}">${tipoUnidad.nombre}</option>`)
-                $('#selTipoUnidad').append(option);
                 addRowTipoUnidad(tipoUnidad.id_tipo_unidad,tipoUnidad.nombre)
             })
 
@@ -114,38 +128,7 @@ $(document).ready(function() {
 
 
 
-    /* tabla unidades */
-    const tablaUnidad = $('#dtUnidad').DataTable({ 
-     "language": {
-        "lengthMenu": "",
-        "search": "Buscar:",
-        "paginate": {
-            "previous": "Anterior",
-            "next": "Siguiente"
-        },
-        "emptyTable": "No se encontraron unidades",
-        "zeroRecords": "No se encontraron unidades"
-    },
-    "searching": true,
-    "ordering": true,
-    "paging": true   
-});
-    $.ajax({
-        url: 'https://api-sascha.herokuapp.com/unidades',
-        contentType: 'application/json',
-        type: 'GET',
-        success: function(res, status, xhr) {
-            res.data.map(function(unidad) {
-                addRowUnidad(unidad.id_unidad, unidad.nombre, unidad.abreviatura, unidad.tipo_unidad.nombre)
-            })
 
-        },
-        error: function(res, status, xhr) {
-            const respuesta = JSON.parse(res.responseText);
-            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
-            
-        }
-    })
 
 
     $('#btnAceptarUnidad').on('click', function() {
@@ -193,19 +176,18 @@ $(document).ready(function() {
     })
 
     $('#btnEditarUnidad').on('click', function() {
-        console.log("hola")
 
         if($('select[name=tipo_unidad]').val() == "0"){
             $('select[name=tipo_unidad]').css('border', '1px solid red')
             return;
         }
         if($('#txtNombreUnidad').val() == ""){
-           console.log($('select[name=tipo_unidad]').val());
-           $('#txtNombreUnidad').css('border', '1px solid red');
-           return;
-       }
+         console.log($('select[name=tipo_unidad]').val());
+         $('#txtNombreUnidad').css('border', '1px solid red');
+         return;
+     }
 
-       if($('#txtAbreviaturaUnidad').val() == ""){
+     if($('#txtAbreviaturaUnidad').val() == ""){
         $('#txtAbreviaturaUnidad').css('border', '1px solid red');
         return;
     }
@@ -223,6 +205,7 @@ $(document).ready(function() {
 
     if(unidad.nombre == $(`#nombreUnidad-${id}`).text() && unidad.abreviatura == $(`#abreviaturaUnidad-${id}`).text() && nombre_tipo_unidad == $(`#tipo_unidad-${id}`).text()){
         mensaje('#msjAlerta', ``, 4);
+        $('#agregarUnidad').modal('hide');   
         return;
     }
     $.ajax({
@@ -330,10 +313,10 @@ function eliminarUnidad(id){
 }
 
 function limpiarUnidad(){
-   $('#txtNombreUnidad').val('');
-   $('#txtIdUnidad').val('');
-   $('#txtAbreviaturaUnidad').val('');
-   $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
+ $('#txtNombreUnidad').val('');
+ $('#txtIdUnidad').val('');
+ $('#txtAbreviaturaUnidad').val('');
+ $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
 }
 
 function limpiarTipoUnidad(){
@@ -345,7 +328,7 @@ function limpiarTipoUnidad(){
 
 
 function addRowTipoUnidad(id, nombre){
- let row = $(`<tr>
+   let row = $(`<tr>
     <td id="nombreTipo-${id}">${nombre}</td>
     <td>
     <button onclick="editarTipoUnidad(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarTipoUnidad"  title='Editar'><i class='fa fa-pencil'></i></button>
@@ -353,7 +336,7 @@ function addRowTipoUnidad(id, nombre){
     </td>
     </tr>
     `);
- $('#dtTipoUnidad').DataTable().row.add(row).draw();
+   $('#dtTipoUnidad').DataTable().row.add(row).draw();
 }
 
 function addRowUnidad(id, nombre, abrev, tipo_unidad) {
@@ -381,4 +364,42 @@ function editRowUnidad(id, nombre, abrev, tipo_unidad){
     $(`#tipo_unidad-${id}`).text(tipo_unidad)
 
 
+}
+
+
+function cargarUnidades(){
+    document.getElementById('selTipoUnidad').length = 1;
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/tipounidades',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            res.data.map(function(tipoUnidad) {
+                let option = $(`<option value="${tipoUnidad.id_tipo_unidad}">${tipoUnidad.nombre}</option>`)
+                $('#selTipoUnidad').append(option);
+            })
+
+        },
+        error: function(res, status, xhr) {
+
+        }
+    })
+    /* tabla unidades */
+    $('#dtUnidad').DataTable().clear();
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/unidades',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            res.data.map(function(unidad) {
+                addRowUnidad(unidad.id_unidad, unidad.nombre, unidad.abreviatura, unidad.tipo_unidad.nombre)
+            })
+
+        },
+        error: function(res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            
+        }
+    })
 }
