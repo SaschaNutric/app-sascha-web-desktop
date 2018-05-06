@@ -35,7 +35,7 @@ $(document).ready(function() {
 
     },
     error: function() {
-
+        mensaje('alert-danger', `<strong>Error ${status}!</strong> Algo salió mal.`);
     }
 })
 
@@ -103,6 +103,7 @@ $(document).ready(function() {
             mensaje('alert-info', '<strong>Exito!</strong> Tipo de dieta modificado.');
         },
         error: function(res, status, xhr) {
+            mensaje('alert-danger', `<strong>Error ${status}!</strong> Algo salió mal.`);
             console.log(res);
             console.log(status);
         }
@@ -134,13 +135,15 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+                mensaje('alert-info', '<strong>Exito!</strong> Tipo de dieta eliminado.');
                 $('#dtregiTipoDieta').DataTable().row($(`#nombre-${id}`).parent()).remove().draw();
                 $('#txtNombreTipoDieta').val('');
             },
             error: function(res, status, xhr) {
+                mensaje('alert-danger', `<strong>Error ${status}!</strong> Algo salió mal.`);
                 console.log(res);
                 console.log(status);
-                mensaje('alert-info', '<strong>Exito!</strong> Tipo de dieta eliminado.');
+                
             }
         })
     }

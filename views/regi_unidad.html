@@ -1,4 +1,4 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -52,6 +52,7 @@
             </header>
             <section class="panel-body">
                 <div class="tab-content">
+                    <div id="msjAgregar" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                     <div id="tabTipoUnidades" class="tab-pane active">
                         <div class="">
                             <div class="pull-right">
@@ -76,9 +77,9 @@
                             <table id="dtUnidad" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Abreviatura</th>
-                                        <th width="25%">Tipo de Unidad</th>
+                                        <th style="width: 40% !important">Nombre</th>
+                                        <th style="width: 15% !important">Abreviatura</th>
+                                        <th style="width: 30% !important">Tipo de Unidad</th>
                                         <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
@@ -87,142 +88,142 @@
                         </div>
                     </div>
                 </div>
-                </section>
-    </section>
+            </section>
+        </section>
     </section>
 
 
     <!-- Inicio de Modales -->
 
     <!-- Modal Agregar tipo unidad -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoUnidad" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" onclick="limpiarTipoUnidad()" type="button">×</button>
-                        <h4 class="modal-title">Tipo Unidad</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="msjAgregar" class="alert alert-danger" style="display: none;">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  </div>
-                        <form class="form-horizontal" role="form" id="frmAgregarTipoUnidad">
-                            <input type="text" class="form-control" id="txtIdTipoUnidad" style="display: none;">
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Nombre:</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" id="txtNombreTipoUnidad">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnAceptartipoUnidad" data-dismiss="modal" type="button" class="btn btn-aceptar">Aceptar</button>
-                        <button id="btnEditartipoUnidad" data-dismiss="modal" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                        <button id="btnCancelarTipoUnidad" onclick="limpiarTipoUnidad()" data-dismiss="modal" type="button" class="btn btn-cancelar">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin Modal agregar tipo unidad -->
-
-        <!-- Modal Agregar Unidad -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarUnidad" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" onclick="limpiarUnidad()" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Agregar Unidad</h4>
-                    </div>
-                    <div class="modal-body">
-                       <div id="msjAgregarUnidad" class="alert alert-danger" style="display: none;">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  </div>
-                        <form class="form-horizontal" role="form" id="frmAgregarUnidad">
-                            <input type="text" class="form-control" id="txtIdUnidad" style="display: none;">
-                            <div class="form-group">
-                            <div class="col-md-3 control-label">
-                                <label for="seleTipoUnidad">Tipo de Unidad</label>
-                            </div>
-                                <div class="col-md-9">
-                                    <select id="selTipoUnidad" name="tipo_unidad" class="form-control" style="width: 100%">
-                                        <option value="Seleccione" selected="selected" >Seleccione</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Nombre:</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" id="txtNombreUnidad">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Abreviatura:</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" id="txtAbreviaturaUnidad">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnAceptarUnidad" type="button" class="btn btn-aceptar">Aceptar</button>
-                        <button id="btnEditarUnidad" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                        <button id="btnCancelarUnidad" type="button" class="btn btn-cancelar" onclick="limpiarUnidad()"  data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin Modal agregar medida -->
-
-
-        <!--inicio de la modal eliminar -->
-        <div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-              <div class="modal-content">
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoUnidad" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
-              </div>
-              <div class="modal-body">
-                <input type="text" class="form-control" id="txtIdTipoUnidadEliminar" style="display: none;" disabled>
-                <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de unidad y todas sus unidades asociadas?</p>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" onclick="limpiarTipoUnidad()" type="button">×</button>
+                    <h4 class="modal-title">Tipo Unidad</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="msjAgregar" class="alert alert-danger" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                    <form class="form-horizontal" role="form" id="frmAgregarTipoUnidad">
+                        <input type="text" class="form-control" id="txtIdTipoUnidad" style="display: none;">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Nombre:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="txtNombreTipoUnidad">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAceptartipoUnidad"  type="button" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btnEditartipoUnidad" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                    <button id="btnCancelarTipoUnidad" onclick="limpiarTipoUnidad()" data-dismiss="modal" type="button" class="btn btn-cancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- fin Modal agregar tipo unidad -->
+
+    <!-- Modal Agregar Unidad -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarUnidad" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" onclick="limpiarUnidad()" data-dismiss="modal" class="close" type="button">×</button>
+                    <h4 class="modal-title">Agregar Unidad</h4>
+                </div>
+                <div class="modal-body">
+                 <div id="msjAgregarUnidad" class="alert alert-danger" style="display: none;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+                <form class="form-horizontal" role="form" id="frmAgregarUnidad">
+                    <input type="text" class="form-control" id="txtIdUnidad" style="display: none;">
+                    <div class="form-group">
+                        <div class="col-md-3 control-label">
+                            <label for="selTipoUnidad">Tipo de Unidad</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select id="selTipoUnidad" name="tipo_unidad" class="form-control" style="width: 100%">
+                                <option value="0" selected="selected" >Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Nombre:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="txtNombreUnidad">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Abreviatura:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="txtAbreviaturaUnidad">
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-              <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button id="btnEliminar" data-dismiss="modal" onclick="eliminarTipoUnidad($('#txtIdTipoUnidadEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
-          </div>
+            <button id="btnAceptarUnidad" type="button"  class="btn btn-aceptar">Aceptar</button>
+                <button id="btnEditarUnidad" type="button"  class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                <button id="btnCancelarUnidad" type="button" class="btn btn-cancelar" onclick="limpiarUnidad()"  data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- fin Modal agregar medida -->
+
+
+<!--inicio de la modal eliminar -->
+<div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
       </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="txtIdTipoUnidadEliminar" style="display: none;" disabled>
+        <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de unidad y todas sus unidades asociadas?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      <button id="btnEliminar" data-dismiss="modal" onclick="eliminarTipoUnidad($('#txtIdTipoUnidadEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
   </div>
 </div>
-        <!--fin de la modal eliminar -->
+</div>
+</div>
+<!--fin de la modal eliminar -->
 
-        <!--inicio de la modal eliminar -->
-        <div class="modal fade bs-example-modal-sm" id="eliminarUnidad" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
-            </div>
-            <div class="modal-body">
-                <input type="text" class="form-control" id="txtIdUnidadEliminar" style="display: none;" disabled>
-               <p style="text-align: center;">¿Está seguro que desea eliminar la unidad?</p>
-            </div>
-            <div class="modal-footer">
-              <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarUnidad($('#txtIdUnidadEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
-            </div>
-          </div>
-        </div>
-        </div>
-        <!--fin de la modal eliminar -->
+<!--inicio de la modal eliminar -->
+<div class="modal fade bs-example-modal-sm" id="eliminarUnidad" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="txtIdUnidadEliminar" style="display: none;" disabled>
+        <p style="text-align: center;">¿Está seguro que desea eliminar la unidad?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarUnidad($('#txtIdUnidadEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+</div>
+</div>
+<!--fin de la modal eliminar -->
 
-    <!-- Fin Modales -->
+<!-- Fin Modales -->
 
-    <!--main content end-->
-    <!--right sidebar start-->
+<!--main content end-->
+<!--right sidebar start-->
 
-    <!--right sidebar end-->
+<!--right sidebar end-->
 
 
 <!-- Placed js at the end of the document so the pages load faster -->
