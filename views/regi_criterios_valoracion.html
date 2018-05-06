@@ -35,136 +35,179 @@
 
 
     <section id="container" >
-
         <!--main content start-->
-        <h3>Registro de Tipo de Criterios de Valoración</h3>
+        <h3>Registro de Tipo de Valoración</h3>
         <!-- Inicio pagina de Criterios de Valoración -->
-
         <section class="panel">
+            <header class="panel-heading tab-bg-dark-navy-blue ">
+                <ul class="nav nav-justified">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tabTipoValoracion" aria-expanded="false">Tipo de Valoración</a>
+                    </li>
+                    <li>
+                        <a onclick="cargarValores()" data-toggle="tab" href="#tabValor" aria-expanded="false">Valores</a>
+                    </li>
+                </ul>
+            </header>
             <section class="panel-body">
-                    <div id="TipoValoracion">
-                        <div class="">
-                            <div class="pull-right"  >
-                                <a id="btnAgregarTipoValoracion" href="#agregarTipoValoracion" data-toggle="modal" class="btn btn-agregar">Agregar</a>
+                <div class="tab-content">
+                    <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+                    <div id="tabTipoValoracion" class="tab-pane active">
+                        <div id="TipoValoracion">
+                            <div class="">
+                                <div class="pull-right"  >
+                                    <a id="btnAgregarTipoValoracion" href="#agregarTipoValoracion" data-toggle="modal" class="btn btn-agregar">Agregar</a>
+                                </div>
+                                <table id="dtTipoValoracion" class="display table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th class="ancho-columna">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
-                            <table id="dtTipoValoracion" class="display table table-bordered table-striped dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>Descripción</th>
-                                        <th>Valores</th>
-                                        <th class="ancho-columna">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Descriptiva</th>
-                                        <th>Excelente, Muy Bueno, Bueno, Regular, Malo</th>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Númerica</th>
-                                        <th>1,2,3,4,5</th>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Condicional</th>
-                                        <th>SI,NO</th>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
-            </div>
-
-        </section>
-    </section>
-
-    <!-- Inicio de Modales -->
-
-    <!-- Modal Agregar Escala de Valoración -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoValoracion" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h4 class="modal-title">Agregar Tipo de Valoración</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form" id=frmagregarEscalaValoracion>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Descripción:</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="txtDescripcion">
-                            </div>
+                    <div id="tabValor" class="tab-pane">
+                        <div class="pull-right" style="margin-bottom: 15px">
+                            <a id="btnAgregarTipoValoracion" href="#agregarValor" data-toggle="modal" class="btn btn-agregar">Agregar</a>
                         </div>
-                    </form>
-                    <div class="row" style="border-bottom: solid 1px;">
-                        <h4>Valores</h4>
-                    </div>
-                    <form class="form-horizontal" style="padding-top: 20px" id=frmagregarValor>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Valor:</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="txtValor">
-                            </div>
-                        </div>
-                        <div class="col-md-12" style="margin-bottom: 15px">
-                           <button id="btnAgregarValor" type="submit" class="btn btn-agregar pull-right">Agregar Valor</button>
-                       </div>
                     </form>
                     <table id="dtValor" class="display table table-bordered table-striped"  >
                         <thead>
                             <tr>
                                 <th>Valor</th>
+                                <th>Tipo de Valoración</th>
                                 <th class="ancho-columna">Acciones</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
-
                 </div>
-                <div class="modal-footer">
-                    <button id="btnAceptarEscala" type="button" class="btn btn-aceptar">Aceptar</button>
-                    <button id="btnCancelarEScala" type="button" class="btn btn-cancelar">Cancelar</button>
-                </div>
-                
             </div>
-        </div>
-    </div>
-    <!-- fin Modal agregar Tipo de Valoración -->
-
-    <!-- Fin Modales -->
-
-    <!--main content end-->
+        </section>
+    </section>
 </section>
 
+<!-- Inicio de Modales -->
 
+<!-- Modal Agregar Escala de Valoración -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoValoracion" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Tipo de Valoración</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id=frmagregarEscalaValoracion>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Nombre:</label>
+                        <div class="col-md-9">
+                            <input type="text" style="display: none" id="txtIdEscala">
+                            <input type="text" class="form-control" id="txtNombreEscala">
+                        </div>
+                    </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <button id="btnAceptarEscala" type="button" class="btn btn-aceptar">Aceptar</button>
+             <button id="btnEditarEscala" type="button" style="display: none;" class="btn btn-aceptar">Aceptar</button>
+            <button id="btnCancelarEscala" type="button" class="btn btn-cancelar">Cancelar</button>
+        </div>
+
+    </div>
+</div>
+</div>
+<!-- fin Modal agregar Valor -->
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarValor" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Valor</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id=frmagregarEscalaValoracion>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Nombre:</label>
+                        <div class="col-md-9">
+                            <input type="text" style="display: none;" id="txtIdValor">
+                            <input type="text" class="form-control" id="txtNombreValor">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-md-3 control-label">Tipo de Valoración:</label>
+                        <div class="col-md-9">
+                            <select name="tipo_valoracion" class="form-control" id="selTipoValoracion">
+                                <option value="0">Seleccione</option>
+                            </select> 
+                        </div>
+                    </div>
+                </form>
+                
+        </div>
+        <div class="modal-footer">
+            <button id="btnAceptarValor" type="button" class="btn btn-aceptar">Aceptar</button>
+            <button id="btnEditarValor" type="button" style="display: none" class="btn btn-aceptar">Aceptar</button>
+
+            <button id="btnCancelarValor" type="button" class="btn btn-cancelar">Cancelar</button>
+        </div>
+
+    </div>
+</div>
+</div>
+<!-- fin Modal agregar Valor -->
+<!-- inicio Modal eliminar Tipo Valorarion -->
+<div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="txtIdEscalaEliminar" style="display: none;" disabled>
+        <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de valoración y todos sus valores asociados?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="btnCancelarEliminarEscala" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      <button id="btnEliminarEscala" data-dismiss="modal" onclick="eliminarEscala($('#txtIdEscalaEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+</div>
+</div>
+<!-- fin Modal eliminar Tipo Valoracion -->
+<!-- inicio Modal eliminar  Valor-->
+
+
+<!-- fin Modal eliminar  Valor-->
+<div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="txtIdValorEliminar" style="display: none;" disabled>
+        <p style="text-align: center;">¿Está seguro que desea eliminar el valor?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="btnCancelarValor" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      <button id="btnEliminarValor" data-dismiss="modal" onclick="eliminarValor($('#txtIdValorEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+  </div>
+</div>
+</div>
+</div>
+<!-- Fin Modales -->
 <!-- Placed js at the end of the document so the pages load faster -->
-
 <!--Core js-->
-
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="bs3/js/bootstrap.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -173,19 +216,17 @@
 <script src="js/easypiechart/jquery.easypiechart.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-
 <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 <!--script for this page-->
 <script src="js/gritter.js" type="text/javascript"></script>
 <!-- tablas editables -->
-<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
-
 <!--script for this page only-->
-<script src="js/registros_basicos.js" type="text/javascript"></script>
+<script src="js/mensaje.js" type="text/javascript"></script>
+<script src="js/regi_criterios_valoracion.js" type="text/javascript"></script>
 <!-- END JAVASCRIPTS -->
 </body>
 </html>
