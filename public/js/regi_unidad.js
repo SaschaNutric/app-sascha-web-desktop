@@ -31,7 +31,7 @@ $(document).ready(function() {
             console.log(res)
             console.log(status)
             const respuesta = JSON.parse(res.responseText);
-            mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
 
         }
     })
@@ -57,13 +57,14 @@ $(document).ready(function() {
                 console.log(status);
                 addRowTipoUnidad(res.data.id_tipo_unidad, res.data.nombre)
                 limpiarTipoUnidad()
-                mensaje('alert-success', `<strong>Éxito!</strong> Tipo de Unidad agregada.`);
+                mensaje('#msjAlerta', `Tipo Unidad`, 1);
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
                 const respuesta = JSON.parse(res.responseText);
-                mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+
             }
         })
         $('#agregarTipoUnidad').modal('hide');
@@ -84,8 +85,9 @@ $(document).ready(function() {
         let id = $('#txtIdTipoUnidad').val();
 
         if(tipoUnidad.nombre == $(`#nombreTipo-${id}`).text()){
-        $('#agregarTipoUnidad').modal('hide');
-        mensaje("alert-info","<strong>Oye!</strong> No has hecho ningún cambio.")
+            $('#agregarTipoUnidad').modal('hide');
+            mensaje('#msjAlerta', '', 4);
+
             return;
         }
         $.ajax({
@@ -97,14 +99,13 @@ $(document).ready(function() {
                 limpiarTipoUnidad()
                 const tipoUnidad = res.data;
                 console.log(res.data)
-                mensaje('alert-info', '<strong>Exito!</strong> Tipo de unidad modificado.');
-
+                mensaje('#msjAlerta',  `Tipo Unidad`, 3);
                 editRowTipoUnidad(tipoUnidad.id_tipo_unidad, tipoUnidad.nombre)
             },
             error: function(res, status, xhr) {
                 limpiarTipoUnidad()
                 const respuesta = JSON.parse(res.responseText);
-                mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
                 
             }
         })
@@ -115,20 +116,20 @@ $(document).ready(function() {
 
     /* tabla unidades */
     const tablaUnidad = $('#dtUnidad').DataTable({ 
-   "language": {
-            "lengthMenu": "",
-            "search": "Buscar:",
-            "paginate": {
-                "previous": "Anterior",
-                "next": "Siguiente"
-            },
-            "emptyTable": "No se encontraron unidades",
-            "zeroRecords": "No se encontraron unidades"
+     "language": {
+        "lengthMenu": "",
+        "search": "Buscar:",
+        "paginate": {
+            "previous": "Anterior",
+            "next": "Siguiente"
         },
-        "searching": true,
-        "ordering": true,
-        "paging": true   
-    });
+        "emptyTable": "No se encontraron unidades",
+        "zeroRecords": "No se encontraron unidades"
+    },
+    "searching": true,
+    "ordering": true,
+    "paging": true   
+});
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/unidades',
         contentType: 'application/json',
@@ -141,8 +142,8 @@ $(document).ready(function() {
         },
         error: function(res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);
-            mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
-
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            
         }
     })
 
@@ -178,75 +179,74 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 const unidad = res.data;
-                mensaje('alert-success', `<strong>Éxito!</strong> Unidad agregada.`);
+                mensaje('#msjAlerta', `Unidad`, 1);
                 const nombre_tipo_unidad = $('select[name="tipo_unidad"] option:selected').text()
                 addRowUnidad(unidad.id_unidad, unidad.nombre, unidad.abreviatura, nombre_tipo_unidad);               
                 limpiarUnidad();
             },
             error: function(res, status, xhr) {
                 const respuesta = JSON.parse(res.responseText);
-                mensaje('alert-danger', `<strong>Eror ${respuesta.data.mensaje}!</strong> No se ha podido agregar.`);
-                
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
             }
         })
 
     })
 
     $('#btnEditarUnidad').on('click', function() {
-            console.log("hola")
+        console.log("hola")
 
         if($('select[name=tipo_unidad]').val() == "0"){
             $('select[name=tipo_unidad]').css('border', '1px solid red')
             return;
         }
         if($('#txtNombreUnidad').val() == ""){
-             console.log($('select[name=tipo_unidad]').val());
-            $('#txtNombreUnidad').css('border', '1px solid red');
-            return;
+           console.log($('select[name=tipo_unidad]').val());
+           $('#txtNombreUnidad').css('border', '1px solid red');
+           return;
+       }
+
+       if($('#txtAbreviaturaUnidad').val() == ""){
+        $('#txtAbreviaturaUnidad').css('border', '1px solid red');
+        return;
+    }
+
+
+    let unidad = {
+        nombre: $('#txtNombreUnidad').val(),
+        abreviatura: $('#txtAbreviaturaUnidad').val(),
+        id_tipo_unidad: $('select[name=tipo_unidad]').val()
+    }
+
+    const nombre_tipo_unidad = $('select[name="tipo_unidad"] option:selected').text()
+
+    let id = $('#txtIdUnidad').val();
+
+    if(unidad.nombre == $(`#nombreUnidad-${id}`).text() && unidad.abreviatura == $(`#abreviaturaUnidad-${id}`).text() && nombre_tipo_unidad == $(`#tipo_unidad-${id}`).text()){
+        mensaje('#msjAlerta', ``, 4);
+        return;
+    }
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/unidad/${id}`,
+        contentType: 'application/json',
+        type: 'PUT',
+        data: JSON.stringify(unidad),
+        success: function(res, status, xhr) {
+            console.log(unidad)
+            mensaje('#msjAlerta', `Unidad`, 3);
+            editRowUnidad(id, unidad.nombre, unidad.abreviatura, nombre_tipo_unidad)
+            limpiarUnidad();
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+
         }
-
-        if($('#txtAbreviaturaUnidad').val() == ""){
-            $('#txtAbreviaturaUnidad').css('border', '1px solid red');
-            return;
-        }
-
-
-        let unidad = {
-            nombre: $('#txtNombreUnidad').val(),
-            abreviatura: $('#txtAbreviaturaUnidad').val(),
-            id_tipo_unidad: $('select[name=tipo_unidad]').val()
-        }
-
-        const nombre_tipo_unidad = $('select[name="tipo_unidad"] option:selected').text()
-
-        let id = $('#txtIdUnidad').val();
-
-        if(unidad.nombre == $(`#nombreUnidad-${id}`).text() && unidad.abreviatura == $(`#abreviaturaUnidad-${id}`).text() && nombre_tipo_unidad == $(`#tipo_unidad-${id}`).text()){
-            mensaje("alert-info","<strong>Oye!</strong> No has hecho ningún cambio.")
-            return;
-        }
-        $.ajax({
-            url: `https://api-sascha.herokuapp.com/unidad/${id}`,
-            contentType: 'application/json',
-            type: 'PUT',
-            data: JSON.stringify(unidad),
-            success: function(res, status, xhr) {
-                console.log(unidad)
-                mensaje('alert-info', `<strong>Éxito!</strong> Unidad modificada.`);
-                editRowUnidad(id, unidad.nombre, unidad.abreviatura, nombre_tipo_unidad)
-                limpiarUnidad();
-            },
-            error: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                const respuesta = JSON.parse(res.responseText);
-                mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
-
-            }
-        })
-
-        $('#agregarUnidad').modal('hide');
     })
+
+    $('#agregarUnidad').modal('hide');
+})
 
 });
 
@@ -277,15 +277,17 @@ function eliminarTipoUnidad(id){
             console.log(status);
             $('#dtTipoUnidad').DataTable().row($(`#nombreTipo-${id}`).parent()).remove().draw();
             $('#txtNombreTipoUnidad').val('');
-            mensaje('alert-info', `<strong>Éxito!</strong> Tipo de Unidad eliminada.`);
+            mensaje('#msjAlerta', `Tipo de Unidad`, 2);
+
 
         },
         error: function(res, status, xhr) {
             console.log(res);
             console.log(status);
             const respuesta = JSON.parse(res.responseText);
-            mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
 
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            
         }
     })
 }
@@ -313,7 +315,7 @@ function eliminarUnidad(id){
             console.log(status);
             $('#dtUnidad').DataTable().row($(`#nombreUnidad-${id}`).parent()).remove().draw();
             $('#txtIdUnidadEliminar').val('');
-            mensaje('alert-info', `<strong>Éxito!</strong> Unidad eliminada.`);
+            mensaje('#msjAlerta', `Unidad`, 2);
 
         },
         error: function(res, status, xhr) {
@@ -321,17 +323,17 @@ function eliminarUnidad(id){
             console.log(status);
             limpiarUnidad();
             const respuesta = JSON.parse(res.responseText);
-            mensaje('alert-danger', `<strong>Error ${respuesta.data.mensaje}!</strong> Algo salió mal.`);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
 
         }
     })
 }
 
 function limpiarUnidad(){
- $('#txtNombreUnidad').val('');
- $('#txtIdUnidad').val('');
- $('#txtAbreviaturaUnidad').val('');
- $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
+   $('#txtNombreUnidad').val('');
+   $('#txtIdUnidad').val('');
+   $('#txtAbreviaturaUnidad').val('');
+   $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
 }
 
 function limpiarTipoUnidad(){
@@ -341,20 +343,9 @@ function limpiarTipoUnidad(){
 
 }
 
-function mensaje(tipo, texto){
-    $('#msjAgregar').addClass(tipo);
-    $('#msjAgregar').html(texto );
-    $('#msjAgregar').css('display', 'block');
-    $(".alert").delay(3000).slideUp(200, function() {
-        $('#msjAgregar').css('display', 'none');
-    });
-
-
-
-}
 
 function addRowTipoUnidad(id, nombre){
-   let row = $(`<tr>
+ let row = $(`<tr>
     <td id="nombreTipo-${id}">${nombre}</td>
     <td>
     <button onclick="editarTipoUnidad(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarTipoUnidad"  title='Editar'><i class='fa fa-pencil'></i></button>
@@ -362,7 +353,7 @@ function addRowTipoUnidad(id, nombre){
     </td>
     </tr>
     `);
-   $('#dtTipoUnidad').DataTable().row.add(row).draw();
+ $('#dtTipoUnidad').DataTable().row.add(row).draw();
 }
 
 function addRowUnidad(id, nombre, abrev, tipo_unidad) {
@@ -385,7 +376,6 @@ function editRowTipoUnidad(id, nombre){
 }
 
 function editRowUnidad(id, nombre, abrev, tipo_unidad){
-    console.log("entrooooooo")
     $(`#nombreUnidad-${id}`).text(nombre)
     $(`#abreviatura-${id}`).text(abrev)
     $(`#tipo_unidad-${id}`).text(tipo_unidad)
