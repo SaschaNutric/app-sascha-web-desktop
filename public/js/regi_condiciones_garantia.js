@@ -59,10 +59,21 @@ $(document).ready(function() {
                 console.log(res);
                 console.log(status);
                 $('#txtCondicion').val('')
+                let row = $(`<tr>
+                    <td id="descripcion-${res.data.id_condicion_garantia}">${res.data.descripcion}</td>
+                    <td>
+                        <button onclick="editarCondicionGarantia(${res.data.id_condicion_garantia})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarCondicionGarantía"  title='Editar'><i class='fa fa-pencil'></i></button>
+                        <button onclick="abrirModalEliminarCondicionGarantia(${res.data.id_condicion_garantia})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modaleliminarCondicionGarantia" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+                `);
+                $('#dtregiTipoDieta').DataTable().row.add(row).draw();
+                mensaje('alert-success', '<strong>Exito!</strong> Condición de Garantía agregada.');
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+                mensaje('alert-danger', `<strong>Error ${status}!</strong> Algo salió mal.`);
             }
         })
 
@@ -94,11 +105,7 @@ $(document).ready(function() {
                 console.log(status);
             }
         })
-    })
-
-
-
-   
+    })   
 
 });
 
@@ -130,4 +137,10 @@ $(document).ready(function() {
                 console.log(status);
             }
         })
+    }
+
+    function mensaje(tipo, texto){
+        $('#msjAgregar').addClass(tipo);
+        $('#msjAgregar').append(texto);
+        $('#msjAgregar').css('display', 'block');
     }

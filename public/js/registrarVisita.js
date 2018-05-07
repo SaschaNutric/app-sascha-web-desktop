@@ -229,6 +229,8 @@ $(document).ready(function() {
         },
     } );
 
+
+$('txtHoraCita').timepicker()
 });
 
 
