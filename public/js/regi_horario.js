@@ -1,5 +1,3 @@
-let arregloHorario = [];
-
 $(document).ready(function() {
 
     $('#txtHoraInicio').timepicker({
@@ -55,11 +53,17 @@ $(document).ready(function() {
     $('#btnAceptar').on('click', function() {
         
         if($('#txtHoraInicio').val() == ""){
-            $('#txtCondicion').css('border', '1px solid red');
+            $('#txtHoraInicio').css('border', '1px solid red');
             return;
         }
         if($('#txtHoraFin').val() == ""){
-            $('#txtCondicion').css('border', '1px solid red');
+            $('#txtHoraFin').css('border', '1px solid red');
+            return;
+        }
+
+        if ($('#txtHoraInicio').val() >= $('#txtHoraFin').val()){
+            mensaje('#msjAlerta', `Bloque Horario`, 5);
+            limpiarHorario();
             return;
         }
 
@@ -137,11 +141,12 @@ $(document).ready(function() {
 
 
     function editarHorario(id){
-        $('#txtHoraInicio').val($(`#hora_inicio-${id}`).text());
-        $('#txtHoraFin').val($(`#hora_fin-${id}`).text());
+        $('#txtHoraInicio').timepicker('setTime', $(`#hora_inicio-${id}`).text());
+        $('#txtHoraFin').timepicker('setTime', $(`#hora_fin-${id}`).text());
         $('#txtIdBloqueHorario').val(id);
         $('#btnAceptar').css('display', 'none');
         $('#btnEditar').css('display', 'inline');
+
     }
 
     function abrirModalEliminarHorario(id){
@@ -167,11 +172,11 @@ $(document).ready(function() {
 
    
     function limpiarHorario(){
-
+        $('#txtHoraInicio').timepicker('setTime', '00:00:00');
+        $('#txtHoraFin').timepicker('defaultTime', '00:00:00');
         $('#txtHoraInicio').val('')
         $('#txtHoraFin').val('')
         $('#txtIdBloqueHorario').val('')
-
     }
 
 
@@ -190,6 +195,8 @@ $(document).ready(function() {
     }
 
     function editRowHorario(id, hora_inicio, hora_fin){
-        $(`#hora_inicio-${id}`).text(hora_inicio)
+        
+        
         $(`#hora_fin-${id}`).text(hora_fin)
+        $(`#hora_inicio-${id}`).text(hora_inicio)
     }
