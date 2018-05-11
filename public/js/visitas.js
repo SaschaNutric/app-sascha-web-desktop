@@ -25,8 +25,9 @@ var Script = function () {
     });
 
     let events = [];
+    let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
     $.ajax({
-      url: 'https://api-sascha.herokuapp.com/agendas/empleado/1',
+      url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
       contentType: 'application/json',
       type: 'POST',
       data: JSON.stringify(data),
