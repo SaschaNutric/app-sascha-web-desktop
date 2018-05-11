@@ -194,9 +194,7 @@ $(document).ready(function() {
         $('#dtBloqueHorario').DataTable().row.add(row).draw();
     }
 
-    function editRowHorario(id, hora_inicio, hora_fin){
-        
-        
+    function editRowHorario(id, hora_inicio, hora_fin){        
         $(`#hora_fin-${id}`).text(hora_fin)
         $(`#hora_inicio-${id}`).text(hora_inicio)
     }
