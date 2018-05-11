@@ -1,4 +1,120 @@
 $(document).ready(function() {
+    /* tabla de ofertas y promociones */
+   /* const tabla = $('#dtofertapromociones').DataTable({ 
+        "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron Ofertas y Promociones",
+            "zeroRecords": "No se encontraron Ofertas y Promociones"
+        },
+        "searching": true,
+        "ordering": true,
+        "paging": true
+    });
+*/
+    // Carga el Combo del servicio
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/servicios',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            console.log(res.data)
+            res.data.map(function(servicio) {
+                let option = $(`<option value="${servicio.id_servicio}">${servicio.nombre}</option>`)
+                $('#selServicios').append(option);
+                
+            })
+
+        },
+        error: function() {
+            
+        }
+    })
+     
+
+// Guarda informacion basica de la promocion
+    $('#btnRegistrar').on('click', function() {
+      
+
+        if($('#txtNombrePromo').val() == ""){
+            $('#txtNombrePromo').css('border', '1px solid red');
+            return;
+        }
+        if($('#selServicios').val() == "")
+        {
+            $('#selServicios').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtDescripcionPromo').val() == "") {
+            $('#txtDescripcionPromo').css('border', '1px solid red');
+            return;
+        }
+        if($('#txtDescuento').val() == ""){
+            $('#txtDescuento').css('border', '1px solid red');
+            return;
+        }
+        if($('#dpValidoDesde').val() == ""){
+            $('#dpValidoDesde').css('border', '1px solid red');
+            return;
+        }
+        if($('#dpValidoHasta').val() == ""){
+            $('#dpValidoHasta').css('border', '1px solid red');
+            return;
+        }
+
+        let ofertaPromo= {
+            nombre: $('#txtNombrePromo').val(),
+            id_servicio: $('#selServicios').val(),
+            descripcion: $('#txtDescripcionPromo').val(),
+            descuento: $('#txtDescuento').val(),
+            valido_desde: $('#dpValidoDesde').val(),
+            valido_hasta: $('#dpValidoHasta').val()
+        }
+        console.log(ofertaPromo)
+
+        $.ajax({
+            url: 'https://api-sascha.herokuapp.com/promociones',
+            contentType: 'application/json',
+            type: 'POST',
+            data: JSON.stringify(ofertaPromo),
+            success: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                $('#txtNombrePromo').val('');
+                $('#selServicios').val('');
+                $('#txtDescripcionPromo').val('');
+                $('#txtDescuento').val('');
+                $('#dpValidoDesde').val('');
+                $('#dpValidoHasta').val('');
+                document.getElementById('promocion').selectedIndex = 0
+            },
+            error: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+            }
+        })
+
+    })
+
+
+
+
+
+});
+
+
+
+
+//////////////////////////////////////////////////////////
+
+
+
+$(document).ready(function() {
   
 
 	$('#dtParametros').dataTable( {
@@ -82,7 +198,4 @@ $(function(){
 });
 
 //date picker end
-
-
 //datetime picker start
-
