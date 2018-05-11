@@ -123,6 +123,11 @@ $(document).ready(function() {
         $('#btnAceptar').css('display', 'none');
         $('#btnEditar').css('display', 'inline');
     }
+    function agregarTipoParametro(){
+
+    $('#btnAceptar').css('display', 'inline');
+    $('#btnEditar').css('display', 'none');
+}
 
     function abrirModalEliminarTipoParametro(id){
         $('#txtIdTipoParametroEliminar').val(id);

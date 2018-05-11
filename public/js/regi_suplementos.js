@@ -42,7 +42,7 @@ $(document).ready(function() {
 
         }
     })
-     $.ajax({
+    $.ajax({
         url: 'https://api-sascha.herokuapp.com/suplementos',
         contentType: 'application/json',
         type: 'GET',
@@ -166,92 +166,95 @@ $(document).ready(function() {
 
     $( '#selTipoUnidad' )
     .change(function () {
-    document.getElementById('selUnidad').length=1;
-    var str = "";
-    $( "#selTipoUnidad option:selected" ).each(function() {
-      str += $( this ).val() + " ";
-    });
-    arregloTipoUnidades.map(function(tipounidad){
-        if(tipounidad.id_tipo_unidad == str){
-            tipounidad.unidades.map(function(unidad) {
-                let optionunidad = $(`<option value="${unidad.id_unidad}">${unidad.nombre}</option>`)
-                $('#selUnidad').append(optionunidad);
-            })
-        }
-    })
-  })
-
-    });
-
-    function limpiarSuplemento(){
-        $('#txtNombre').val('');
-        $('#txtIdSuplemento').val('');
-        $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
-        $('#selUnidad option:contains(Seleccione)').prop('selected',true);
-    }
-
-    function addRowSuplemento(id, nombre, tipo_unidad, unidad) {
-        let row = $(`<tr>
-            <td id="nombresuplemento-${id}">${nombre}</td>
-            <td id="tipo_unidad-${id}" style="display:none;">${tipo_unidad}</td>
-            <td id="unidad-${id}">${unidad}</td>
-            <td>
-            <button onclick="editarSuplemento(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarSuplemento"  title='Editar'><i class='fa fa-pencil'></i></button>
-            <button onclick="abrirModalEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-            </td>
-            </tr>
-            `);
-        $('#dtSuplementos').DataTable().row.add(row).draw();
-    }
-
-    function editarSuplemento(id){
-        $('#txtNombre').val($(`#nombresuplemento-${id}`).text());
-        $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').prop('selected',true);
-        const tipounidades = $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').val();
+        document.getElementById('selUnidad').length=1;
+        var str = "";
+        $( "#selTipoUnidad option:selected" ).each(function() {
+          str += $( this ).val() + " ";
+      });
         arregloTipoUnidades.map(function(tipounidad){
+            if(tipounidad.id_tipo_unidad == str){
+                tipounidad.unidades.map(function(unidad) {
+                    let optionunidad = $(`<option value="${unidad.id_unidad}">${unidad.nombre}</option>`)
+                    $('#selUnidad').append(optionunidad);
+                })
+            }
+        })
+    })
+
+});
+
+function limpiarSuplemento(){
+    $('#txtNombre').val('');
+    $('#txtIdSuplemento').val('');
+    $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
+    $('#selUnidad option:contains(Seleccione)').prop('selected',true);
+}
+
+function addRowSuplemento(id, nombre, tipo_unidad, unidad) {
+    let row = $(`<tr>
+        <td id="nombresuplemento-${id}">${nombre}</td>
+        <td id="tipo_unidad-${id}" style="display:none;">${tipo_unidad}</td>
+        <td id="unidad-${id}">${unidad}</td>
+        <td>
+        <button onclick="editarSuplemento(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarSuplemento"  title='Editar'><i class='fa fa-pencil'></i></button>
+        <button onclick="abrirModalEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+        </td>
+        </tr>
+        `);
+    $('#dtSuplementos').DataTable().row.add(row).draw();
+}
+
+function editarSuplemento(id){
+    $('#txtNombre').val($(`#nombresuplemento-${id}`).text());
+    $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').prop('selected',true);
+    const tipounidades = $('#selTipoUnidad option:contains('+ $(`#tipo_unidad-${id}`).text() + ')').val();
+    arregloTipoUnidades.map(function(tipounidad){
         if(tipounidad.id_tipo_unidad == tipounidades){
             tipounidad.unidades.map(function(unidad) {
                 let optionunidad = $(`<option value="${unidad.id_unidad}">${unidad.nombre}</option>`)
                 $('#selUnidad').append(optionunidad);
             })
         }
-        })
-        $('#selUnidad option:contains('+ $(`#unidad-${id}`).text() + ')').prop('selected',true);
-        $('#txtIdSuplemento').val(id);
-        $('#btnAceptar').css('display', 'none');
-        $('#btnEditar').css('display', 'inline');
-    }
+    })
+    $('#selUnidad option:contains('+ $(`#unidad-${id}`).text() + ')').prop('selected',true);
+    $('#txtIdSuplemento').val(id);
+    $('#btnAceptar').css('display', 'none');
+    $('#btnEditar').css('display', 'inline');
+}
 
-    function editRowSuplemento(id, nombre, tipo_unidad, unidad){
-        $(`#nombresuplemento-${id}`).text(nombre)
-        $(`#tipo_unidad-${id}`).text(tipo_unidad)
-        $(`#unidad-${id}`).text(unidad)
-    }
+function editRowSuplemento(id, nombre, tipo_unidad, unidad){
+    $(`#nombresuplemento-${id}`).text(nombre)
+    $(`#tipo_unidad-${id}`).text(tipo_unidad)
+    $(`#unidad-${id}`).text(unidad)
+}
 
-    function abrirModalEliminarSuplemento(id){
-        $('#txtIdSuplementoEliminar').val(id);
-    }
+function abrirModalEliminarSuplemento(id){
+    $('#txtIdSuplementoEliminar').val(id);
+}
 
-    function eliminarSuplemento(id){
-        $.ajax({
-            url: `https://api-sascha.herokuapp.com/suplemento/${id}`,
-            contentType: 'application/json',
-            type: 'DELETE',
-            success: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                $('#dtSuplementos').DataTable().row($(`#nombresuplemento-${id}`).parent()).remove().draw();
-                $('#txtIdSuplemento').val('');
-                mensaje('#msjAlerta', `Suplemento`, 2);
+function eliminarSuplemento(id){
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/suplemento/${id}`,
+        contentType: 'application/json',
+        type: 'DELETE',
+        success: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            $('#dtSuplementos').DataTable().row($(`#nombresuplemento-${id}`).parent()).remove().draw();
+            $('#txtIdSuplemento').val('');
+            mensaje('#msjAlerta', `Suplemento`, 2);
 
-            },
-            error: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                const respuesta = JSON.parse(res.responseText);
-                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
-            }
-        })
-    }
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+        }
+    })
+}
+function agregarSuplemento(){
+   $('#btnAceptar').css('display', 'inline');
+   $('#btnEditar').css('display', 'none');
 
-    
+}

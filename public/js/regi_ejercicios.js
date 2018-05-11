@@ -124,6 +124,12 @@ function editarEjercicio(id){
     $('#btnEditar').css('display', 'inline');
 }
 
+function agregarEjercicio(){
+
+    $('#btnAceptar').css('display', 'inline');
+    $('#btnEditar').css('display', 'none');
+}
+
 function abrirModalEliminarEjercicio(id){
     $('#txtIdEjercicioEliminar').val(id);
 }

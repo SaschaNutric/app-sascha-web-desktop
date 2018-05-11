@@ -144,6 +144,11 @@ $(document).ready(function() {
         $('#btnEditar').css('display', 'inline');
     }
 
+function agregarHorario(){
+
+    $('#btnAceptar').css('display', 'inline');
+    $('#btnEditar').css('display', 'none');
+}
     function abrirModalEliminarHorario(id){
         $('#txtIdBloqueHorarioEliminar').val(id);
     }

@@ -56,7 +56,7 @@
                     <div id="tabGrupoAlimenticio" class="tab-pane active">
                         <div class="">
                             <div class="pull-right">
-                                <a class="btn btn-agregar" data-toggle='modal' href="#agregarGrupoAlimenticio">Agregar</a>
+                                <a class="btn btn-agregar" data-toggle='modal' onclick="agregarGrupo()" href="#agregarGrupoAlimenticio">Agregar</a>
                             </div>
                             <table id="dtGruposAlimenticios" class="display table table-bordered table-striped dataTable">
                                 <thead>
@@ -74,7 +74,7 @@
                     <div id="tabAlimentos" class="tab-pane">
                         <div class="">
                             <div class="pull-right"  >
-                                <a id="btnAgregarAlimentos" class="btn btn-agregar" data-toggle='modal' href="#agregarAlimentos">Agregar</a>
+                                <a id="btnAgregarAlimentos" class="btn btn-agregar" onclick="agregarAlimento()" data-toggle='modal' href="#agregarAlimentos">Agregar</a>
                             </div>
                             <table id="dtAlimentos" class="display table table-bordered table-striped dataTable">
                                 <thead>

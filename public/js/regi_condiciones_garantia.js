@@ -67,7 +67,7 @@ $(document).ready(function() {
                     </td>
                 </tr>
                 `);
-                $('#dtregiTipoDieta').DataTable().row.add(row).draw();
+                $('#dtCondicionGarantia').DataTable().row.add(row).draw();
                 mensaje('alert-success', '<strong>Exito!</strong> Condición de Garantía agregada.');
             },
             error: function(res, status, xhr) {
@@ -108,6 +108,13 @@ $(document).ready(function() {
     })   
 
 });
+
+
+    function agregarCondicionGarantia(){
+    $('#btnAceptar').css('display', 'inline');
+    $('#btnEditar').css('display', 'none');
+
+}
 
 
     function editarCondicionGarantia(id){

@@ -252,6 +252,18 @@ function editarTipoUnidad(id){
     $('#btnEditartipoUnidad').css('display', 'inline');
 }
 
+function agregarTipoUnidad(){
+
+    $('#btnAceptartipoUnidad').css('display', 'inline');
+    $('#btnEditartipoUnidad').css('display', 'none');
+}
+
+function agregarUnidad(){
+
+    $('#btnAceptarUnidad').css('display', 'inline');
+    $('#btnEditarUnidad').css('display', 'none');
+}
+
 function abrirModalEliminarTipoUnidad(id){
     $('#txtIdTipoUnidadEliminar').val(id);
 }

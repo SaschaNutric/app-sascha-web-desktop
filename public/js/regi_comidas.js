@@ -176,3 +176,9 @@ function editRowComida(id, nombre){
     $(`#nombre-${id}`).text(nombre)
 
 }
+
+function agregarComida(){
+    $('#btnAceptar').css('display', 'inline');
+    $('#btnEditar').css('display', 'none');
+
+}

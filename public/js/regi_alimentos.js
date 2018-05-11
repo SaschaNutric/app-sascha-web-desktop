@@ -331,6 +331,12 @@ $(document).ready(function() {
         $('#btnAceptarGrupo').css('display', 'none');
         $('#btnEditarGrupo').css('display', 'inline');
     }
+function agregarGrupo(){
+
+       $('#btnAceptarGrupo').css('display', 'inline');
+        $('#btnEditarGrupo').css('display', 'none');
+}
+
 
     function editRowGrupo(id, nombre, tipo_unidad, unidad){
         $(`#nombregrupo-${id}`).text(nombre)
@@ -384,6 +390,13 @@ $(document).ready(function() {
         $('#btnAceptarAlimento').css('display', 'none');
         $('#btnEditarAlimento').css('display', 'inline');
     }
+
+    function agregarAlimento(){
+    $('#btnAceptarAlimento').css('display', 'inline');
+    $('#btnEditarAlimento').css('display', 'none');
+
+}
+
 
     function editRowAlimento(id, nombre, grupo_alimenticio){
         console.log("entrooooooo")
