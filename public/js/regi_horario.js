@@ -105,9 +105,15 @@ $(document).ready(function() {
             return;
         }
 
+        if ($('#txtHoraInicio').val() >= $('#txtHoraFin').val()) {
+            mensaje('#msjAlerta', `Bloque Horario`, 5);
+            limpiarHorario();
+            return;
+        }
+
         let bloqueHorario = {
             hora_inicio: $('#txtHoraInicio').val(),
-            hora_fin: $('#txtHoraFin')
+            hora_fin: $('#txtHoraFin').val()
         }
 
         let id = $('#txtIdBloqueHorario').val();
@@ -161,11 +167,13 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                $('#dtBloqueHorario').DataTable().row($(`#descripcion-${id}`).parent()).remove().draw();
+                $('#dtBloqueHorario').DataTable().row($(`#hora_inicio-${id}`).parent()).remove().draw();
+                mensaje('#msjAlerta', `Bloque Horario`, 2);
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
             }
         })
     }
@@ -173,7 +181,7 @@ $(document).ready(function() {
    
     function limpiarHorario(){
         $('#txtHoraInicio').timepicker('setTime', '00:00:00');
-        $('#txtHoraFin').timepicker('defaultTime', '00:00:00');
+        $('#txtHoraFin').timepicker('setTime', '00:00:00');
         $('#txtHoraInicio').val('')
         $('#txtHoraFin').val('')
         $('#txtIdBloqueHorario').val('')
