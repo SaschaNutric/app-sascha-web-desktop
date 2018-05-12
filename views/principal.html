@@ -19,7 +19,7 @@
 <body >
 
     <div >
-        <aside id='sidebar'>
+        <aside id='sidebar' style="overflow-y: auto;">
             <div class="nav-collapse">
                 <!-- sidebar menu start-->            
                 <div class="leftside-navigation">
@@ -46,6 +46,11 @@
                                 <span>Tipos de Parámetros</span>
                             </button>
                         </li>
+                        <li><button class="btn-sub-menu" id="menu-tipo-contacto" onclick="content.location='regi_tipo_contacto.html'">
+                                <i class="fa fa-chevron-right"></i>
+                                <span>Tipos de Contacto</span>
+                            </button>
+                        </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-chevron-right"></i>
@@ -69,7 +74,7 @@
                         <span>Condiciones de Garantía</span>
                     </button>
                 </li>
-                <li><button class="btn-sub-menu" id="menu-criterios-valoracion" onclick="content.location='regi_criterios_valoracion.html'">
+                <li><button class="btn-sub-menu" id="menu-criterios-valoracion" onclick="content.location='regi_tipo_valoracion.html'">
                     <i class="fa fa-chevron-right"></i>
                     <span>Tipos de Valoración</span>
                 </button>
@@ -93,7 +98,7 @@
                 <span>Sistema</span>
             </a>
             <ul class="sub">
-                <li><button class="btn-sub-menu" id="menu-mensajes" onclick="content.location='conf_sist_mensajes.html'" >Mensajes</button ></li>
+                <li><button class="btn-sub-menu" id="menu-mensajes" onclick="content.location='conf_sist_mensajes.html'" >Motivos y Respuestas</button ></li>
                 <li><button class="btn-sub-menu" id="menu-notificacion"onclick="content.location='conf_sist_notificacion.html'" >Notificaciones</button ></li>
                 <li><button class="btn-sub-menu" id="menu-agenda" onclick="content.location='conf_agenda.html'" >Agenda</button ></li>
                 <li><button class="btn-sub-menu" id="menu-criterios" onclick="content.location='conf_sist_valoracion.html'" >Criterios de Valoración</button ></li>
@@ -169,6 +174,7 @@
         </a>
         <ul class="sub">
             <li><button class="btn-sub-menu" id="menu-reportes-solicitudes" onclick="content.location='repo_solicitudes.html'">Solicitudes</button></li>
+            <li><button class="btn-sub-menu" id="menu-reportes-reclamos" onclick="content.location='repo_servicios.html'">Servicios</button></li>
             <li><button class="btn-sub-menu" id="menu-reportes-reclamos" onclick="content.location='repo_reclamos.html'">Reclamos</button></li>
             <li><button class="btn-sub-menu" id="menu-reportes-canal" onclick="content.location='repo_canalEscucha.html'">Canal de Escucha</button></li>
         </ul>
@@ -211,8 +217,7 @@
     </a>
     <ul class="sub">
         <li><button class="btn-sub-menu" id="menu-negocio" onclick="content.location='admi_portalWeb-negocio.html'">Negocio</button></li>
-        <li><button class="btn-sub-menu" id="menu-contenido"  onclick="content.location='admi_portalWeb-contenido.html'">Contenido</button></li>
-        <li><button class="btn-sub-menu" id="menu-preguntas" href="" onclick="content.location='admi_portalWeb-preguntas.html'">Preguntas Frecuentes</button></li>        
+        <li><button class="btn-sub-menu" id="menu-contenido"  onclick="content.location='admi_portalWeb-contenido.html'">Contenido</button></li>     
     </ul>
 </li>
 <li class="sub-menu">

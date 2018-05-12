@@ -1,6 +1,5 @@
 $(document).ready(function() {
 //Valores seleccionados en el multiselect
-let valores = [];
 //Declaracion del multiselect de condiciones de garantia
 $('#ms_condiciones').multiSelect({
     selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
@@ -31,18 +30,11 @@ $('#ms_condiciones').multiSelect({
     afterSelect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        valores.push(values[0]);
-        console.log(valores)
 
     },
     afterDeselect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        const index = valores.indexOf(values[0])
-        if(index != -1){
-            valores.splice(index,1)
-        }
-        console.log(valores)
 
     }
 });
@@ -223,6 +215,7 @@ function validate(){
 
 $('#btnRegistrar').on('click', function() {
     if(!validate()){
+        console.log($('#ms_condiciones').val())
         mensaje('#msjAlerta', '', 5);
         return;
     }

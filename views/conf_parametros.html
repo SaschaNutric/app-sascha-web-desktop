@@ -1,13 +1,13 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-	<title>Sascha</title>
+    <title>Sascha</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -34,16 +34,18 @@
     <![endif]-->
 </head>
 <body>
-<section id="">
+<section id="container">  <!-- le agrege la palabra container -->
         <h3>Configuración de Parámetros</h3> 
         <!-- Inicio pagina parametros -->
         <div class="row">
             <div class="col-md-12">
                 <section class="panel">
+            
                     <div class="panel-body">
+                    <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                         <!-- Tabla de parametro -->
                         <div class="pull-right">
-                            <a id="btnAgregarParametro" href="#modal-agregar-parametro" data-toggle="modal" class="btn btn-agregar">
+                            <a id="btnAgregarParametro" href="#modal-agregar-parametro" data-toggle="modal"  class="btn btn-agregar">
                                 Configurar
                             </a>
                         </div>
@@ -53,47 +55,18 @@
                                     <th>Nombre</th>
                                     <th>Tipo Parámetro</th>
                                     <th>Tipo de valor</th>
-                                    <th>Unidad</th>
+                                    <th style="text-align: center">Unidad</th>
                                     <th class="ancho-columna">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="">
-                                    <th>Peso</th>
-                                    <td>Antropométrico</td>
-                                    <th>Real</th>
-                                    <th>Kg</th>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                        </div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <th>Diabetes</th>
-                                    <td>Patología</td>
-                                    <th>Nominal</th>
-                                    <th>-</th>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#modal-editar-parametro" data-toggle="modal" class="btn btn-transparente"><i class="fa fa-pencil"></i></a>
-                                        </div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-transparente"><i class="fa fa-trash-o"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>              
-                            </tbody>
+                            
                         </table>
 
                     </div>
                 </section>
             </div>
         </div>
+        </section>
         <!-- Fin pagina parametros -->
 
         <!-- Modales de agregar y editar -->
@@ -103,72 +76,93 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <button aria-hidden="true"  onclick="limpiarParametro()" data-dismiss="modal" class="close" type="button">×</button>
                         <h4 class="modal-title">Agregar parametro</h4>
                     </div>
                     <div class="modal-body">
+                         <div id="msjAgregarParametro" class="alert alert-danger" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                         </div>
                         <form class="form-horizontal" role="form" id="frmAgregarParametro">
+
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Tipo de Parámetro:</label>
                                 <div class="col-md-9">
-                                    <select id="selTipoParametro" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Antropométrico</option>
-                                        <option value="02">Patología</option>
+                                    <select id="selTipoParametro" name="tipo_parametro" class="form-control" style="width: 100%">
+                                        <option value="0" selected="selected" >Seleccione</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Nombre de Parámetro:</label>
                                 <div class="col-md-9">
+                                    <input type="text" class="form-control" id="txtIdParametro" style="display: none;">
                                     <input type="text" class="form-control" id="txtNombreParametro" style="width: 100%">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Tipo de Valor:</label>
                                 <div class="col-md-9">
-                                    <select id="selTipoValor" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Real</option>
-                                        <option value="02">Nominal</option>
+                                    <select id="selTipoValor" name="tipo_valor" class="form-control" style="width: 100%">
+                                        <option value="0">Seleccione</option>
+                                        <option value="1">Nominal</option>
+                                        <option value="2">Real</option>
                                     </select>
                                 </div>
                             </div>
+                            <div id="real" style="display: none">
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Tipo de Unidad:</label>
                                 <div class="col-md-9">
-                                    <select id="selTipoUnidad" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">Masa</option>
-                                        <option value="02">Tiempo</option>
-                                        <option value="03">Longitud</option>
-                                        <option value="04">Cantidad</option>
+                                    <select id="selTipoUnidad" name="tipo_unidad" class="form-control" style="width: 100%">
+                                        <option value="00" selected="selected" >Seleccione</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Unidad:</label>
                                 <div class="col-md-9">
-                                    <select id="selUnidad" class="form-control" style="width: 100%">
-                                        <option value="00">Seleccione</option>
-                                        <option value="01">kilogramos</option>
-                                        <option value="02">gramos</option>
+                                    <select id="selUnidad" name="unidad" class="form-control" style="width: 100%">
+                                        <option value="0" selected="selected" >Seleccione</option>
                                     </select>
                                 </div>
                             </div>
+                        </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnAceptarParametro" type="button"  class="btn btn-aceptar">Aceptar</button>
+                <button id="btnEditarParametro" type="button"  class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                <button id="btnCancelarParametro" type="button" class="btn btn-cancelar" onclick="limpiarParametro()"  data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- fin Modal agregar parametro -->
 
+        <!--inicio de la modal eliminar -->
+<div class="modal fade bs-example-modal-sm" id="eliminarParametro" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="txtIdParametroEliminar" style="display: none;" disabled>
+        <p style="text-align: center;">¿Está seguro que desea eliminar el parametro?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="btnEliminarParametro" data-dismiss="modal" onclick="eliminarParametro($('#txtIdParametroEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+      <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+  </div>
+</div>
+</div>
+</div>
+<!--fin de la modal eliminar -->
+
         <!--main content end-->
-</section>
+<!-- quite el section y lo puse arriba -->
 
 <!-- Placed js at the end of the document so the pages load faster -->
 
@@ -182,7 +176,7 @@
 <script src="js/bootstrap-switch.js"></script>
 
 <!-- tablas editables -->
-<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
 
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
 
@@ -192,6 +186,7 @@
     <!--script for this page-->
     <script src="js/gritter.js" type="text/javascript"></script>
 <!--script for this page only-->
+<script src="js/mensaje.js" type="text/javascript"></script>
 <script src="js/conf_parametros.js" type="text/javascript"></script>
 <!-- END JAVASCRIPTS -->
 
