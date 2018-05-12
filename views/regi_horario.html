@@ -12,8 +12,10 @@
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
-    
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
@@ -41,14 +43,17 @@
             <section class="panel-body">
                 <div id="tabBloqueHorario">
                     <div class="">
+                        <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+                  </div>
                         <div class="pull-right">
-                            <a id="btnAgregarBloqueHorario" class="btn btn-agregar" data-toggle='modal' href="#agregarBloqueHorario">Agregar</a>
+                            <a id="btnAgregarBloqueHorario" class="btn btn-agregar" data-toggle='modal' href="#agregarBloqueHorario" onclick="agregarHorario()">Agregar</a>
                         </div>
                         <table id="dtBloqueHorario" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
                             <thead>
                                 <tr>
-                                    <th width="50%">Bloque Horario</th>
-                                    <th width="15%">Acciones</th>
+                                    <th >Hora de inicio</th>
+                                    <th >Hora de fin</th>
+                                    <th class="ancho-columna">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -66,27 +71,62 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Agregar Bloque Horario</h4>
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" onclick="limpiarHorario()">×</button>
+                        <h4 class="modal-title">Bloque Horario</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" role="form" id="frmAgregarBloqueHorario">
+                            <input type="text" class="form-control" id="txtIdBloqueHorario" style="display: none;">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Bloque Horario:</label>
+                                <label class="control-label col-md-3">Hora Inicio:</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="txtBloqueHorario">
+                                    <div class="input-group bootstrap-timepicker timepicker">
+                                        <input type="text" id="txtHoraInicio" class="form-control" name="from" readonly>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Hora Fin:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group bootstrap-timepicker timepicker">
+                                        <input type="text" id="txtHoraFin" class="form-control" name="from" readonly>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnAceptar" data-dismiss="modal" type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnEditar" data-dismiss="modal" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                        <button id="btnCancelar" data-dismiss="modal" type="button" class="btn btn-cancelar" onclick="limpiarHorario()">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- fin Modal agregar medida -->
+
+        <!--inicio de la modal eliminar -->
+        <div class="modal fade bs-example-modal-sm" id="eliminarBloqueHorario" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="txtIdBloqueHorarioEliminar" style="display: none;" disabled>
+               <p style="text-align: center;">¿Está seguro que desea eliminar la unidad?</p>
+            </div>
+            <div class="modal-footer">
+              <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarUnidad($('#txtIdUnidadEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+              <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        <!--fin de la modal eliminar -->
 
     <!-- Fin Modales -->
 
@@ -119,11 +159,14 @@
 <script src="js/gritter.js" type="text/javascript"></script>
 <!-- tablas editables -->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!-- script de timepicker -->
+<script src="js/bootstrap-timepicker/js/bootstrap-timepicker.js" type="text/javascript"></script>
 
 <!--script for this page only-->
-<script src="js/registros_basicos.js" type="text/javascript"></script>
+<script src="js/mensaje.js" type="text/javascript"></script>
+<script src="js/regi_horario.js" type="text/javascript"></script>
 <!-- END JAVASCRIPTS -->
 </body>
 </html>

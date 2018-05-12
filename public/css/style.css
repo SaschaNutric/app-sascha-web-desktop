@@ -5766,3 +5766,8 @@ right: -1px;
     -o-transition: none;
     transition: none;
 }
+
+
+.form-control{
+    color: #858580 !important;
+}

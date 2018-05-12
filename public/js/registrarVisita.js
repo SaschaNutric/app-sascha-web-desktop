@@ -1,3 +1,44 @@
+$(document).ready(function () {
+    var paramstr = window.location.search.substr(1);
+    var paramarr = paramstr.split("=");
+    var params = {};
+    params[paramarr[0]] = paramarr[1];
+    const id = params['id'];
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/agenda/${id}`,
+        type: 'GET',
+        contentType: 'application/json',
+        beforeSend: function() {
+            $('#cita-info').css('display', 'none');
+            $('#spinner-cita').css('display', 'inline');
+            $('#cliente-info').css('display, none');
+            $('#spinner-cliente').css('display', 'inline');
+            $('#servicio-info').css('display, none');
+            $('#spinner-servicio').css('display', 'inline');
+            
+        },
+        success: function(res, status, xhr){
+            let agenda = res.data;
+            let fecha = new Date(agenda.fecha);
+            $('#cita-fecha').text(fecha.toLocaleDateString('es-ES'));
+            $('#tipo-cita').text(agenda.tipo_cita);
+            $('#cliente-nombre').text(agenda.nombre_cliente);
+            $('#servicio-nombre').text(agenda.nombre_servicio);
+        },
+        error: function (res, status, xhr) {
+            
+        },
+        complete: function() {
+            $('#spinner-cita').css('display', 'none');
+            $('#cita-info').css('display', 'block');
+            $('#spinner-cliente').css('display', 'none');
+            $('#cliente-info').css('display, block');
+            $('#spinner-servicio').css('display', 'none');
+            $('#servicio-info').css('display, block');
+        }
+    })
+})
+
 
 var alimentos = ["Carne","Pollo", "Pescado", "Huevo", "Atún"];     
 var sel = document.getElementById('ms_alimentos');
@@ -229,6 +270,8 @@ $(document).ready(function() {
         },
     } );
 
+
+$('txtHoraCita').timepicker()
 });
 
 

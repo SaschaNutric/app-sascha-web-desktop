@@ -2,312 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-    <title>Sascha</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <title>Iniciar sesión</title>
+
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <!--external css-->
-    <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
+
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body >
 
-    <div >
-        <aside id='sidebar'>
-            <div class="nav-collapse">
-                <!-- sidebar menu start-->            
-                <div class="leftside-navigation">
-                    <ul class="sidebar-menu" id="nav-accordion">
-                        <li class="active">
-                            <button class="btn-menu" id="menu-dashboard" class="active" onclick="content.location='dashboard.html'">
-                                <i class="fa fa-leaf"></i>
-                                <span>Dashboard</span>
-                            </button>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-edit"></i>
-                                <span>Registros Básicos</span>
-                            </a>
-                            <ul class="sub">
-                                <li><button class="btn-sub-menu" id="menu-unidades" onclick="content.location='regi_unidad.html'">
-                                    <i class="fa fa-chevron-right"></i>
-                                    <span>Unidades</span>
-                                </button>
-                            </li>
-                            <li><button class="btn-sub-menu" id="menu-tipo-parametro" onclick="content.location='regi_tipo_parametro.html'">
-                                <i class="fa fa-chevron-right"></i>
-                                <span>Tipos de Parámetros</span>
-                            </button>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-chevron-right"></i>
-                                <span>Planes</span>
-                            </a>
-                            <ul class="sub">
-                                <li><button class="btn-sub-menu" id="menu-alimentos" onclick="content.location='regi_alimentos.html'">Alimentos</button></li>
-                                <li><button class="btn-sub-menu" id="menu-alimentos" onclick="content.location='regi_comidas.html'">Comidas</button></li>
-                                <li><button  class="btn-sub-menu" id="menu-suplementos" onclick="content.location='regi_suplementos.html'"> Suplementos</button></li>
-                                <li><button  class="btn-sub-menu" id="menu-ejercicios" onclick="content.location='regi_ejercicios.html'">Ejercicios</button></li>
-                                 <li><button  class="btn-sub-menu" id="menu-tipo-dieta" onclick="content.location='regi_tipo_dieta.html'">Tipos de Dieta</button></li>        
-                            </ul>
-                        </li>
-                        <li><button class="btn-sub-menu" id="menu-horario" onclick="content.location='regi_horario.html'">
-                            <i class="fa fa-chevron-right"></i>
-                            <span>Horario</span>
-                        </button>
-                    </li>
-                    <li><button class="btn-sub-menu" id="menu-condiciones-garantia" onclick="content.location='regi_condiciones_garantia.html'">
-                        <i class="fa fa-chevron-right"></i>
-                        <span>Condiciones de Garantía</span>
-                    </button>
-                </li>
-                <li><button class="btn-sub-menu" id="menu-criterios-valoracion" onclick="content.location='regi_criterios_valoracion.html'">
-                    <i class="fa fa-chevron-right"></i>
-                    <span>Criterios de Valoración</span>
-                </button>
-            </li> 
-        </ul>
-    </li>
-     <li class="sub-menu">
-        <a href="javascript:;">
-            <i class="fa fa-cogs"></i>
-            <span>Configuración</span>
-        </a>
-        <ul class="sub">
-            <li><button class="btn-sub-menu" id="menu-parametros" onclick="content.location='conf_parametros.html'">
-                <i class="fa fa-chevron-right"></i>
-                <span>Parámetros</span>
-            </button>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-chevron-right"></i>
-                <span>Sistema</span>
-            </a>
-            <ul class="sub">
-                <li><button class="btn-sub-menu" id="menu-mensajes" onclick="content.location='conf_sist_mensajes.html'" >Mensajes</button ></li>
-                <li><button class="btn-sub-menu" id="menu-notificacion"onclick="content.location='conf_sist_notificacion.html'" >Notificaciones</button ></li>
-                <li><button class="btn-sub-menu" id="menu-agenda" onclick="content.location='conf_agenda.html'" >Agenda</button ></li>
-                <li><button class="btn-sub-menu" id="menu-criterios" onclick="content.location='conf_sist_valoracion.html'" >Criterios de Valoración</button ></li>
-                <li><button class="btn-sub-menu" id="menu-filtros" onclick="content.location='conf_sist_filtros.html'" >Filtros</button ></li>         
-            </ul>
-        </li>
-        <li><button class="btn-sub-menu" id="menu-servicios" onclick="content.location='conf_servicios.html'">
-            <i class="fa fa-chevron-right"></i>
-            <span>Servicios</span>
-        </button>
-    </li> 
-    <li class="sub-menu">
-        <a href="javascript:;">
-            <i class="fa fa-chevron-right"></i>
-            <span>Planes</span>
-        </a>
-        <ul class="sub">
-            <li><button class="btn-sub-menu" id="menu-dietas" onclick="content.location='conf_plan_dieta.html'">Dietas</button></li>
-            <li><button  class="btn-sub-menu" id="menu-planSuplementos" onclick="content.location='conf_plan_suplemento.html'"> Plan de Suplemento </button></li>
-            <li><button  class="btn-sub-menu" id="menu-planEntrenamiento" onclick="content.location='conf_plan_actividad.html'">Planes de Entrenamiento</button></li>        
-        </ul>
-    </li>
+  <body class="login-body" style="background-color: #FFF">
 
+    <div class="container">
 
-</ul>
-</li>
-<li class="sub-menu">
-    <a id="menu-visitas" href="javascript:;">
-        <i class="fa fa-calendar"></i>
-        <span>Visitas</span>
-    </a>
-    <ul class="sub">
-        <li><button class="btn-sub-menu"  onclick="content.location='visitas.html'">
-            <i class="fa fa-chevron-right"></i>
-            <span>Atender</span>
-        </button>
-    </li>
-    <li><button class="btn-sub-menu" onclick="content.location='visi_registrarIncidencia.html'">
-       <i class="fa fa-chevron-right"></i>
-       <span>Incidencias</span>
-   </button>
-</li>                          
-</ul>
-</li>
-<li class="sub-menu">
-    <a id="menu-visitas" href="javascript:;">
-        <i class="fa fa-tags"></i>
-        <span>Ofertas y promociones</span>
-    </a>
-    <ul class="sub">
-        <li><button class="btn-sub-menu"  onclick="content.location='ofertasYPromocionesRegistrar.html'">
-            <i class="fa fa-chevron-right"></i>
-            <span>Agregar</span>
-        </button>
-    </li>
-    <li><button class="btn-sub-menu" onclick="content.location='ofertasYPromocionesReenviar.html'">
-       <i class="fa fa-chevron-right"></i>
-       <span>Reenviar</span>
-   </button>
-</li>                          
-</ul>
-</li>     
-<li class="sub-menu">
-    <a id="menu-reportes" href="javascript:;">
-        <i class="fa fa-bar-chart-o"></i>
-        <span>Reportes</span>
-    </a>
-    <ul class="sub">
-        <li class="sub-menu">
-           <a href="javascript:;">
-            <i class="fa fa-chevron-right"></i>
-            <span>Escructurados</span>
-        </a>
-        <ul class="sub">
-            <li><button class="btn-sub-menu" id="menu-reportes-solicitudes" onclick="content.location='repo_solicitudes.html'">Solicitudes</button></li>
-            <li><button class="btn-sub-menu" id="menu-reportes-reclamos" onclick="content.location='repo_reclamos.html'">Reclamos</button></li>
-            <li><button class="btn-sub-menu" id="menu-reportes-canal" onclick="content.location='repo_canalEscucha.html'">Canal de Escucha</button></li>
-        </ul>
-    </li>
-    <li class="sub-menu">
-       <a href="javascript:;">
-        <i class="fa fa-chevron-right"></i>
-        <span>Estadísticos</span>
-    </a>
-    <ul class="sub">
-        <li><button class="btn-sub-menu" id="menu-estad-visitas" onclick="content.location='esta_visitas.html'">Visitas</button></li>
-        <li><button class="btn-sub-menu" id="menu-estad-servicios" onclick="content.location='esta_servicios.html'">Servicios</button></li>
-        <li><button class="btn-sub-menu" id="menu-estad-clientes" onclick="content.location='esta_clientes.html'">Clientes</button></li>
-        <li><button class="btn-sub-menu" id="menu-estad-reclamos" onclick="content.location='esta_reclamos.html'">Reclamos</button></li>
-        <li><button class="btn-sub-menu" id="menu-estad-canal" onclick="content.location='esta_canalEscucha.html'">Canal de Escucha</button></li>
-    </ul>
-</li>                       
-</ul>
-</li>       
-<li class="sub-menu">
-    <a href="javascript:;">
-        <i class="fa fa-wrench"></i>
-        <span>Administración del Sistema</span>
-    </a>
-    <ul class="sub">
-     <li class="sub-menu">
-        <a href="javascript:;">
-         <i class="fa fa-chevron-right"></i>
-         <span>Permisología</span>
-     </a>
-     <ul class="sub">
-        <li><button class="btn-sub-menu" id="menu-roles"  onclick="content.location='permi_roles.html'">Roles</button></li>
-        <li><button class="btn-sub-menu" id="menu-usuarios"  onclick="content.location='permi_usuarios.html'">Usuarios</button></li>        
-    </ul>
-</li>
-<li class="sub-menu">
-    <a href="javascript:;">
-        <i class="fa fa-chevron-right"></i>
-        <span>Portal Web</span>
-    </a>
-    <ul class="sub">
-        <li><button class="btn-sub-menu" id="menu-negocio" onclick="content.location='admi_portalWeb-negocio.html'">Negocio</button></li>
-        <li><button class="btn-sub-menu" id="menu-contenido"  onclick="content.location='admi_portalWeb-contenido.html'">Contenido</button></li>
-        <li><button class="btn-sub-menu" id="menu-preguntas" href="" onclick="content.location='admi_portalWeb-preguntas.html'">Preguntas Frecuentes</button></li>        
-    </ul>
-</li>
-<li class="sub-menu">
-    <a href="javascript:;">
-     <i class="fa fa-chevron-right"></i>
-     <span>Comunicación</span>
- </a>
- <ul class="sub">
-    <li><button class="btn-sub-menu" id="menu-reclamos" onclick="content.location='comu_reclamos.html'">Reclamos</button></li>
-    <li><button class="btn-sub-menu" id="menu-canalEscucha"  onclick="content.location='comu_canal_escucha.html'">Canal de Escucha</button></li>        
-</ul>
-</li>
-</ul>
-</li>
+      <div class="form-signin">
+        <div style="display: inline-block;text-align: center;">
+        	 <img src="images/l2Sascha.png" height="auto" width="80%">
+        	 </div>
+        <br>
+        <div class="login-wrap">
+        	
 
-</div>
-</div>
-</aside>
-<!--header start-->
-<header class="header fixed-top clearfix">
-    <!--logo start-->
-    <div class="brand">
+            <div class="user-login-info" style="background-color: #D3D3D3">
+            
+                <input id="txtCorreo" type="text" class="form-control" placeholder="Correo" autofocus>
+                <input id="txtContraseña" type="password" class="form-control" placeholder="Contraseña">
+            
+            <label class="checkbox" style="color: #858580">
+                <input type="checkbox"  value="remember-me" > Recordarme
+            </label>
+            <div  style="text-align: center;">
+              <span>
+                    <a data-toggle="modal" href="#myModal">¿Olvidaste tu contraseña?</a>
 
-        <a href="index.html" class="logo">
-            <img style="max-height: 75px; max-width: 200px" src="images/l2Sascha.png" alt="">
-        </a>
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars"></div>
+                </span>
+            </div>     
+            <button id="btnIngresar" class="btn btn-lg btn-login btn-block" style="background-color: #17AA8B" >Ingresar</button>
+            	
+            </div>
+            
+
         </div>
+
+          <!-- Modal -->
+          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title">Restablecer contraseña</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Enter your e-mail address below to reset your password.</p>
+                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                      </div>
+                      <div class="modal-footer">
+                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                          <button class="btn btn-success" type="button">Enviar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- modal -->
+
+        </div>
+
     </div>
-    <!--logo end-->
-
-    <div class="nav notify-row" id="top_menu">
-        <!--  notification start -->
-        <ul class="nav top-menu">
-            <!-- settings start -->
 
 
-            <!-- notification Icono-->
-            <li id="header_notification_bar" class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-warning">3</span>
-                </a>
+    <!-- Placed js at the end of the document so the pages load faster -->
 
-            </li>
-        </ul>
-    </div>
-    <div class="top-nav clearfix">
-        <!--search & user info start-->
-        <ul class="nav pull-right top-menu">
+    <!--Core js-->
+    <script src="js/jquery-1.8.3.min.js"></script>    
+    <script src="bs3/js/bootstrap.min.js"></script>
 
-            <!-- user login dropdown start-->
-            <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="images/avatar1_small.jpg">
-                    <span class="username">John Doe</span>
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu extended logout">
-                    <li><a href="#"><i class=" fa fa-user"></i>Mi Cuenta</a></li>
-                    <li><a href="login.html"><i class="fa fa-key"></i>Salir</a></li>
-                </ul>
-            </li>
-            <!-- user login dropdown end -->
-        </ul>
-        <!--search & user info end-->
-    </div>
-</header>
-<!--header end-->
+    <script src="js/login.js" type="text/javascript"></script>
+    
 
-<section id="main-content">
-    <section class="wrapper">
-        <iframe  id="content" name="content" src="dashboard.html" scrolling="auto"  ></iframe>
-    </section>
-</section>
-
-
-</div>
-<!-- Placed js at the end of the document so the pages load faster -->
-<!--Core js-->
-
-<script src="js/jquery.js"></script>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
-<!--common script init for all pages-->
-<script src="js/scripts.js"></script>
-<!--script for this page-->
-<script src="js/gritter.js" type="text/javascript"></script>
-</body>
+  </body>
 </html>
-

@@ -42,15 +42,16 @@
         <section class="panel">
             <section class="panel-body">
                         <div class="">
+                       <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div> 
                             <div class="pull-right"  >
-                                <a id="btnAgregarComida" class="btn btn-agregar" data-toggle='modal' href="#agregarComida">Agregar</a>
+                                <a id="btnAgregarComida" class="btn btn-agregar" data-toggle='modal' onclick="agregarComida()" href="#agregarComida">Agregar</a>
                             </div>
                             <br>
                             <table id="dtComidas" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
                                 <thead>
                                     <tr>
-                                        <th width="85%">Nombre</th>
-                                        <th width="15%">Acciones</th>
+                                        <th >Nombre</th>
+                                        <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -65,41 +66,17 @@
 
     <!-- Inicio de Modales -->
 
-        <!-- Modal Agregar tipo de Comida -->
-        <div class="modal fade" id="agregarTipoComida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Agregar Comida</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" id="frmAgregarTipoComidas">
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Descripción:</label>
-                                <div class="col-md-9"><input id="txtDescripcionTipoComida" class="form-control" type="text" name="" value=""/> </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnCancelarTipoComidas" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptarTipoComidas" type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- Fin Modal Agregar tipo de Comida -->
-
         <!-- Modal Agregar Comida -->
         <div class="modal fade" id="agregarComida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="limpiarComida()">&times;</button>
                         <h4 class="modal-title">Agregar Comida</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" id="frmAgregarComidas">
+                            <input type="text" class="form-control" id="txtIdComida" style="display: none;">
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Nombre:</label>
                                 <div class="col-md-9"><input id="txtNombreComida" class="form-control" type="text" name="" value=""/> </div>
@@ -107,13 +84,34 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button id="btnCancelarComida" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptarComida" type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
     <!-- Fin Modal Agregar Comida -->
+
+    <!--inicio de la modal eliminar -->
+    <div class="modal fade bs-example-modal-sm" id="eliminarComida" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="txtIdComidaEliminar" style="display: none;" disabled>
+                    <p style="text-align: center;">¿Está seguro que desea eliminar la comida?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnEliminarComida" data-dismiss="modal" onclick="eliminarComida($('#txtIdComidaEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Fin Modales -->
 
@@ -145,11 +143,12 @@
 <script src="js/gritter.js" type="text/javascript"></script>
 <!-- tablas editables -->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
-
 <!--script for this page only-->
-<script src="js/registros_basicos.js" type="text/javascript"></script>
+
+<script src="js/mensaje.js" type="text/javascript"></script>
+<script src="js/regi_comidas.js" type="text/javascript"></script>
 <!-- END JAVASCRIPTS -->
 </body>
 </html>
