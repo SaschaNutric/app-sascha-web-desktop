@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -396,3 +397,397 @@
 </body>
 </html>
 
+=======
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="ThemeBucket">
+
+        <title>Sascha</title>
+
+        <!--Core CSS -->
+        <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-reset.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+
+        <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
+        <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+        <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
+
+        <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+
+        <!--external css-->
+        <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+
+
+
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style-responsive.css" rel="stylesheet" />
+        <link href="css/registrarVisita.css" rel="stylesheet">
+    </head>       
+    <body>
+
+        <h3>Registrar Visita</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <section class="panel">
+                 <header class="panel-heading tab-bg-dark-navy-blue ">
+                    <ul class="nav nav-tabs" style="text-align: center;">
+                        <li class="active" style="width: 25%">
+                            <a data-toggle="tab" href="#perfil" aria-expanded="false">Perfil</a>
+                        </li>
+                        <li class="" style="width: 25%">
+                            <a data-toggle="tab" href="#dieta" aria-expanded="false">Dieta</a>
+                        </li>
+                        <li class="" style="width: 25%">
+                            <a data-toggle="tab" href="#suplementos" aria-expanded="false">Suplementos</a>
+                        </li>
+                        <li class="" style="width: 25%">
+                            <a data-toggle="tab" href="#actividades" aria-expanded="false">Entrenamiento</a>
+                        </li>
+                    </ul>
+                </header>
+                <section class="panel-body">
+                    <div class="tab-content">
+                        <div id="perfil" class="tab-pane active"> 
+                            <div class="plan-panel" " style="padding-top: 20px">
+                                <form class="form-horizontal" style="padding-top: 20px; padding-bottom: 40px">
+                                    <div class="form-group">
+                                        <div class="col-sm-3 control-label"  >   
+                                            <label for="cmbTipoParametro">Tipo de Parametro:</label>
+                                        </div>     
+                                        <div class="col-sm-7">
+                                           <select  id="cmbTipoParametro" class="form-control xsmall">
+                                               <option value="Todos" selected="selected" >Todos</option>
+                                           </select>            
+                                       </div>
+                                   </div>
+                               </form> 
+
+                               <table class="display table table-bordered table-striped " id="dtPerfil">
+                                <thead>
+                                    <tr >
+                                        <th id=tipoParametro style="display: none"> </th>
+                                        <th style="width: 45%;">Parametro</th>
+                                        <th  style="width: 45%;">Valor</th>
+                                        <th  style="width: 10%; display: none;">Editar</th>                     
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table> 
+                        </div>
+                    </div>                                          
+                    <div id="dieta" class="tab-pane"> 
+
+                        <div class="plan-panel" style="padding-top: 20px">
+                            <div class="row" style="border-bottom: solid 1px;">
+                                <h4>Dieta Hipocalorica</h4>
+                            </div>
+                            <div class="row">
+                                <h5> Baja en calorias. Ideal para perder peso</h5>
+                            </div>
+                            <div class="row" id='comidas'></div>
+
+
+                        </div>
+                    </div>
+                    <div  id="suplementos" class="tab-pane">
+                        <div class="plan-panel" style="padding-top: 20px">
+                            <div class="row" style="border-bottom: solid 1px;">
+                                <h4>Plan de Suplementos 1</h4>
+                            </div>
+                            <div class="row">
+                                <h5>Deficiencia de Cacio y vitaminas</h5>
+                            </div>
+
+                            <table id="dtSuplementos" class="display table table-bordered table-striped" style="padding-top: 20px">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Suplemento</th>
+                                        <th width="20%">Cantidad</th>
+                                        <th width="30%">Frecuencia</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="actividades" class="tab-pane">
+                       <div class="plan-panel" style="padding-top: 20px">
+                        <div class="row" style="border-bottom: solid 1px;">
+                            <h4>Plan de Ejercicios Basico</h4>
+                        </div>
+                        <div class="row">
+                            <h5> Ejercicios para personas que no acostumbran a realizar actividad fisica</h5>
+                        </div>
+                        <br>
+                        <table id="dtEjercicios" class="display table table-bordered table-striped" style="padding-top: 20px">
+                            <thead>
+                                <tr>
+                                    <th width="50%">Ejercicio</th>
+                                    <th width="20%">Cantidad</th>
+                                    <th width="30%">Frecuencia</th>
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </section>
+            <div class="row" style="padding: 30px;">
+                <div class="position-left col-md-6">           
+                    <a  href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
+                </div>   
+                <div class="pull-right col-md-6" style="text-align: right;">
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar</button>  
+                </div>
+            </div>
+    </section>
+</div>
+<div class="col-md-4">     
+    <div class="mini-stat clearfix">
+        <span class="mini-stat-icon light-green"><i class="fa  fa-stethoscope"></i></span>
+        <div class="mini-stat-info">
+            <span>23 de Abril 2018</span>
+            <h4>Primera Visita</h4> 
+        </div>
+    </div>
+    <section class="panel">   
+        <header class="panel-heading">
+            Cliente
+        </header>
+        <section class="panel-body">
+            <h3 style="text-align: center; margin: 0px 0px 20px 0px;">Ana Victoria De Palma</h3>
+
+            <div class="row">
+               <label class="control-label col-md-3 ">Telefono:</label>
+               <div class="col-md-9"><span >02324242</span> </div>
+           </div>
+           <div class=" row">
+               <label class="control-label col-md-3 ">Edad:</label>
+               <div class="col-md-9"><span >12 años</span> </div>
+           </div>
+           <div class="row">
+               <label class="control-label col-md-3 ">Direccion:</label>
+               <div class="col-md-9"><span >Av Los Leones con calle republica</span> </div>
+           </div>
+       </section>
+   </section>
+   <section class="panel">   
+    <header class="panel-heading">
+        Servicio
+    </header>
+    <section class="panel-body">
+        <h3 style="text-align: center; margin: 0px 0px 20px 0px;">Adelgazar</h3>
+        <div class=" row">
+            <label class="control-label col-md-3 ">Estado:</label>
+            <div class="col-md-9" >                                
+               <div class="progress progress-xs">
+                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                    <span class="sr-only">10% Complete</span>
+                </div>
+            </div> 
+            <span class="pull-right">1 de 12 visitas</span>
+        </div>
+
+    </div>
+
+    <div  style="padding: 20px">
+        <div class="row">
+            <i class="fa fa-asterisk"></i>
+            <label>Dieta:</label> <span>Hipocalórica</span>
+        </div>
+        <div class="row">
+            <i class="fa fa-asterisk"></i>
+            <label>Plan de Suplemento:</label> <span>Suplementos 1</span>
+        </div>
+        <div class="row">
+           <i class="fa fa-asterisk"></i>
+           <label>Plan de Entrenamiento:</label> <span>Ejercicios básicos</span>
+       </div>
+
+   </div>
+</section>
+</section>
+<section class="panel">
+    <header class="panel-heading">Meta</header>
+    <section class="panel-body">
+       <div class="col-md-12"  >              
+            <a href="#definirMeta" data-toggle="modal" class="btn btn-info" style="width: 100%;">Definir Meta</a>
+        </div>           
+</section>
+</section>
+
+</div>
+</div>
+
+
+<!-- MODALES -->
+
+<div class="modal fade" id="proximaVisita"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Proxima Vista</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for= "dtpFecha" class="col-md-4 control-label">Fecha:</label>
+                        <div class="col-md-4">
+
+                            <div  data-date-viewmode="days" data-date-format="dd-mm-yyyy" data-date="27-04-2018" class="input-append date dpYears">
+                                <input type="text" readonly="" size="16" class="form-control">
+                                <span class="input-group-btn add-on">
+                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="hora">Hora:</label>
+                        <div class="col-md-4">
+                            <div class="input-group bootstrap-timepicker">
+                                <input type="text" class="form-control timepicker-default">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                <button class="btn btn-info" type="button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="definirMeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Definir Meta</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for= "cmbTipoParametro2" class="col-md-5 control-label">Tipo de Parametro:</label>
+                        <div class="col-md-4">
+                            <select id="cmbTipoParametro2" class="form-control"> </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label" for="cmbParametro">Parametro:</label>
+                        <div class="col-md-4">
+                           <select id="cmbParametro" class="form-control"> </select>
+
+                       </div>
+                   </div>
+                   <div class="form-group">
+                    <label class="col-md-5 control-label" for="txtValorMeta">Valor:</label>
+                    <div class="col-md-4">
+                        <input id="txtValorMeta" type="number" class="form-control"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+            <button class="btn btn-info" type="button">Aceptar</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="agregarAlimentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Agregar Alimentos</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Grupo Alimenticio:</label>
+                        <div class="col-md-7"><input class="form-control" type="text" disabled="disabled" name="" value="Proteina"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Cantidad:</label>
+                        <div class="col-md-7"><input class="form-control" type="number"  name="" /> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>
+                        <div class="col-md-9">
+                           <select id="ms_alimentos" class="form-control"> </select>
+
+                       </div>
+                   </div>
+               </form>
+           </div>
+           <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+            <button class="btn btn-info" type="button">Aceptar</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<!--Core js-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="bs3/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<script src="js/bootstrap-switch.js"></script>
+
+<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+
+
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>
+<!--script for this page-->
+
+
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--script for this page-->
+<script src="js/gritter.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="js/registrarVisita.js" type="text/javascript"></script>
+
+<script src="js/toggle-init.js"></script>
+
+
+</body>
+</html>
+
+>>>>>>> 00677d36b2225695a0e5fddf5eac824cd60ece6e

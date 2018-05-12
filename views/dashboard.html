@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="">
+   <meta name="author" content="ThemeBucket">
+   <title>Sascha</title>
+   <!--Core CSS -->
+   <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/bootstrap-reset.css" rel="stylesheet">
+   <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
+   <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+   <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
+   <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+   <!--external css-->
+   <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
+   <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+   <link href="css/clndr.css" rel="stylesheet">
+   <!-- Custom styles for this template -->
+   <link href="css/style.css" rel="stylesheet">
+   <link href="css/style-responsive.css" rel="stylesheet" />
+   <link href="css/dashboard.css" rel="stylesheet">
+
+</head>       
+<body>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon light-green"><i class="fa  fa-stethoscope"></i></span>
+                <div class="mini-stat-info">
+                    <span>3</span>
+                    Visitas Diagnóstico
+                </div>
+            </div>
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon medium-green"><i class="fa fa-star"></i></span>
+                <div class="mini-stat-info">
+                    <span>4.3/5</span>
+                    Valoración de los Clientes
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
+                <div class="mini-stat-info">
+                    <span>5</span>
+                    Visitas de Control
+                </div>
+            </div>
+            <div class="mini-stat clearfix">
+                <span class="mini-stat-icon dark-green"><i class="fa fa-medkit"></i></span>
+                <div class="mini-stat-info">
+                    <span>50</span>
+                    Clientes activos
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="top-stats-panel">
+                        <div class="daily-visit">
+                            <h4 class="widget-h">Clientes en la semana</h4>
+                            <div id="clientes-semanales" style="width:100%; height: 100px; display: block; font-size: 14px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="event-calendar clearfix">
+                <div class="col-md-7 calendar-block">
+                    <div class="cal1 ">
+                    </div>
+                </div>
+                <div class="col-md-5 event-list-block">
+                    <div class="cal-day">
+                        <span>Hoy</span>
+                        Visitas
+                    </div>
+                    <ul class="event-list">
+                        <li class="blue">
+                            <div class="row">
+                                <div class="col-md-10" style="padding-right: 0px">
+                                    <span>2:00 pm - Ana Victoria De Palma </span>
+                                </div>
+                                <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
+                                    <i class="fa fa-ellipsis-v"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class=" fa fa-medkit"></i> Atender</a></li>
+                                        <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
+                                    </ul>          
+                                </div>
+                            </li>
+                            <li class="blue">
+                                <div class="row">
+                                    <div class="col-md-10" style="padding-right: 0px">
+                                        <span>3:00 pm - Juan Pérez </span>
+                                    </div>
+                                    <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
+                                        <i class="fa fa-ellipsis-v"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#"><i class=" fa fa-medkit"></i> Atender</a></li>
+                                            <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
+                                        </ul>
+
+                                    </div>
+                                </li>                        
+                                <li class="blue">
+                                    <div class="row">
+                                        <div class="col-md-10" style="padding-right: 0px">
+                                            <span>3:30 pm - David Colmenarez </span>
+                                        </div>
+                                        <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
+                                            <i class="fa fa-ellipsis-v"></i></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#"><i class=" fa fa-medkit"></i> Atender</a></li>
+                                                <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 20px" > 
+                            <section class="panel">
+                                <header class="panel-heading">
+                                   Notificaciones <span class="tools pull-right">
+                                   <a href="javascript:;" class="fa fa-chevron-down"></a>
+                               </span>
+                           </header>
+                           <div class="panel-body">
+                            <div class="alert alert-incidencia clearfix">
+                                <span class="alert-icon"><i class="fa fa-clock-o"></i></span>
+                                <div class="notification-info">
+                                    <ul class="clearfix notification-meta">
+                                        <li class="pull-left notification-sender"><span><a href="#">Jonathan Smith</a></span> reprogramó  su cita</li>
+                                        <li class="pull-right notification-time">hace 1 min</li>
+                                    </ul>
+                                    <p>
+                                        Lo siento, tuve que viajar
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="alert alert-reclamo">
+                                <span class="alert-icon"><i class="fa fa-thumbs-down"></i></span>
+                                <div class="notification-info">
+                                    <ul class="clearfix notification-meta">
+                                        <li class="pull-left notification-sender"><span><a href="#">Juan Pérez</a></span> reclamó un servicio </li>
+                                        <li class="pull-right notification-time">hace 3 horas</li>
+                                    </ul>
+                                    <p>
+                                        El plan nutricional no funcionó
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="alert alert-solicitud ">
+                                <span class="alert-icon"><i class="fa fa-calendar"></i></span>
+                                <div class="notification-info">
+                                    <ul class="clearfix notification-meta">
+                                        <li class="pull-left notification-sender"><span><a href="#">María Pérez</a></span> solicitó una cita</li>
+                                        <li class="pull-right notification-time">hace 1 día</li>
+                                    </ul>
+                                    <p>
+                                        Se programó para el viernes, 27 de Abril de 2018
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="alert alert-comentario ">
+                                <span class="alert-icon"><i class="fa fa-comment-o"></i></span>
+                                <div class="notification-info">
+                                    <ul class="clearfix notification-meta">
+                                    <li class="pull-left notification-sender">Tienes 5 comentarios nuevos</li>
+                                        <li class="pull-right notification-time">hace 1 min</li>
+                                    </ul>
+                                    <p>
+                                        <a href="#">Anjelina Mewlo, Jack Flip</a> y <a href="#">3 más</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel">
+                    <header class="panel-heading">Próximo Cliente <span class="tools pull-right"></span>
+                    </header>
+                    <div class="panel-body">
+                        <h3 style="text-align: center;">Ana Victoria De Palma</h3>
+
+                        <div class="info-cliente row">
+                           <label class="control-label col-md-3 ">Motivo:</label>
+                           <div class="col-md-9"><span >Adelgazar</span> </div>
+                       </div>
+                       <div class="info-cliente row">
+                           <label class="control-label col-md-3 ">Servicio:</label>
+                           <div class="col-md-9"><span >Alcanza tu peso ideal</span> </div>
+                       </div>
+                       <div class="info-cliente row">
+                           <label class="control-label col-md-3 ">Visitas:</label>
+                           <div class="col-md-9"><span >3/10</span> </div>
+                       </div>
+
+
+                       <span>Historial de Visitas</span>
+                       <ul class="event-list">
+                        <li style="background: #3da3cb" >
+                         <div class="row" >
+                             <div class="col-md-7"><a class="a-visita" href="#">19 Abril 2018 </a></div>
+                             <div class="col-md-5" style="text-align: center">No Valorada</div>
+                         </div>
+
+                     </li>
+                     <li style="background: #3da3cb" >
+                         <div class="row" >
+                             <div class="col-md-7"><a class="a-visita" href="#">12 Abril 2018 </a></div>
+                             <div class="col-md-5" style="text-align: center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+
+                         </div>
+
+                     </li>
+                     <li style="background: #3da3cb" >
+                         <div class="row" >
+                             <div class="col-md-7"><a class="a-visita" href="#">8 Abril 2018 </a></div>
+                             <div class="col-md-5" style="text-align: center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+
+                         </div>
+
+                     </li>
+                 </ul>
+                 <div class="text-center">
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">«</a></li>
+                        <li><a class="active" href="#">1</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<!--Core js-->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+<script src="bs3/js/bootstrap.min.js"></script>
+<script src="js/jquery.dcjqaccordion.2.7.js"></script>
+
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+<script src="js/skycons/skycons.js"></script>
+<script src="js/jquery.scrollTo/jquery.scrollTo.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="js/calendar/clndr.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src="js/calendar/moment-2.2.1.js"></script>
+
+
+
+<script src="js/evnt.calendar.init.js"></script>
+<script src="js/jvector-map/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="js/jvector-map/jquery-jvectormap-us-lcc-en.js"></script>
+<script src="js/gauge/gauge.js"></script>
+<!--clock init-->
+
+<!--Sparkline Chart-->
+<script src="js/sparkline/jquery.sparkline.js"></script>
+<!--Morris Chart-->
+
+<!--jQuery Flot Chart-->
+<script src="js/flot-chart/jquery.flot.js"></script>
+<script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
+<script src="js/flot-chart/jquery.flot.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.animator.min.js"></script>
+<script src="js/flot-chart/jquery.flot.growraf.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/jquery.customSelect.min.js" ></script>
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>
+</body>
+</html>
+
+

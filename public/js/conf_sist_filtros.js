@@ -1,9 +1,9 @@
 /* tabla filtros */
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
+      
     $('#dtFiltros').dataTable({ 
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [2] }
+        { "bSortable": false, "aTargets": [1] }
         ],               
         "sDom": "ftp",
         "oLanguage": {
@@ -13,11 +13,11 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
-    $('#ms_parametros').multiSelect({
+/*    $('#ms_parametros').multiSelect({
     selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='Buscar...'>",
     selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='Buscar...'>",
     afterInit: function (ms) {
@@ -87,5 +87,5 @@ $(document).ready(function() {
         this.qs1.cache();
         this.qs2.cache();
     }
-});
+});*/
 });

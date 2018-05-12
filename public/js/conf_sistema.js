@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
+      
     /* tabla Comentarios */
 	$('#dtMotivos').dataTable({ 
 		"aoColumnDefs": [
@@ -14,7 +14,7 @@ $(document).ready(function() {
             	"sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
@@ -31,14 +31,14 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
     /* tabla Valoracion */
     $('#dtCriterios').dataTable({ 
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [1] }
+        { "bSortable": false, "aTargets": [3] }
         ],               
         "sDom": "ftp",
         "oLanguage": {
@@ -48,7 +48,7 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 
@@ -67,7 +67,7 @@ $(document).ready(function() {
                 "sPrevious": "Anterior",
                 "sNext": "Siguiente"
             },
-            "sEmpatyTable": "No se encontraron medidas"
+            "SEmptyTble": "No se encontraron medidas"
         },        
     });
 

@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    $('#menuSascha').load('menu.html');
 
 
 
-$('#ms_gruposAlimenticios').multiSelect();
+
+$('#selGruposAlimenticios').multiSelect();
 
 
 $('#dtPlanDieta').dataTable( {
@@ -67,3 +67,4 @@ $('#dtGrupoAlimenticio').dataTable( {
 	} );
 
 });
+

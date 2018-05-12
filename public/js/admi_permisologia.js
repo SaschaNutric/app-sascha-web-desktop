@@ -1,5 +1,5 @@
 $(document).ready(function() {
-$('#menuSascha').load('menu.html');
+  
 
 	$('#dtRoles').dataTable( {
 		"aoColumnDefs": [
@@ -57,4 +57,42 @@ $('#ms_funcionalidades').multiSelect({
     }
 });
 
+
+
+
 });
+
+function crearUsuario() {
+    let password = $('#txtContraseñaNueva').val();
+    let confirmPass = $('txtRepContraseña').val();
+    if(password !== confirmPass){
+        let mensaje = document.getElementById('msjAgregar');
+        mensaje.innerHTML += `<strong>Error!</strong> Las contraseñas no coinciden.`;
+        mensaje.style.display = 'block';
+        return;
+    }
+
+    let usuario = {
+        cedula : $('#txtCedula').val(),
+      nombre_usuario:   $('#txtUsuarioNuevo').val(),
+      correo:           $('#txtCorreoNuevo').val(),
+      contraseña:       password,
+      id_rol:        $('select[name=selRoles]').val(),
+    }
+
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/usuarios',
+        contentType: 'application/json',
+        type: 'POST',
+        data: JSON.stringify(usuario),
+        success: function (res, status, xhr) {
+            console.log("todo bien");
+        },
+        error: function (res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText);
+            
+        }
+    })
+      
+  }
+

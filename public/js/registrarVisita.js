@@ -1,8 +1,3 @@
-$(document).ready(function() {
-    $('#menuSascha').load('menu.html');
-});
-
-
 
 var alimentos = ["Carne","Pollo", "Pescado", "Huevo", "Atún"];     
 var sel = document.getElementById('ms_alimentos');
@@ -216,11 +211,30 @@ $('#ms_alimentos').multiSelect({
 });
 
 
+$(document).ready(function() {
+
+
+    $('#dtPerfil').dataTable( {
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 3 ] }
+        ],
+        "sDom": "ftp",
+        "oLanguage": {
+            "sLengthMenu": "",
+            "sSearch": "Buscar:",
+            "oPaginate":{
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente"},
+            "sEmptyTable": "No se encontraron parametros"
+        },
+    } );
+
+});
+
+
 //date picker start
 
-if (top.location != location) {
-    top.location.href = document.location.href ;
-}
+
 $(function(){
     window.prettyPrint && prettyPrint();
     $('.default-date-picker').datepicker({
@@ -228,32 +242,6 @@ $(function(){
     });
     $('.dpYears').datepicker();
     $('.dpMonths').datepicker();
-
-
-    var startDate = new Date(2012,1,20);
-    var endDate = new Date(2012,1,25);
-    $('.dp4').datepicker()
-        .on('changeDate', function(ev){
-            if (ev.date.valueOf() > endDate.valueOf()){
-                $('.alert').show().find('strong').text('The start date can not be greater then the end date');
-            } else {
-                $('.alert').hide();
-                startDate = new Date(ev.date);
-                $('#startDate').text($('.dp4').data('date'));
-            }
-            $('.dp4').datepicker('hide');
-        });
-    $('.dp5').datepicker()
-        .on('changeDate', function(ev){
-            if (ev.date.valueOf() < startDate.valueOf()){
-                $('.alert').show().find('strong').text('The end date can not be less then the start date');
-            } else {
-                $('.alert').hide();
-                endDate = new Date(ev.date);
-                $('.endDate').text($('.dp5').data('date'));
-            }
-            $('.dp5').datepicker('hide');
-        });
 
     // disabling dates
     var nowTemp = new Date();
@@ -289,19 +277,19 @@ $(function(){
 $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 
 $(".form_datetime-component").datetimepicker({
-    format: "dd MM yyyy - hh:ii"
+    format: "dd MM yyyy"
 });
 
 $(".form_datetime-adv").datetimepicker({
-    format: "dd MM yyyy - hh:ii",
+    format: "dd mm yyyy",
     autoclose: true,
     todayBtn: true,
-    startDate: "2013-02-14 10:00",
+    startDate: "2013-02-14",
     minuteStep: 10
 });
 
 $(".form_datetime-meridian").datetimepicker({
-    format: "dd MM yyyy - HH:ii P",
+    format: "dd mm yyyy",
     showMeridian: true,
     autoclose: true,
     todayBtn: true
@@ -309,35 +297,4 @@ $(".form_datetime-meridian").datetimepicker({
 
 //datetime picker end
 
-//timepicker start
-$('.timepicker-default').timepicker();
 
-
-$('.timepicker-24').timepicker({
-    autoclose: true,
-    minuteStep: 1,
-    showSeconds: true,
-    showMeridian: false
-});
-
-//timepicker end
-
-$(document).ready(function() {
-
-
-    $('#dtPerfil').dataTable( {
-        "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [ 3 ] }
-        ],
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate":{
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"},
-            "sEmptyTable": "No se encontraron parametros"
-        },
-    } );
-
-});

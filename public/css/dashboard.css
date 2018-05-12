@@ -1,0 +1,98 @@
+.control-span{
+    padding-top: 5px;
+}
+
+.info-cliente{
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+}
+
+.info-cliente .control-label{
+	    font-weight: 300;
+    font-size: 14px;
+}
+
+.light-green{
+background-color: #cfdd3f;}
+
+.medium-green{
+background-color: #7ab740 
+
+}
+
+.dark-green{
+background-color: #1c6b34;
+
+}
+
+.blue{
+	background-color: #3da3cb;
+}
+
+.gray{
+	background-color: #858580;
+}
+
+.event-calendar{
+	background-color: #7ab740;
+}
+
+.a-visita:hover , a-visita:focus{
+	text-decoration: underline;
+	color:#858580;
+
+}
+
+.a-visita{
+	color: #FFFFFF;
+}
+
+.alert-incidencia{
+	background-color: #DDDDDC;
+    color: #858580;
+}
+
+.alert-reclamo{
+	background-color: #E8F0EA;
+	color: #1c6b34;
+
+}
+
+.alert-solicitud{
+	background-color: #B8DDEC;
+	color:#3da3cb;
+
+}
+
+.alert-comentario{
+	background-color: #DAEBCA;
+	color: #7ab740;
+
+}
+
+.alert-incidencia .alert-icon {
+    background-color:#858580;
+}
+.alert-reclamo .alert-icon {
+    background-color:#1c6b34;
+}
+.alert-solicitud .alert-icon {
+    background-color:#3da3cb;
+}
+.alert-comentario .alert-icon {
+    background-color:#7ab740;
+}
+
+.alert-incidencia .notification-info a {
+    color:#858580;
+}
+.alert-reclamo .notification-info a {
+    color:#1c6b34;
+}
+.alert-solicitud .notification-info a {
+    color:#3da3cb;
+}
+.alert-comentario .notification-info a {
+    color:#7ab740;
+}

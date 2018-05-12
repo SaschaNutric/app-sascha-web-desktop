@@ -1,6 +1,3 @@
-$(document).ready(function() {
-	$('#menuSascha').load('menu.html');
-});
 
 $(document).ready(function() {
 
@@ -40,7 +37,7 @@ $(document).ready(function() {
 		});
 
 
-	$('#ms_actividades').multiSelect({
+	$('#seleActividades').multiSelect({
     selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
     selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
     afterInit: function (ms) {

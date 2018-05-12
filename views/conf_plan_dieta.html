@@ -13,8 +13,6 @@
         <link href="css/bootstrap-reset.css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-        <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-        <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
         <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
 
 
@@ -29,95 +27,17 @@
     </head>       
     <body>
         <div id="menuSascha"></div>
-        <section id="main-content">
-            <section class="wrapper">
-                <h3>Configuración de Planes de Dieta</h3>
-                
+        
+        <h3>Configuración de Planes de Dieta</h3>
+        <div class="row">
+            <div class="col-md-12">
                 <section class="panel">
-                 <header class="panel-heading tab-bg-dark-navy-blue ">
-                    <ul class="nav nav-tabs" style="text-align: center;">
-                        <li class="active" style="width: 25%">
-                            <a data-toggle="tab" href="#comidas" aria-expanded="false">Comidas</a>
-                        </li>
-                        <li  style="width: 25%">
-                            <a data-toggle="tab" href="#gruposAlimenticios" aria-expanded="false"> Grupos Alimenticios</a>
-                        </li>
-                        <li  style="width: 25%">
-                            <a data-toggle="tab" href="#alimentos" aria-expanded="false">Alimentos</a>
-                        </li>
-                        <li  style="width: 25%">
-                            <a data-toggle="tab" href="#plan-dieta" aria-expanded="false">Dietas</a>
-                        </li>
-                    </ul>
-                </header>
-                <section class="panel-body">
-                    <div class="tab-content">
-                        <div id="comidas" class="tab-pane active">
-                            <div class="container">
-
-                                <div class="pull-right btn-agregar"  >
-                                    <a class="btn btn-info " data-toggle='modal' href="#agregarComida">Agregar</a>
-                                </div>
-                                <br>
-                                <table id="dtComidas" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
-                                    <thead>
-                                        <tr>
-                                            <th width="85%">Nombre</th>
-                                            <th width="15%">Acciones</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div id="gruposAlimenticios" class="tab-pane">
-                            <div class="container">
-
-                                <div class="pull-right btn-agregar"  >
-                                    <a class="btn btn-info " data-toggle='modal' href="#agregarGrupoAlimenticio">Agregar</a>
-                                </div>
-                                <br>
-                                <table id="dtGrupoAlimenticio" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
-                                    <thead>
-                                        <tr>
-                                            <th width="60%">Nombre</th>
-                                            <th width="25%">Unidad</th>
-                                            <th width="15%">Acciones</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div id="alimentos" class="tab-pane ">
-                            <div class="container">
-
-                                <div class="pull-right btn-agregar"  >
-                                    <a class="btn btn-info " data-toggle='modal' href="#agregarAlimento">Agregar</a>
-                                </div>
-                                <br>
-                                <table id="dtAlimentos" class="display table table-bordered table-striped dataTable" style="padding-top: 20px">
-                                    <thead>
-                                        <tr>
-                                            <th width="85%">Nombre</th>
-                                            <th width="15%">Acciones</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div id="plan-dieta" class="tab-pane">
-                           <div class="container" >
-
+                    <section class="panel-body">
+                        <div id="plan-dieta">
                             <div class="pull-right btn-agregar" >
-                                <a class="btn btn-info " data-toggle="modal" href="#agregarPlan">Agregar</a>
+                            <a id="btnAgregarDieta" class="btn btn-info " data-toggle="modal" href="#agregarPlan">Configurar</a>
                             </div>
-                            <br>
-                            <table id="dtPlanDieta" class="display table table-bordered table-striped" style="padding-top: 20px">
+                            <table id="dtPlanDieta" class="display table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th width="25%">Nombre</th>
@@ -130,34 +50,32 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
+                    </section>
+                </section>
+            </div>
+        </div>
+        
 
-            </section>
-        </section>
-
-    </section>
-</section>
 <div class="modal fade" id="agregarPlan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content modal-dieta">
+        <div class="modal-content modal-dieta">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Agregar Dieta</h4>
+                <h4 class="modal-title">Configurar Dieta</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="frmConfigurarDieta">
                     <div class="form-group">
                         <label class="col-md-2 control-label">Nombre:</label>
-                        <div class="col-md-4"><input class="form-control" type="text" name="" value=""/> </div>
+                        <div class="col-md-4"><input class="form-control" id="txtNombreDieta" type="text" name="" value=""/> </div>
                         <label class="col-md-2 control-label" for="cmbParametro">Tipo:</label>
                         <div class="col-md-4">
-                         <select id="ms_tipoDieta" class="form-control"> </select>
-                     </div>
-                 </div>
-                 <div class="form-group">
+                           <select id="selTipoDieta" class="form-control"> </select>
+                       </div>
+                   </div>
+                   <div class="form-group">
                     <label class="col-md-2 control-label">Descripción:</label>
-                    <div class="col-md-10"><textarea class="form-control" rows="2"></textarea> </div>
+                    <div class="col-md-10"><textarea id="txtDescripcionDieta" class="form-control" rows="2"></textarea> </div>
 
                 </div>
             </form>
@@ -168,117 +86,40 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="comidas">Comida:</label>
                     <div class="col-md-7">
-                     <select id="comidas" class="form-control"> </select>
-                 </div>
-             </div>
-             <div class="form-group">
+                       <select id="selComidas" class="form-control"> </select>
+                   </div>
+               </div>
+               <div class="form-group">
                 <label class="col-md-3 control-label" for="ms_gruposAlimenticios">Grupos Alimenticios:</label>
-                <div class="col-md-9">
-                 <select id="ms_gruposAlimenticios" > </select>
+                <div class="col-md-7">
+                   <select id="selGruposAlimenticios" > </select>
 
-             </div>
-         </div>
-         <div class="col-md-12" style="text-align: right;padding-bottom: 20px">
-             <button type="submit" class="btn btn-info pull-right">Agregar a Dieta</button>
-         </div>           
-     </form>
-     <table id="dtComidaGrupo" class="display table table-bordered table-striped"  >
-         <thead>
-             <tr>
-                 <th width="30%">Comida</th>
-                 <th width="60%">Grupos Alimenticios</th>
-                 <th width="10%">Acciones</th>
+               </div>
+           </div>
+           <div class="col-md-12" style="text-align: right;padding-bottom: 20px">
+               <button id="btnAgregarADieta" type="submit" class="btn btn-info pull-right">Agregar a Dieta</button>
+           </div>           
+       </form>
+       <table id="dtComidaGrupo" class="display table table-bordered table-striped"  >
+           <thead>
+               <tr>
+                   <th width="30%">Comida</th>
+                   <th width="60%">Grupos Alimenticios</th>
+                   <th width="10%">Acciones</th>
 
-             </tr>
-         </thead>
-         <tbody></tbody>
-     </table>
+               </tr>
+           </thead>
+           <tbody></tbody>
+       </table>
 
- </div>
- <div class="modal-footer">
-    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-    <button class="btn btn-info" type="button">Aceptar</button>
+   </div>
+   <div class="modal-footer">
+    <button id="btnCancelar" data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+    <button id="btnAceptar" class="btn btn-info" type="button">Aceptar</button>
 </div>
 </div>
 </div>
 </div>
-<div class="modal fade" id="agregarComida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Agregar Comida</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Nombre:</label>
-                        <div class="col-md-9"><input class="form-control" type="text" name="" value=""/> </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-                <button class="btn btn-info" type="button">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="agregarGrupoAlimenticio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Agregar Grupo Alimenticio</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Nombre:</label>
-                        <div class="col-md-9"><input class="form-control" type="text" name="" value=""/> </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Unidad:</label>
-                        <div class="col-md-9"><select id="unidades" class="form-control"></select> </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-                <button class="btn btn-info" type="button">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="agregarAlimento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Agregar Alimento</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Nombre:</label>
-                        <div class="col-md-9"><input class="form-control" type="text" name="" value=""/> </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="cmbParametro">Grupo Alimenticio:</label>
-                        <div class="col-md-9">
-                         <select id="grupoAlimenticio" class="form-control"> </select>
-
-                     </div>
-                 </form>
-             </div>
-             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-                <button class="btn btn-info" type="button">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
@@ -291,7 +132,11 @@
 <script src="js/jquery.nicescroll.js"></script>
 
 <script src="js/bootstrap-switch.js"></script>
-
+<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>
+<!--script for this page-->
+<script src="js/gritter.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
 <script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
 
