@@ -32,6 +32,7 @@ $(document).ready(function() {
                 arregloTipoUnidades.push(tipoUnidad);
                 let optiontipo = $(`<option value="${tipoUnidad.id_tipo_unidad}">${tipoUnidad.nombre}</option>`)
                 $('#selTipoUnidad').append(optiontipo);
+
             })
         },
         error: function(res, status, xhr) {
@@ -180,7 +181,6 @@ $(document).ready(function() {
             }
         })
     })
-
 });
 
 function limpiarSuplemento(){
