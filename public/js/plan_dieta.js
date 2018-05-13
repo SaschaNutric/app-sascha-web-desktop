@@ -148,12 +148,19 @@ $('#dtPlanDieta').DataTable( {
         let row = $(`<tr>
             <td id="nombreplan-${id}">${nombre}</td>
             <td id="descripcionplan-${id}">${descripcion}</td>
-            <td id="tipoDieta-${id}">${tipo_dieta}</td>
+            <td id="tipo_dieta-${id}">${tipo_dieta}</td>
             <td>
-            <button onclick="editarPlanSuplemento(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarPlan"  title='Editar'><i class='fa fa-pencil'></i></button>
-            <button onclick="abrirModalPlanEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+            <button onclick="editarPlan(${id})" type='button' class='edit btn  btn-transparente' title='Editar'><i class='fa fa-pencil'></i></button>
+            <button onclick="abrirModalPlanEliminar(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>
             `);
         $('#dtPlanDieta').DataTable().row.add(row).draw();
     }
+
+function editarPlan(id) {
+    var params = {
+        id_servicio: id
+    }
+    window.location = `conf_plan_dieta_agregar.html?id=${id}`;
+}

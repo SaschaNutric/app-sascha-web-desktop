@@ -23,7 +23,7 @@
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/style-responsive.css" rel="stylesheet" />
-        <link href="css/plan_dieta.css" rel="stylesheet">
+        <link href="css/conf_sistema.css" rel="stylesheet">
     </head>       
     <body>
         <div id="menuSascha"></div>
@@ -35,8 +35,8 @@
                     <section class="panel-body">
                       <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                         <div id="plan-dieta">
-                            <div class="pull-right btn-agregar" >
-                            <a id="btnAgregarDieta" class="btn btn-info " data-toggle="modal" href="#agregarPlan">Configurar</a>
+                            <div class="pull-right" >
+                            <a id="btnAgregarDieta" class="btn btn-agregar" href="./conf_plan_dieta_agregar.html">Configurar</a>
                             </div>
                             <table id="dtPlanDieta" class="display table table-bordered table-striped">
                                 <thead>
@@ -44,8 +44,7 @@
                                         <th width="25%">Nombre</th>
                                         <th width="30%">Descripcion</th>
                                         <th width="35">Tipo</th>
-                                        <th width="10%">Acciones</th>
-
+                                        <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

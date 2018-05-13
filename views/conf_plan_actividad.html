@@ -24,7 +24,7 @@
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/style-responsive.css" rel="stylesheet" />
-        <link href="css/plan_actividad.css" rel="stylesheet">
+        <link href="css/conf_sistema.css" rel="stylesheet">
     </head>       
     <body>
 
@@ -36,15 +36,15 @@
                         <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                         <div id="plan-ejercicio">
                             <div class="pull-right" >
-                                <a id="btnAgregarPlanEntrenamiento" class="btn btn-info " data-toggle="modal" href="#agregarPlan">Configurar</a>
+                                <a id="btnAgregarPlanEntrenamiento" class="btn btn-agregar " data-toggle="modal" href="#agregarPlan">Configurar</a>
                             </div>
                             <table id="dtPlanActividad" class="display table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th width="25%">Nombre</th>
-                                        <th width="30%">Descripcion</th>
-                                        <th width="35">Ejercicios</th>
-                                        <th width="10%">Acciones</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Ejercicios</th>
+                                        <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -76,16 +76,17 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="cmbParametro">Ejercicios:</label>
                                 <div class="col-md-9">
-                                 <select id="seleActividades" class="form-control"></select>
-
+                                    <select id="seleActividades" class="form-control">
+                                        <option value="0"></option>
+                                    </select>
                              </div>
                          </div>
                      </form>
                  </div>
                  <div class="modal-footer">
-                    <button id="btnCancelar" data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-                    <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                    <button id="btnAceptar" class="btn btn-info" type="button">Aceptar</button>
+                     <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                     <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
+                     <button id="btnCancelar" data-dismiss="modal" class="btn btn-cancelar" type="button">Cancelar</button>
                 </div>
             </div>
         </div>

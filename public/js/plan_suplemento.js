@@ -1,4 +1,4 @@
-var datos=[];
+var valor=[];
 $(document).ready(function() {
 
 	$('#dtPlanSuplemento').DataTable( {
@@ -66,17 +66,17 @@ $(document).ready(function() {
     afterSelect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        datos.push(values[0]);
-        console.log(datos);
+        valor.push(values[0]);
+        console.log(valor);
     },
     afterDeselect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        const index = datos.indexOf(values[0])
+        const index = valor.indexOf(values[0])
         if (index != -1){
-            datos.splice(index,1)
+            valor.splice(index,1)
         }
-        console.log(datos)
+        console.log(valor)
     }
 });
     /*fin multiselect */
@@ -105,13 +105,13 @@ $(document).ready(function() {
     })
 
     $.ajax({
-        url: 'https://api-sascha.herokuapp.com/plansuplementos',
+        url: 'http://localhost:5000/plansuplementos',
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
             console.log(res);
-            res.data.map(function(suplemento) {
-                addRowPlan(suplemento.id_suplemento, suplemento.nombre, suplemento.descripcion, suplemento.nombre)
+            res.data.map(function(plan) {
+                addRowPlan(plan.id_plan_suplemento, plan.nombre, plan.descripcion, plan.suplementos)
             })
         },
         error: function(res, status, xhr) {
@@ -138,25 +138,41 @@ $(document).ready(function() {
             return;
         }
 
-        if(datos.length == 0){
+        if(valor.length == 0){
             $('select[name=suplemento]').css('border', '1px solid red')
             return;
         }
 
+        console.log(valor);
+        let suplementos = [];
+        valor.map(function(val) {
+            suplementos.push({
+                id_suplemento: val
+            })
+        })
         let planSuplemento = {
             nombre: $('#txtNombre').val(),
-            descripcion: $('#txtDescripcion').val()
+            descripcion: $('#txtDescripcion').val(),
+            suplementos: suplementos
         }
 
         $.ajax({
-            url: 'https://api-sascha.herokuapp.com/plansuplementos',
+            url: 'http://localhost:5000/plansuplementos',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(planSuplemento),
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                addRowPlan(res.data.id_plan_suplemento, res.data.nombre, res.data.descripcion,res.data.nombre)
+                let suplementos = [];
+                res.data.suplementos.map(function(suplemento) {
+                    suplementos.push({ 
+                        id_suplemento: suplemento,
+                        nombre: $(`option[value="${suplemento}"]`).text()
+                    })
+                });
+                
+                addRowPlan(res.data.id_plan_suplemento, res.data.nombre, res.data.descripcion, suplementos)
                 limpiarPlanSuplemento();
                 mensaje('#msjAlerta', `Plan Suplemento`, 1);
             },
@@ -177,20 +193,51 @@ $(document).ready(function() {
         let row = $(`<tr>
             <td id="nombreplansuplemento-${id}">${nombre}</td>
             <td id="descripcionplansuplemento-${id}">${descripcion}</td>
-            <td id="suplementos-${id}">${suplementos}</td>
+            <td id="suplementos-${id}">${
+                suplementos.map(function (suplemento) {
+                    return suplemento.nombre;
+                })
+            }</td>
             <td>
-            <button onclick="editarPlanSuplemento(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarPlan"  title='Editar'><i class='fa fa-pencil'></i></button>
-            <button onclick="abrirModalPlanEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+            <button onclick="abrirModalPlanEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarPlan" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>
             `);
         $('#dtPlanSuplemento').DataTable().row.add(row).draw();
     }
 
+    function eliminarPlan(id) {
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/plansuplemento/${id}`,
+            contentType: 'application/json',
+            type: 'DELETE',
+            success: function (res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                $('#dtPlanSuplemento').DataTable().row($(`#nombreplansuplemento-${id}`).parent()).remove().draw();
+                $('#txtIdPlanSuplementoEliminar').val('');
+                mensaje('#msjAlerta', `Plan de Suplemento`, 2);
+            },
+            error: function (res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                limpiarPlanSuplemento();
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            }
+        })
+    }
+
+    function abrirModalPlanEliminarSuplemento(id) {
+        $('#txtIdPlanSuplementoEliminar').val(id);
+    }
+
     function limpiarPlanSuplemento(){
         $('#txtNombre').val('');
         $('#txtDescripcion').val('');
         $('#txtIdSuplemento').val('');
-        $('#ms_suplementos').multiSelect('refresh');
-        datos=[];
+        // document.getElementById('ms_suplementos').length = 0;
+        // $('#ms_suplementos option:selected').prop('selected', false);
+        $('#ms_suplementos').multiSelect('deselect_all');
+        valor=[];
     }

@@ -199,8 +199,8 @@ function agregarHorario(){
             <td id="hora_inicio-${id}">${hora_inicio}</td>
             <td id="hora_fin-${id}">${hora_fin}</td>
             <td>
-                <button onclick="editarHorario(${id})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarBloqueHorario"  title='Editar'><i class='fa fa-pencil'></i></button>
-                <button onclick="abrirModalEliminarHorario(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarBloqueHorario" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                <button onclick="editarHorario(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarBloqueHorario"  title='Editar'><i class='fa fa-pencil'></i></button>
+                <button onclick="abrirModalEliminarHorario(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarBloqueHorario" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
         </tr>
         `);
