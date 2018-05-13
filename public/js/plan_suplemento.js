@@ -105,7 +105,7 @@ $(document).ready(function() {
     })
 
     $.ajax({
-        url: 'http://localhost:5000/plansuplementos',
+        url: 'https://api-sascha.herokuapp.com/plansuplementos',
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
@@ -124,8 +124,6 @@ $(document).ready(function() {
     })
 
     
-    
-
     $('#btnAceptar').on('click', function() {
 
         if($('#txtNombre').val() == ""){
@@ -144,6 +142,7 @@ $(document).ready(function() {
         }
 
         console.log(valor);
+        // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_suplemento: id }
         let suplementos = [];
         valor.map(function(val) {
             suplementos.push({
@@ -157,13 +156,15 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'http://localhost:5000/plansuplementos',
+            url: 'https://api-sascha.herokuapp.com/plansuplementos',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(planSuplemento),
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+                // Busca en el multiselect el nombre de los suplementos
+                // y crea arreglo de objetos JSON Ej. { id_suplemento: 1, nombre: "Vitamina" }
                 let suplementos = [];
                 res.data.suplementos.map(function(suplemento) {
                     suplementos.push({ 
@@ -236,8 +237,6 @@ $(document).ready(function() {
         $('#txtNombre').val('');
         $('#txtDescripcion').val('');
         $('#txtIdSuplemento').val('');
-        // document.getElementById('ms_suplementos').length = 0;
-        // $('#ms_suplementos option:selected').prop('selected', false);
         $('#ms_suplementos').multiSelect('deselect_all');
         valor=[];
     }
