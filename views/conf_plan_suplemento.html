@@ -35,7 +35,7 @@
                         <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                         <!-- Tabla de parametro -->
                         <div class="pull-right" >
-                            <a class="btn btn-agregar" data-toggle="modal" href="#agregarPlan">Configurar</a>
+                            <a class="btn btn-agregar" data-toggle="modal" href="#agregarPlan" onclick="agregarPlan()">Configurar</a>
                         </div>
                         <table id="dtPlanSuplemento" class="display table table-bordered table-striped">
                             <thead>
@@ -64,6 +64,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
+                        <input type="text" class="form-control" id="txtIdSuplemento" style="display: none;" disabled>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Nombre:</label>
                             <div class="col-md-9"><input class="form-control" id="txtNombre" type="text" name="" value=""/> </div>
@@ -73,20 +74,20 @@
                             <div class="col-md-9"><textarea class="form-control" id="txtDescripcion" rows="3"></textarea> </div>
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="multiselectSuplementos">
                             <label class="col-md-3 control-label" for="cmbParametro">Suplementos:</label>
                             <div class="col-md-9">
-                             <select id="ms_suplementos" name="suplemento" class="form-control">
-                                <option value="0"></option>
+                             <select id="ms_suplementos" name="suplemento" multiple class="form-control">
+                                <option value="0" selected disabled></option>
                             </select>
                          </div>
                      </div>
                  </form>
              </div>
              <div class="modal-footer">
-                 <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                 <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
-                 <button data-dismiss="modal" class="btn btn-cancelar" type="button" id="btnCancelar" onclick="limpiarPlanSuplemento()">Cancelar</button>
+                <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
+                <button data-dismiss="modal" class="btn btn-cancelar" type="button" id="btnCancelar" onclick="limpiarPlanSuplemento()">Cancelar</button>
             </div>
         </div>
     </div>
