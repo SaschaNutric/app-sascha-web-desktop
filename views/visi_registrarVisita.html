@@ -72,7 +72,7 @@
 
                                <table class="display table table-bordered table-striped " id="dtPerfil">
                                 <thead>
-                                    <tr >
+                                    <tr>
                                         <th id=tipoParametro style="display: none"> </th>
                                         <th style="width: 45%;">Parametro</th>
                                         <th  style="width: 45%;">Valor</th>
@@ -158,29 +158,31 @@
 <div class="col-md-4">     
     <div class="mini-stat clearfix">
         <span class="mini-stat-icon light-green"><i class="fa  fa-stethoscope"></i></span>
-        <div class="mini-stat-info">
-            <span>23 de Abril 2018</span>
-            <h4>Primera Visita</h4> 
+        <i id="spinner-cita" class="fas fa-spinner" style="display: none;"></i>
+        <div id="cita-info" class="mini-stat-info">
+            <span id="cita-fecha">18 de Mayo 2018</span>
+            <h4 id="tipo-cita">Diagnóstico</h4> 
         </div>
     </div>
     <section class="panel">   
         <header class="panel-heading">
             Cliente
         </header>
-        <section class="panel-body">
-            <h3 style="text-align: center; margin: 0px 0px 20px 0px;">Ana Victoria De Palma</h3>
+        <i id="spinner-cliente" class="fas fa-spinner" style="display: none;"></i>        
+        <section id="cliente-info" class="panel-body">
+            <h3 id="cliente-nombre" style="text-align: center; margin: 0px 0px 20px 0px;">Ana Victoria De Palma</h3>
 
             <div class="row">
                <label class="control-label col-md-3 ">Telefono:</label>
-               <div class="col-md-9"><span >02324242</span> </div>
+               <div id="cliente-telefono" class="col-md-9"><span >02324242</span> </div>
            </div>
            <div class=" row">
                <label class="control-label col-md-3 ">Edad:</label>
-               <div class="col-md-9"><span >12 años</span> </div>
+               <div id="cliente-edad" class="col-md-9"><span >12 años</span> </div>
            </div>
            <div class="row">
                <label class="control-label col-md-3 ">Direccion:</label>
-               <div class="col-md-9"><span >Av Los Leones con calle republica</span> </div>
+               <div id="cliente-direccion" class="col-md-9"><span >Av Los Leones con calle republica</span> </div>
            </div>
        </section>
    </section>
@@ -188,8 +190,9 @@
     <header class="panel-heading">
         Servicio
     </header>
-    <section class="panel-body">
-        <h3 style="text-align: center; margin: 0px 0px 20px 0px;">Adelgazar</h3>
+    <i id="spinner-servicio" class="fas fa-spinner" style="display: none;"></i>    
+    <section id="servicio-info" class="panel-body">
+        <h3 id="servicio-nombre" style="text-align: center; margin: 0px 0px 20px 0px;">Adelgazar</h3>
         <div class=" row">
             <label class="control-label col-md-3 ">Estado:</label>
             <div class="col-md-9" >                                
@@ -298,7 +301,6 @@
                         <label class="col-md-5 control-label" for="cmbParametro">Parametro:</label>
                         <div class="col-md-4">
                            <select id="cmbParametro" class="form-control"> </select>
-
                        </div>
                    </div>
                    <div class="form-group">
@@ -338,7 +340,6 @@
                         <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>
                         <div class="col-md-9">
                            <select id="ms_alimentos" class="form-control"> </select>
-
                        </div>
                    </div>
                </form>

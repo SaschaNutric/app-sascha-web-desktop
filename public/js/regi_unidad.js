@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
     const tablaUnidad = $('#dtUnidad').DataTable({ 
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [3] }
+        ],
        "language": {
         "lengthMenu": "",
         "search": "Buscar:",
@@ -17,6 +20,9 @@ $(document).ready(function() {
 });
     /* tabla tipo de unidades */
     const tablaTipoUnidad = $('#dtTipoUnidad').DataTable({ 
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [1] }
+        ],
         "language": {
             "lengthMenu": "",
             "search": "Buscar:",
@@ -244,6 +250,18 @@ function editarTipoUnidad(id){
     $('#txtIdTipoUnidad').val(id);
     $('#btnAceptartipoUnidad').css('display', 'none');
     $('#btnEditartipoUnidad').css('display', 'inline');
+}
+
+function agregarTipoUnidad(){
+
+    $('#btnAceptartipoUnidad').css('display', 'inline');
+    $('#btnEditartipoUnidad').css('display', 'none');
+}
+
+function agregarUnidad(){
+
+    $('#btnAceptarUnidad').css('display', 'inline');
+    $('#btnEditarUnidad').css('display', 'none');
 }
 
 function abrirModalEliminarTipoUnidad(id){

@@ -744,6 +744,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     padding:8px 8px 8px 9px;
     color:rgba(0,0,0,.3);
 }
+
 .sidebar-toggle-box:hover {
     background:#F6F6F6;
 }
@@ -782,10 +783,10 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 .toggle-right-box:hover {
     background:#32D2C9;
 }
-.toggle-right-box:hover .fa-bars {
+.toggle-right-box:hover .fa-filter {
     color:rgba(0,0,0,0.3);
 }
-.toggle-right-box .fa-bars {
+.toggle-right-box .fa-filter {
     cursor:pointer;
     display:inline-block;
     font-size:15px;
@@ -794,13 +795,14 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 /*right sidebar*/
 .right-sidebar {
-    background:#32323A;
-    width:240px;
+    background:#FFFFFF;
+    width:400px;
     position:fixed;
     height:100%;
     z-index:1000;
-    right:-240px;
+    right:-400px;
     top:0;
+    overflow-y: scroll;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
     -o-transition:all .3s ease-in-out;

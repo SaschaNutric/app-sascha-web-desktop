@@ -1,6 +1,9 @@
 $(document).ready(function() {
-    /* tabla tipo de parametros */
-    const tablaCondicion = $('#dtCondicionGarantia').DataTable({ 
+    /* tabla condicones de garantia */
+    const tablaCondicion = $('#dtCondicionGarantia').DataTable({
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [1] }
+        ], 
         "language": {
             "lengthMenu": "",
             "search": "Buscar:",
@@ -57,23 +60,16 @@ $(document).ready(function() {
             data: JSON.stringify(condicionGarantia),
             success: function(res, status, xhr) {
                 console.log(res);
-                console.log(status);
-                $('#txtCondicion').val('')
-                let row = $(`<tr>
-                    <td id="descripcion-${res.data.id_condicion_garantia}">${res.data.descripcion}</td>
-                    <td>
-                        <button onclick="editarCondicionGarantia(${res.data.id_condicion_garantia})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarCondicionGarantía"  title='Editar'><i class='fa fa-pencil'></i></button>
-                        <button onclick="abrirModalEliminarCondicionGarantia(${res.data.id_condicion_garantia})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modaleliminarCondicionGarantia" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-                    </td>
-                </tr>
-                `);
-                $('#dtregiTipoDieta').DataTable().row.add(row).draw();
-                mensaje('alert-success', '<strong>Exito!</strong> Condición de Garantía agregada.');
+                const condicionGarantia = res.data;
+                mensaje('#msjAlerta', `Condición Garantía`, 1);
+                addRowCondicionGarantia(condicionGarantia.id_condicion_garantia, condicionGarantia.descripcion);               
+                limpiarCondicionGarantia();
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                mensaje('alert-danger', `<strong>Error ${status}!</strong> Algo salió mal.`);
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
             }
         })
 
@@ -90,6 +86,12 @@ $(document).ready(function() {
         }
 
         let id = $('#txtIdCondicion').val();
+
+        if(condicionGarantia.descripcion == $(`#descripcion-${id}`).text()){
+        mensaje('#msjAlerta', ``, 4);
+        $('#agregarCondicionGarantía').modal('hide');   
+        return;
+        }
         $.ajax({
             url: `https://api-sascha.herokuapp.com/condiciongarantia/${id}`,
             contentType: 'application/json',
@@ -98,16 +100,27 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                $('#txtCondicion').val('')
+                mensaje('#msjAlerta', `Bloque Horario`, 3);
+                editRowHorario(id, condicionGarantia.descripcion)
+                limpiarHorario();
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
             }
         })
     })   
 
 });
+
+
+    function agregarCondicionGarantia(){
+    $('#btnAceptar').css('display', 'inline');
+    $('#btnEditar').css('display', 'none');
+
+}
 
 
     function editarCondicionGarantia(id){
@@ -139,8 +152,25 @@ $(document).ready(function() {
         })
     }
 
-    function mensaje(tipo, texto){
-        $('#msjAgregar').addClass(tipo);
-        $('#msjAgregar').append(texto);
-        $('#msjAgregar').css('display', 'block');
+    function limpiarCondicionGarantia(){
+        $('#txtCondicion').val('')
+        $('#txtIdCondicion').val('')
+    }
+
+
+    function addRowCondicionGarantia(id, descripcion){
+
+        let row = $(`<tr>
+            <td id="descripcion-${id}">${descripcion}</td>
+            <td>
+            <button onclick="editarCondicionGarantia(${id})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarCondicionGarantía"  title='Editar'><i class='fa fa-pencil'></i></button>
+            <button onclick="abrirModalEliminarCondicionGarantia(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modaleliminarCondicionGarantia" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+            </td>
+            </tr>
+            `);
+        $('#dtCondicionGarantia').DataTable().row.add(row).draw();
+    }
+
+    function editRowCondicionGarantia(id, descripcion){        
+        $(`#descripcion-${id}`).text(descripcion)
     }

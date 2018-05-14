@@ -123,6 +123,11 @@ function abrirModalEliminarTipoDieta(id){
     $('#txtIdTipoDietaEliminar').val(id);
 }
 
+function agregarTipoDieta(){
+
+    $('#btnAceptartipoDieta').css('display', 'inline');
+    $('#btnEditartipoDieta').css('display', 'none');
+}
 function eliminarTipoDieta(id){
     $.ajax({
         url: `https://api-sascha.herokuapp.com/tipodieta/${id}`,

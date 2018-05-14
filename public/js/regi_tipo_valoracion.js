@@ -236,6 +236,11 @@ function editarEscala(id){
     $('#btnEditarEscala').css('display', 'inline');
 }
 
+function agregarEscala(){
+    $('#btnAceptarEscala').css('display', 'inline');
+    $('#btnEditarEscala').css('display', 'none');
+}
+
 function abrirModalEliminarEscala(id){
     $('#txtIdEscalaEliminar').val(id);
 }
@@ -273,6 +278,10 @@ function editarValor(id){
     $('#btnEditarValor').css('display', 'inline');
 }
 
+function agregarValor(){
+    $('#btnAceptarValor').css('display', 'inline');
+    $('#btnEditarValor').css('display', 'none');
+}
 function abrirModalEliminarValor(id){
     $('#txtIdValorEliminar').val(id);
 }

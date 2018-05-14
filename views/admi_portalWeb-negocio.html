@@ -22,46 +22,52 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 
+    <link href="css/portalWeb.css" rel="stylesheet" />
+
 
 </head>
 
 <body>
 
-           <h3>Administracion Portal Web</h3>
-           <div class="row">
-            <div class="col-md-12">
-              <section class="panel">
-                <header class="panel-heading">
-                    Negocio
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-                      <div class="col-sm-12">
-                          <h4>Contenido del Negocio</h4>
-                          <form class="form-horizontal row" role="form">
+    <section id="container" >
+        <!--main content start-->
+        <h3>Contenido del Negocio</h3>
+        <!-- Inicio pagina de Administracion de contenido del negocio -->
+        <section class="panel">
+            <header class="panel-heading tab-bg-dark-navy-blue ">
+                <ul class="nav nav-justified">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tabNegocio" aria-expanded="false">Informacion del Negocio</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabNosotros" aria-expanded="false">Seccion Nosotros</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabRedes"   aria-expanded="false">Redes Sociales</a>
+                    </li>
+                </ul>
+            </header>
+            <section class="panel-body">
+                <div class="tab-content">
+                    <div id="tabNegocio" class="tab-pane active">
+                                                 <form class="form-horizontal row" role="form">
                               <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-sm-2 control-label">Razon Social</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail1">
+                                        <input type="text" class="form-control" id="inputRazonSocial" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-sm-2 control-label">Rif</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail1">
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="inputEmail1" class="col-sm-2 control-label">Direccion</label>
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail1">
+                                        <input type="text" class="form-control" id="inputRif" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                    <label class="col-sm-2 control-label">Ubicación</label>
                                     <div class="col-sm-6">
-                                        <input type="email" class="form-control" id="inputEmail1">
+                                        <input type="email" class="form-control" id="inputEmail1" disabled>
                                     </div>
                                     <div class="btn-group col-sm-4">
                                         <button id="editable-sample_new" class="btn btn-primary">
@@ -72,16 +78,22 @@
                                 <div class="form-group ">
                                     <label for="inputEmail1" class="col-sm-2 control-label">Telefono</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail1">
+                                        <input type="text" class="form-control" id="inputTelefono" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="inputEmail1" class="col-sm-2 control-label">Correo Electronico</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputCorreo" disabled>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group last col-md-6">
                                 <label class="control-label col-md-3">Logo</label>
                                 <div class="col-md-9">
-                                    <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden" value="" name="">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden" value="" name="" id="inputLogo">
                                         <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="">
+                                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" id="imagenLogo">
                                         </div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 10px;"></div>
                                         <div>
@@ -95,60 +107,42 @@
                                  </div>
                              </div>
                          </div>
+                        </form>
                          <div class="col-md-12">
-                            <center><button class="btn btn-primary" type="button">Guardar Cambios</button></center>
-                            <br>
-                            <br>
-                            <br>
+                            <center><button class="btn btn-primary" type="button" id="btn-editar">Editar Informacion</button></center>
+                            <center><button class="btn btn-primary" type="button" id="btn-guardar">Guardar Informacion</button></center>
                         </div>
 
-                        <div class="col-sm-12"> 
-                         <section class="panel">
-                            <header class="panel-heading">
-                                Seccion Nosotros
-                                <span class="tools pull-right">
-                                    <a href="javascript:;" class="fa fa-chevron-up"></a>
-                                </span>
-                            </header>
-                            <div class="panel-body" style="display:none">                          
-                                <div class="form-group col-md-12">
+                    </div>
+                    <div id="tabNosotros" class="tab-pane">
+                        <form>
+                             <div class="form-group col-md-12">
                                     <label for="inputEmail1" class="col-sm-2 control-label">Mision</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="inputEmail1" rows="6"></textarea>
+                                        <textarea class="form-control" id="textMision" rows="6"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 ">
                                     <label for="inputEmail1" class="col-sm-2 control-label">Vision</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="inputEmail1" rows="6"></textarea>
+                                        <textarea class="form-control" id="textVision" rows="6"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 ">
                                     <label for="inputEmail1" class="col-sm-2 control-label">Objetivos</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" id="inputEmail1" rows="6"></textarea>
+                                        <textarea class="form-control" id="textObjetivos" rows="6"></textarea>
                                     </div>
                                 </div>
                                 <center><button class="btn btn-primary" type="button">Guardar Cambios</button></center>
-
-                            </div>
-                        </section>
+                        </form>
                     </div>
-                </form>
-            </div>
 
-            <div class="col-sm-12"> 
-             <section class="panel">
-                <header class="panel-heading">
-                    Redes Sociales
-                    <span class="tools pull-right">
-                        <a href="javascript:;" class="fa fa-chevron-up"></a>
-                    </span>
-                </header>
-                <div class="panel-body" style="display:none">
-                    <div class="adv-table ">
+                    <div id="tabRedes" class="tab-pane">
+                    <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+                        <div class="adv-table ">
                         <div class="btn-group pull-right" >
-                            <a href="#agregarAlimentos" data-toggle="modal" class="btn btn-primary" data-target="#agregarAlimentos">
+                            <a href="#agregarRedsocial" data-toggle="modal" class="btn btn-primary" data-target="#agregarRedsocial">
                                 Agregar
                             </a>
                         </div>
@@ -158,63 +152,24 @@
                                 <tr>
                                     <th width="35%">Red Social</th>
                                     <th width="20%">Icono</th>
-                                    <th width="30%">Usuario</th>
+                                    <th width="30%">Enlace</th>
                                     <th width="10%">Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="">
-                                    <td>Twitter</td>
-                                    <td>Imagen</td>
-                                    <td>@saschanutric</td>
-                                    <td><a class="edit btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> <a class="delete btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-trash"></span></a></td>
-                                </tr>
-                                <tr class="">
-                                    <td>Twitter</td>
-                                    <td>Imagen</td>
-                                    <td>@saschanutric</td>
-                                    <td><a class="edit btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> <a class="delete btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-trash"></span></a></td>
-                                </tr>
-                                <tr class="">
-                                    <td>Twitter</td>
-                                    <td>Imagen</td>
-                                    <td>@saschanutric</td>
-                                    <td><a class="edit btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> <a class="delete btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-trash"></span></a></td>
-                                </tr>
-                                <tr class="">
-                                    <td>Twitter</td>
-                                    <td>Imagen</td>
-                                    <td>@saschanutric</td>
-                                    <td><a class="edit btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> <a class="delete btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-trash"></span></a></td>
-                                </tr>
-                                <tr class="">
-                                    <td>Twitter</td>
-                                    <td>Imagen</td>
-                                    <td>@saschanutric</td>
-                                    <td><a class="edit btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> <a class="delete btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-trash"></span></a></td>
-                                </tr>
-                                <tr class="">
-                                    <td>Twitter</td>
-                                    <td>Imagen</td>
-                                    <td>@saschanutric</td>
-                                    <td><a class="edit btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-pencil"></span></a> <a class="delete btn btn-stransparent" href="javascript:;"><span class="glyphicon glyphicon-trash"></span></a></td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
+                    </div>
                 </div>
             </section>
-        </div>
-    </div>
-</div>
-</section>
-</div>
+        </section>
+    </section>
 
-</div>
-</section>
+    <!--Modal agregar redes sociales -->
 
-
-<div class="modal fade" id="agregarAlimentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="agregarRedsocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -225,7 +180,7 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Nombre de Red Social</label>
-                        <div class="col-md-8"><input class="form-control" type="text"  name=""/> </div>
+                        <div class="col-md-8"><input class="form-control" type="text"  name="" id="inputNombreRed"/> </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Logo</label>
@@ -247,70 +202,53 @@
                      </div>
                  </div>
                  <div class="form-group">
-                    <label class="col-md-3 control-label">Usuario</label>
-                    <div class="col-md-8"><input class="form-control" type="text" /> </div>
+                    <label class="col-md-3 control-label">Enlace</label>
+                    <div class="col-md-8">
+                    <input class="form-control" type="text" id="inpuEnlace" /> </div>
                 </div>
 
             </form>
         </div>
         <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-            <button class="btn btn-info" type="button">Aceptar</button>
+            <button class="btn btn-info" type="button" id="guardarRedSocial">Guardar</button>
         </div>
     </div>
 </div>
 </div>
 <style type="text/css">
-    .dataTables .filter{
-     float: left !important;
-     text-align: left !important;
- }
- .btn-stransparent
-{ 
- background-color: transparent;
- border-color: transparent;
-}
+    #btn-guardar{
+        display: none;
+    }
 </style>
 
-<!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
-<!-- Placed js at the end of the document so the pages load faster -->
-<!--Core js-->
-<script src="js/jquery.js"></script>
+
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="bs3/js/bootstrap.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/easypiechart/jquery.easypiechart.js"></script>
 <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-
-<script src="js/bootstrap-switch.js"></script>
+<script type="text/javascript" src="js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
 
 <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
-<script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
-<script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-
-
 <!--common script init for all pages-->
-<script src="js/toggle-init.js"></script>
-
-<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<script src="js/scripts.js"></script>
 <!--script for this page-->
+<script src="js/gritter.js" type="text/javascript"></script>
+<!-- tablas editables -->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--script for this page only-->
+
+<script src="js/mensaje.js" type="text/javascript"></script>
 <script src="js/scripts.js"></script>
 <script src="js/gritter.js" type="text/javascript"></script>
 <script src="js/admin-portalWeb-negocio.js"></script>
-    <!--common script init for all pages-->
-    <!--script for this page-->
 
-<script>
-    jQuery(document).ready(function() {
-        TablaRedesSociales.init();
-        $('#menuSascha').load('menu.html');
-    });
-</script>
-
+<!-- END JAVASCRIPTS -->
 </body>

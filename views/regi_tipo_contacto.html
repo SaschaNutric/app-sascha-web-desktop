@@ -37,84 +37,86 @@
     <section id="container" >
 
         <!--main content start-->
-        <h3>Registro de Tipos de Dieta</h3>
-        <!-- Inicio pagina de Unidades -->
+        <h3>Registro de Tipos de Contacto</h3>
+        <!-- Inicio pagina de Tipos de Parámetros -->
         <section class="panel">
             <section class="panel-body">
-                <!-- Tabla de Tipo de parametros -->
+                <!-- Tabla de Tipo de Contactos -->
+                <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                 <div class="adv-table">
-                     <div id="msjAgregar" class="alert alert-dismissible" style="display: none;"></div>
                     <div class="pull-right">
-                        <!-- modal agregar tipo parametro -->
-                        <a id="btnAgregarTipoDieta" href="#agregarTipoDieta" data-toggle="modal" class="btn btn-agregar" onclick="agregarTipoDieta()">
+                        <!-- modal agregar tipo Contacto -->
+                        <a id="btnAgregarTipoContacto" href="#agregarTipoContacto" data-toggle="modal" class="btn btn-agregar" onclick="agregarTipoContacto()" >
                             Agregar
                         </a>
                     </div>
-                    <table class="table table-bordered table-striped" id="dtregiTipoDieta">
+                    <table class="table table-bordered table-striped" id="dtTipoContacto">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th class="ancho-columna">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>             
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
-                <!-- fin tabla tipo de parametro -->
+                <!-- fin tabla tipo de contacto -->
             </section>
         </section>
 
 
     <!-- Inicio de Modales -->
 
-    <!-- Modal Agregar tipo parametro -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoDieta" class="modal fade">
+    <!-- Modal Agregar tipo contacto -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="agregarTipoContacto" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Agregar Tipo de Dieta</h4>
+                        <h4 class="modal-title">Agregar Tipo Contacto</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form" id="frmAgregarTipoDieta">
-                             <input type="text" class="form-control" id="txtIdTipoDieta" style="display: none;">
+                        <form class="form-horizontal" role="form" id="frmAgregarTipoContacto">
+                        <input type="text" class="form-control" id="txtIdTipoContacto" style="display: none;">
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Nombre:</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="txtNombreTipoDieta">
+                                    <input type="text" class="form-control" id="txtNombreTipoContacto">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button id="btnAceptartipoDieta" type="button" class="btn btn-aceptar" >Aceptar</button>
-                        <button id="btnEditartipoDieta" type="button" class="btn btn-aceptar" style="display: none;" >Aceptar</button>
-                        <button id="btnCancelarTipoDieta" data-dismiss="modal" type="button" class="btn btn-cancelar">Cancelar</button>
+                        <button id="btnAceptar" data-dismiss="modal" type="button" class="btn btn-aceptar">Aceptar</button>
+                        <button id="btnEditar" data-dismiss="modal" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- fin Modal agregar tipo parametro -->
-  <div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
-            </div>
-            <div class="modal-body">
+        <!-- fin Modal agregar tipo Contacto -->
 
-                <input type="text" class="form-control" id="txtIdTipoDietaEliminar" style="display: none;" disabled>
-               <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de dieta y todos sus planes de dieta asociados?</p>
+        <!--inicio de la modal eliminar -->
+        <div class="modal fade bs-example-modal-sm" id="eliminarTipoContacto" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="txtIdTipoContactoEliminar" style="display: none;" disabled>
+                        <p style="text-align: center;">¿Está seguro que desea eliminar el tipo de contacto y todos sus motivos asociados?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button id="btnEliminar" data-dismiss="modal" onclick="eliminarTipoContacto($('#txtIdTipoContactoEliminar').val())" type="button" class="btn btn-primary">Aceptar</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button id="btnEliminar" data-dismiss="modal" onclick="eliminarTipoDieta($('#txtIdTipoDietaEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
-              <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
         </div>
-        </div>
+        <!--fin de la modal eliminar -->
+
     <!-- Fin Modales -->
 
     <!--main content end-->
@@ -150,7 +152,7 @@
 
 <!--script for this page only-->
 <script src="js/mensaje.js" type="text/javascript"></script>
-<script src="js/regi_tipo_dieta.js" type="text/javascript"></script>
+<script src="js/regi_tipo_contacto.js" type="text/javascript"></script>
 <!-- END JAVASCRIPTS -->
 </body>
 </html>

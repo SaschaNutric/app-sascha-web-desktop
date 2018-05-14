@@ -199,10 +199,24 @@
 
 
         });
-        $('.toggle-right-box .fa-bars').click(function (e) {
+
+        $('.sidebar-toggle-box .fa-filter').click(function (e) {
+            if ($('#container').hasClass('open-right-panel')) {
+                $('#container').removeClass('open-right-panel')
+            }
+            if ($('.right-sidebar').hasClass('open-right-bar')) {
+                $('.right-sidebar').removeClass('open-right-bar')
+            }
+
+        });
+        
+        $('.toggle-right-box .fa-filter').click(function (e) {
+            
             $('#container').toggleClass('open-right-panel');
             $('.right-sidebar').toggleClass('open-right-bar');
             $('.header').toggleClass('merge-header');
+
+          
 
             e.stopPropagation();
         });
