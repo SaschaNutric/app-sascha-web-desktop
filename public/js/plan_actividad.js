@@ -67,10 +67,17 @@ $(document).ready(function() {
     afterSelect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
+        valor.push(values[0]);
+        console.log(valor);
     },
     afterDeselect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
+        const index = valor.indexOf(values[0])
+        if (index != -1){
+            valor.splice(index,1)
+        }
+        console.log(valor)
     }
 });
     /*fin multiselect de ejercicios */
@@ -129,19 +136,19 @@ $(document).ready(function() {
             return;
         }
 
-        /*console.log(valor);
-        // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_suplemento: id }
-        let suplementos = [];
+        console.log(valor);
+        // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_ejercicio: id }
+        let ejercicios = [];
         valor.map(function(val) {
-            suplementos.push({
-                id_suplemento: val
+            ejercicios.push({
+                id_ejercicio: val
             })
-        })*/
+        })
         let planActividad = {
             nombre: $('#txtNombre').val(),
             descripcion: $('#txtDescripcion').val(),
-            //suplementos: suplementos
-            ejercicios: $('select[name=ejercicios]').val()
+            ejercicios: ejercicios
+            //ejercicios: $('select[name=ejercicios]').val()
         }
         console.log(planActividad);
         $.ajax({

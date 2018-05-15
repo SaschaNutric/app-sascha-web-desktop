@@ -66,17 +66,17 @@ $(document).ready(function() {
     afterSelect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-       /* valor.push(values[0]);
-        console.log(valor);*/
+       valor.push(values[0]);
+        console.log(valor);
     },
     afterDeselect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        /*const index = valor.indexOf(values[0])
+        const index = valor.indexOf(values[0])
         if (index != -1){
             valor.splice(index,1)
         }
-        console.log(valor)*/
+        console.log(valor)
     }
 });
     /*fin multiselect */
@@ -90,7 +90,6 @@ $(document).ready(function() {
         success: function(res, status, xhr) {
             console.log(res);
             res.data.map(function(suplemento) {
-                valor.push(suplemento);
                 let option = $(`<option value="${suplemento.id_suplemento}">${suplemento.nombre}</option>`)
                 $('#ms_suplementos').append(option);
                 $('#ms_suplementos').multiSelect('refresh')
@@ -142,19 +141,19 @@ $(document).ready(function() {
             return;
         }
 
-        /*console.log(valor);
+        console.log(valor);
         // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_suplemento: id }
         let suplementos = [];
         valor.map(function(val) {
             suplementos.push({
                 id_suplemento: val
             })
-        })*/
+        })
         let planSuplemento = {
             nombre: $('#txtNombre').val(),
             descripcion: $('#txtDescripcion').val(),
-            //suplementos: suplementos
-            suplementos: $('select[name=suplemento]').val()
+            suplementos: suplementos
+            //suplementos: $('select[name=suplemento]').val()
         }
         console.log(planSuplemento);
         $.ajax({
@@ -207,8 +206,6 @@ $(document).ready(function() {
             nombre: $('#txtNombre').val(),
             descripcion: $('#txtDescripcion').val(),
         }
-
-
         let id = $('#txtIdSuplemento').val();
 
         if(planSuplemento.nombre == $(`#nombreplansuplemento-${id}`).text() && planSuplemento.descripcion == $(`#descripcionplansuplemento-${id}`).text()){
@@ -216,6 +213,7 @@ $(document).ready(function() {
             $('#agregarPlan').modal('hide');   
             return;
         }
+        console.log(id);
         $.ajax({
             url: `https://api-sascha.herokuapp.com/plansuplemento/${id}`,
             contentType: 'application/json',
@@ -310,6 +308,7 @@ $(document).ready(function() {
         console.log(id);
         $('#txtNombre').val($(`#nombreplansuplemento-${id}`).text());
         $('#txtDescripcion').val($(`#descripcionplansuplemento-${id}`).text());
+        $('#txtIdSuplemento').val(id);
         $('#multiselectSuplementos').css('display','none');
         $('#btnAceptar').css('display', 'none');
         $('#btnEditar').css('display', 'inline');

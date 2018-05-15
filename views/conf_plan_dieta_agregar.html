@@ -42,15 +42,6 @@
                                     <div class="col-md-8">
                                         <input class="form-control" id="txtNombreDieta"/>
                                     </div>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label" for="cmbParametro">Tipo:</label>
-                                    <div class="col-md-8">
-                                        <select id="selTipoDieta" class="form-control">
-                                            <option>seleccione</option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Descripción:</label>
@@ -58,36 +49,47 @@
                                         <textarea id="txtDescripcion" class="form-control" rows="2"></textarea> 
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="cmbParametro">Tipo:</label>
+                                    <div class="col-md-8">
+                                        <select id="selTipoDieta" name="tipo_dieta" class="form-control">
+                                            <option>seleccione</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" id="configurarComidas">
+                                    <div class="col-md-12" style="border-bottom: solid 1px;">
+                                            <h4>Configurar Comidas</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" style="margin-top: 20px;">
+                                            <div style="text-align: right">
+                                                <a id="btnAgregarComida" href="#agregarComidas" data-toggle="modal" class="btn btn-agregar">
+                                                    Agregar
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <table id="dtComidaGrupo" style="margin-top:23px;" class="display table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Comida</th>
+                                                        <th>Grupos Alimenticios</th>
+                                                        <th class="ancho-columna">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
-                            <div class="col-md-12" style="border-bottom: solid 1px;">
-                                <h4>Configurar Comidas</h4>
+                            <div class="col-md-12">
+                                <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
+                                <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
+                                <button id="btnCancelar" data-dismiss="modal" class="btn btn-cancelar" type="button">Cancelar</button>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12" style="margin-top: 20px;">
-                                <div class="pull-right">
-                                    <a id="btnAgregarComida" href="#agregarComidas" data-toggle="modal" class="btn btn-agregar">
-                                        Agregar
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <table id="dtComidaGrupo" style="margin-top:23px;" class="display table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Comida</th>
-                                                <th>Grupos Alimenticios</th>
-                                                <th class="ancho-columna">Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                                <div class="col-md-12">
-                                    <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                                    <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
-                                    <button id="btnCancelar" data-dismiss="modal" class="btn btn-cancelar" type="button">Cancelar</button>
-                                </div>
                         </div>
                     </section>
                 </section>
@@ -96,9 +98,9 @@
 
         <div class="modal fade" id="agregarComidas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content modal-dieta">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="limpiarAgregarComidas()">&times;</button>
                         <h4 class="modal-title">Configurar Comidas</h4>
                     </div>
                     <div class="modal-body">
@@ -106,15 +108,15 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="comidas">Comida:</label>
                                 <div class="col-md-7">
-                                    <select id="selComidas" class="form-control">
-                                        <option>seleccione</option>
+                                    <select id="selComidas" name="comidas" class="form-control">
+                                        <option value="Seleccione">Seleccione</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="ms_gruposAlimenticios">Grupos Alimenticios:</label>
                                 <div class="col-md-9">
-                                    <select id="selGruposAlimenticios">
+                                    <select id="selGruposAlimenticios" name="grupoalimenticio" multiple>
                                         <option value="0" selected disabled></option>
                                     </select>
                                 </div>
@@ -122,12 +124,33 @@
                         </form>        
                     </div>
                     <div class="modal-footer">
-                        <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
-                        <button id="btnCancelar" data-dismiss="modal" class="btn btn-cancelar" type="button">Cancelar</button>
+                        <button id="btnAceptarComida" class="btn btn-aceptar" type="button">Aceptar</button>
+                        <button id="btnCancelarComida" data-dismiss="modal" class="btn btn-cancelar" type="button">Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--inicio de la modal eliminar -->
+    <div class="modal fade bs-example-modal-sm" id="eliminarComida" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+              </div>
+              <div class="modal-body">
+                <input type="text" class="form-control" id="txtIdEliminar" style="display: none;" disabled>
+                <p style="text-align: center;">¿Está seguro que desea eliminar la comida?</p>
+            </div>
+            <div class="modal-footer">
+              <button id="btnEliminar" data-dismiss="modal" onclick="eliminar($('#txtIdEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+              <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+          </div>
+      </div>
+    </div>
+    </div>
+    <!--fin de la modal eliminar -->
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
