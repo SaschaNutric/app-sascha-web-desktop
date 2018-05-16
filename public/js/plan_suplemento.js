@@ -1,4 +1,5 @@
 var valor=[];
+var suple = [];
 $(document).ready(function() {
 
 	$('#dtPlanSuplemento').DataTable( {
@@ -90,6 +91,7 @@ $(document).ready(function() {
         success: function(res, status, xhr) {
             console.log(res);
             res.data.map(function(suplemento) {
+                suple.push(suplemento);
                 let option = $(`<option value="${suplemento.id_suplemento}">${suplemento.nombre}</option>`)
                 $('#ms_suplementos').append(option);
                 $('#ms_suplementos').multiSelect('refresh')
@@ -293,23 +295,26 @@ $(document).ready(function() {
     }
 
     function editarPlan(id){
-        /*let prueba = $(`#suplementos-${id}`).text();
+        let prueba = $(`#suplementos-${id}`).text();
         console.log("suplementos: ", prueba);
         let nom_suplementos = prueba.split(",");
         console.log(nom_suplementos);
-        valor.map(function(suplementos){
-            nom_suplementos.map(function(nombre){
-                if(suplementos.nombre == nombre){
-                    console.log(suplementos.id_suplemento);
-                    $('#ms_suplementos').multiSelect('select', ['suplementos.id_suplemento']);
+        let suplementos=[];
+        nom_suplementos.map(function(s){
+            suple.map(function(suplemento){
+                console.log(suplemento);
+                if(s == suplemento.nombre){
+                    suplementos.push(suplemento.id_suplemento.toString());
                 }
             })
-        })*/
+        })
+        console.log(suplementos);
+        $('#ms_suplementos').multiSelect('select', suplementos);
         console.log(id);
         $('#txtNombre').val($(`#nombreplansuplemento-${id}`).text());
         $('#txtDescripcion').val($(`#descripcionplansuplemento-${id}`).text());
         $('#txtIdSuplemento').val(id);
-        $('#multiselectSuplementos').css('display','none');
+        //$('#multiselectSuplementos').css('display','none');
         $('#btnAceptar').css('display', 'none');
         $('#btnEditar').css('display', 'inline');
     }
