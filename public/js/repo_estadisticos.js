@@ -1,10 +1,7 @@
 Morris.Bar({
     element: 'graph-bar',
     data: [
-        {x: '15 Mar. 2018', y: 3, z: 2, a: 3},
-        {x: '16 Mar. 2018', y: 2, z: 0, a: 1},
-        {x: '17 Mar. 2018', y: 0, z: 2, a: 4},
-        {x: '18 Mar. 2018', y: 4, z: 2, a: 3}
+        {x: 'Visitas', y: 3, z: 2, a: 3}
     ],
     xkey: 'x',
     ykeys: ['y', 'z', 'a'],

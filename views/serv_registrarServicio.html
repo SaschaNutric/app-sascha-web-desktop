@@ -1,4 +1,3 @@
-1
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,9 +70,7 @@
                         </div>
                         <label class="col-sm-1 control-label">Precio:</label>
                         <div class="col-sm-3">
-                            <select id="selPrecio" class="form-control" name="id_precio">
-                                <option value="0" selected>Seleccione</option>                    
-                            </select>
+                                <input id="txtPrecio" name="nombre" type="text" class="form-control"> Bs
                         </div>
 
                     </div>
@@ -124,20 +121,25 @@
          </div>
      </div>
  </form> 
+ <div class="position-right col-md-12" style="text-align: right; padding-bottom: 30px">
+        <button class="btn btn-cancelar" onclick="verServicios()" type="button">Cancelar</button>
+        <button class="btn btn-voscuro" id="btnRegistrar" type="submit">Registar</button>
+        <button class="btn btn-voscuro" style="display: none" id="btnGuardar" type="submit">Guardar</button>
+    
+    </div>
 </div>
 <div id="parametros" class="tab-pane">
  <div class="pull-right" style="padding-bottom: 20px"  >
-    <a href="#modalParametro" data-toggle="modal" class="btn btn-vclaro">
+    <button id="agregarParametro" data-toggle="modal" class="btn btn-vclaro">
         Agregar 
-    </a>
+    </button>
 </div>
 <table class="table table-striped table-hover table-bordered" id="dtParametros">
     <thead>
         <tr>
-            <th width="25%">Tipo de Parametros</th>
-            <th width="25%">Parametro</th>
-            <th width="20%">Valor Minimo</th>
-            <th width="20%">Valor Maximo</th>
+            <th width="40%">Parametro</th>
+            <th width="25%">Valor Minimo</th>
+            <th width="25%">Valor Maximo</th>
             <th width="10%">Acciones</th>
         </tr>
     </thead>
@@ -155,15 +157,16 @@
     </div>
 
 </div>
-</div>
-
-</div>
 <div class="position-right col-md-12" style="text-align: right; padding-bottom: 30px">
-    <button class="btn btn-cancelar" onclick="verServicios()" type="button">Cancelar</button>
-    <button class="btn btn-voscuro" id="btnRegistrar" type="submit">Registar</button>
-    <button class="btn btn-voscuro" style="display: none" id="btnGuardar" type="submit">Guardar</button>
+        <button class="btn btn-voscuro" id="btnGuardarCondicion"  type="submit">Guardar</button>
+        <button style="display: none" class="btn btn-voscuro" id="btnEditarCondicion"  type="submit">Guardar</button>
+        
+    
+    </div>
+</div>
 
 </div>
+
 </div>
 </section>
 
@@ -181,7 +184,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-cancelar" id="btn-cancelar" data-dismiss="modal">Cancelar</button>
-            <button onclick="eliminarParametro($('#txtIdServicioEliminar').val())" data-dismiss="modal"s type="button" class="btn btn-vclaro" id="btn-regis">Aceptar</button>        
+            <button onclick="eliminarParametro($('#txtIdServicioEliminar').val())" data-dismiss="modal"s type="button" class="btn btn-vclaro" id="btn-eliminar">Aceptar</button>        
         </div>
         </div>
     </div>
@@ -196,12 +199,13 @@
      </div>
      <div class="modal-body">
          <section>
+                <div id="msjParametro" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>                 
             <form class="form-horizontal">
               <div class="form-group">
                 <label class="col-md-4 control-label">
                 Tipo de Parametro:</label>
                 <div class="col-md-6">
-                    <select class="form-control" id="selTipoParametro">
+                    <select class="form-control" id="selTipoParametro" name="tipo_parametro">
                         <option value="0">Seleccione</option>
                     </select>
                 </div>
@@ -210,11 +214,12 @@
                 <label class="col-md-4 control-label">
                 Parametro:</label>
                 <div class="col-md-6">
-                    <select id="selParametro" class="form-control">
+                    <select id="selParametro" class="form-control" name="parametro">
                         <option value="0">Seleccione</option>
                     </select>
                 </div>
             </div>
+            <div id="valores" style="display: none;">
             <div class="form-group">
                 <label class="col-md-4 control-label">
                 Valor Minimo:</label>
@@ -222,7 +227,7 @@
                     <input type="number" id="txtMinimo" class="form-control" placeholder="">
                 </div>
                 <div class="col-md-2">
-                    <input type="text" readonly class="form-control" id="txtUnidad">
+                    <span id="txtUnidadMin"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -232,15 +237,17 @@
                     <input type="number" class="form-control" id="txtMaximo">
                 </div>
                 <div class="col-md-2">
-                    <input type="text" class="form-control" readonly id="txtUnidad">
+                    <span id="txtUnidadMax"></span>
                 </div>
             </div>
+        </div>
+            
         </form>
     </section>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-cancelar" id="btn-cancelar" data-dismiss="modal">Cancelar</button>
-    <button type="button" class="btn btn-regis" id="btn-regis">Registrar</button>
+    <button type="button" class="btn btn-vclaro" id="btn-regis">Registrar</button>
 </div>
 </div>
 </div>
@@ -248,7 +255,26 @@
 
 
 
-
+        <!--inicio de la modal eliminar -->
+        <div class="modal fade bs-example-modal-sm" id="eliminarParametro" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="txtIdParametroEliminar" style="display: none;" disabled>
+                       <p style="text-align: center;">¿Está seguro que desea eliminar el parametro del servicio?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="btnEliminarParamtro" data-dismiss="modal" onclick="eliminarParametro($('#txtIdParametroEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+                      <button id="btnCancelarEliminar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <!--fin de la modal eliminar -->
 <!--main content end-->
 <!--right sidebar start-->
 
@@ -264,8 +290,9 @@
 <script src="js/jquery.nicescroll.js"></script>
 
 <script type="text/javascript" src="js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+
 
 <!--common script init for all pages-->
 <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>

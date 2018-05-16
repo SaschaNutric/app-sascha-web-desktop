@@ -20,20 +20,26 @@ function mensaje(id, entidad, accion){
         break;
         case 4:
         tipo= "alert alert-info";
-        texto = `<strong>Oye!</strong> ${entidad} No has hecho ningún cambio.`;
+        texto = `<strong>Info!</strong> ${entidad} No has hecho ningún cambio.`;
         break;
         case 5: 
         tipo= "alert alert-danger";
         texto = `<strong>Error!</strong> Rellena los campos obligatorios.`;
-
-
+        break;
+        case 6:
+        tipo = "alert alert-danger";
+        texto = `<strong>Error!</strong> Rangos inválidos.`;
+        break;
+        case 7:
+        tipo = "alert alert-info";
+        texto = `<strong>Info!</strong> Debes registrar el(la) ${entidad} primero.`;
 
     }
     $(id).removeClass();
     $(id).addClass(tipo);
     $(id).html(texto);
     $(id).css('display', 'block');
-    $(".alert").delay(3000).slideUp(200, function() {
+    $(".alert").delay(8000).slideUp(200, function() {
         $(id).css('display', 'none');
     });
 

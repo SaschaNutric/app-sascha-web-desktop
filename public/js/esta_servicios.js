@@ -58,19 +58,17 @@ $(function(){
         }).data('datepicker');
 });
 
-var day_data = [
-    {x: "Visita 1", y: 0,  z: 7},
-    {x: " Visita 2", y: 2, z: 5},
-    {x: "Visita 3", y: 4, z: 3},
-    {x: "Visita 4", y: 6, z: 1}
-];
-Morris.Line({
-    element: 'graph-line',
-    data: day_data,
-    xkey: 'x',
-    ykeys: ['y','z'],
-    labels: ['Alcanzada', 'No alcanzada'],
-    lineColors:['#7ab740','#17aa8b'],
-    parseTime: false
+Morris.Donut({
+    element: 'graph-donut',
+    data: [
+        {value: 25, label: 'No Alcanzadas', formatted: '25%' },
+        {value: 75, label: 'Alcanzadas', formatted: '75%' }
+    ],
+    backgroundColor: '#fff',
+    labelColor: '#858580',
+    colors: [
+        '#1c6b34','#7ab740','#cfdd3f'
+    ],
+    formatter: function (x, data) { return data.formatted; }
 });
 
