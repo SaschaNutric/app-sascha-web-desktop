@@ -1,13 +1,12 @@
-let grupos=[];
-let arreglocomidas=[];
 let arrcomidas=[];
 let valor=[];
 let idtabla = 0;
 $(document).ready(function() {
-    $('#dtComidaGrupo').DataTable( {
+    var tablaComidas = $('#dtComidaGrupo').DataTable( {
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [ 2 ] }
         ],
+        "searching": "Buscar",
         "language": {
         "lengthMenu": "",
         "paginate": {
@@ -17,7 +16,7 @@ $(document).ready(function() {
         "emptyTable": "No se encontraron comidas",
         "zeroRecords": "No se encontraron comidas"
         },
-        "searching": false,
+        "searching": true,
         "ordering": true,
         "paging": true 
     } );
@@ -69,7 +68,6 @@ $(document).ready(function() {
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
-            console.log(res);
             res.data.map(function(tipoDieta) {
                 let option = $(`<option value="${tipoDieta.id_tipo_dieta}">${tipoDieta.nombre}</option>`)
                 $('#selTipoDieta').append(option);
@@ -91,9 +89,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             type: 'GET',
             success: function(res, status, xhr) {
-                console.log(res);
                 res.data.map(function(comida) {
-                    arreglocomidas.push(comida);
                     let option = $(`<option value="${comida.id_comida}">${comida.nombre}</option>`)
                     $('#selComidas').append(option);
                 })
@@ -113,9 +109,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             type: 'GET',
             success: function(res, status, xhr) {
-                console.log(res);
                 res.data.map(function(grupoAlimenticio) {
-                    grupos.push(grupoAlimenticio);
                     let option = $(`<option value="${grupoAlimenticio.id_grupo_alimenticio}">${grupoAlimenticio.nombre}</option>`)
                     $('#selGruposAlimenticios').append(option);
                     $('#selGruposAlimenticios').multiSelect('refresh')
@@ -139,14 +133,14 @@ $(document).ready(function() {
     
     //Llena el formulario con informacion del plan de dieta a editar
     if (id != undefined) {
-        $('#btnGuardar').css('display', 'inline');
-        $('#btnRegistrar').css('display', 'none');
+        $('#btnEditar').css('display', 'inline');
+        $('#btnAceptar').css('display', 'none');
+        $('#configurarComidas').css('display', 'none');
         $.ajax({
             url: 'https://api-sascha.herokuapp.com/plandieta/' + id,
             contentType: 'application/json',
             type: 'GET',
             success: function (res, status, xhr) {
-                console.log(res.data);
                 let planDieta = res.data;
                 oldPlanDieta = planDieta;
                 $('#txtNombreDieta').val(planDieta.nombre);
@@ -173,11 +167,16 @@ $(document).ready(function() {
 
         console.log(valor);
         // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_ejercicio: id }
+        eliminar($('select[name=comidas]').val()); 
         let gruposA = [];
         valor.map(function(val) {
             gruposA.push({
                 id_grupo_alimenticio: val,
                 nombre: $(`#selGruposAlimenticios option[value="${val}"]`).text()
+            })
+            arrcomidas.push({
+                id_comida: $('select[name=comidas]').val(),
+                id_grupo_alimenticio: val
             })
         })
 
@@ -187,21 +186,19 @@ $(document).ready(function() {
             nombre: $(`#selComidas option[value="${$('select[name=comidas]').val()}"]`).text()
         })
 
-        idtabla = idtabla + 1;
         let Comidas = {
             id_comida: comida,
             id_grupo_alimenticio:  gruposA
         }
-        console.log(Comidas);
-        addRowComida(idtabla,Comidas.id_comida, Comidas.id_grupo_alimenticio)
-        arrcomidas.push(Comidas);
         console.log("arreglocomidas: ",arrcomidas);
+        idtabla = idtabla + 1;
+        addRowComida(Comidas.id_comida, Comidas.id_grupo_alimenticio)
         limpiarAgregarComidas();
         $('#agregarComidas').modal('hide');
         
     })
 
-    $('#btnAceptar').on('click', function() {
+$('#btnAceptar').on('click', function() {
 
         if($('#txtNombreDieta').val() == ""){
             $('#txtNombreDieta').css('border', '1px solid red');
@@ -218,11 +215,16 @@ $(document).ready(function() {
             return;
         }
 
+        if (tablaComidas.data().count() == 0){
+            mensaje('#msjAlerta','', 5);
+            return;
+        }
 
         let planDieta = {
             nombre: $('#txtNombreDieta').val(),
             id_tipo_dieta: $('select[name=tipo_dieta]').val(),
             descripcion: $('#txtDescripcion').val(),
+            detalle: arrcomidas
         }
 
         $.ajax({
@@ -231,7 +233,6 @@ $(document).ready(function() {
             type: 'POST',
             data: JSON.stringify(planDieta),
             success: function(res, status, xhr) {
-                console.log(res);
                 console.log(status);
                 verplandieta();
                 limpiarPlan();
@@ -247,37 +248,97 @@ $(document).ready(function() {
 
     })
 
+    $('#btnEditar').on('click', function() {
+
+        if($('#txtNombreDieta').val() == ""){
+            $('#txtNombreDieta').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtDescripcion').val() == ""){
+            $('#txtDescripcion').css('border', '1px solid red');
+            return;
+        }
+
+        if($('select[name=tipo_dieta]').val() == "0"){
+            $('select[name=tipo_dieta]').css('border', '1px solid red')
+            return;
+        }
+
+        if (tablaComidas.data().count() == 0){
+            mensaje('#msjAlerta', 5);
+            return;
+        }
+
+        let planDieta = {
+            nombre: $('#txtNombreDieta').val(),
+            id_tipo_dieta: $('select[name=tipo_dieta]').val(),
+            descripcion: $('#txtDescripcion').val()
+        }
+
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/plandieta/${id}`,
+            contentType: 'application/json',
+            type: 'PUT',
+            data: JSON.stringify(planDieta),
+            success: function(res, status, xhr) {
+                console.log(status);
+                mensaje('#msjAlerta', `Plan de Dieta`, 3);
+                verplandieta();
+                limpiarPlan();
+            },
+            error: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+
+            }
+        })
+
+    })
 
 });
 
-function addRowComida(id,comida, gruposAlimenticios) {
-    let row = $(`<tr>
-        <td id="comida"-${id}>${comida.map(function(comida){
-            return comida.nombre;
-        })}</td>
-        <td id="gruposAlimenticios"-${id}>${gruposAlimenticios.map(function(grupo){
+function quitarElementosArreglo( arr, item ) {
+    arrcomidas = arr.filter( function( e ) {
+        return e.id_comida !== item;
+    } );
+};
+
+function addRowComida(comidas, gruposAlimenticios) {
+    comidas.map(function(comida) {
+        let row = $(`<tr>
+        <td id="comidatabla-${comida.id_comida}">${comida.nombre}</td>
+        <td id="gruposAlimenticios-${comida.id_comida}">${gruposAlimenticios.map(function(grupo){
             return grupo.nombre;
         })}</td>
         <td>
-        <button onclick="abrirModalEliminar(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarComida" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+        <button onclick="abrirModalEliminar(${comida.id_comida})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarComida" title='Eliminar'><i class="fa fa-trash-o"></i></button>
         </td>
         </tr>
         `);
-    $('#dtComidaGrupo').DataTable().row.add(row).draw();
+        $('#dtComidaGrupo').DataTable().row.add(row).draw();
+    })
 }
 
 function abrirModalEliminar(id) {
+    console.log(id);
     $('#txtIdEliminar').val(id);
 }
 
 function eliminar(id) {
-    $('#dtComidaGrupo').DataTable().row($(`#comida-${id}`).parent()).remove().draw();       
+    console.log(id);
+    quitarElementosArreglo ( arrcomidas, id );
+    console.log(arrcomidas);
+    $('#dtComidaGrupo').DataTable().row($(`#comidatabla-${id}`).parent()).remove().draw();
 }
 
 function limpiarPlan(){
     $('#txtNombreDieta').val('');
     $('#txtDescripcion').val('');
     $('#txtIdPlanDieta').val('');
+    $('#txtIdEliminar').val('');
     $('#selTipoDieta option:contains(Seleccione)').prop('selected',true);
     $('#dtComidaGrupo').DataTable().clear();
 }

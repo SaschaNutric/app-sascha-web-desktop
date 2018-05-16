@@ -63,15 +63,14 @@
                                             <h4>Configurar Comidas</h4>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12" style="margin-top: 20px;">
+                                        <div class="col-md-12" style="margin-top: 10px;">
                                             <div style="text-align: right">
                                                 <a id="btnAgregarComida" href="#agregarComidas" data-toggle="modal" class="btn btn-agregar">
                                                     Agregar
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <table id="dtComidaGrupo" style="margin-top:23px;" class="display table table-bordered table-striped">
+                                            <table id="dtComidaGrupo" class="display table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>Comida</th>
@@ -81,14 +80,13 @@
                                                 </thead>
                                                 <tbody></tbody>
                                             </table>
-                                        </div>
                                     </div>
                                 </div>
                             </form>
                             <div class="col-md-12">
                                 <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
                                 <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
-                                <button id="btnCancelar" data-dismiss="modal" class="btn btn-cancelar" type="button">Cancelar</button>
+                                <button id="btnCancelar" data-dismiss="modal" class="btn btn-cancelar" type="button" onclick="verplandieta(), limpiarPlan()">Cancelar</button>
                             </div>
                         </div>
                     </section>
