@@ -253,7 +253,6 @@ function editarTipoUnidad(id){
 }
 
 function agregarTipoUnidad(){
-
     $('#btnAceptartipoUnidad').css('display', 'inline');
     $('#btnEditartipoUnidad').css('display', 'none');
 }
