@@ -173,6 +173,9 @@ $('#btnRegistrar').on('click', function () {
         mensaje('#msjAlerta', '', 5);
         return;
     }
+
+    const valido_desde = $('#dpValidoDesde').val();
+    const valido_hasta = $('#dpValidoHasta').val()
     let promocion = {
         nombre: $('#txtNombrePromo').val(),
         descripcion: $('#txtDescripcionPromo').val(),
@@ -181,8 +184,8 @@ $('#btnRegistrar').on('click', function () {
         id_rango_edad: $('#selRangoEdad').val(),
         id_genero: $('#selGenero').val(),
         id_estado_civil: $('#selEstadoCivil').val(),
-        valido_desde: $('#dpValidoDesde').val(),
-        valido_hasta: $('#dpValidoHasta').val()
+        valido_desde: valido_desde.split("-").reverse().join("-"),
+        valido_hasta: valido_hasta.split("-").reverse().join("-")
 
     }
 
