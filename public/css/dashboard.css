@@ -96,3 +96,36 @@ background-color: #1c6b34;
 .alert-comentario .notification-info a {
     color:#7ab740;
 }
+
+.modal-dashboard{
+	width: 800px;
+	height: auto;
+	margin: auto;
+}
+
+/*botones*/
+.btn-aceptar {
+    background-color: #7ab740;
+    border-color: #7ab740;
+    color: #FFFFFF;
+    width: 90px;
+}
+
+.btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
+    background-color: #7ab740;
+    border-color: #7ab740;
+    color: #FFFFFF;
+}
+
+.btn-cancelar {
+    background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+    width: 90px;
+}
+
+.btn-cancelar:hover, .btn-cancelar:focus, .btn-cancelar:active, .btn-cancelar.active, .open .dropdown-toggle.btn-cancelar {
+    background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+}

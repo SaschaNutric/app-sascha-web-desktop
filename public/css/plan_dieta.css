@@ -8,8 +8,9 @@ width: 50% !important;
 }
 
 .btn-info{
-background-color: #17aa8b;
-border-color: #17aa8b;
+    float: right !important;
+background-color: #7ab740;
+border-color: #7ab740;
 
 }
 
@@ -17,4 +18,5 @@ border-color: #17aa8b;
     background-color: #6BC8B5;
     border-color: #6BC8B5;
     color: #FFFFFF;
+    float: right !important;
 }

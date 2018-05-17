@@ -1,5 +1,3 @@
-let arregloHorario = [];
-
 $(document).ready(function() {
 
     $('#txtHoraInicio').timepicker({
@@ -55,11 +53,17 @@ $(document).ready(function() {
     $('#btnAceptar').on('click', function() {
         
         if($('#txtHoraInicio').val() == ""){
-            $('#txtCondicion').css('border', '1px solid red');
+            $('#txtHoraInicio').css('border', '1px solid red');
             return;
         }
         if($('#txtHoraFin').val() == ""){
-            $('#txtCondicion').css('border', '1px solid red');
+            $('#txtHoraFin').css('border', '1px solid red');
+            return;
+        }
+
+        if ($('#txtHoraInicio').val() >= $('#txtHoraFin').val()){
+            mensaje('#msjAlerta', `Bloque Horario`, 5);
+            limpiarHorario();
             return;
         }
 
@@ -101,9 +105,15 @@ $(document).ready(function() {
             return;
         }
 
+        if ($('#txtHoraInicio').val() >= $('#txtHoraFin').val()) {
+            mensaje('#msjAlerta', `Bloque Horario`, 5);
+            limpiarHorario();
+            return;
+        }
+
         let bloqueHorario = {
             hora_inicio: $('#txtHoraInicio').val(),
-            hora_fin: $('#txtHoraFin')
+            hora_fin: $('#txtHoraFin').val()
         }
 
         let id = $('#txtIdBloqueHorario').val();
@@ -137,11 +147,12 @@ $(document).ready(function() {
 
 
     function editarHorario(id){
-        $('#txtHoraInicio').val($(`#hora_inicio-${id}`).text());
-        $('#txtHoraFin').val($(`#hora_fin-${id}`).text());
+        $('#txtHoraInicio').timepicker('setTime', $(`#hora_inicio-${id}`).text());
+        $('#txtHoraFin').timepicker('setTime', $(`#hora_fin-${id}`).text());
         $('#txtIdBloqueHorario').val(id);
         $('#btnAceptar').css('display', 'none');
         $('#btnEditar').css('display', 'inline');
+
     }
 
 function agregarHorario(){
@@ -161,22 +172,24 @@ function agregarHorario(){
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                $('#dtBloqueHorario').DataTable().row($(`#descripcion-${id}`).parent()).remove().draw();
+                $('#dtBloqueHorario').DataTable().row($(`#hora_inicio-${id}`).parent()).remove().draw();
+                mensaje('#msjAlerta', `Bloque Horario`, 2);
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
             }
         })
     }
 
    
     function limpiarHorario(){
-
+        $('#txtHoraInicio').timepicker('setTime', '00:00:00');
+        $('#txtHoraFin').timepicker('setTime', '00:00:00');
         $('#txtHoraInicio').val('')
         $('#txtHoraFin').val('')
         $('#txtIdBloqueHorario').val('')
-
     }
 
 
@@ -186,15 +199,15 @@ function agregarHorario(){
             <td id="hora_inicio-${id}">${hora_inicio}</td>
             <td id="hora_fin-${id}">${hora_fin}</td>
             <td>
-                <button onclick="editarHorario(${id})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#agregarBloqueHorario"  title='Editar'><i class='fa fa-pencil'></i></button>
-                <button onclick="abrirModalEliminarHorario(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarBloqueHorario" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                <button onclick="editarHorario(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarBloqueHorario"  title='Editar'><i class='fa fa-pencil'></i></button>
+                <button onclick="abrirModalEliminarHorario(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarBloqueHorario" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
         </tr>
         `);
         $('#dtBloqueHorario').DataTable().row.add(row).draw();
     }
 
-    function editRowHorario(id, hora_inicio, hora_fin){
-        $(`#hora_inicio-${id}`).text(hora_inicio)
+    function editRowHorario(id, hora_inicio, hora_fin){        
         $(`#hora_fin-${id}`).text(hora_fin)
+        $(`#hora_inicio-${id}`).text(hora_inicio)
     }
