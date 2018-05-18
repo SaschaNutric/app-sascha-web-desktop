@@ -18,6 +18,7 @@ $(document).ready(function(event) {
                     $("input#txtContraseña").css('border', '1px solid #ccc');
                 });
             } 
+            mensaje('#msjAlerta',``, 5);            
             return;
         }
         
@@ -40,6 +41,8 @@ $(document).ready(function(event) {
             },
             error: function(res, status, xhr) {
                 console.log(res)
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
             }
         })
     })
