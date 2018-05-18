@@ -46,16 +46,16 @@ function addRowTipoParametro(id, nombre, filtrable){
     if(filtrable == false){
         row = $(`<tr>
         <td id="nombre-${id}">${nombre}</td>
-        <td>
-            <button onclick="filtrable(${id})" type='button' class='edit btn  btn-aceptar' title='filtrable'>Filtrable</i></button>
+        <td style='text-align: center'>
+            <button onclick="filtrable(${id})" type='button' class='edit btn  btn-filtrable' title='filtrable'>Filtrable</i></button>
         </td>
         </tr>
         `);
     }else{
     row = $(`<tr>
         <td id="nombre-${id}">${nombre}</td>
-        <td>
-            <button onclick="noFiltrable(${id})" type='button' class='ver btn  btn-cancelar' title='noFiltrable'>No Filtrable</i></button>
+        <td style='text-align: center'>
+            <button onclick="noFiltrable(${id})" type='button' class='ver btn  btn-no-filtrable' title='noFiltrable'>No Filtrable</i></button>
         </td>
         </tr>
         `);
