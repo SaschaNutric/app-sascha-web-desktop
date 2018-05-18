@@ -1,28 +1,31 @@
 
 $(document).ready(function () {
-    
-    
+
+
     var paramstr = window.location.search.substr(1);
     var paramarr = paramstr.split("=");
     var params = {};
     params[paramarr[0]] = paramarr[1];
-    const id = 14 // params['id'];
+    const id = params['id'];
 
-    
-    $('#dtPerfil').dataTable({
+
+    $('#dtPerfil').DataTable({
         "aoColumnDefs": [
             { "bSortable": false, "aTargets": [3] }
-        ],
-        "sDom": "ftp",
-        "oLanguage": {
-            "sLengthMenu": "",
-            "sSearch": "Buscar:",
-            "oPaginate": {
-                "sPrevious": "Anterior",
-                "sNext": "Siguiente"
+            ],
+           "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
             },
-            "sEmptyTable": "No se encontraron parametros"
+            "emptyTable": "No se encontraron parametros",
+            "zeroRecords": "No se encontraron parametros"
         },
+        "searching": true,
+        "ordering": true,
+        "paging": true   
     });
 
 
@@ -53,13 +56,13 @@ $(document).ready(function () {
                 let plan_dieta = servicio.plan_dieta;
                 let plan_suplemento = servicio.plan_suplemento;
                 let plan_ejercicio = servicio.plan_ejercicio;
-                
+
                 //Datos de la cita
                 moment.locale('es')
                 let fecha = moment(agenda.fecha);
                 $('#cita-fecha').text(fecha.format('DD, MMMM  YYYY'));
                 $('#tipo-cita').text(agenda.tipo_cita);
-            
+
                 //Datos del cliente 
                 $('#cliente-nombre').text(cliente.nombre_completo);
                 $('#cliente-telefono').text(cliente.telefono);
@@ -67,15 +70,46 @@ $(document).ready(function () {
                 $('#cliente-direccion').text(cliente.direccion);
 
                 //Datos del servicio
-                let realizadas=  orden.visitas_realizadas+1
+                let realizadas = orden.visitas_realizadas + 1
                 $('#servicio-nombre').text(servicio.nombre);
                 $('#servicio-avance-barra').css('width', calcularAvance(realizadas, servicio.numero_visitas));
-                $('#servicio-avance-texto').text(realizadas+' de '+ servicio.numero_visitas + " visitas");
-                
+                $('#servicio-avance-texto').text(realizadas + ' de ' + servicio.numero_visitas + " visitas");
+
                 $('#servicio-plan-dieta').text(plan_dieta.nombre)
-                $('#servicio-plan-ejercicio').text(plan_ejercicio.nombre == null? 'No incluye' : plan_ejercicio.nombre)
-                $('#servicio-plan-suplemento').text(plan_suplemento.nombre == null? 'No incluye': plan_suplemento.nombre)
-                
+                $('#servicio-plan-ejercicio').text(plan_ejercicio.nombre == null ? 'No incluye' : plan_ejercicio.nombre)
+                $('#servicio-plan-suplemento').text(plan_suplemento.nombre == null ? 'No incluye' : plan_suplemento.nombre)
+
+                //Perfil
+                if (agenda.id_tipo_cita == 1) {
+                    $.ajax({
+                        url: 'https://api-sascha.herokuapp.com/parametros',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function (res, status, xhr) {
+                            res.data.map(function (parametro) {
+                                let unidad = parametro.id_unidad
+                                if (unidad == null) {
+                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '')
+                                } else {
+                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura)
+                                }
+                            })
+
+                        },
+                        error: function (res, status, xhr) {
+                            const respuesta = JSON.parse(res.responseText);
+                            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+
+                        }
+
+                    })
+                } else {
+                    if (agenda.id_tipo_cita == 2) {
+
+
+                    }
+                }
+
 
             },
             error: function (res, status, xhr) {
@@ -83,7 +117,7 @@ $(document).ready(function () {
             },
             complete: function () {
                 $('#loadingDiv').hide();
-                $('#info-visita').css('display', 'block'); 
+                $('#info-visita').css('display', 'block');
             }
         })
 
@@ -104,18 +138,6 @@ for (var i = 0; i < alimentos.length; i++) {
 }
 
 
-var tipo_parametro = ["Antropometrico", "Patologia", "Examen", "Condicion", "Actividad Fisica", "Alergia", "Medicamento"];
-var parametro = ["Peso", "Diabetes", "Glicemia", "Fumador", "Yoga", "Maní", "Eutirox"];
-var tablaDieta = document.getElementById('dtPerfil');
-var sel = document.getElementById('cmbTipoParametro');
-for (var i = 0; i < tipo_parametro.length; i++) {
-    var opt = document.createElement('option');
-    opt.innerHTML = tipo_parametro[i];
-    opt.value = tipo_parametro[i];
-    sel.appendChild(opt);
-
-
-}
 
 
 
@@ -371,8 +393,56 @@ $(".form_datetime-meridian").datetimepicker({
 //datetime picker end
 
 
-function calcularAvance(realizadas, total){
+function calcularAvance(realizadas, total) {
     let porc = realizadas * 100 / total
     return porc + '%'
 
 }
+
+
+function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad) {
+    let valor = '';
+    if (tipo_valor === 1) {
+        valor = `<div class='icheck'>
+        <div class="minimal-green single-row">
+        <div class="checkbox ">
+            <input id='nominal-${id}' type="checkbox" >
+        </div>
+    </div>
+    </div>`
+    } else {
+        if (tipo_valor === 2) {
+            valor = `<input id='real-${id}' type="number" class='form-control' style='width: 80px' ><span> ${unidad}</span>`
+        }
+    }
+
+    let row = $(`<tr>
+        <td id="tipo_parametro-${id}">${tipo_parametro}</td>
+        <td id="nombreParametro-${id}">${nombre}</td>
+        <td id="tipo_valor-${id}">${valor}</td>
+        <td>
+        <button onclick="agregarValor(${id})" type='button' class='edit btn  btn-transparente'   
+        title='Editar'><i class='fa fa-check'></i></button>
+        </td>
+        </tr>
+        `);
+    $('#dtPerfil').DataTable().row.add(row).draw();
+}
+
+
+$(function(){
+    "use strict";
+    $('.minimal input').iCheck({
+        checkboxClass: 'icheckbox_minimal',
+        radioClass: 'iradio_minimal',
+        increaseArea: '20%' // optional
+    });
+});
+
+$(function(){
+    $('.minimal-green input').iCheck({
+        checkboxClass: 'icheckbox_minimal-green',
+        radioClass: 'iradio_minimal-green',
+        increaseArea: '20%' // optional
+    });
+});
