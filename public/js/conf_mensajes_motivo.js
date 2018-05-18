@@ -36,7 +36,7 @@ $(document).ready(function() {
     })
 
     $.ajax({
-        url: 'https://api-sascha.herokuapp.com/tipomotivos',
+        url: 'https://api-sascha.herokuapp.com/tipomotivos/todos',
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
