@@ -42,25 +42,24 @@ $(document).ready(function() {
 });
 
 function addRowTipoParametro(id, nombre, filtrable){
-    let row;
-    if(filtrable == false){
+    let row = '';
+    if(filtrable){
         row = $(`<tr>
         <td id="nombre-${id}">${nombre}</td>
         <td style='text-align: center'>
-            <button onclick="filtrable(${id})" type='button' class='edit btn  btn-filtrable' title='filtrable'>Filtrable</i></button>
+            <button onclick="noFiltrable(${id})" type='button' class='edit btn  btn-filtrable' title='filtrable'>Filtrable</i></button>
         </td>
-        </tr>
-        `);
-    }else{
-    row = $(`<tr>
+        </tr>`);
+    }
+    else {
+        row = $(`<tr>
         <td id="nombre-${id}">${nombre}</td>
         <td style='text-align: center'>
-            <button onclick="noFiltrable(${id})" type='button' class='ver btn  btn-no-filtrable' title='noFiltrable'>No Filtrable</i></button>
+            <button onclick="filtrable(${id})" type='button' class='ver btn  btn-no-filtrable' title='noFiltrable'>No Filtrable</i></button>
         </td>
-        </tr>
-        `);
+        </tr>`);
     }
-   $('#dtFiltros').DataTable().row.add(row).draw();
+    $('#dtFiltros').DataTable().row.add(row).draw();
 }
 
 function filtrable(id){
@@ -76,8 +75,8 @@ function filtrable(id){
             console.log(res.data)
             let row = $(`<tr>
             <td id="nombre-${res.data.id_tipo_parametro}">${res.data.nombre}</td>
-            <td>
-                <button onclick="noFiltrable(${res.data.id_tipo_parametro})" type='button' class='ver btn  btn-cancelar' title='noFiltrable'>No Filtrable</i></button>
+            <td style='text-align: center'>
+                <button onclick="noFiltrable(${res.data.id_tipo_parametro})" type='button' class='edit btn  btn-filtrable' title='filtrable'>Filtrable</i></button>            
             </td>
             </tr>
             `);
@@ -108,8 +107,8 @@ function noFiltrable(id){
             console.log(res.data)
             let row = $(`<tr>
             <td id="nombre-${res.data.id_tipo_parametro}">${res.data.nombre}</td>
-            <td>
-                <button onclick="filtrable(${res.data.id_tipo_parametro})" type='button' class='edit btn  btn-aceptar' title='filtrable'>Filtrable</i></button>
+            <td style='text-align: center'>
+                <button onclick="filtrable(${res.data.id_tipo_parametro})" type='button' class='ver btn  btn-no-filtrable' title='noFiltrable'>No Filtrable</i></button>            
             </td>
             </tr>
             `);
