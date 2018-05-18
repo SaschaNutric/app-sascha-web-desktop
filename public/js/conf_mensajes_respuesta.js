@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 
     $.ajax({
-        url: 'https://api-sascha.herokuapp.com/tiporespuestas',
+        url: 'https://api-sascha.herokuapp.com/tipomotivos',
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
