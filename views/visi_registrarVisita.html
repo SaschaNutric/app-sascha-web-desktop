@@ -85,25 +85,12 @@
                         <div class="tab-content">
                             <div id="perfil" class="tab-pane active">
                                 <div class="plan-panel"  style="padding-top: 20px">
-                                <form class="form-horizontal" style="padding-top: 20px; padding-bottom: 40px">
-                                    <div class="form-group">
-                                        <div class="col-sm-3 control-label"  >   
-                                            <label for="cmbTipoParametro">Tipo de Parametro:</label>
-                                        </div>     
-                                        <div class="col-sm-7">
-                                           <select  id="cmbTipoParametro" class="form-control xsmall">
-                                               <option value="Todos" selected="selected" >Todos</option>
-                                           </select>            
-                                       </div>
-                                   </div>
-                               </form> 
-
                                <table class="display table table-bordered table-striped" id="dtPerfil">
                                 <thead>
                                     <tr>
-                                        <th width="35%" >Tipo Parametro </th>
+                                        <th width="30%" >Tipo Parametro </th>
                                         <th width="40%">Parametro</th>
-                                        <th width="15%" >Valor</th>
+                                        <th width="20%" >Valor</th>
                                         <th width="10%" ></th>                     
                                     </tr>
                                 </thead>
@@ -114,11 +101,9 @@
                     <div id="dieta" class="tab-pane"> 
                         <div class="plan-panel" style="padding-top: 20px">
                             <div class="row" style="border-bottom: solid 1px;">
-                                <h4>Dieta Hipocalorica</h4>
+                                <h4 id="plan-dieta-nombre"></h4>
                             </div>
-                            <div class="row">
-                                <h5> Baja en calorias. Ideal para perder peso</h5>
-                            </div>
+                     
                             <div class="row" id='comidas'></div>
 
 
@@ -127,11 +112,9 @@
                     <div  id="suplementos" class="tab-pane">
                         <div class="plan-panel" style="padding-top: 20px">
                             <div class="row" style="border-bottom: solid 1px;">
-                                <h4>Plan de Suplementos 1</h4>
+                                <h4 id="plan-suplemento-nombre"></h4>
                             </div>
-                            <div class="row">
-                                <h5>Deficiencia de Cacio y vitaminas</h5>
-                            </div>
+                  
 
                             <table id="dtSuplementos" class="display table table-bordered table-striped" style="padding-top:
                                     20px">
@@ -152,10 +135,7 @@
                     <div id="actividades" class="tab-pane">
                        <div class="plan-panel" style="padding-top: 20px">
                         <div class="row" style="border-bottom: solid 1px;">
-                            <h4>Plan de Ejercicios Basico</h4>
-                        </div>
-                        <div class="row">
-                            <h5> Ejercicios para personas que no acostumbran a realizar actividad fisica</h5>
+                            <h4 id="plan-ejercicio-nombre"></h4>
                         </div>
                         <br>
                         <table id="dtEjercicios" class="display table table-bordered table-striped" style="padding-top:

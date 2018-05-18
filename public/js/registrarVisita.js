@@ -79,6 +79,11 @@ $(document).ready(function () {
                 $('#servicio-plan-ejercicio').text(plan_ejercicio.nombre == null ? 'No incluye' : plan_ejercicio.nombre)
                 $('#servicio-plan-suplemento').text(plan_suplemento.nombre == null ? 'No incluye' : plan_suplemento.nombre)
 
+                $('#plan-dieta-nombre').text(plan_dieta.nombre)                
+                $('#plan-ejercicio-nombre').text(plan_ejercicio.nombre == null ? 'No incluye' : plan_ejercicio.nombre)                
+                $('#plan-suplemento-nombre').text(plan_suplemento.nombre == null ? 'No incluye' : plan_suplemento.nombre)
+                
+
                 //Perfil
                 if (agenda.id_tipo_cita == 1) {
                     $.ajax({
