@@ -3,8 +3,8 @@ var Script = function () {
     /* initialize the calendar
     -----------------------------------------------------------------*/
     let data = {
-        fecha_inicio: '2018-05-05',
-        fecha_fin: '2018-05-18'
+        fecha_inicio: '2018-05-01',
+        fecha_fin: '2018-05-31'
     }
 
     var date = new Date();
