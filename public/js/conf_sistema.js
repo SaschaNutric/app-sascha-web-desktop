@@ -177,7 +177,6 @@ function addRowTipoNotificaciones(id, nombre,mensaje){
         <td id="tipo_notificacion-${id}">${mensaje}</td>
         <td>
         <button onclick="editartipoNotificacion(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#editartipoNotificacion"  title='Editar'><i class='fa fa-pencil'></i></button>
-        
         </td>
         </tr>
         `);

@@ -252,7 +252,7 @@ html .fc,
     border-color: #DDDDDD #DDDDDD #FFFFFF;
     color: #646464;
 }
-  }
+ 
   
 .fc-state-disabled,
 .fc-state-disabled .fc-button-inner {
@@ -276,7 +276,7 @@ html .fc,
 .fc-event {
   border-style: solid;
   border-width: 0;
-  font-size: .85em;
+  font-size: 15px;
   cursor: default;
   }
   

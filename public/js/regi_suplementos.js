@@ -50,7 +50,7 @@ $(document).ready(function() {
         success: function(res, status, xhr) {
             console.log(res);
             res.data.map(function(suplemento) {
-                addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, suplemento.id_unidad, suplemento.id_unidad)
+                addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, suplemento.id_unidad, suplemento.unidad.nombre)
             })
         },
         error: function(res, status, xhr) {

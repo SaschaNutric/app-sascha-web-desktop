@@ -85,10 +85,10 @@ $(document).ready(function() {
         refressRowTipoComentario(
         id, 
         descripcion_respuesta,
-        comentario.respuesta
+        comentario.mensaje
       );                
         
-        limpiarMotivo();
+        limpiar();
       },
       error: function(res, status, xhr) {
         console.log(res);
@@ -120,6 +120,7 @@ function  addRowTipoComentario(id, cliente, id_tipo_motivo,tipo_motivo, motivo, 
 }
 
 function editarComunicacion(id, id_tipo_motivo){
+  document.getElementById('selRespuesta').length = 1;
   $.ajax({
     url: `https://api-sascha.herokuapp.com/respuestas/tipomotivo/${id_tipo_motivo}`,
     contentType: 'application/json',
@@ -147,4 +148,13 @@ function editarComunicacion(id, id_tipo_motivo){
 function refressRowTipoComentario(id, respuesta, mensaje){
   $(`#respuesta-${id}`).text(respuesta)
   $(`#mensaje-${id}`).text(mensaje)
+}
+
+function limpiar(){
+  $('#txtIdComunicacion').val('');
+  $('#selRespuesta option:contains(Seleccione)').prop('selected',true);
+  $('#txtCliente').val('');
+  $('#txtComentario').val('');
+  $('#txtMensaje').val('');
+
 }
