@@ -102,7 +102,7 @@
                           <label class="col-md-4 control-label" >
                             Rol:</label>
                             <div class="col-md-4" >
-                             <select class="form-control m-bot15" name="selRol" id="selRoles">
+                             <select class="form-control m-bot15" name="selRoles" id="selRoles">
                                 <option value="0" selected="selected" >Seleccione</option>
                               <option></option>
                             </select>
@@ -186,7 +186,7 @@
                   <!--Fin Modal Editar-->
 
                   <!--inicio de la modal eliminar -->
-                  <div class="modal fade bs-example-modal-sm" id="modal-confirmar-1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                  <div class="modal fade bs-example-modal-sm" id="eliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -194,11 +194,13 @@
                           <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
                         </div>
                         <div class="modal-body">
+                          <input id="txtIdUsuarioEliminar" type="text" class="form-control" placeholder="Nombre" style="display: none">
+                          <input id="txtNombreU" type="text" class="form-control" placeholder="Nombre" style="display: none">
                           <h3 style="text-align: center;">¿Está seguro que desea eliminar al Usuario?</h3>
                         </div>
                         <div class="modal-footer">
                           <button id="btnCerrar" type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                          <button id="btnGuardar" type="button" class="btn btn-primary">Sí</button>
+                          <button id="btnSi" type="button" onclick="eliminarUsuario($('#txtIdUsuarioEliminar').val())" class="btn btn-primary">Sí</button>
                         </div>
                       </div>
                     </div>
