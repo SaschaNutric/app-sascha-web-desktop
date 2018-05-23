@@ -1,4 +1,4 @@
-var datos=[];
+var valor=[];
 $(document).ready(function() {
 
     $('#dtPlanActividad').DataTable( {
@@ -34,12 +34,10 @@ $(document).ready(function() {
 				"sNext": "Siguiente"},
 			"sEmptyTable": "No se encontraron actividades"
 			},
-
-
-
 		});
 
-
+        
+        /* multiselect de ejercicios */
 	$('#seleActividades').multiSelect({
     selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
     selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
@@ -69,22 +67,23 @@ $(document).ready(function() {
     afterSelect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        datos.push(values[0]);
-        console.log(datos);
+        valor.push(values[0]);
+        console.log(valor);
     },
     afterDeselect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        const index = datos.indexOf(values[0])
+        const index = valor.indexOf(values[0])
         if (index != -1){
-            datos.splice(index,1)
+            valor.splice(index,1)
         }
-        console.log(datos)
+        console.log(valor)
     }
 });
+    /*fin multiselect de ejercicios */
 
     /*Inicio de peticiones ajax */
-
+    /*llena el multiselect de ejercicios*/
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/ejercicios',
         contentType: 'application/json',
@@ -105,15 +104,15 @@ $(document).ready(function() {
 
         }
     })
-
+    /*llena la tabla de los planes de ejercicios */
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/planejercicios',
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
             console.log(res);
-            res.data.map(function(ejercicio) {
-                addRowPlan(ejercicio.id_plan_ejercicio, ejercicio.nombre, ejercicio.descripcion, ejercicio.nombre)
+            res.data.map(function(plan) {
+                addRowPlan(plan.id_plan_ejercicio, plan.nombre, plan.descripcion, plan.ejercicios)
             })
         },
         error: function(res, status, xhr) {
@@ -125,18 +124,187 @@ $(document).ready(function() {
         }
     })
 
+    $('#btnAceptar').on('click', function() {
+
+        if($('#txtNombre').val() == ""){
+            $('#txtNombre').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtDescripcion').val() == ""){
+            $('#txtDescripcion').css('border', '1px solid red');
+            return;
+        }
+
+        console.log(valor);
+        // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_ejercicio: id }
+        let ejercicios = [];
+        valor.map(function(val) {
+            ejercicios.push({
+                id_ejercicio: val
+            })
+        })
+        let planActividad = {
+            nombre: $('#txtNombre').val(),
+            descripcion: $('#txtDescripcion').val(),
+            ejercicios: ejercicios
+            //ejercicios: $('select[name=ejercicios]').val()
+        }
+        console.log(planActividad);
+        $.ajax({
+            url: 'https://api-sascha.herokuapp.com/planejercicios',
+            contentType: 'application/json',
+            type: 'POST',
+            data: JSON.stringify(planActividad),
+            success: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                // Busca en el multiselect el nombre de los suplementos
+                // y crea arreglo de objetos JSON Ej. { id_suplemento: 1, nombre: "Vitamina" }
+                let ejercicios = [];
+                res.data.ejercicios.map(function(ejercicio) {
+                    ejercicios.push({ 
+                        id_ejercicio: ejercicio,
+                        nombre: $(`option[value="${ejercicio}"]`).text()
+                    })
+                });
+                
+                addRowPlan(res.data.id_plan_ejercicio, res.data.nombre, res.data.descripcion, ejercicios)
+                limpiarPlan();
+                mensaje('#msjAlerta', `Plan de Entrenamiento`, 1);
+            },
+            error: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+            }
+        })
+        $('#agregarPlan').modal('hide');
+
+    })
+
+    $('#btnEditar').on('click', function() {
+
+        if($('#txtNombre').val() == ""){
+            $('#txtNombre').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtDescripcion').val() == ""){
+            $('#txtDescripcion').css('border', '1px solid red');
+            return;
+        }
+
+
+        let planActividad = {
+            nombre: $('#txtNombre').val(),
+            descripcion: $('#txtDescripcion').val(),
+        }
+
+
+        let id = $('#txtIdEjercicio').val();
+
+        if(planActividad.nombre == $(`#nombreplan-${id}`).text() && planActividad.descripcion == $(`#descripcionplan-${id}`).text()){
+            mensaje('#msjAlerta', ``, 4);
+            $('#agregarPlan').modal('hide');   
+            return;
+        }
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/planejercicio/${id}`,
+            contentType: 'application/json',
+            type: 'PUT',
+            data: JSON.stringify(planActividad),
+            success: function(res, status, xhr) {
+                console.log(planActividad)
+                mensaje('#msjAlerta', `Plan de Suplemento`, 3);
+                editRowPlan(id, planActividad.nombre, planActividad.descripcion)
+                limpiarPlan();
+            },
+            error: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+
+            }
+        })
+
+        $('#agregarPlan').modal('hide');
+    })
+
+
 });
 
+    /* agrega una nueva fila en la tabla de planes */
     function addRowPlan(id, nombre, descripcion, ejercicios) {
         let row = $(`<tr>
             <td id="nombreplan-${id}">${nombre}</td>
             <td id="descripcionplan-${id}">${descripcion}</td>
-            <td id="ejercicios-${id}">${ejercicios}</td>
+            <td id="ejercicios-${id}">${
+                ejercicios.map(function (ejercicio) {
+                    return ejercicio.nombre;
+                })
+            }</td>
             <td>
-            <button onclick="editarPlanSuplemento(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarPlan"  title='Editar'><i class='fa fa-pencil'></i></button>
-            <button onclick="abrirModalPlanEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+            <button onclick="editarPlan(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarPlan"  title='Editar'><i class='fa fa-pencil'></i></button>
+            <button onclick="abrirModalEliminarPlan(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarPlan" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>
             `);
         $('#dtPlanActividad').DataTable().row.add(row).draw();
+    }
+
+    function eliminarPlan(id) {
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/planejercicio/${id}`,
+            contentType: 'application/json',
+            type: 'DELETE',
+            success: function (res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                $('#dtPlanActividad').DataTable().row($(`#nombreplan-${id}`).parent()).remove().draw();
+                $('#txtIdPlanEliminar').val('');
+                mensaje('#msjAlerta', `Plan de Entrenamiento`, 2);
+            },
+            error: function (res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                limpiarPlan();
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            }
+        })
+    }
+
+    function abrirModalEliminarPlan(id) {
+        $('#txtIdPlanEliminar').val(id);
+    }
+
+    function limpiarPlan(){
+        $('#txtNombre').val('');
+        $('#txtDescripcion').val('');
+        $('#txtIdEjercicio').val('');
+        $('#seleActividades').multiSelect('deselect_all');
+        valor=[];
+    }
+
+    function editarPlan(id){
+        console.log(id);
+        $('#txtNombre').val($(`#nombreplan-${id}`).text());
+        $('#txtDescripcion').val($(`#descripcionplan-${id}`).text());
+        $('#multiselectejercicios').css('display','none');
+        $('#btnAceptar').css('display', 'none');
+        $('#btnEditar').css('display', 'inline');
+    }
+
+    function editRowPlan(id, nombre, descripcion){
+        $(`#nombreplan-${id}`).text(nombre);
+        $(`#descripcionplan-${id}`).text(descripcion);
+    }
+
+    function agregarPlan(){
+        $('#btnAceptar').css('display', 'inline');
+        $('#btnEditar').css('display', 'none');
+        $('#multiselectejercicios').css('display','inline');
     }

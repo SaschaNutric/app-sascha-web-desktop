@@ -60,7 +60,11 @@ document.getElementById('selRoles').length = 1;
             let usuario = {
                 id_empleado: $('#txtIdEmpleado').val(),
                 correo: $('#txtCorreoNuevo').val(),
+<<<<<<< HEAD
                 id_rol: $('select[name=selRoles]').val(),
+=======
+                id_rol: $('select[name=selRol]').val(),
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
                 contraseña: $('#txtContrasena').val()
             }
 
@@ -74,8 +78,13 @@ document.getElementById('selRoles').length = 1;
                     console.log(status);
                     const emp = res.data 
                     limpiarEmpleado()
+<<<<<<< HEAD
                     mensaje('#msjAlerta', `Usuario`, 1);
                     addRowUsuarios(emp.id_usuario, emp.empleado.nombres, $('select[name="selRoles"] option:selected').text());
+=======
+                    mensaje('#msjAlertaA', `Tipo Unidad`, 1);
+                    addRowUsuarios(emp.id_usuario, emp.empleado.nombres);
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
                     $('#agregarUsuario .close').click();
                 },
                 error: function(res, status, xhr) {
@@ -110,8 +119,13 @@ document.getElementById('selRoles').length = 1;
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
+<<<<<<< HEAD
                 editRowUsuario(id, $('select[name="selRoles1"] option:selected').text())
                 $('#editarUsuario .close').click();
+=======
+                editRowUsuario(id, $('select[name=selRoles1]').text())
+                $('#editarRoles .close').click();
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
                 mensaje('#msjAlerta',  `Usuario`, 3);
             },
             error: function(res, status, xhr) {
@@ -128,6 +142,7 @@ document.getElementById('selRoles').length = 1;
             return;
         }
         cargarEmpleado($('#txtCedula').val())
+<<<<<<< HEAD
     })
 
     $("#btnSi").on('click', function() {
@@ -136,6 +151,11 @@ document.getElementById('selRoles').length = 1;
     })
 
 
+=======
+        $('#grupoEmpleado').css('display', 'inline');
+    })
+
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
     function editRowUsuario(id, rol){
         $(`#rol-${id}`).text(rol);
     }
@@ -146,7 +166,11 @@ document.getElementById('selRoles').length = 1;
             <td id="rol-${id}">${rol}</td>                    
             <td>
                 <button onclick="editarUsuarios(${id})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#editarUsuario"  title='Editar'><i class='fa fa-pencil'></i></button>
+<<<<<<< HEAD
                 <button onclick="abrirModalEliminarUsuarios(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarUsuario" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+=======
+                <button onclick="abrirModalEliminarUsuarios(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarUsuarios" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
             </td>
         </tr>`);
         $('#dtUsuarios').DataTable().row.add(row).draw();
@@ -160,16 +184,22 @@ document.getElementById('selRoles').length = 1;
 
     }
 
+<<<<<<< HEAD
     function abrirModalEliminarUsuarios(id){
         $('#txtIdUsuarioEliminar').val(id);
         $('#txtNombreU').val($(`#nombre-${id}`).text())
     }
+=======
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
     
     function limpiarEmpleado(){
         $('#grupoEmpleado').css('display', 'none');
         $('#txtCedula').val('');
+<<<<<<< HEAD
         $('#txtNombreNuevo').val('');
         $('#txtCorreoNuevo').val('');
+=======
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449
     }
 
     function ValidarUsuario(){
@@ -226,6 +256,7 @@ document.getElementById('selRoles').length = 1;
             $('#txtNombreNuevo').val(res.data.nombres)
             $('#txtCorreoNuevo').val(res.data.correo)
             $('#txtIdEmpleado').val(res.data.id_empleado)
+<<<<<<< HEAD
             $('#grupoEmpleado').css('display', 'inline');
         },
         error: function(res, status, xhr) {
@@ -252,3 +283,15 @@ document.getElementById('selRoles').length = 1;
             }
         })
     }
+=======
+            console.log($('#txtIdEmpleado').val())
+            console.log(res)
+            console.log(status)
+        },
+        error: function(res, status, xhr) {
+            console.log(res)
+            console.log(status)
+        }
+    })
+    }
+>>>>>>> 2116ed4ea389e6cc1c5ed8fe511cc3074e3d0449

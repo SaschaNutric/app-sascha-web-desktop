@@ -11,7 +11,18 @@
    	width: 90px;
 }
 
+.btn-filtrable{
+    background-color: #7ab740;
+    border-color: #7ab740;
+    color: #FFFFFF;
+}
+
 .btn-aceptar:hover, .btn-aceptar:focus, .btn-aceptar:active, .btn-aceptar.active, .open .dropdown-toggle.btn-aceptar {
+    background-color: #7ab740;
+    border-color: #7ab740;
+    color: #FFFFFF;
+}
+.btn-filtrable:hover, .btn-filtrable:focus, .btn-filtrable:active, .btn-filtrable.active, .open .dropdown-toggle.btn-filtrable {
     background-color: #7ab740;
     border-color: #7ab740;
     color: #FFFFFF;
@@ -26,12 +37,18 @@
     margin-left: 5px;
 }
 
+
 .btn-cancelar:hover, .btn-cancelar:focus, .btn-cancelar:active, .btn-cancelar.active, .open .dropdown-toggle.btn-cancelar {
-    background-color: #ec6459;
-    border-color: #ec6459;
+    background-color: #858580;
+    border-color: #858580;
     color: #FFFFFF;
 }
 
+.btn-no-filtrable{
+    background-color: #858580;
+    border-color: #858580;
+    color: #FFFFFF;
+}
 .btn-agregar {
     background-color: #17aa8b;
     border-color: #17aa8b;

@@ -1,4 +1,5 @@
-var datos=[];
+var valor=[];
+var suple = [];
 $(document).ready(function() {
 
 	$('#dtPlanSuplemento').DataTable( {
@@ -66,17 +67,17 @@ $(document).ready(function() {
     afterSelect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        datos.push(values[0]);
-        console.log(datos);
+       valor.push(values[0]);
+        console.log(valor);
     },
     afterDeselect: function (values) {
         this.qs1.cache();
         this.qs2.cache();
-        const index = datos.indexOf(values[0])
+        const index = valor.indexOf(values[0])
         if (index != -1){
-            datos.splice(index,1)
+            valor.splice(index,1)
         }
-        console.log(datos)
+        console.log(valor)
     }
 });
     /*fin multiselect */
@@ -90,6 +91,7 @@ $(document).ready(function() {
         success: function(res, status, xhr) {
             console.log(res);
             res.data.map(function(suplemento) {
+                suple.push(suplemento);
                 let option = $(`<option value="${suplemento.id_suplemento}">${suplemento.nombre}</option>`)
                 $('#ms_suplementos').append(option);
                 $('#ms_suplementos').multiSelect('refresh')
@@ -110,8 +112,8 @@ $(document).ready(function() {
         type: 'GET',
         success: function(res, status, xhr) {
             console.log(res);
-            res.data.map(function(suplemento) {
-                addRowPlan(suplemento.id_suplemento, suplemento.nombre, suplemento.descripcion, suplemento.nombre)
+            res.data.map(function(plan) {
+                addRowPlan(plan.id_plan_suplemento, plan.nombre, plan.descripcion, plan.suplementos)
             })
         },
         error: function(res, status, xhr) {
@@ -124,8 +126,6 @@ $(document).ready(function() {
     })
 
     
-    
-
     $('#btnAceptar').on('click', function() {
 
         if($('#txtNombre').val() == ""){
@@ -138,16 +138,26 @@ $(document).ready(function() {
             return;
         }
 
-        if(datos.length == 0){
+        if(valor.length == 0){
             $('select[name=suplemento]').css('border', '1px solid red')
             return;
         }
 
+        console.log(valor);
+        // Convierte el arreglo de ids en un arreglo de objetos JSON. Ej. { id_suplemento: id }
+        let suplementos = [];
+        valor.map(function(val) {
+            suplementos.push({
+                id_suplemento: val
+            })
+        })
         let planSuplemento = {
             nombre: $('#txtNombre').val(),
-            descripcion: $('#txtDescripcion').val()
+            descripcion: $('#txtDescripcion').val(),
+            suplementos: suplementos
+            //suplementos: $('select[name=suplemento]').val()
         }
-
+        console.log(planSuplemento);
         $.ajax({
             url: 'https://api-sascha.herokuapp.com/plansuplementos',
             contentType: 'application/json',
@@ -156,9 +166,19 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                addRowPlan(res.data.id_plan_suplemento, res.data.nombre, res.data.descripcion,res.data.nombre)
+                // Busca en el multiselect el nombre de los suplementos
+                // y crea arreglo de objetos JSON Ej. { id_suplemento: 1, nombre: "Vitamina" }
+                let suplementos = [];
+                res.data.suplementos.map(function(suplemento) {
+                    suplementos.push({ 
+                        id_suplemento: suplemento,
+                        nombre: $(`option[value="${suplemento}"]`).text()
+                    })
+                });
+                
+                addRowPlan(res.data.id_plan_suplemento, res.data.nombre, res.data.descripcion, suplementos)
                 limpiarPlanSuplemento();
-                mensaje('#msjAlerta', `Plan Suplemento`, 1);
+                mensaje('#msjAlerta', `Plan de Suplementos`, 1);
             },
             error: function(res, status, xhr) {
                 console.log(res);
@@ -171,26 +191,141 @@ $(document).ready(function() {
 
     })
 
+    $('#btnEditar').on('click', function() {
+
+        if($('#txtNombre').val() == ""){
+            $('#txtNombre').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtDescripcion').val() == ""){
+            $('#txtDescripcion').css('border', '1px solid red');
+            return;
+        }
+
+
+        let planSuplemento = {
+            nombre: $('#txtNombre').val(),
+            descripcion: $('#txtDescripcion').val(),
+        }
+        let id = $('#txtIdSuplemento').val();
+
+        if(planSuplemento.nombre == $(`#nombreplansuplemento-${id}`).text() && planSuplemento.descripcion == $(`#descripcionplansuplemento-${id}`).text()){
+            mensaje('#msjAlerta', ``, 4);
+            $('#agregarPlan').modal('hide');   
+            return;
+        }
+        console.log(id);
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/plansuplemento/${id}`,
+            contentType: 'application/json',
+            type: 'PUT',
+            data: JSON.stringify(planSuplemento),
+            success: function(res, status, xhr) {
+                console.log(planSuplemento)
+                mensaje('#msjAlerta', `Plan de Suplemento`, 3);
+                editRowPlan(id, planSuplemento.nombre, planSuplemento.descripcion)
+                limpiarPlanSuplemento();
+            },
+            error: function(res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+
+            }
+        })
+
+        $('#agregarPlan').modal('hide');
+    })
+
+
 });
 
     function addRowPlan(id, nombre, descripcion, suplementos) {
         let row = $(`<tr>
             <td id="nombreplansuplemento-${id}">${nombre}</td>
             <td id="descripcionplansuplemento-${id}">${descripcion}</td>
-            <td id="suplementos-${id}">${suplementos}</td>
+            <td id="suplementos-${id}">${
+                suplementos.map(function (suplemento) {
+                    return suplemento.nombre;
+                })
+            }</td>
             <td>
-            <button onclick="editarPlanSuplemento(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarPlan"  title='Editar'><i class='fa fa-pencil'></i></button>
-            <button onclick="abrirModalPlanEliminarSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarSuplemento" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+            <button onclick="editarPlan(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarPlan"  title='Editar'><i class='fa fa-pencil'></i></button>
+            <button onclick="abrirModalEliminarPlanSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarPlan" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>
             `);
         $('#dtPlanSuplemento').DataTable().row.add(row).draw();
     }
 
+    function eliminarPlan(id) {
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/plansuplemento/${id}`,
+            contentType: 'application/json',
+            type: 'DELETE',
+            success: function (res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                $('#dtPlanSuplemento').DataTable().row($(`#nombreplansuplemento-${id}`).parent()).remove().draw();
+                $('#txtIdPlanSuplementoEliminar').val('');
+                mensaje('#msjAlerta', `Plan de Suplemento`, 2);
+            },
+            error: function (res, status, xhr) {
+                console.log(res);
+                console.log(status);
+                limpiarPlanSuplemento();
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            }
+        })
+    }
+
+    function abrirModalEliminarPlanSuplemento(id) {
+        $('#txtIdPlanSuplementoEliminar').val(id);
+    }
+
     function limpiarPlanSuplemento(){
         $('#txtNombre').val('');
         $('#txtDescripcion').val('');
         $('#txtIdSuplemento').val('');
-        $('#ms_suplementos').multiSelect('refresh');
-        datos=[];
+        $('#ms_suplementos').multiSelect('deselect_all');
+        valor=[];
+    }
+
+    function editarPlan(id){
+        let prueba = $(`#suplementos-${id}`).text();
+        console.log("suplementos: ", prueba);
+        let nom_suplementos = prueba.split(",");
+        console.log(nom_suplementos);
+        let suplementos=[];
+        nom_suplementos.map(function(s){
+            suple.map(function(suplemento){
+                console.log(suplemento);
+                if(s == suplemento.nombre){
+                    suplementos.push(suplemento.id_suplemento.toString());
+                }
+            })
+        })
+        console.log(suplementos);
+        $('#ms_suplementos').multiSelect('select', suplementos);
+        console.log(id);
+        $('#txtNombre').val($(`#nombreplansuplemento-${id}`).text());
+        $('#txtDescripcion').val($(`#descripcionplansuplemento-${id}`).text());
+        $('#txtIdSuplemento').val(id);
+        //$('#multiselectSuplementos').css('display','none');
+        $('#btnAceptar').css('display', 'none');
+        $('#btnEditar').css('display', 'inline');
+    }
+
+    function editRowPlan(id, nombre, descripcion){
+        $(`#nombreplansuplemento-${id}`).text(nombre);
+        $(`#descripcionplansuplemento-${id}`).text(descripcion);
+    }
+
+    function agregarPlan(){
+        $('#btnAceptar').css('display', 'inline');
+        $('#btnEditar').css('display', 'none');
+        $('#multiselectSuplementos').css('display','inline');
     }
