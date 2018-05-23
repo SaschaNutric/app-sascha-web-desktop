@@ -1,20 +1,6 @@
+
 Morris.Bar({
     element: 'graph-bar',
-    data: [
-        {x: 'Servicio X', y: 10, z: 90},
-        {x: 'Servicio Y', y: 8, z: 92},
-        {x: 'Servicio z', y: 3, z: 97}
-    ],
-    xkey: 'x',
-    ykeys: ['y', 'z'],
-    labels: ['Aprobados', 'Rechazados'],
-    barColors:['#3da3cb','#858580']
-
-
-});
-
-Morris.Bar({
-    element: 'graph-donut-A',
     data: [
         {x: 'Motivo X', y: 5, z: 9},
         {x: 'Motivo Y', y: 2, z: 3},

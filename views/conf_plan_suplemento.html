@@ -22,7 +22,7 @@
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
-    <link href="css/plan_suplemento.css" rel="stylesheet">
+    <link href="css/conf_sistema.css" rel="stylesheet">
 </head>       
 <body>
 
@@ -35,7 +35,7 @@
                         <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                         <!-- Tabla de parametro -->
                         <div class="pull-right" >
-                            <a class="btn btn-info" data-toggle="modal" href="#agregarPlan">Configurar</a>
+                            <a class="btn btn-agregar" data-toggle="modal" href="#agregarPlan" onclick="agregarPlan()">Configurar</a>
                         </div>
                         <table id="dtPlanSuplemento" class="display table table-bordered table-striped">
                             <thead>
@@ -43,8 +43,7 @@
                                     <th width="25%">Nombre</th>
                                     <th width="30%">Descripcion</th>
                                     <th width="35">Suplementos</th>
-                                    <th width="10%">Acciones</th>
-
+                                    <th class="ancho-columna">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -65,6 +64,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
+                        <input type="text" class="form-control" id="txtIdSuplemento" style="display: none;" disabled>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Nombre:</label>
                             <div class="col-md-9"><input class="form-control" id="txtNombre" type="text" name="" value=""/> </div>
@@ -74,18 +74,20 @@
                             <div class="col-md-9"><textarea class="form-control" id="txtDescripcion" rows="3"></textarea> </div>
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="multiselectSuplementos">
                             <label class="col-md-3 control-label" for="cmbParametro">Suplementos:</label>
                             <div class="col-md-9">
-                             <select id="ms_suplementos" name="suplemento" class="form-control"></select>
+                             <select id="ms_suplementos" name="suplemento" multiple class="form-control">
+                                <option value="0" selected disabled></option>
+                            </select>
                          </div>
                      </div>
                  </form>
              </div>
              <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-danger" type="button" id="btnCancelar" onclick="limpiarPlanSuplemento()">Cancelar</button>
                 <button id="btnEditar" type="button" class="btn btn-aceptar" style="display: none;">Aceptar</button>
-                <button id="btnAceptar" class="btn btn-info" type="button">Aceptar</button>
+                <button id="btnAceptar" class="btn btn-aceptar" type="button">Aceptar</button>
+                <button data-dismiss="modal" class="btn btn-cancelar" type="button" id="btnCancelar" onclick="limpiarPlanSuplemento()">Cancelar</button>
             </div>
         </div>
     </div>
@@ -100,11 +102,11 @@
               <h4 class="modal-title" id="gridSystemModalLabel"><i></i> Confirmar Acción</h4>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control" id="txtIdPlanEliminar" style="display: none;" disabled>
+            <input type="text" class="form-control" id="txtIdPlanSuplementoEliminar" style="display: none;" disabled>
             <p style="text-align: center;">¿Está seguro que desea eliminar el plan?</p>
         </div>
         <div class="modal-footer">
-          <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarPlan($('#txtIdPlanEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
+          <button id="btnEliminarUnidad" data-dismiss="modal" onclick="eliminarPlan($('#txtIdPlanSuplementoEliminar').val())" type="button" class="btn btn-aceptar">Aceptar</button>
           <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
       </div>
   </div>

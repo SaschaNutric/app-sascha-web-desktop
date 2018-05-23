@@ -18,6 +18,7 @@ $(document).ready(function(event) {
                     $("input#txtContraseña").css('border', '1px solid #ccc');
                 });
             } 
+            mensaje('#msjAlerta',``, 5);            
             return;
         }
         
@@ -32,13 +33,16 @@ $(document).ready(function(event) {
             contentType: 'application/json',
             data: JSON.stringify(credenciales),
             success: function(res, status, xhr) {
-                console.log(res)
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('empleado', JSON.stringify(res.data.empleado));
+                console.log(res.data)
+                localStorage.removeItem('token');             
+                localStorage.removeItem('empleado');
+                localStorage.setItem('empleado', JSON.stringify(res.data));
                 window.location = 'principal.html';
             },
             error: function(res, status, xhr) {
                 console.log(res)
+                const respuesta = JSON.parse(res.responseText);
+                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
             }
         })
     })
