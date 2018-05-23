@@ -1,7 +1,11 @@
+
+let arregloTipoParametros = []
 let arreglo_grupos = []
 let realizadas = 0;
 let id_cliente = null;
 let id_tipo_cita = null;
+let arreglo_frecuencias = []
+let valores_viejos = []
 $(document).ready(function () {
 
 
@@ -64,7 +68,23 @@ $(document).ready(function () {
     });
 
 
-    $('txtHoraCita').timepicker()
+    $('#dtMeta').DataTable({
+        "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron metas",
+            "zeroRecords": "No se encontraron metas"
+        },
+        "searching": false,
+        "ordering": false,
+        "paging": false
+    });
+
+
 
 
     if (id_agenda == undefined) {
@@ -92,6 +112,7 @@ $(document).ready(function () {
                 let plan_suplemento = servicio.plan_suplemento;
                 let plan_ejercicio = servicio.plan_ejercicio;
 
+                agenda.id_tipo_cita = 2 //BORRAAAAR
                 //Datos de la cita
                 moment.locale('es')
                 id_tipo_cita = agenda.id_tipo_cita
@@ -121,6 +142,7 @@ $(document).ready(function () {
                 $('#plan-suplemento-nombre').text(plan_suplemento.nombre == null ? 'No incluye' : plan_suplemento.nombre)
 
                 if (agenda.id_tipo_cita == 1) {
+
                     //Perfil Diagnostico
                     $.ajax({
                         url: 'https://api-sascha.herokuapp.com/parametros',
@@ -143,34 +165,11 @@ $(document).ready(function () {
 
                         }
                     })
-                    //Plan Dieta
-                    $('#plan_dieta_nombre').val(plan_dieta.nombre)
-                    if (plan_dieta.comidas.length != 0) {
-                        plan_dieta.comidas.map(function (comida) {
-                            crearPanelesDieta(comida.id_comida, comida)
-                        })
 
-                    }
-                    //Plan Suplemento
-                    if (plan_suplemento) {
-                        $('#plan_suplemento_nombre').val(plan_suplemento.nombre)
-                        plan_suplemento.suplementos.map(function (suplemento) {
-                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, '', suplemento.unidad_abreviatura, '');
-
-                        })
-                    }
-
-                    //Plan Ejercicio
-                    if (plan_ejercicio) {
-                        $('#plan_ejercicio_nombre').val(plan_ejercicio.nombre)
-                        plan_ejercicio.ejercicios.map(function (ejercicio) {
-                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, '', '');
-
-                        })
-                    }
                 } else {
-                    //Perfil
+                    //Perfil Control
                     if (agenda.id_tipo_cita == 2) {
+                        $('#btnMeta').css('display', 'none')
                         $('#btnAgregarParametro').css('display', 'inline')
                         perfil.map(function (parametro) {
                             let unidad = parametro.unidad
@@ -181,46 +180,62 @@ $(document).ready(function () {
                             }
                         })
                     }
-                    //Plan Dieta
+                }
+                //Plan Dieta
+                $('#plan_dieta_nombre').val(plan_dieta.nombre)
+                if (plan_dieta.comidas.length != 0) {
+                    plan_dieta.comidas.map(function (comida) {
+                        crearPanelesDieta(comida.id_comida, comida)
+                    })
 
-                    //Plan Suplemento
-
-                    //Plan Ejercicio
                 }
 
                 //Frecuencias
                 $.ajax({
                     url: `https://api-sascha.herokuapp.com/frecuencias`,
                     type: 'GET',
+                    async: false,
                     contentType: 'application/json',
                     success: function (res, status, xhr) {
                         const frecuencias = res.data;
                         frecuencias.map(function (frecuencia) {
-                            //Frecuencias de suplementos
-                            let select_suplementos = document.getElementsByClassName('select-suplemento');
-                            for (let s = 0; s < select_suplementos.length; s++) {
-                                let selectE = select_suplementos[s];
-                                let optionE = document.createElement('option');
-                                optionE.value = frecuencia.id_frecuencia;
-                                optionE.innerHTML = frecuencia.frecuencia;
-                                selectE.appendChild(optionE);
-                            }
-                            //Frecuencias de ejercicios
-                            let select_ejercicios = document.getElementsByClassName('select-ejercicio');
-                            for (let e = 0; e < select_ejercicios.length; e++) {
-                                let selectS = select_ejercicios[e];
-                                let optionS = document.createElement('option');
-                                optionS.value = frecuencia.id_frecuencia;
-                                optionS.innerHTML = frecuencia.frecuencia;
-                                selectS.appendChild(optionS);
-                            }
+                            arreglo_frecuencias.push({
+                                id_frecuencia: frecuencia.id_frecuencia,
+                                frecuencia: frecuencia.frecuencia
+                            })
                         })
                     },
                     error: function (res, status, xhr) {
                         alert("error!")
                     }
-
                 })
+                //Plan Suplemento
+                if (plan_suplemento) {
+                    $('#plan_suplemento_nombre').val(plan_suplemento.nombre)
+                    plan_suplemento.suplementos.map(function (suplemento) {
+                        if (suplemento.cantidad) {
+                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, suplemento.cantidad, suplemento.unidad_abreviatura, suplemento.frecuencia);
+                        } else {
+                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, '', suplemento.unidad_abreviatura, 0);
+
+                        }
+
+                    })
+                }
+                //Plan Ejercicio
+                if (plan_ejercicio) {
+                    $('#plan_ejercicio_nombre').val(plan_ejercicio.nombre)
+                    plan_ejercicio.ejercicios.map(function (ejercicio) {
+                        if (ejercicio.duracion) {
+                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, ejercicio.duracion, ejercicio.id_frecuencia);
+                        } else {
+                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, '', 0);
+                        }
+
+                    })
+                }
+
+
 
             },
             error: function (res, status, xhr) {
@@ -397,8 +412,146 @@ $(document).ready(function () {
 
     })
 
+    $('#txtHoraCita').timepicker({
+        minuteStep: 1,
+        appendWidgetTo: 'body',
+        showSeconds: true,
+        showMeridian: false,
+        defaultTime: '12:00:00'
+    });
+
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/tipoparametros',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function (res, status, xhr) {
+            res.data.map(function (tipo_parametro) {
+                arregloTipoParametros.push(tipo_parametro);
+                let option = $(`<option value="${tipo_parametro.id_tipo_parametro}">${tipo_parametro.nombre}</option>`)
+                let optionMeta = $(`<option value="${tipo_parametro.id_tipo_parametro}">${tipo_parametro.nombre}</option>`)
+
+                $('#selTipoParametro').append(option);
+                $('#selTipoParametroMeta').append(optionMeta);
+            })
+        },
+        error: function (res, status, xhr) {
+            console.log(res)
+        }
+    });
+    //Llenando el combo dependiente parametro
+    $('#selTipoParametro').on('change', function () {
+        document.getElementById('selParametro').length = 1;
+        var str = "";
+        $("#selTipoParametro option:selected").each(function () {
+            str += $(this).val() + " ";
+        });
+        arregloTipoParametros.map(function (tipoparametro) {
+            if (tipoparametro.id_tipo_parametro == str) {
+                tipoparametro.parametros.map(function (parametro) {
+                    let option = $(`<option value="${parametro.id_parametro}">${parametro.nombre}</option>`)
+                    $('#selParametro').append(option);
+                })
+            }
+        })
+
+    })
+    $('#selTipoParametroMeta').on('change', function () {
+        document.getElementById('selParametroMeta').length = 1;
+        let str = $("#selTipoParametroMeta").val()
+        arregloTipoParametros.map(function (tipoparametro) {
+            if (tipoparametro.id_tipo_parametro == str) {
+                tipoparametro.parametros.map(function (parametro) {
+                    if (parametro.tipo_valor == 2) {
+                        let option = $(`<option value="${parametro.id_parametro}">${parametro.nombre}</option>`)
+                        $('#selParametroMeta').append(option);
+                    }
+                })
+            }
+        })
+
+    })
+    //Ocultando valor
+    $('#selParametro').on('change', function () {
+        const id = $('#selTipoParametro').val()
+        const idP = $('#selParametro').val()
+        console.log($('#selParametro').val())
+        arregloTipoParametros.map(function (tipoparametro) {
+            if (tipoparametro.id_tipo_parametro == id) {
+                tipoparametro.parametros.map(function (parametro) {
+                    if (parametro.id_parametro == idP) {
+                        console.log(parametro)
+                        if (parametro.tipo_valor == 1) {
+                            $('#valores').css('display', 'none')
+                            $('#txtValorParametro').val('')
+                            $('#parametro-unidad').text('');
+
+                        } else {
+                            if (parametro.tipo_valor == 2) {
+                                $('#valores').css('display', 'inline')
+                                $('#parametro-unidad').text(parametro.unidad.abreviatura);
+                            }
+                        }
+                    }
+                })
+            }
+        })
+
+    })
+
+    //Agregar meta
+    $('#bntAceptarMeta').on('click', function () {
+        let tp = $('#selTipoParametroMeta').val()
+        let p = $('#selParametroMeta').val()
+        let v = $('#txtValorMeta').val()
+        let p_nombre = $('select[name="parametro_meta"] option:selected').text()
+
+        if (tp == 0 || p == 0 || v == '') {
+            mensaje('#msjMeta', '', 5)
+            return
+        }
+
+        //ajax
+        addRowMeta(p, tp, p_nombre, v)
+        $('#definirMeta').modal('hide')
+
+    })
+
+    //Agregar Parametro
+    $('#btnAceptarParametro').on('click', function () {
+        let tp = $('#selTipoParametro').val()
+        let p = $('#selParametro').val()
+        let v = $('#txtValorParametro').val()
+        let u = $('#parametro-unidad').text();
+        let tv = u == '' ? 1 : 2;
+        let p_nombre = $('select[name="parametro"] option:selected').text()
+        let tp_nombre = $('select[name="tipo_parametro"] option:selected').text()
+
+        if (tp == 0 || p == 0 || (tv == 2 && v == '')) {
+            mensaje('#msjMeta', '', 5)
+            return
+        }
+
+        //ajax
+        //Aqui hay que reemplazar p por el id del parametro_cliente que regrese el ajax
+        addRowParametro(p, p_nombre, tp_nombre, tv, u, v, 2)
+        $('#agregarParametro').modal('hide')
+
+    })
 });
 
+function limpiarAgregarParametro() {
+    $('#selTipoParametro').val(0)
+    $('#selParametro').val(0)
+    $('#txtValorParametro').val("")
+    $('#parametro-unidad').text("");
+    $('#valores').css('display', 'none')
+}
+function limpiarDefinirMeta() {
+
+    $('#selTipoParametroMeta').val(0)
+    $('#selParametroMeta').val(0)
+    $('#txtValorMeta').val('')
+}
 
 function crearPanelesDieta(i, comida) {
     //creando el panel
@@ -447,14 +600,21 @@ function crearTabla(id, grupos, body) {
         let alimentos = row.insertCell(3);
         let editar = row.insertCell(4);
         let id_alimentos = row.insertCell(5);
-
+        let arreglo_alimentos_id = []
+        let arreglo_alimentos_nombre = []
+        if (grupo.alimentos) {
+            grupo.alimentos.map(function (al) {
+                arreglo_alimentos_id.push(al.id_alimento)
+                arreglo_alimentos_nombre.push(al.nombre)
+            })
+        }
         grupo_alimenticio.innerHTML = `<span id='grupo-${id}-${grupo.id_grupo_alimenticio}' > ${grupo.nombre} </span>`;
-        cant.innerHTML = `<span id='cantidad-${id}-${grupo.id_grupo_alimenticio}' class='cantidad-dieta'></span>`;
+        cant.innerHTML = `<span id='cantidad-${id}-${grupo.id_grupo_alimenticio}' class='cantidad-dieta'> ${grupo.cantidad ? grupo.cantidad : ''}  </span>`;
         unidad.innerHTML = `<span id='unidad-${id}-${grupo.id_grupo_alimenticio}' >${grupo.unidad_abreviatura}</span>`;
-        alimentos.innerHTML = `<span id='alimentos-${id}-${grupo.id_grupo_alimenticio}' ></span>`;
+        alimentos.innerHTML = `<span id='alimentos-${id}-${grupo.id_grupo_alimenticio}' > ${arreglo_alimentos_nombre}</span>`;
         editar.innerHTML = `<a id='editar-${id}-${grupo.id_grupo_alimenticio}' class='btn btn-white' onclick='agregarAlimentos(${id},${grupo.id_grupo_alimenticio})' data-toggle='modal' href='#agregarAlimentos'><i class='fa fa-pencil' /> </a>`
         id_alimentos.style.display = 'none';
-        id_alimentos.innerHTML = `<span id='id_alimentos-${id}-${grupo.id_grupo_alimenticio}' class='id-alimentos-dieta' ></span>`;
+        id_alimentos.innerHTML = `<span id='id_alimentos-${id}-${grupo.id_grupo_alimenticio}' class='id-alimentos-dieta' > ${arreglo_alimentos_id}</span>`;
     })
 
 }
@@ -560,15 +720,13 @@ function addRowEjercicios(id, ejercicio, cantidad, frecuencia) {
         <td class='text-center'>
         <input class='form-control input-ejercicio' id='cantidadE-${id}' type="number" value='${cantidad}'>
         </td>
-        <td>
-        <select id='selFrecuenciaE-${id}' class='form-control select-ejercicio' >
-        <option value='0' > Seleccione </option>
-        </select>
+        <td id='colE-${id}'>  
         </td>
         </tr>
         `);
     $('#dtEjercicios').DataTable().row.add(row).draw();
 
+    createSelFrecuencia('selFrecuenciaE-' + id, 'form-control select-ejercicio', frecuencia, 'colE-' + id)
 }
 
 function addRowSuplemento(id, suplemento, cantidad, unidad, frecuencia) {
@@ -577,15 +735,31 @@ function addRowSuplemento(id, suplemento, cantidad, unidad, frecuencia) {
         <td class='text-center'>
         <input class='form-control input-suplemento' id='cantidad-${id}' type="number" value='${cantidad}'> ${unidad}
         </td>
-        <td>
-        <select id='selFrecuencia-${id}' class='form-control select-suplemento' >
-        <option value='0' > Seleccione </option>
-        </select>
+        <td id='colS-${id}'>
+        
         </td>
         </tr>
         `);
     $('#dtSuplementos').DataTable().row.add(row).draw();
 
+    createSelFrecuencia('selFrecuencia-' + id, 'form-control select-suplemento', frecuencia, 'colS-' + id)
+}
+function createSelFrecuencia(id, clases, selected, element) {
+    let select = document.createElement("select");
+    select.id = id;
+    select.className = clases
+    let defecto = document.createElement('option');
+    defecto.value = 0;
+    defecto.innerHTML = "Seleccione";
+    select.appendChild(defecto);
+    arreglo_frecuencias.map(function (frecuencia) {
+        let option = document.createElement('option');
+        option.value = frecuencia.id_frecuencia;
+        option.innerHTML = frecuencia.frecuencia;
+        select.appendChild(option);
+    })
+    select.value = selected
+    document.getElementById(element).appendChild(select)
 }
 
 function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita) {
@@ -597,22 +771,69 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
         <td id="tipo_parametro-${id}">${tipo_parametro}</td>
         <td id="nombreParametro-${id}">${nombre}</td>
         <td class='text-center' id="tipo_valor-${id}">${valor}</td>
-        <td>
+        <td ${tipo_cita == 1 ? '' : 'hidden'}>
         <input id='parametro-${id}' type="checkbox" > 
+        </td>
+        <td ${tipo_cita == 2 ? '' : 'hidden'}>
+        <a style='display: ${tipo_valor==1?'none':'inline'}' id='editarParametro-${id}' class='btn btn-white' onclick='editarParametro(${id})'><i class='fa fa-pencil' /> </a>
+        <a id='eliminarParametro-${id}' class='btn btn-white' onclick='eliminarParametro(${id})'><i class='fa fa-trash' /> </a>
+        
+        <a style='display:none' id='confirmarParametro-${id}' class='btn btn-white' onclick='confirmarParametro(${id})'><i class='fa fa-save' /> </a>
+        <a style='display:none' id='cancelarParametro-${id}' class='btn btn-white' onclick='cancelarParametro(${id})'><i class='fa fa-times' /> </a>
         </td>
         </tr>
         `);
     $('#dtPerfil').DataTable().row.add(row).draw();
 
-    $(`#parametro-${id}`).iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green',
-    });
-
+        $(`#parametro-${id}`).iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green',
+        });
+    
     if (tipo_cita == 2) {
-        $(`#parametro-${id}`).iCheck('check')
+        $(`#real-${id}`).prop('disabled', true)
+        $(`#thEditar`).css('display', 'inline')
     }
 
+
+}
+
+function editarParametro(id) {
+
+    valores_viejos.push({
+        id: id,
+        valor: $(`#real-${id}`).val(),
+    })
+    $(`#editarParametro-${id}`).css('display', 'none')
+    $(`#eliminarParametro-${id}`).css('display', 'none')
+    
+    $(`#confirmarParametro-${id}`).css('display', 'inline')
+    $(`#cancelarParametro-${id}`).css('display', 'inline')
+
+    $(`#parametro-${id}`).iCheck('enable')
+    if (document.getElementById('real-' + id)) {
+        $(`#real-${id}`).prop('disabled', false)
+    }
+}
+
+function cancelarParametro(id) {
+    let index;
+    for (let i = 0; i < valores_viejos.length; i++) {
+        if (valores_viejos[i].id == id) {
+            index = i;
+            if (valores_viejos[i].valor) {
+                $(`#real-${id}`).val(valores_viejos[i].valor)
+                $(`#real-${id}`).prop('disabled', true)
+
+            }
+        }
+    }
+    valores_viejos.splice(index, 1)
+    $(`#editarParametro-${id}`).css('display', 'inline')
+    $(`#eliminarParametro-${id}`).css('display', 'inline')
+    
+    $(`#confirmarParametro-${id}`).css('display', 'none')
+    $(`#cancelarParametro-${id}`).css('display', 'none')
 
 }
 
@@ -620,9 +841,9 @@ function agregarAlimentos(comida, grupo) {
 
     resetMultiSelect()
     const id = `grupo-${comida}-${grupo}`
-    const nombre = document.getElementById(id).innerHTML
-    const unidad = document.getElementById(`unidad-${comida}-${grupo}`).innerHTML;
-    const cantidad = document.getElementById(`cantidad-${comida}-${grupo}`).innerHTML;
+    const nombre = document.getElementById(id).innerHTML.trim()
+    const unidad = document.getElementById(`unidad-${comida}-${grupo}`).innerHTML.trim();
+    const cantidad = document.getElementById(`cantidad-${comida}-${grupo}`).innerHTML.trim();
 
     $('#txtGrupoAlimenticioId').val(id);
     $('#txtGrupoAlimenticio').val(nombre);
@@ -641,7 +862,7 @@ function agregarAlimentos(comida, grupo) {
 
     })
     $('#ms_alimentos').multiSelect('refresh');
-    const id_alimentos = document.getElementById(`id_alimentos-${comida}-${grupo}`).innerHTML.split(',');
+    const id_alimentos = document.getElementById(`id_alimentos-${comida}-${grupo}`).innerHTML.trim().split(',');
     $('#ms_alimentos').multiSelect('select', id_alimentos);
 
 }
@@ -652,5 +873,24 @@ function resetMultiSelect() {
     $('#txtGrupoCantidad').val('')
     $('#ms_alimentos').empty();
     $('#ms_alimentos').multiSelect('refresh')
+
+}
+
+function addRowMeta(id, tipo_parametro, parametro, valor) {
+
+    let row = $(`<tr>
+        <td hidden id="metaTP-${id}">${tipo_parametro}</td>    
+        <td id="metaP-${id}">${parametro}</td>
+        <td id= "metaV">
+        ${valor}
+        </td>
+        <td>
+        <button onclick="editarMeta(${id})" type='button' class='btn  btn-white' data-toggle="modal" data-target="#definirMeta"  title='Editar'><i class='fa fa-pencil'></i></button>
+        <button onclick="abrirModalEliminarMeta(${id})" type='button' class=' btn  btn-white' data-toggle='modal' data-target="#eliminarMeta" title='Eliminar'><i class="fa fa-trash-o"></i></button>  
+        </td>
+        </tr>
+        `);
+    $('#dtMeta').DataTable().row.add(row).draw();
+
 
 }

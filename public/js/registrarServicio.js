@@ -136,6 +136,7 @@ $(document).ready(function () {
                 arregloTipoParametros.push(tipo_parametro);
                 let option = $(`<option value="${tipo_parametro.id_tipo_parametro}">${tipo_parametro.nombre}</option>`)
                 $('#selTipoParametro').append(option);
+
             })
 
         },
@@ -160,6 +161,7 @@ $(document).ready(function () {
         })
 
     })
+
     //Ocultando valor minimo y maximo 
     $('#selParametro').on('change', function () {
         const id = $('#selTipoParametro').val()
@@ -169,7 +171,6 @@ $(document).ready(function () {
             if (tipoparametro.id_tipo_parametro == id) {
                 tipoparametro.parametros.map(function (parametro) {
                     if (parametro.id_parametro == idP) {
-                        console.log(parametro)
                         if (parametro.tipo_valor == 1) {
                             $('#valores').css('display', 'none')
                             $('#txtMaximo').val('')
@@ -343,9 +344,9 @@ $(document).ready(function () {
             success: function (res, status, xhr) {
                 const serv = res.data;
                 console.log(res.data)
-                $('#btnRegistrar').css('display','none')
+                $('#btnRegistrar').css('display', 'none')
                 $('#btnCancelarServ').text('Cerrar')
-                
+
                 registrado = res.data.data.id_servicio;
                 mensaje('#msjAlerta', 'Servicio', 1);
             },
@@ -376,10 +377,14 @@ $(document).ready(function () {
 
         }
 
-        const url_imagen = $('#imgServicio').attr("src");
+        const div = document.getElementsByClassName('fileupload-preview')[0]
+        let url_imagen = ''
+        if (div.firstChild != null) {
+            url_imagen = div.firstChild.src
+        }
 
         console.log(servicio)
-        if (oldServicio.nombre == servicio.nombre && oldServicio.descripcion == servicio.descripcion && oldServicio.plan_dieta.id_plan_dieta == servicio.id_plan_dieta && oldServicio.plan_suplemento.id_plan_suplemento == servicio.id_plan_suplemento && oldServicio.plan_ejercicio.id_plan_ejercicio == servicio.id_plan_ejercicio && oldServicio.especialidad.id_especialidad == servicio.id_especialidad && oldServicio.numero_visitas == servicio.numero_visitas && oldServicio.url_imagen == url_imagen) {
+        if (oldServicio.nombre == servicio.nombre && oldServicio.descripcion == servicio.descripcion && oldServicio.plan_dieta.id_plan_dieta == servicio.id_plan_dieta && oldServicio.plan_suplemento.id_plan_suplemento == servicio.id_plan_suplemento && oldServicio.plan_ejercicio.id_plan_ejercicio == servicio.id_plan_ejercicio && oldServicio.especialidad.id_especialidad == servicio.id_especialidad && oldServicio.numero_visitas == servicio.numero_visitas && url_imagen == '') {
             mensaje('#msjAlerta', '', 4);
             return;
 
@@ -395,7 +400,7 @@ $(document).ready(function () {
         form_data.append('id_plan_ejercicio', servicio.id_plan_ejercicio);
         form_data.append('id_especialidad', servicio.id_especialidad);
         form_data.append('numero_visitas', servicio.numero_visitas);
-        if (url_imagen != servicio.url_imagen) {
+        if (url_imagen != '') {
             form_data.append('imagen', file_data);
         }
 
