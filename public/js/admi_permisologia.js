@@ -1,25 +1,6 @@
 $(document).ready(function() {
   
 
-	$('#dtRoles').dataTable( {
-		"aoColumnDefs": [
-		{ "bSortable": false, "aTargets": [ 2 ] }
-		],
-		"sDom": "ftp",
-		"oLanguage": {
-			
-			"sLengthMenu": "",
-			"sSearch": "Buscar:",
-			"oPaginate":{
-				"sPrevious": "Anterior",
-				"sNext": "Siguiente"
-			},
-			"sEmptyTable": "No se encontraron roles"
-		},
-	} );
-
-
-
 $('#ms_funcionalidades').multiSelect({
     selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
     selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",

@@ -25,6 +25,9 @@ function mensaje(id, entidad, accion){
         case 5: 
         tipo= "alert alert-danger";
         texto = `<strong>Error!</strong> Rellena los campos obligatorios.`;
+        case 10:
+        tipo= "alert alert-info";
+        texto = `<strong>${entidad}</strong>  No encontrado.`;
 
 
 
