@@ -4,7 +4,7 @@ var Script = function () {
     -----------------------------------------------------------------*/
     let data = {
         fecha_inicio: '2018-05-01',
-        fecha_fin: '2018-05-31'
+        fecha_fin: '2019-05-31'
     }
 
     var date = new Date();
@@ -37,6 +37,8 @@ var Script = function () {
          let event = {
             title: agenda.horario + " - " + agenda.nombre_cliente,
             start: agenda.fecha_inicio,
+            end: agenda.fecha_fin,
+            color: (agenda.id_tipo_cita ==1 ? '#7ab740': '#3da3cb'),
             url: `visi_registrarVisita.html?id=${agenda.id_agenda}`
         }
         events.push(event);

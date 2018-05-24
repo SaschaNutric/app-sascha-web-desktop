@@ -17,7 +17,10 @@
 
     <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker.css" />
+    <link href="js/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="js/fullcalendar/bootstrap-fullcalendar.print.css" media="print" rel="stylesheet" />
+    
+
 
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
@@ -31,7 +34,7 @@
     <link href="css/registrarVisita.css" rel="stylesheet">
 
 
-    <link href="js/iCheck/skins/minimal/green.css" rel="stylesheet">
+    <link href="js/iCheck/skins/flat/green.css" rel="stylesheet">
 
 
     <!--external css-->
@@ -67,10 +70,10 @@
                 <section class="panel">
                     <header class="panel-heading tab-bg-dark-navy-blue">
                         <ul class="nav nav-tabs" style="text-align: center;">
-                            <li class="active" style="width: 25%">
+                            <li id='plan-perfil' class="active" style="width: 25%">
                                 <a data-toggle="tab" href="#perfil" aria-expanded="false">Perfil</a>
                             </li>
-                            <li class="" style="width: 25%">
+                            <li id="plan-dieta" class="" style="width: 25%">
                                 <a data-toggle="tab" href="#dieta" aria-expanded="false">Dieta</a>
                             </li>
                             <li id="panel-suplementos" class="" style="width: 25%">
@@ -83,346 +86,421 @@
                     </header>
                     <section class="panel-body">
                         <div class="tab-content">
+                            <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"></div>
                             <div id="perfil" class="tab-pane active">
-                                <div class="plan-panel"  style="padding-top: 20px">
-                               <table class="display table table-bordered table-striped" id="dtPerfil">
-                                <thead>
-                                    <tr>
-                                        <th width="30%" >Tipo Parametro </th>
-                                        <th width="40%">Parametro</th>
-                                        <th width="20%" >Valor</th>
-                                        <th width="10%" ></th>                     
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table> 
-                        </div>
-                    </div>                                          
-                    <div id="dieta" class="tab-pane"> 
-                        <div class="plan-panel" style="padding-top: 20px">
-                            <div class="row" style="border-bottom: solid 1px;">
-                                <h4 id="plan-dieta-nombre"></h4>
+                                <div class="pull-right">
+                                    <!-- modal agregar tipo parametro -->
+                                    <a style="display: none" id="btnAgregarParametro" href="#agregarParametro" data-toggle="modal" class="btn btn-info">
+                                        Agregar
+                                    </a>
+                                </div>
+                                <div class="plan-panel" style="padding-top: 20px">
+
+                                    <table class="display table table-bordered table-striped" id="dtPerfil">
+                                        <thead>
+                                            <tr>
+                                                <th width="30%">Tipo Parametro </th>
+                                                <th width="30%">Parametro</th>
+                                                <th width="20%">Valor</th>
+                                                <th width="10%">Registrado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
-                     
-                            <div class="row" id='comidas'></div>
+                            <div id="dieta" class="tab-pane">
+                                <div class="plan-panel" style="padding-top: 20px">
+                                    <div class="row" style="border-bottom: solid 1px;">
+                                        <h4 id="plan-dieta-nombre"></h4>
+                                    </div>
+
+                                    <div class="row" id='comidas'></div>
 
 
-                        </div>
-                    </div>
-                    <div  id="suplementos" class="tab-pane">
-                        <div class="plan-panel" style="padding-top: 20px">
-                            <div class="row" style="border-bottom: solid 1px;">
-                                <h4 id="plan-suplemento-nombre"></h4>
+                                </div>
                             </div>
-                  
+                            <div id="suplementos" class="tab-pane">
+                                <div class="plan-panel" style="padding-top: 20px">
+                                    <div class="row" style="border-bottom: solid 1px;">
+                                        <h4 id="plan-suplemento-nombre"></h4>
+                                    </div>
+                                    <div style="padding-top: 20px">
+                                        <table id="dtSuplementos" class="display table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th width="45%">Suplemento</th>
+                                                    <th width="25%">Cantidad</th>
+                                                    <th width="30%">Dosis</th>
 
-                            <table id="dtSuplementos" class="display table table-bordered table-striped" style="padding-top:
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="actividades" class="tab-pane">
+                                <div class="plan-panel" style="padding-top: 20px">
+                                    <div class="row" style="border-bottom: solid 1px;">
+                                        <h4 id="plan-ejercicio-nombre"></h4>
+                                    </div>
+                                    <br>
+                                    <table id="dtEjercicios" class="display table table-bordered table-striped" style="padding-top:
                                     20px">
-                                <thead>
-                                    <tr>
-                                        <th width="45%">Suplemento</th>
-                                        <th width="20%">Cantidad</th>
-                                        <th width="30%">Frecuencia</th>
-                                        <th width="5%"></th>
-                                        
+                                        <thead>
+                                            <tr>
+                                                <th width="45%">Ejercicio</th>
+                                                <th width="25%">Cantidad</th>
+                                                <th width="30%">Frecuencia</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div id="actividades" class="tab-pane">
-                       <div class="plan-panel" style="padding-top: 20px">
-                        <div class="row" style="border-bottom: solid 1px;">
-                            <h4 id="plan-ejercicio-nombre"></h4>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <br>
-                        <table id="dtEjercicios" class="display table table-bordered table-striped" style="padding-top:
-                                    20px">
+                    </section>
+                    <div class="row" style="padding: 30px;">
+                        <div class="position-left col-md-6">
+                            <a  href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
+                        </div>
+                        <div class="pull-right col-md-6" style="text-align: right;">
+                            <button type="button" class="btn btn-danger">Cancelar</button>
+                            <button id='btnRegistrar' type="button" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <div class="mini-stat clearfix">
+                    <span class="mini-stat-icon light-green">
+                        <i class="fa fa-stethoscope"></i>
+                    </span>
+                    <div id="cita-info" class="mini-stat-info">
+                        <span id="cita-fecha"></span>
+                        <h4 id="tipo-cita"></h4>
+                    </div>
+                </div>
+                <section class="panel">
+                    <header class="panel-heading">
+                        Cliente
+                    </header>
+                    <section id="cliente-info" class="panel-body">
+                        <h3 id="cliente-nombre" style="text-align: center; margin: 0px 0px 20px 0px;"></h3>
+
+                        <div class="row">
+                            <label class="control-label col-md-3">Telefono:</label>
+                            <div class="col-md-9">
+                                <span id="cliente-telefono"></span>
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <label class="control-label col-md-3">Edad:</label>
+                            <div class="col-md-9">
+                                <span id="cliente-edad"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-md-3">Direccion:</label>
+                            <div class="col-md-9">
+                                <span id="cliente-direccion"></span>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        Servicio
+                    </header>
+                    <i id="spinner-servicio" class="fas fa-spinner" style="display: none;"></i>
+                    <section id="servicio-info" class="panel-body">
+                        <h3 id="servicio-nombre" style="text-align: center; margin: 0px 0px 20px 0px;"></h3>
+                        <div class=" row">
+                            <label class="control-label col-md-3">Estado:</label>
+                            <div class="col-md-9">
+                                <div class="progress progress-xs">
+                                    <div id="servicio-avance-barra" class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 10%;">
+                                        <span class="sr-only">10% Complete</span>
+                                    </div>
+                                </div>
+                                <span id="servicio-avance-texto" class="pull-right"></span>
+                            </div>
+
+                        </div>
+
+                        <div style="padding: 20px">
+                            <div class="row">
+                                <i class="fa fa-asterisk"></i>
+                                <label>Dieta:</label>
+                                <span id="servicio-plan-dieta"></span>
+                            </div>
+                            <div class="row">
+                                <i class="fa fa-asterisk"></i>
+                                <label>Plan de Suplemento:</label>
+                                <span id="servicio-plan-suplemento"></span>
+                            </div>
+                            <div class="row">
+                                <i class="fa fa-asterisk"></i>
+                                <label>Plan de Entrenamiento:</label>
+                                <span id="servicio-plan-ejercicio"></span>
+                            </div>
+
+                        </div>
+                    </section>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">Meta</header>
+                    <section class="panel-body">
+                        <div class="col-md-12" style="padding: 20px">
+                            <button id="btnMeta" href="#definirMeta" data-toggle="modal" class="btn btn-info" style="width: 100%;">Definir Meta</button>
+                        </div>
+
+                        <table id="dtMeta" class="display table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th width="45%">Ejercicio</th>
-                                    <th width="20%">Cantidad</th>
-                                    <th width="30%">Frecuencia</th>
-                                    <th width="5%"></th>
-                                    
+                                    <th hidden></th>
+                                    <th>Parametro</th>
+                                    <th>Valor</th>
+                                    <th></th>
 
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
-                    </div>
-                </div>
+                    </section>
+                </section>
+
             </div>
-            <br>
-        </section>
-            <div class="row" style="padding: 30px;">
-                <div class="position-left col-md-6">           
-                    <a  href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
-                </div>   
-                <div class="pull-right col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-danger">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Registrar</button>  
-                </div>
-            </div>
-    </section>
-</div>
-<div class="col-md-4">     
-    <div class="mini-stat clearfix">
-        <span class="mini-stat-icon light-green"><i class="fa fa-stethoscope"></i></span>
-        <div id="cita-info" class="mini-stat-info">
-            <span id="cita-fecha"></span>
-            <h4 id="tipo-cita"></h4> 
         </div>
     </div>
-    <section class="panel">   
-        <header class="panel-heading">
-            Cliente
-        </header>
-        <section id="cliente-info" class="panel-body">
-            <h3 id="cliente-nombre" style="text-align: center; margin: 0px 0px 20px 0px;"></h3>
 
-            <div class="row">
-               <label class="control-label col-md-3">Telefono:</label>
-               <div class="col-md-9"><span  id="cliente-telefono"></span> </div>
-           </div>
-           <div class=" row">
-               <label class="control-label col-md-3">Edad:</label>
-               <div  class="col-md-9"><span id="cliente-edad"></span> </div>
-           </div>
-           <div class="row">
-               <label class="control-label col-md-3">Direccion:</label>
-               <div  class="col-md-9"><span id="cliente-direccion" ></span> </div>
-           </div>
-       </section>
-   </section>
-   <section class="panel">   
-    <header class="panel-heading">
-        Servicio
-    </header>
-    <i id="spinner-servicio" class="fas fa-spinner" style="display: none;"></i>    
-    <section id="servicio-info" class="panel-body">
-        <h3 id="servicio-nombre" style="text-align: center; margin: 0px 0px 20px 0px;"></h3>
-        <div class=" row">
-            <label class="control-label col-md-3">Estado:</label>
-            <div class="col-md-9" >                                
-               <div class="progress progress-xs">
-                <div id="servicio-avance-barra" class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100
-                                   " style="width: 10%;">
-                    <span class="sr-only">10% Complete</span>
+
+    <!-- MODALES -->
+
+    <div class="modal fade" id="proximaVisita"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Proxima Vista</h4>
                 </div>
-            </div> 
-            <span id="servicio-avance-texto" class="pull-right"></span>
+                <div class="modal-body">
+                    <div id="msjProximaVisita" class="alert alert-dismissible" style="display: none;"></div>
+                    <form class="form-horizontal">
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label" for="hora">Fecha:</label>
+                                <div class="col-md-4">
+                                    <input type="text" readonly name="txtFechaCita" id="txtFechaCita">
+                                </div> 
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="hora">Hora:</label>
+                                <div class="col-md-4">
+                                    <select id='selHoraCita' class="form-control">
+                                        <option value="0">Seleccione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group last" >
+                                <div id="calendar" class="has-toolbar"></div>
+        
+                            </div>
+                            
+                        </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                    <button id="btnProximaVisita" class="btn btn-primary" type="button">Aceptar</button>
+                </div>
+            </div>
         </div>
-
     </div>
 
-    <div  style="padding: 20px">
-        <div class="row">
-            <i class="fa fa-asterisk"></i>
-            <label>Dieta:</label> <span id="servicio-plan-dieta"></span>
-        </div>
-        <div class="row">
-            <i class="fa fa-asterisk"></i>
-            <label>Plan de Suplemento:</label> <span id="servicio-plan-suplemento"></span>
-        </div>
-        <div class="row">
-           <i class="fa fa-asterisk"></i>
-           <label>Plan de Entrenamiento:</label> <span id="servicio-plan-ejercicio"></span>
-       </div>
-
-   </div>
-</section>
-</section>
-<section class="panel">
-    <header class="panel-heading">Meta</header>
-    <section class="panel-body">
-       <div class="col-md-12" style="padding: 20px"  > 
-            <a href="#definirMeta" data-toggle="modal" class="btn btn-info" style="width: 100%;">Definir Meta</a>
-        </div>           
-            
-           <table id="dtMeta" class="display table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th hidden></th>
-                    <th>Parametro</th>
-                    <th>Valor</th>
-                    <th></th>
-                    
-                </tr>
-            </thead>
-            <tbody></tbody>
-           </table>            
-</section>
-</section>
-
-</div>
-</div>
-</div>
 
 
-<!-- MODALES -->
-
-<div class="modal fade" id="proximaVisita"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel
-                                   " aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Proxima Vista</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="dtpFecha" class="col-md-4 control-label">Fecha:</label>
-                        <div class="col-md-4">
-
-                            <div  data-date-viewmode="days" data-date-format="dd-mm-yyyy" data-date="27-04-2018
-                                   " class="input-append date dpYears">
-                                <input type="text" readonly="" size="16" class="form-control">
-                                <span class="input-group-btn add-on">
-                                    <button class="btn btn-primary" type="button"><i class="fa fa-calendar"></i></button>
-                                </span>
+    <div class="modal fade" id="definirMeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button onclick="limpiarDefinirMeta()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Definir Meta</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="msjMeta" class="alert alert-dismissible" style="display: none;"></div>
+                    <input type="text" hidden id="txtIdMeta">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="selTipoParametroMeta" class="col-md-5 control-label">Tipo de Parametro:</label>
+                            <div class="col-md-4">
+                                <select id="selTipoParametroMeta" name="tipo_parametro_meta" class="form-control">
+                                    <option value="0">Seleccione</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="hora">Hora:</label>
-                        <div class="col-md-4">
-                            <div class="input-group bootstrap-timepicker">
-                                <input id="txtHoraCita" type="text" class="form-control timepicker-default">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
-                                </span>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label" for="selParametroMeta">Parametro:</label>
+                            <div class="col-md-4">
+                                <select id="selParametroMeta" class="form-control" name="parametro_meta">
+                                    <option value="0">Seleccione</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-                <button class="btn btn-info" type="button">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="definirMeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Definir Meta</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="cmbTipoParametro2" class="col-md-5 control-label">Tipo de Parametro:</label>
-                        <div class="col-md-4">
-                            <select id="cmbTipoParametro2" class="form-control"> </select>
+                        <div class="form-group">
+                            <label class="col-md-5 control-label" for="txtValorMeta">Valor:</label>
+                            <div class="col-md-4">
+                                <input id="txtValorMeta" type="number" class="form-control" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-5 control-label" for="cmbParametro">Parametro:</label>
-                        <div class="col-md-4">
-                           <select id="cmbParametro" class="form-control"> </select>
-                       </div>
-                   </div>
-                   <div class="form-group">
-                    <label class="col-md-5 control-label" for="txtValorMeta">Valor:</label>
-                    <div class="col-md-4">
-                        <input id="txtValorMeta" type="number" class="form-control"/>
-                    </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-            <button class="btn btn-info" type="button">Aceptar</button>
-        </div>
-    </div>
-</div>
-</div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                    <button id="btnAceptarMeta" class="btn btn-primary" type="button">Aceptar</button>
+                    <button style="display: none" id="btnEditarMeta" class="btn btn-primary" type="button">Aceptar</button>
 
-<div class="modal fade" id="agregarAlimentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel
-                                   " aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Agregar Alimentos</h4>
+                </div>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Grupo Alimenticio:</label>
-                        <div class="col-md-7"><input class="form-control" type="text" disabled="disabled" name="
-                                   " value="Proteina"/> </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Cantidad:</label>
-                        <div class="col-md-7"><input class="form-control" type="number"  name="" /> </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>
-                        <div class="col-md-9">
-                           <select id="ms_alimentos" class="form-control"> </select>
-                       </div>
-                   </div>
-               </form>
-           </div>
-           <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
-            <button class="btn btn-info" type="button">Aceptar</button>
         </div>
     </div>
-</div>
-</div>
+
+    <div class="modal fade" id="agregarAlimentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Agregar Alimentos</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="msjAgregarAlimento" class="alert alert-dismissible" style="display: none;"></div>
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Grupo Alimenticio:</label>
+                            <div class="col-md-7">
+                                <input id="txtGrupoAlimenticioId" type="text" hidden>
+                                <input class="form-control" type="text" disabled="disabled" id='txtGrupoAlimenticio' /> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Cantidad:</label>
+                            <div class="col-md-5">
+                                <input id="txtGrupoCantidad" class="form-control" type="number" name="" /> </div>
+                            <div class="col-md-2">
+                                <span id="grupo-unidad"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="cmbParametro">Alimentos:</label>
+                            <div class="col-md-9">
+                                <select multiple id="ms_alimentos" class="form-control">
+                                    <option value="null" disabled></option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                    <button id="btnAceptarAlimentos" class="btn btn-primary" type="button">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="agregarParametro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Agregar Parametro</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="msjAgregarParametro" class="alert alert-dismissible" style="display: none;"></div>
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Tipo de Parametro:</label>
+                            <div class="col-md-7">
+                                <select id="selTipoParametro" class="form-control" name="tipo_parametro">
+                                    <option value="0">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Parametro:</label>
+                            <div class="col-md-7">
+                                <select id="selParametro" name="parametro" class="form-control">
+                                    <option value="0">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="valores" class="form-group" hidden>
+                            <label class="col-md-3 control-label">Valor:</label>
+                            <div class="col-md-5">
+                                <input id="txtValorParametro" class="form-control" type="number" name="" /> </div>
+                            <div class="col-md-2">
+                                <span id="parametro-unidad"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                    <button id="btnAceptarParametro" class="btn btn-primary" type="button">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- Placed js at the end of the document so the pages load faster -->
-<!--Core js-->
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!--Core js-->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
 
-<script src="js/bootstrap-switch.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
 
-<script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
-<script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
-<script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
-
-
-<!--common script init for all pages-->
-<!--script for this page-->
+    <script type="text/javascript" src="js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="js/jquery-multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="js/jquery-multi-select/js/jquery.quicksearch.js"></script>
 
 
-<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
-<!--script for this page-->
-<script src="js/gritter.js" type="text/javascript"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
+    <!--common script init for all pages-->
+    <!--script for this page-->
 
 
+    <script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+    <!--script for this page-->
+    <script src="js/gritter.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
 
-<script src="js/registrarVisita.js" type="text/javascript"></script>
-<script src="js/iCheck/jquery.icheck.js"></script>
-<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
-<script src="js/toggle-init.js"></script>
+    <script src="js/iCheck/jquery.icheck.js"></script>
 
+    <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
+    <script src="js/fullcalendar/fullcalendar.js"></script>
+    
+
+    <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+    <script src="js/toggle-init.js"></script>
+    <script src="js/registrarVisita.js" type="text/javascript"></script>
+
+    <script src="js/mensaje.js" type="text/javascript"></script>
+
+    <script src="js/scripts.js"></script>
 
 </body>
+
 </html>

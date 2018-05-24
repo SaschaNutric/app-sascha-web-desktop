@@ -267,6 +267,7 @@ function abrirModalEliminarTipoUnidad(id){
     $('#txtIdTipoUnidadEliminar').val(id);
 }
 
+
 function eliminarTipoUnidad(id){
     $.ajax({
         url: `https://api-sascha.herokuapp.com/tipounidad/${id}`,
