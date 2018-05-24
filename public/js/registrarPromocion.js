@@ -97,73 +97,7 @@ $(document).ready(function() {
     }     
      
 
-// Guarda informacion basica de la promocion
-  /*   $('#btnRegistrar').on('click', function() {
-        if(!validate()){
-            mensaje('#msjAlerta', '', 5);
-            return;
-        }
-      
 
-        if($('#txtNombrePromo').val() == ""){
-            $('#txtNombrePromo').css('border', '1px solid red');
-            return;
-        }
-        if($('#selServicios').val() == "")
-        {
-            $('#selServicios').css('border', '1px solid red');
-            return;
-        }
-
-        if($('#txtDescripcionPromo').val() == "") {
-            $('#txtDescripcionPromo').css('border', '1px solid red');
-            return;
-        }
-        if($('#txtDescuento').val() == ""){
-            $('#txtDescuento').css('border', '1px solid red');
-            return;
-        }
-        if($('#dpValidoDesde').val() == ""){
-            $('#dpValidoDesde').css('border', '1px solid red');
-            return;
-        }
-        if($('#dpValidoHasta').val() == ""){
-            $('#dpValidoHasta').css('border', '1px solid red');
-            return;
-        }
-
-        let ofertaPromo= {
-            nombre: $('#txtNombrePromo').val(),
-            id_servicio: $('#selServicios').val(),
-            descripcion: $('#txtDescripcionPromo').val(),
-            descuento: $('#txtDescuento').val(),
-            valido_desde: $('#dpValidoDesde').val(),
-            valido_hasta: $('#dpValidoHasta').val()
-        }
-
-        $.ajax({
-            url: 'https://api-sascha.herokuapp.com/promociones',
-            contentType: 'application/json',
-            type: 'POST',
-            data: JSON.stringify(ofertaPromo),
-            success: function(res, status, xhr) {
-                $('#txtNombrePromo').val('');
-                $('#selServicios').val('');
-                $('#txtDescripcionPromo').val('');
-                $('#txtDescuento').val('');
-                $('#dpValidoDesde').val('');
-                $('#dpValidoHasta').val('');
-                document.getElementById('promocion').selectedIndex = 0
-                verpromocion();
-            },
-            error: function(res, status, xhr) {
-                const respuesta = JSON.parse(res.responseText);
-                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
-            }
-        })
-
-    })
- */
 
    
 //Agregar nuevo servicio
