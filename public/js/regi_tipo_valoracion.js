@@ -163,6 +163,7 @@ $(document).ready(function() {
                 limpiarValor();
             },
             error: function(res, status, xhr) {
+                console.log(res)
                 const respuesta = JSON.parse(res.responseText);
                 mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
             }

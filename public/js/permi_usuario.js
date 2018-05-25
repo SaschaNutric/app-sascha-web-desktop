@@ -55,7 +55,7 @@ document.getElementById('selRoles').length = 1;
         }
     })
 });
-    $("#btnRegistrar").on('click', function() {
+    $("#btnRegistrar").on('click', function() {   
         if(ValidarUsuario()){
             let usuario = {
                 id_empleado: $('#txtIdEmpleado').val(),
@@ -95,13 +95,16 @@ document.getElementById('selRoles').length = 1;
         else{
              $('#selRoles1').css('border', '1px solid gray');
         }
+        let id=$('#txtIdUsuario').val();
+        if($('select[name="selRoles1"] option:selected').text() == $(`#rol-${id}`).text()){
+            mensaje('#msjAlerta',``,4);
+            $('#editarUsuario').modal('hide');
+            return;
+        }
 
         let usuario = {
             id_rol: $('select[name=selRoles1]').val(),
         }
-
-
-        let id = $('#txtIdUsuario').val();
         $.ajax({
             url: `https://api-sascha.herokuapp.com/usuario/${id}`,
             contentType: 'application/json',
@@ -156,8 +159,6 @@ document.getElementById('selRoles').length = 1;
         $('#txtNombreE').val($(`#nombre-${id}`).text());
         $('#txtIdUsuario').val(id);
         $('#selRoles1 option:contains('+ $(`#rol-${id}`).text() + ')').prop('selected',true);
-
-
     }
 
     function abrirModalEliminarUsuarios(id){
@@ -173,7 +174,7 @@ document.getElementById('selRoles').length = 1;
     }
 
     function ValidarUsuario(){
-             if($('#selRoles').val()==0){
+        if($('#selRoles').val()==0){
             mensaje('#msjAlertaA', `Cedula`, 5);
             $('#selRoles').css('border', '1px solid red');
             return false;
@@ -197,17 +198,26 @@ document.getElementById('selRoles').length = 1;
         else{
              $('#txtRepContrasena').css('border', '1px solid gray');
         }
-
+        
         if($('#txtContrasena').val() != $('#txtRepContrasena').val()){
             $('#txtRepContrasena').css('border', '1px solid red');
-            $('#txtContrasena').css('border', '1px solid red');
-            console.log("contraseñas diferentes")            
+            $('#txtContrasena').css('border', '1px solid red');            
+            mensaje('#msjAlertaA', `Cedula`, 12);  
             return false;
         }
         else
         {
             $('#txtRepContrasena').css('border', '1px solid gray');
             $('#txtContrasena').css('border', '1px solid gray');
+        }
+        
+        if($('#txtContrasena').val().length < 8){
+            $('#txtContrasena').css('border', '1px solid red');
+            mensaje('#msjAlertaA', `Cedula`, 11);
+            return false;
+        }
+        else{
+             $('#txtContrasena').css('border', '1px solid gray');
         }
         return true;
     }
