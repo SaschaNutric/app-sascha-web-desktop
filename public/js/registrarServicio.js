@@ -213,6 +213,11 @@ $(document).ready(function () {
         $('#ms_condiciones').empty()
         $('#ms_condiciones').multiSelect('refresh');
 
+        $('#selPlanDieta').prop('disabled',true)
+        $('#selPlanEjercicio').prop('disabled',true)
+        $('#selPlanSuplemento').prop('disabled',true)
+        
+
         $.ajax({
             url: 'https://api-sascha.herokuapp.com/servicio/' + id,
             contentType: 'application/json',

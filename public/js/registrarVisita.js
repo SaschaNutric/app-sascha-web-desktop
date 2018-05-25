@@ -1,4 +1,3 @@
-
 let arregloTipoParametros = []
 let arreglo_grupos = []
 let realizadas = 0;
@@ -6,6 +5,8 @@ let id_cliente = null;
 let id_tipo_cita = null;
 let arreglo_frecuencias = []
 let valores_viejos = []
+let vv_ejercicios = []
+let vv_suplementos = []
 let id_orden_servicio = null;
 let visita = {};
 $(document).ready(function () {
@@ -72,7 +73,6 @@ $(document).ready(function () {
         "paging": true
     });
 
-
     $('#dtMeta').DataTable({
         "language": {
             "lengthMenu": "",
@@ -89,9 +89,6 @@ $(document).ready(function () {
         "paging": false
     });
 
-
-
-
     if (id_agenda == undefined) {
         $('#info-visita').css('display', 'none');
         $('#error-info-visita').css('display', 'block');
@@ -103,10 +100,11 @@ $(document).ready(function () {
             contentType: 'application/json',
             beforeSend: function () {
                 $('#loadingDiv').show();
-                $('#info-visita').css('display', 'none');
+                
 
             },
             success: function (res, status, xhr) {
+                $('#info-visita').show()
                 let agenda = res.data;
                 let cliente = agenda.cliente;
                 let orden = agenda.orden_servicio;
@@ -116,7 +114,6 @@ $(document).ready(function () {
                 let plan_dieta = servicio.plan_dieta;
                 let plan_suplemento = servicio.plan_suplemento;
                 let plan_ejercicio = servicio.plan_ejercicio;
-
                 // agenda.id_tipo_cita = 2 //BORRAAAAR
                 //Datos de la cita
                 moment.locale('es')
@@ -125,6 +122,16 @@ $(document).ready(function () {
                 id_orden_servicio = orden.id_orden_servicio
                 $('#cita-fecha').text(fecha.format('DD, MMMM  YYYY'));
                 $('#tipo-cita').text(agenda.tipo_cita);
+                if (id_tipo_cita == 2) {
+                    if ($('#color-icono-visita').hasClass('light-green')) {
+                        $('#color-icono-visita').removeClass('light-green')
+                    }
+                    if ($('#icono-visita').addClass('fa-stethoscope')) {
+                        $('#icono-visita').removeClass('fa-stethoscope')
+                    }
+                    $('#color-icono-visita').addClass('turquoise')
+                    $('#icono-visita').addClass('fa-eye')
+                }
 
                 //Datos del cliente 
                 id_cliente = cliente.id_cliente
@@ -226,9 +233,9 @@ $(document).ready(function () {
                     $('#plan_suplemento_nombre').val(plan_suplemento.nombre)
                     plan_suplemento.suplementos.map(function (suplemento) {
                         if (suplemento.cantidad) {
-                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, suplemento.cantidad, suplemento.unidad_abreviatura, suplemento.frecuencia);
+                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, suplemento.cantidad, suplemento.unidad_abreviatura, suplemento.frecuencia, (suplemento.id_regimen_suplemento ? suplemento.id_regimen_suplemento : ''));
                         } else {
-                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, '', suplemento.unidad_abreviatura, 0);
+                            addRowSuplemento(suplemento.id_suplemento, suplemento.nombre, '', suplemento.unidad_abreviatura, 0, (suplemento.id_regimen_suplemento ? suplemento.id_regimen_suplemento : ''));
 
                         }
 
@@ -239,23 +246,24 @@ $(document).ready(function () {
                     $('#plan_ejercicio_nombre').val(plan_ejercicio.nombre)
                     plan_ejercicio.ejercicios.map(function (ejercicio) {
                         if (ejercicio.duracion) {
-                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, ejercicio.duracion, ejercicio.id_frecuencia);
+                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, ejercicio.duracion, ejercicio.id_frecuencia, (ejercicio.id_regimen_ejercicio ? ejercicio.id_regimen_ejercicio : ''));
                         } else {
-                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, '', 0);
+                            addRowEjercicios(ejercicio.id_ejercicio, ejercicio.nombre, '', 0, (ejercicio.id_regimen_ejercicio ? ejercicio.id_regimen_ejercicio : ''));
                         }
 
                     })
                 }
             },
             error: function (res, status, xhr) {
-                $('#loadingDiv').hide();                
+                $('#loadingDiv').hide();
                 $('#info-visita').css('display', 'none');
                 $('#error-info-visita').css('display', 'block');
                 console.log(res)
+               
             },
             complete: function () {
                 $('#loadingDiv').hide();
-                $('#info-visita').css('display', 'block');
+               // $('#info-visita').css('display', 'block');
             }
         })
 
@@ -293,8 +301,80 @@ $(document).ready(function () {
         $('#agregarAlimentos').modal('hide');
 
     })
-//Registrar Visita
+
+    //Editar Dieta
+    $('#btnEditarAlimentos').on('click', function () {
+        if ($('#txtGrupoCantidad').val() == '' || $('#ms_alimentos').val() == null) {
+            mensaje('#msjAgregarAlimento', '', 5);
+            return
+        }
+        const id_comida_grupo = $('#txtGrupoAlimenticioId').val();
+        const id_comida_grupo_cantidad = id_comida_grupo.replace('grupo', 'cantidad');
+        const id_comida_grupo_alimentos = id_comida_grupo.replace('grupo', 'alimentos');
+        const id_comida_grupo_id_alimentos = id_comida_grupo.replace('grupo', 'id_alimentos');
+        const id_regimen = $('#txtIdRegimen').val();
+
+        let cantidad = document.getElementById(id_comida_grupo_cantidad);
+        let c = $('#txtGrupoCantidad').val();
+
+        let alimentos_edit = []
+
+        let alimentos = document.getElementById(id_comida_grupo_alimentos);
+        let arreglo_alimentos = $('#ms_alimentos').val()
+
+        let id_alimentos = document.getElementById(id_comida_grupo_id_alimentos);
+
+        let nombre_alimento = [];
+        arreglo_alimentos.map(function (alimento) {
+            nombre_alimento.push($(`#ms_alimentos option[value="${alimento}"]`).text())
+            alimentos_edit.push({ id_alimento: alimento })
+        });
+
+        let regimen_alimento = {
+            cantidad: Number.parseInt(c),
+            alimentos: alimentos_edit
+
+        }
+
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/regimen/dieta/${id_regimen}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(regimen_alimento),
+
+            success: function (res, status, xhr) {
+                mensaje('#msjAlerta', 'Dieta ', 3)
+                cantidad.innerHTML = c
+                id_alimentos.innerHTML = arreglo_alimentos;
+                alimentos.innerHTML = nombre_alimento.toString();
+            },
+            error: function (res, status, xhr) {
+                const respuesta = JSON.parse(res.responseText)
+                mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+                console.log(res)
+
+            }
+
+        })
+
+
+        $('#agregarAlimentos').modal('hide');
+
+    })
+
+
+
+
+    //Registrar Visita
     $('#btnRegistrar').on('click', function () {
+        if(id_tipo_cita == 2){
+            if(!proxima){
+                mensaje('#msjAlerta', '',5)
+                return
+            }
+            window.location = 'visitas.html'
+            return
+        }
         let parametros = []
         let regimen_suplementos = []
         let regimen_ejercicios = []
@@ -361,10 +441,10 @@ $(document).ready(function () {
             let alimentos = []
             let cantidadD = cantidad_dieta[d].innerHTML;
             let alimentosD = id_alimentos_dieta[d].innerHTML.split(',');
-            if(cantidadD == '' || alimentosD.length == 0 ||cantidadD == undefined || alimentosD == undefined){
-                    mensaje('#msjAlerta', '', 5)
-                    return
-                
+            if (cantidadD == '' || alimentosD.length == 0 || cantidadD == undefined || alimentosD == undefined) {
+                mensaje('#msjAlerta', '', 5)
+                return
+
             }
             alimentosD.map(function (aliD) {
                 alimentos.push({
@@ -435,21 +515,7 @@ $(document).ready(function () {
         }
 
     })
-    //Llenando los bloques horarios para la proxima visita
-    $.ajax({
-        url: 'https://api-sascha.herokuapp.com/bloquehorarios',
-        contentType: 'application/json',
-        type: 'GET',
-        success: function (res, status, xhr) {
-            res.data.map(function (bloque) {
-                let option = $(`<option value="${bloque.id_bloque_horario}">${bloque.hora_inicio.substr(0, 5)}-${bloque.hora_fin.substr(0, 5)}</option>`)
-                $('#selHoraCita').append(option);
-            })
-        },
-        error: function (res, status, xhr) {
-            console.log(res)
-        }
-    });
+
 
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/tipoparametros',
@@ -522,6 +588,22 @@ $(document).ready(function () {
                                 $('#parametro-unidad').text(parametro.unidad.abreviatura);
                             }
                         }
+                    }
+                })
+            }
+        })
+
+    })
+    //Actualizando la unidad en la meta
+    $('#selParametroMeta').on('change', function () {
+        const id = $('#selTipoParametroMeta').val()
+        const idP = $('#selParametroMeta').val()
+        console.log($('#selParametroMeta').val())
+        arregloTipoParametros.map(function (tipoparametro) {
+            if (tipoparametro.id_tipo_parametro == id) {
+                tipoparametro.parametros.map(function (parametro) {
+                    if (parametro.id_parametro == idP) {
+                        $('#parametro-meta-unidad').text(parametro.unidad.abreviatura);
                     }
                 })
             }
@@ -738,7 +820,7 @@ function crearTabla(id, grupos, body) {
         cant.innerHTML = `<span id='cantidad-${id}-${grupo.id_grupo_alimenticio}' class='cantidad-dieta'> ${grupo.cantidad ? grupo.cantidad : ''}  </span>`;
         unidad.innerHTML = `<span id='unidad-${id}-${grupo.id_grupo_alimenticio}' >${grupo.unidad_abreviatura}</span>`;
         alimentos.innerHTML = `<span id='alimentos-${id}-${grupo.id_grupo_alimenticio}' > ${arreglo_alimentos_nombre}</span>`;
-        editar.innerHTML = `<a id='editar-${id}-${grupo.id_grupo_alimenticio}' class='btn btn-white' onclick='agregarAlimentos(${id},${grupo.id_grupo_alimenticio})' data-toggle='modal' href='#agregarAlimentos'><i class='fa fa-pencil' /> </a>`
+        editar.innerHTML = `<a id='editar-${id}-${grupo.id_grupo_alimenticio}' class='btn btn-white' onclick='agregarAlimentos(${id},${grupo.id_grupo_alimenticio},${grupo.id_regimen_dieta})' data-toggle='modal' href='#agregarAlimentos'><i class='fa fa-pencil' /> </a>`
         id_alimentos.style.display = 'none';
         id_alimentos.innerHTML = `<span id='id_alimentos-${id}-${grupo.id_grupo_alimenticio}' class='id-alimentos-dieta' > ${arreglo_alimentos_id}</span>`;
     })
@@ -841,37 +923,216 @@ function calcularAvance(realizadas, total) {
     return porc + '%'
 
 }
-
-function addRowEjercicios(id, ejercicio, cantidad, frecuencia) {
+//----------------------------------------- PLAN DE EJERCICIOS ----------------------------------------------------------
+function addRowEjercicios(id, ejercicio, cantidad, frecuencia, id_regimen) {
     let row = $(`<tr>
-        <td id="ejercicio-${id}">${ejercicio}</td>
-        <td class='text-center'>
-        <input class='form-control input-ejercicio' id='cantidadE-${id}' type="number" value='${cantidad}'>
-        </td>
-        <td id='colE-${id}'>  
-        </td>
-        </tr>
-        `);
-    $('#dtEjercicios').DataTable().row.add(row).draw();
+    <td id="ejercicio-${id}">${ejercicio}</td>
+    <td class='text-center'>
+    <input class='form-control input-ejercicio' id='cantidadE-${id}' type="number" value='${cantidad}'>
+    </td>
+    <td id='colE-${id}'>  
+    </td>
+    <td style='display: ${id_tipo_cita == 2 ? 'block' : 'none'}'>
+    <button id='editarEjercicio-${id}' onclick="editarEjercicio(${id})" type='button' class='btn  btn-white'   title='Editar'><i class='fa fa-pencil'></i></button>            
+    <a style='display:none' id='confirmarEjercicio-${id}' class='btn btn-white' onclick='confirmarEjercicio(${id}, ${id_regimen})'><i class='fa fa-save' /> </a>
+    <a style='display:none' id='cancelarEjercicio-${id}' class='btn btn-white' onclick='cancelarEjercicio(${id})'><i class='fa fa-times' /> </a>
+    </td>
+    </tr>`);
 
+    $('#dtEjercicios').DataTable().row.add(row).draw();
     createSelFrecuencia('selFrecuenciaE-' + id, 'form-control select-ejercicio', frecuencia, 'colE-' + id)
+    if (id_tipo_cita == 2) {
+        $('#acciones-e').show()
+        $(`#cantidadE-${id}`).prop('disabled', true);
+        $(`#selFrecuenciaE-${id}`).prop('disabled', true);
+
+    }
 }
 
-function addRowSuplemento(id, suplemento, cantidad, unidad, frecuencia) {
+function editarEjercicio(id) {
+    $(`#editarEjercicio-${id}`).hide()
+    $(`#confirmarEjercicio-${id}`).show()
+    $(`#cancelarEjercicio-${id}`).show()
+
+    vv_ejercicios.push({
+        id_ejercicio: id,
+        id_frecuencia: $(`#selFrecuenciaE-${id}`).val(),
+        duracion: $(`#cantidadE-${id}`).val()
+    })
+
+    $(`#cantidadE-${id}`).prop('disabled', false);
+    $(`#selFrecuenciaE-${id}`).prop('disabled', false);
+
+}
+
+function cancelarEjercicio(id) {
+    let index;
+    for (let i = 0; i < vv_ejercicios.length; i++) {
+        if (vv_ejercicios[i].id_ejercicio == id) {
+            index = i;
+            $(`#cantidadE-${id}`).val(vv_ejercicios[i].duracion)
+            $(`#cantidadE-${id}`).prop('disabled', true)
+            $(`#selFrecuenciaE-${id}`).val(vv_ejercicios[i].id_frecuencia)
+            $(`#selFrecuenciaE-${id}`).prop('disabled', true)
+
+        }
+    }
+    vv_ejercicios.splice(index, 1)
+
+    $(`#editarEjercicio-${id}`).show()
+    $(`#confirmarEjercicio-${id}`).hide()
+    $(`#cancelarEjercicio-${id}`).hide()
+}
+
+function confirmarEjercicio(id, id_regimen) {
+    if (id_regimen == '') {
+        mensaje('#msjAlerta', 'No se encontro el regimen', 0)
+        return
+    }
+    if ($(`#cantidadE-${id}`).val() == '' || $(`#selFrecuenciaE-${id}`).val() == 0) {
+        mensaje('#msjAlerta', '', 5)
+        return
+    }
+
+    $(`#editarEjercicio-${id}`).show()
+    $(`#confirmarEjercicio-${id}`).hide()
+    $(`#cancelarEjercicio-${id}`).hide()
+
+    $(`#cantidadE-${id}`).prop('disabled', true);
+    $(`#selFrecuenciaE-${id}`).prop('disabled', true);
+
+    let ejercicio = {
+        id_frecuencia: Number.parseInt($(`#selFrecuenciaE-${id}`).val()),
+        duracion: Number.parseInt($(`#cantidadE-${id}`).val())
+    }
+
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/regimen/ejercicio/${id_regimen}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(ejercicio),
+
+        success: function (res, status, xhr) {
+            mensaje('#msjAlerta', 'Ejercicio ', 3)
+        },
+        error: function (res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText)
+            mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+            console.log(res)
+
+        }
+
+    })
+}
+//------------------------------------------ PLAN DE SUPLEMENTOS ------------------------------------------------------
+function addRowSuplemento(id, suplemento, cantidad, unidad, frecuencia, id_regimen) {
     let row = $(`<tr>
         <td id="suplemento-${id}">${suplemento}</td>
         <td class='text-center'>
         <input class='form-control input-suplemento' id='cantidad-${id}' type="number" value='${cantidad}'> ${unidad}
         </td>
         <td id='colS-${id}'>
-        
+        </td>
+        <td style='display: ${id_tipo_cita == 2 ? 'block' : 'none'}'>
+        <button id='editarSuplemento-${id}' onclick="editarSuplemento(${id})" type='button' class='btn  btn-white'   title='Editar'><i class='fa fa-pencil'></i></button>            
+        <a style='display:none' id='confirmarSuplemento-${id}' class='btn btn-white' onclick='confirmarSuplemento(${id}, ${id_regimen})'><i class='fa fa-save' /> </a>
+        <a style='display:none' id='cancelarSuplemento-${id}' class='btn btn-white' onclick='cancelarSuplemento(${id})'><i class='fa fa-times' /> </a>
         </td>
         </tr>
         `);
     $('#dtSuplementos').DataTable().row.add(row).draw();
 
     createSelFrecuencia('selFrecuencia-' + id, 'form-control select-suplemento', frecuencia, 'colS-' + id)
+
+    if (id_tipo_cita == 2) {
+        $('#acciones-s').show()
+        $(`#cantidad-${id}`).prop('disabled', true);
+        $(`#selFrecuencia-${id}`).prop('disabled', true);
+
+    }
 }
+
+function editarSuplemento(id) {
+    $(`#editarSuplemento-${id}`).hide()
+    $(`#confirmarSuplemento-${id}`).show()
+    $(`#cancelarSuplemento-${id}`).show()
+
+    vv_suplementos.push({
+        id_suplemento: id,
+        id_frecuencia: $(`#selFrecuencia-${id}`).val(),
+        cantidad: $(`#cantidad-${id}`).val()
+    })
+
+    $(`#cantidad-${id}`).prop('disabled', false);
+    $(`#selFrecuencia-${id}`).prop('disabled', false);
+
+}
+
+function cancelarSuplemento(id) {
+    let index;
+    for (let i = 0; i < vv_suplementos.length; i++) {
+        if (vv_suplementos[i].id_suplemento == id) {
+            index = i;
+            $(`#cantidad-${id}`).val(vv_suplementos[i].cantidad)
+            $(`#cantidad-${id}`).prop('disabled', true)
+            $(`#selFrecuencia-${id}`).val(vv_suplementos[i].id_frecuencia)
+            $(`#selFrecuencia-${id}`).prop('disabled', true)
+
+        }
+    }
+    vv_suplementos.splice(index, 1)
+
+    $(`#editarSuplemento-${id}`).show()
+    $(`#confirmarSuplemento-${id}`).hide()
+    $(`#cancelarSuplemento-${id}`).hide()
+}
+
+function confirmarSuplemento(id, id_regimen) {
+    if (id_regimen == '') {
+        mensaje('#msjAlerta', 'No se encontro el regimen', 0)
+        return
+    }
+    if ($(`#cantidad-${id}`).val() == '' || $(`#selFrecuencia-${id}`).val() == 0) {
+        mensaje('#msjAlerta', '', 5)
+        return
+    }
+
+    $(`#editarSuplemento-${id}`).show()
+    $(`#confirmarSuplemento-${id}`).hide()
+    $(`#cancelarSuplemento-${id}`).hide()
+
+    $(`#cantidad-${id}`).prop('disabled', true);
+    $(`#selFrecuencia-${id}`).prop('disabled', true);
+
+    let suplemento = {
+        id_frecuencia: Number.parseInt($(`#selFrecuencia-${id}`).val()),
+        cantidad: Number.parseInt($(`#cantidad-${id}`).val())
+    }
+
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/regimen/suplemento/${id_regimen}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(suplemento),
+
+        success: function (res, status, xhr) {
+            mensaje('#msjAlerta', 'Suplemento ', 3)
+        },
+        error: function (res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText)
+            mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+            console.log(res)
+
+        }
+
+    })
+}
+
+
+
+
+
+
 function createSelFrecuencia(id, clases, selected, element) {
     let select = document.createElement("select");
     select.id = id;
@@ -893,7 +1154,7 @@ function createSelFrecuencia(id, clases, selected, element) {
 function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita) {
     let valor = '';
     if (tipo_valor === 2) {
-        valor = `<input id='real-${id}' type="number" class='form-control txtValor' style='width: 80%' value='${valorP == null ? '' : valorP}' ><span> ${unidad}</span>`
+        valor = `<input id='real-${id}' type="number" class='form-control txtValor' style='width: 70%' value='${valorP == null ? '' : valorP}' ><span> ${unidad}</span>`
     }
     let row = $(`<tr>
         <td id="tipo_parametro-${id}">${tipo_parametro}</td>
@@ -965,8 +1226,12 @@ function cancelarParametro(id) {
 
 }
 
-function agregarAlimentos(comida, grupo) {
+function agregarAlimentos(comida, grupo, id_regimen) {
+    if (id_tipo_cita == 2) {
+        $('#btnEditarAlimentos').show()
+        $('#btnAceptarAlimentos').hide()
 
+    }
     resetMultiSelect()
     const id = `grupo-${comida}-${grupo}`
     const nombre = document.getElementById(id).innerHTML.trim()
@@ -977,6 +1242,8 @@ function agregarAlimentos(comida, grupo) {
     $('#txtGrupoAlimenticio').val(nombre);
     $('#grupo-unidad').text(unidad);
     $('#txtGrupoCantidad').val(cantidad);
+    $('#txtIdRegimen').val(id_regimen);
+
 
     arreglo_grupos.map(function (grupoA) {
         if (grupoA.id_grupo_alimenticio == grupo) {
@@ -1070,8 +1337,81 @@ function eliminarMeta(id) {
     })
 }
 
-let Script = function () {
-    /* initialize the calendar
+// let Script = function () {
+//     /* initialize the calendar
+//       -----------------------------------------------------------------*/
+//     let data = {
+//         fecha_inicio: '2018-05-01',
+//         fecha_fin: '2019-05-31'
+//     }
+
+//     var date = new Date();
+//     var d = date.getDate();
+//     var m = date.getMonth();
+//     var y = date.getFullYear();
+
+//     $('#calendar').fullCalendar({
+//         header: {
+//             left: 'prev,next today',
+//             right: ''
+//         },
+//         defaultView: 'month',
+//         editable: false,
+//         droppable: false, // this allows things to be dropped onto the calendar !!!
+//         dayClick: function (date, jsEvent, view) {
+//             $('#txtFechaCita').val(moment(date).format('DD-MM-YYYY'))
+//         }
+
+//     });
+
+//     let events = [];
+//     let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
+//     $.ajax({
+//         url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
+//         contentType: 'application/json',
+//         type: 'POST',
+//         data: JSON.stringify(data),
+//         success: function (res, status, xhr) {
+//             res.data.map(function (agenda) {
+//                 let event = {
+//                     title: agenda.horario + " - " + agenda.nombre_cliente,
+//                     start: agenda.fecha_inicio,
+//                     end: agenda.fecha_fin,
+//                     color: (agenda.id_tipo_cita == 1 ? '#7ab740' : '#3da3cb')
+//                 }
+//                 events.push(event);
+//             })
+//             console.log(events)
+//             $('#calendar').fullCalendar('addEventSource', events);
+//         },
+
+//         error: function (res, status, xhr) {
+//             alert('there was an error while fetching events!');
+//         },
+//     })
+
+// }();
+
+
+function cargarAgenda(){
+    document.getElementById('selHoraCita').length = 1
+    $('#calendar').fullCalendar('destroy')
+        //Llenando los bloques horarios para la proxima visita
+        $.ajax({
+            url: 'https://api-sascha.herokuapp.com/bloquehorarios',
+            contentType: 'application/json',
+            type: 'GET',
+            success: function (res, status, xhr) {
+                res.data.map(function (bloque) {
+                    let option = $(`<option value="${bloque.id_bloque_horario}">${bloque.hora_inicio.substr(0, 5)}-${bloque.hora_fin.substr(0, 5)}</option>`)
+                    $('#selHoraCita').append(option);
+                })
+            },
+            error: function (res, status, xhr) {
+                console.log(res)
+            }
+        });
+     /* initialize the calendar
       -----------------------------------------------------------------*/
     let data = {
         fecha_inicio: '2018-05-01',
@@ -1122,5 +1462,5 @@ let Script = function () {
             alert('there was an error while fetching events!');
         },
     })
-
-}();
+   
+}
