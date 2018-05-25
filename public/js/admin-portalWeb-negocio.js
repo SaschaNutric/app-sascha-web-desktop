@@ -36,7 +36,7 @@ $(document).ready(function(){
                   let vision = document.getElementById('textVision');
                   let objetivos = document.getElementById('textObjetivos');
                   let imglogo = document.getElementById('imagenLogo');
-                 // let inputlogo =document.getElementById('inputLogo');
+                  let inputlogo =document.getElementById('inputLogo');
                   razonsocial.value = `${negocio.razon_social}`;
                   rif.value = `${negocio.rif}`;
                   telefono.value = `${negocio.telefono}`;
@@ -45,7 +45,7 @@ $(document).ready(function(){
                   vision.value = `${negocio.vision}`;
                   objetivos.value = `${negocio.objetivo}`;
                   imglogo.src= `${negocio.url_logo}`;
-                  //inputlogo.value = `${negocio.url_logo}`;
+                  inputlogo.value = `${negocio.url_logo}`;
 
               })
           }
@@ -57,7 +57,7 @@ $(document).ready(function(){
         type: 'GET',
         success: function(res, status, xhr) {
             res.data.map(function(redsocial) {
-                addRowRedesSociales(redsocial.id_red_social, redsocial.nombre, redsocial.url_logo, redsocial.url_base)
+                addRowRedesSociales(redsocial.id_red_social, redsocial.nombre, redsocial.url_logo, redsocial.usuario, redsocial.url_base)
             })
 
         },
@@ -71,12 +71,12 @@ $(document).ready(function(){
     })
 })
 
-      $('#guardarRedSocial').on('click', function() {
+      $('#btnGuardarRedSocial').on('click', function() {
 
     let redsocial = {
             nombre: $('#txtNombreRed').val(),
             url_base: $('#txtEnlace').val(),
-            usuario:  $('#txtEnlace').val(),
+            usuario:  $('#txtUsuario').val(),
         }
 
 
@@ -96,7 +96,7 @@ $(document).ready(function(){
         data: form_data,
             success: function(res, status, xhr){
                     console.log(res);
-                     mensaje('#msjAlerta', `Red Social`, 1);
+                     mensaje('#msjAlertaRedes', `Red Social`, 1);
                        const redSocial = res.data;
                  addRowRedesSociales( redSocial.id_red_social, redSocial.nombre, redSocial.url_logo, redSocial.url_base) 
                 },
@@ -176,6 +176,59 @@ let negocio = {
             })
 
 })
+
+$('#btnEditarRedSocial').on('click', function() {
+
+   let redsocial = {
+            nombre: $('#txtNombreRed').val(),
+            url_base: $('#txtEnlace').val(),
+            usuario:  $('#txtUsuario').val(),
+        }
+        let id = $('#txtIdRedSocial').val();
+        imagen = $('.fileupload-exists img').attr('src');
+        console.log(imagen);
+        console.log($('.fileupload-exists img').attr('src'));
+
+    if(redsocial.nombre == $(`#redsocial-${id}`).text() && redsocial.url_base == $(`#enlace-${id}`).text() && redsocial.usuario == $(`#usuario-${id}`).text() && imagen === undefined ){
+         mensaje('#msjAlertaRedes', 'Red Social', 4);
+        $('#agregarRedsocial').modal('hide');
+        return;
+    } 
+
+    var file_data = $("#imagenRedsocial").prop("files")[0];   // Getting the properties of file from file field
+    var form_data = new FormData();                  // Creating object of FormData class
+    form_data.append( 'nombre', redsocial.nombre);
+    form_data.append('usuario', redsocial.usuario);
+    form_data.append('url_base', redsocial.url_base);
+     form_data.append('imagen', file_data);
+     console.log(form_data);
+
+          $.ajax({
+        url: `https://api-sascha.herokuapp.com/redsocial/${id}`,
+          type:"PUT",
+        processData:false,
+        contentType: false,
+        data: form_data,
+            success: function(res, status, xhr){
+                    console.log(res);
+                     console.log(status);
+                     const red = res.data;
+                     editRowPregunta(red.id_red_social, red.nombre, red.url_logo, red.usuario, red.url_base);
+                     $('#agregarRedsocial').modal('hide');
+                    mensaje('#msjAlertaRedes', `Seccion Nosotros`, 3);
+                     },
+        error: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlertaRedes',`${respuesta.data.mensaje}`, 0);
+           
+
+        }
+    })
+         $('#agregarPregunta').modal('hide');
+})
+
     
 
      $('#btn-editar').click(function(){
@@ -183,6 +236,18 @@ let negocio = {
         $("input").removeAttr('disabled');
            $('#btn-guardar').show();
              })
+
+ function editarRedSocial(id){
+   $('#btnGuardarRedSocial').hide();
+    $('#btnEditarRedSocial').show();
+  $('#txtIdRedSocial').val(id);
+  $('#txtNombreRed').val($(`#redsocial-${id}`).text());
+  $('#txtEnlace').val($(`#enlace-${id}`).text());
+  $('#txtUsuario').val($(`#usuario-${id}`).text());
+  $('#vistaImagenRedsocial').attr('src', $(`#imagenRedSocial-${id}`).attr('src'));
+  $('#imagenRedsocial').val($(`#imagenRedSocial-${id}`).attr('src'));
+  
+ }
 
 
   function abrirModalEliminarRedsocial(id){
@@ -198,26 +263,38 @@ let negocio = {
             console.log(res);
             console.log(status);
             $('#redes-sociales').DataTable().row($(`#redsocial-${id}`).parent()).remove().draw();
-            mensaje('#msjAlerta', `Red social`, 2);
+            mensaje('#msjAlertaRedes', `Red social`, 2);
 
         },
         error: function(res, status, xhr) {
             console.log(res);
             console.log(status);
             const respuesta = JSON.parse(res.responseText);
-            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            mensaje('#msjAlertaRedes', `${respuesta.data.mensaje}`, 0);
 
         }
     })
 
      }
 
-     function addRowRedesSociales( id, redsocial,icono, enlace) {
+     function limpiarModalRedSocial(){
+     $('#txtIdRedSocial').val(" ");
+  $('#txtNombreRed').val(" ");
+  $('#txtEnlace').val(" ");
+  $('#txtUsuario').val(" ");
+  $('#vistaImagenRedsocial').attr('src', 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image');
+  $('#imagenRedsocial').val(" ");
+    $('#btnGuardarRedSocial').show();
+    $('#btnEditarRedSocial').hide();
+}
+
+     function addRowRedesSociales( id, redsocial,icono, usuario, enlace) {
     let row = $(`<tr>
         <td id="redsocial-${id}">${redsocial}</td>
-        <td id="td-icono-${id}"><img src="${icono}" style="width:30px"></td>
+        <td id="redsocial-${id}"><img src="${icono}" style="width:30px" id="imagenRedSocial-${id}"></td>
+         <td id="usuario-${id}">${usuario}</td>
         <td id="enlace-${id}">${enlace}</td>
-        <td>  <button onclick="editarContenido(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarContenido"  title='Editar'><i class='fa fa-pencil'></i></button>
+        <td>  <button onclick="editarRedSocial(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarRedsocial"  title='Editar'><i class='fa fa-pencil'></i></button>
         <button onclick="abrirModalEliminarRedsocial(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarRedsocial" title='Eliminar'><i class="fa fa-trash-o"></i></button>
         </td>
         </tr>
@@ -225,3 +302,9 @@ let negocio = {
     $('#redes-sociales').DataTable().row.add(row).draw();
 }
 
+function editRowPregunta(id, redsocial,icono, usuario, enlace){
+    $(`#redsocial-${id}`).text(redsocial);
+    $(`#usuario-${id}`).text(usuario);
+    $(`#imagenRedSocial-${id}`).attr('src',icono);
+    $(`#enlace-${id}`).text(enlace);
+}
