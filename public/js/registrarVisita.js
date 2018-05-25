@@ -9,6 +9,8 @@ let vv_ejercicios = []
 let vv_suplementos = []
 let id_orden_servicio = null;
 let visita = {};
+let id_visita_control = null;
+let proxima = false;
 $(document).ready(function () {
 
     $('#proximaVisita').on('shown.bs.modal', function () {
@@ -100,7 +102,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             beforeSend: function () {
                 $('#loadingDiv').show();
-                
+
 
             },
             success: function (res, status, xhr) {
@@ -185,6 +187,8 @@ $(document).ready(function () {
                         }
                     })
                 } else {
+                    id_visita_control = agenda.id_visita
+                    console.log(id_visita_control)
                     //Perfil Control
                     if (agenda.id_tipo_cita == 2) {
                         $('#btnMeta').css('display', 'none')
@@ -259,11 +263,11 @@ $(document).ready(function () {
                 $('#info-visita').css('display', 'none');
                 $('#error-info-visita').css('display', 'block');
                 console.log(res)
-               
+
             },
             complete: function () {
                 $('#loadingDiv').hide();
-               // $('#info-visita').css('display', 'block');
+                // $('#info-visita').css('display', 'block');
             }
         })
 
@@ -367,10 +371,13 @@ $(document).ready(function () {
 
     //Registrar Visita
     $('#btnRegistrar').on('click', function () {
-        if(id_tipo_cita == 2){
-            if(!proxima){
-                mensaje('#msjAlerta', '',5)
+        if (id_tipo_cita == 2) {
+            if (!proxima) {
+                mensaje('#msjAlerta', '', 5)
                 return
+            }
+            if(id_visita_control == null){
+                registrarVisitaControl()
             }
             window.location = 'visitas.html'
             return
@@ -699,6 +706,10 @@ $(document).ready(function () {
 
     //Agregar Parametro
     $('#btnAceptarParametro').on('click', function () {
+        if (id_visita_control == null) {
+            registrarVisitaControl(id_agenda)
+        }
+
         let tp = $('#selTipoParametro').val()
         let p = $('#selParametro').val()
         let v = $('#txtValorParametro').val()
@@ -712,9 +723,31 @@ $(document).ready(function () {
             return
         }
 
-        //ajax
-        //Aqui hay que reemplazar p por el id del parametro_cliente que regrese el ajax
-        addRowParametro(p, p_nombre, tp_nombre, tv, u, v, 2)
+        let para_clie = {
+            id_visita: id_visita_control,
+            id_cliente: id_cliente,
+            id_parametro: p,
+            valor: v == '' ? null : v
+        }
+
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/parametroclientes`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(para_clie),
+
+            success: function (res, status, xhr) {
+                mensaje('#msjAlerta', 'Visista', 1)
+                addRowParametro(res.data.id_parametro_cliente, p_nombre, tp_nombre, tv, u, v, 2)
+                console.log(res.data.mensaje)
+            },
+            error: function (res, status, xhr) {
+                console.log(res)
+                const respuesta = JSON.parse(res.responseText)
+                mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+
+            }
+        })
         $('#agregarParametro').modal('hide')
 
     })
@@ -730,16 +763,37 @@ $(document).ready(function () {
 
         let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
 
-
-
         visita.id_empleado = id_empleado
         visita.id_cliente = id_cliente
         visita.fecha = moment(fecha).format('YYYY-MM-DD')
         visita.id_bloque_horario = Number.parseInt($('#selHoraCita').val())
         visita.id_orden_servicio = id_orden_servicio
+        if (id_tipo_cita == 2) {
+            visita.id_tipo_cita = 2
+            $.ajax({
+                url: `https://api-sascha.herokuapp.com/agendas/proximacita`,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(visita),
+
+                success: function (res, status, xhr) {
+                    mensaje('#msjAlerta', 'Proxima cita', 1)
+                    proxima = true
+                    console.log(res.data.mensaje)
+                },
+                error: function (res, status, xhr) {
+                    console.log(res)
+
+                }
+            })
 
 
-        console.log(visita)
+
+
+        }
+
+        $('#proximaVisita').modal('hide');
+
     })
 
 
@@ -1337,82 +1391,29 @@ function eliminarMeta(id) {
     })
 }
 
-// let Script = function () {
-//     /* initialize the calendar
-//       -----------------------------------------------------------------*/
-//     let data = {
-//         fecha_inicio: '2018-05-01',
-//         fecha_fin: '2019-05-31'
-//     }
-
-//     var date = new Date();
-//     var d = date.getDate();
-//     var m = date.getMonth();
-//     var y = date.getFullYear();
-
-//     $('#calendar').fullCalendar({
-//         header: {
-//             left: 'prev,next today',
-//             right: ''
-//         },
-//         defaultView: 'month',
-//         editable: false,
-//         droppable: false, // this allows things to be dropped onto the calendar !!!
-//         dayClick: function (date, jsEvent, view) {
-//             $('#txtFechaCita').val(moment(date).format('DD-MM-YYYY'))
-//         }
-
-//     });
-
-//     let events = [];
-//     let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
-//     $.ajax({
-//         url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
-//         contentType: 'application/json',
-//         type: 'POST',
-//         data: JSON.stringify(data),
-//         success: function (res, status, xhr) {
-//             res.data.map(function (agenda) {
-//                 let event = {
-//                     title: agenda.horario + " - " + agenda.nombre_cliente,
-//                     start: agenda.fecha_inicio,
-//                     end: agenda.fecha_fin,
-//                     color: (agenda.id_tipo_cita == 1 ? '#7ab740' : '#3da3cb')
-//                 }
-//                 events.push(event);
-//             })
-//             console.log(events)
-//             $('#calendar').fullCalendar('addEventSource', events);
-//         },
-
-//         error: function (res, status, xhr) {
-//             alert('there was an error while fetching events!');
-//         },
-//     })
-
-// }();
 
 
-function cargarAgenda(){
+
+function cargarAgenda() {
     document.getElementById('selHoraCita').length = 1
     $('#calendar').fullCalendar('destroy')
-        //Llenando los bloques horarios para la proxima visita
-        $.ajax({
-            url: 'https://api-sascha.herokuapp.com/bloquehorarios',
-            contentType: 'application/json',
-            type: 'GET',
-            success: function (res, status, xhr) {
-                res.data.map(function (bloque) {
-                    let option = $(`<option value="${bloque.id_bloque_horario}">${bloque.hora_inicio.substr(0, 5)}-${bloque.hora_fin.substr(0, 5)}</option>`)
-                    $('#selHoraCita').append(option);
-                })
-            },
-            error: function (res, status, xhr) {
-                console.log(res)
-            }
-        });
-     /* initialize the calendar
-      -----------------------------------------------------------------*/
+    //Llenando los bloques horarios para la proxima visita
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/bloquehorarios',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function (res, status, xhr) {
+            res.data.map(function (bloque) {
+                let option = $(`<option value="${bloque.id_bloque_horario}">${bloque.hora_inicio.substr(0, 5)}-${bloque.hora_fin.substr(0, 5)}</option>`)
+                $('#selHoraCita').append(option);
+            })
+        },
+        error: function (res, status, xhr) {
+            console.log(res)
+        }
+    });
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
     let data = {
         fecha_inicio: '2018-05-01',
         fecha_fin: '2019-05-31'
@@ -1432,7 +1433,13 @@ function cargarAgenda(){
         editable: false,
         droppable: false, // this allows things to be dropped onto the calendar !!!
         dayClick: function (date, jsEvent, view) {
-            $('#txtFechaCita').val(moment(date).format('DD-MM-YYYY'))
+            let fecha = moment(date).format('DD-MM-YYYY')
+            if (moment(date).isAfter(moment())){
+                $('#txtFechaCita').val(fecha)
+            }else{
+                $('#txtFechaCita').val(moment().format('DD-MM-YYYY'))
+                
+            }
         }
 
     });
@@ -1462,5 +1469,37 @@ function cargarAgenda(){
             alert('there was an error while fetching events!');
         },
     })
-   
+
+}
+
+
+function registrarVisitaControl(id_agenda) {
+    if (id_tipo_cita != 2) {
+        return
+    }
+    let visita_control = {
+        id_agenda: Number.parseInt(id_agenda),
+        numero: realizadas,
+        fecha_atencion: moment().format('YYYY-MM-DD')
+    }
+    console.log(visita_control)
+
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/visitascontrol`,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(visita_control),
+
+        success: function (res, status, xhr) {
+            mensaje('#msjAlerta', 'Visista', 1)
+            id_visita_control = res.data.id_visita
+            console.log(res.data.mensaje)
+        },
+        error: function (res, status, xhr) {
+            console.log(res)
+
+        }
+    })
+
+
 }
