@@ -10,16 +10,16 @@
     <title>Sascha</title>
 
     <!--Core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
     <link href="js/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
     <link href="js/fullcalendar/bootstrap-fullcalendar.print.css" media="print" rel="stylesheet" />
-    
+
 
 
     <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
@@ -63,7 +63,7 @@
             <i id="spinner-cita" class="fa fa-circle-o-notch fa-spin" style="font-size:48px;"></i>
         </div>
     </div>
-    <div id="info-visita">
+    <div id="info-visita" style="display: none">
         <h3>Registrar Visita</h3>
         <div class="row">
             <div class="col-md-8">
@@ -101,7 +101,7 @@
                                             <tr>
                                                 <th width="30%">Tipo Parametro </th>
                                                 <th width="30%">Parametro</th>
-                                                <th width="20%">Valor</th>
+                                                <th width="30%">Valor</th>
                                                 <th width="10%">Registrado</th>
                                             </tr>
                                         </thead>
@@ -129,9 +129,10 @@
                                         <table id="dtSuplementos" class="display table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th width="45%">Suplemento</th>
+                                                    <th width="35%">Suplemento</th>
                                                     <th width="25%">Cantidad</th>
                                                     <th width="30%">Dosis</th>
+                                                    <th width="10%" id=acciones-s></th>
 
                                                 </tr>
                                             </thead>
@@ -150,9 +151,10 @@
                                     20px">
                                         <thead>
                                             <tr>
-                                                <th width="45%">Ejercicio</th>
+                                                <th width="35%">Ejercicio</th>
                                                 <th width="25%">Cantidad</th>
                                                 <th width="30%">Frecuencia</th>
+                                                <th width="10%" id=acciones-e></th>
 
                                             </tr>
                                         </thead>
@@ -165,7 +167,7 @@
                     </section>
                     <div class="row" style="padding: 30px;">
                         <div class="position-left col-md-6">
-                            <a  href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
+                            <a onclick="cargarAgenda()" href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
                         </div>
                         <div class="pull-right col-md-6" style="text-align: right;">
                             <button type="button" class="btn btn-danger">Cancelar</button>
@@ -176,8 +178,8 @@
             </div>
             <div class="col-md-4">
                 <div class="mini-stat clearfix">
-                    <span class="mini-stat-icon light-green">
-                        <i class="fa fa-stethoscope"></i>
+                    <span id="color-icono-visita" class="mini-stat-icon light-green">
+                        <i id="icono-visita" class="fa fa-stethoscope"></i>
                     </span>
                     <div id="cita-info" class="mini-stat-info">
                         <span id="cita-fecha"></span>
@@ -281,7 +283,7 @@
 
     <!-- MODALES -->
 
-    <div class="modal fade" id="proximaVisita"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="proximaVisita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog  modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -291,27 +293,27 @@
                 <div class="modal-body">
                     <div id="msjProximaVisita" class="alert alert-dismissible" style="display: none;"></div>
                     <form class="form-horizontal">
-                            <div class="form-group">
-                                    <label class="col-md-4 control-label" for="hora">Fecha:</label>
-                                <div class="col-md-4">
-                                    <input type="text" readonly name="txtFechaCita" id="txtFechaCita">
-                                </div> 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="hora">Fecha:</label>
+                            <div class="col-md-4">
+                                <input type="text" readonly name="txtFechaCita" id="txtFechaCita">
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="hora">Hora:</label>
-                                <div class="col-md-4">
-                                    <select id='selHoraCita' class="form-control">
-                                        <option value="0">Seleccione</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="hora">Hora:</label>
+                            <div class="col-md-4">
+                                <select id='selHoraCita' class="form-control">
+                                    <option value="0">Seleccione</option>
+                                </select>
                             </div>
-                            
-                            <div class="form-group last" >
-                                <div id="calendar" class="has-toolbar"></div>
-        
-                            </div>
-                            
-                        </form>
+                        </div>
+
+                        <div class="form-group last">
+                            <div id="calendar" class="has-toolbar"></div>
+
+                        </div>
+
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
@@ -355,6 +357,9 @@
                             <div class="col-md-4">
                                 <input id="txtValorMeta" type="number" class="form-control" />
                             </div>
+                            <div class="col-md-2">
+                                <span id="parametro-meta-unidad"></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -383,6 +388,8 @@
                             <label class="col-md-3 control-label">Grupo Alimenticio:</label>
                             <div class="col-md-7">
                                 <input id="txtGrupoAlimenticioId" type="text" hidden>
+                                <input id="txtIdRegimen" type="text" hidden>
+                                
                                 <input class="form-control" type="text" disabled="disabled" id='txtGrupoAlimenticio' /> </div>
                         </div>
                         <div class="form-group">
@@ -406,6 +413,8 @@
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
                     <button id="btnAceptarAlimentos" class="btn btn-primary" type="button">Aceptar</button>
+                    <button hidden id="btnEditarAlimentos" class="btn btn-primary" type="button">Aceptar</button>
+                    
                 </div>
             </div>
         </div>
@@ -489,7 +498,7 @@
 
     <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
     <script src="js/fullcalendar/fullcalendar.js"></script>
-    
+
 
     <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
