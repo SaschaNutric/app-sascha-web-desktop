@@ -167,13 +167,19 @@ $(document).ready(function() {
             $('#txtDescripcionE').css('border', '1px solid #858580');
         }
 
+        let id = $('#txtIdRolE').val();
+        if($('#txtDescripcionE').val() == $(`#descripcion-${id}`).text() && $('#txtNombreE').val() == $(`#nombre-${id}`).text()){
+            mensaje('#msjAlerta',``,4);
+            $('#editarRoles').modal('hide');
+            return;
+        }
         let rol = {
             nombre: $('#txtNombreE').val(),
             descripcion: $('#txtDescripcionE').val()
         }
 
 
-        let id = $('#txtIdRolE').val();
+        
         $.ajax({
             url: `https://api-sascha.herokuapp.com/role/${id}`,
             contentType: 'application/json',

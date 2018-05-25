@@ -100,9 +100,9 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                mensaje('#msjAlerta', `Bloque Horario`, 3);
-                editRowHorario(id, condicionGarantia.descripcion)
-                limpiarHorario();
+                mensaje('#msjAlerta', `Condiciones de Garantia`, 3);
+                editRowCondicionGarantia(id, res.data.descripcion)
+                limpiarCondicionGarantia();
             },
             error: function(res, status, xhr) {
                 console.log(res);
