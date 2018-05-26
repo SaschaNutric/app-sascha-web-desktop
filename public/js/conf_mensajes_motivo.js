@@ -90,7 +90,7 @@ $(document).ready(function() {
             }
         })
 
-       $('#modal-agregar-motivo').modal('hide');
+       $('#agregarMensajeMotivo').modal('hide');
 
     })
 
@@ -119,7 +119,7 @@ $(document).ready(function() {
         
         if(tipoM == $(`#tipomotivo-${id}`).text() && motivo.descripcion== $(`#descripcion-${id}`).text()){
             mensaje('#msjAlerta', ``, 4);
-            $('#modal-agregar-motivo').modal('hide');   
+            $('#agregarMensajeMotivo').modal('hide');   
             return;
         }
         /* Metodo Put Si se Puede */
@@ -141,13 +141,13 @@ $(document).ready(function() {
                 mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
             }
         })
-        $('#modal-agregar-motivo').modal('hide');
+        $('#agregarMensajeMotivo').modal('hide');
     });
 });
 
 function editarMotivo(id){
     $('#selTipoMotivo option:contains('+ $(`#tipomotivo-${id}`).text() + ')').prop('selected',true);
-    $('#txtDescripcionMotivo').val($(`#descripcion-${id}`).text());
+    $('#txtDescripcionMotivo').val($(`#descripcionMotivo-${id}`).text());
     $('#txtIdMotivo').val(id);
     $('#btnAceptarMotivo').css('display', 'none');
     $('#btnEditarMotivo').css('display', 'inline');
@@ -200,11 +200,11 @@ function addRowTipoMotivo(id, tipo_motivo , descripcion ) {
 
   let row = $(`<tr>
      <td id="tipomotivo-${id}">${tipo_motivo}</td>
-     <td id="descripcion-${id}">${descripcion}</td>
+     <td id="descripcionMotivo-${id}">${descripcion}</td>
 
     <td>
-    <button onclick="editarMotivo(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#modal-agregar-motivo"  title='Editar'><i class='fa fa-pencil'></i></button>
-    <button onclick="abrirModalEliminarMotivo(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarMotivo" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+        <button onclick="editarMotivo(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarMensajeMotivo"  title='Editar'><i class='fa fa-pencil'></i></button>
+        <button onclick="abrirModalEliminarMotivo(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarMotivo" title='Eliminar'><i class="fa fa-trash-o"></i></button>
     </td>
     </tr>
     `);
@@ -217,7 +217,7 @@ function addRowTipoMotivo(id, tipo_motivo , descripcion ) {
 
 function editRowMotivo(id, tipo_motivo, descripcion){
     $(`#tipomotivo-${id}`).text(tipo_motivo)
-    $(`#descripcion-${id}`).text(descripcion)
+    $(`#descripcionMotivo-${id}`).text(descripcion)
 
     
 

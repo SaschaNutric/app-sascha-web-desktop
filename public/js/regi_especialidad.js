@@ -56,7 +56,8 @@ $(document).ready(function() {
             success: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
-                addRowEspecialidad(res.data.id_tipo_parametro, res.data.nombre)
+                console.log(res.data.id_especialidad)
+                addRowEspecialidad(res.data.id_especialidad, res.data.nombre)
                 limpiarEspecialidad()
                 mensaje('#msjAlerta', `Especialidad`, 1);
             },
@@ -82,7 +83,7 @@ $(document).ready(function() {
         }
 
         let id = $('#txtIdEspecialidad').val();
-
+        console.log(id)
         if(especialidad.nombre == $(`#nombre-${id}`).text()){
             $('#agregarEspecialidad').modal('hide');
             mensaje('#msjAlerta', '', 4);
@@ -165,8 +166,8 @@ $(document).ready(function() {
         let row = $(`<tr>
             <td id="nombre-${id}">${nombre}</td>
             <td>
-            <button onclick="editarEspecialidad(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarEspecialidad"  title='Editar'><i class='fa fa-pencil'></i></button>
-            <button onclick="abrirModalEliminarEspecialidad(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarEspecialidad" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+                <button onclick="editarEspecialidad(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarEspecialidad"  title='Editar'><i class='fa fa-pencil'></i></button>
+                <button onclick="abrirModalEliminarEspecialidad(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarEspecialidad" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>
             `);

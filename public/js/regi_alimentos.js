@@ -93,17 +93,16 @@ $(document).ready(function() {
             type: 'POST',
             data: JSON.stringify(grupoalimenticio),
             success: function(res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                addRowGrupo(res.data.id_grupo_alimenticio, res.data.nombre, nombre_tipo_unidad, nombre_unidad)
+                const ga= res.data
                 limpiarGrupo();
+                addRowGrupo(ga.id_grupo_alimenticio, ga.nombre, nombre_tipo_unidad, nombre_unidad)
                 mensaje('#msjAlerta', `Grupo Alimenticio`, 1);
             },
             error: function(res, status, xhr) {
                 console.log(res);
                 console.log(status);
                 const respuesta = JSON.parse(res.responseText);
-                mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+                mensaje('#msjAlerta',``, 13);
             }
         })
         $('#agregarGrupoAlimenticio').modal('hide');

@@ -82,4 +82,13 @@ border-color: #17aa8b;
     .gray{
         background-color: #858580;
     }
+
+    .turquoise{
+        background-color: #1FB5AD;
+    }
     
+    .ancho-columna{
+        width: 30px !important;
+        min-width: 30px !important
+        
+    }

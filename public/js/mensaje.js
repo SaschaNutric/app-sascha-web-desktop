@@ -25,11 +25,23 @@ function mensaje(id, entidad, accion){
         case 5: 
         tipo= "alert alert-danger";
         texto = `<strong>Error!</strong> Rellena los campos obligatorios.`;
+        break;
         case 10:
         tipo= "alert alert-info";
         texto = `<strong>${entidad}</strong>  No encontrado.`;
-
-
+        break;
+        case 11:
+        tipo= "alert alert-danger";
+        texto= `<strong>Error!</strong>  Contraseña demasiado corta.`;
+        break;
+        case 12:
+        tipo= "alert alert-danger";
+        texto= `<strong>Error!</strong>  Contraseñas no coinciden.`;
+        break;
+        case 13:
+        tipo= "alert alert-danger";
+        texto= `<strong>Error!</strong>.`;
+        break;
 
     }
     $(id).removeClass();

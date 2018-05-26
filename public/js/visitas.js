@@ -43,7 +43,6 @@ var Script = function () {
         }
         events.push(event);
     })
-        console.log(events)
 
         $('#calendar').fullCalendar('addEventSource', events);
     },
