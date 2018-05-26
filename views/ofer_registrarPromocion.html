@@ -74,37 +74,37 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Servicio:</label>
                                 <div class="col-md-6">
-                                    <select class="form-control m-bot15" id="selServicios">
-                                        <option>Seleccionar</option>
-                                    </select>
+                                <select class="form-control m-bot15" id="selServicios">
+                                <option>Seleccionar</option>
+                                </select>
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <div class="col-md-2">
-                                     <label id="label-inc-visit" class="control-label" style="padding-left: 97px;">Desde:</label>
+                                <label id="label-inc-visit" class="control-label" style="padding-left: 97px;">Desde:</label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div id="comb-inc-visit" data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="19-04-2018" class="input-append date dpYears">
-                                        <input type="text" readonly="" value="" size="16" class="form-control" id="dpValidoDesde">
-                                        <span class="input-group-btn add-on">
-                                            <button class="btn btn-voscuro" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                    <input type="text" readonly="" value="" size="16" class="form-control" id="dpValidoDesde">
+                                    <span class="input-group-btn add-on">
+                                    <button class="btn btn-voscuro" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                    </button>
+                                    </span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <label id="label-inc-visit" class="control-label" style="padding-left: 100px;">Hasta:</label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div id="comb-inc-visit" data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="19-04-2018" class="input-append date dpYears">
-                                        <input type="text" readonly="" value="" size="16" class="form-control" id="dpValidoHasta">
-                                        <span class="input-group-btn add-on">
-                                            <button class="btn btn-voscuro" type="button">
-                                            <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
+                                    <input type="text" readonly="" value="" size="16" class="form-control" id="dpValidoHasta">
+                                    <span class="input-group-btn add-on">
+                                    <button class="btn btn-voscuro" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                    </button>
+                                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -112,53 +112,55 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Descuento</label>
                                 <div class="col-md-2">
-                                    <label class="sr-only" for="exampleInputAmount">Descuento (in dollars)</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="txtDescuento">
-                                        <div class="input-group-addon  btn btn-voscuro">%</div>
-                                    </div>
+                                <label class="sr-only" for="exampleInputAmount">Descuento (in dollars)</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="txtDescuento">
+                                <div class="input-group-addon  btn btn-voscuro">%</div>
+                                </div>
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Estado Civil:</label>
                                 <div class="col-md-2">
-                                    <select class="form-control m-bot15" id="selEstadoCivil">
-                                    <option value="null">Seleccionar</option>
-                                    </select>
+                                <select class="form-control m-bot15" id="selEstadoCivil">
+                                <option value="null">Seleccionar</option>
+                                </select>
                                 </div>
+
                                 <label class="col-md-2 control-label"> Rango de Edad:</label>
                                 <div class="col-md-2">
-                                    <select class="form-control m-bot15" id="selRangoEdad">
-                                    <option value="null">Seleccionar</option>
-                                    </select>
+                                <select class="form-control m-bot15" id="selRangoEdad">
+                                <option value="null">Seleccionar</option>
+                                </select>
                                 </div>
+
                                 <label class="col-md-2 control-label"> Genero:</label>
                                 <div class="col-md-2">
-                                    <select class="form-control m-bot15" id="selGenero">
-                                    <option value="null">Seleccionar</option>
-                                    </select>
+                                <select class="form-control m-bot15" id="selGenero">
+                                <option value="null">Seleccionar</option>
+                                </select>
                                 </div>
                             </div> 
                             <div class="form-group last">
-                                    <label class="control-label col-md-2">Imagen:</label>
-                                    <div class="col-md-10">
-                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                                            <div class="fileupload-new thumbnail" style="width: 400px; height: 300px;">
-                                                <img id="imgPromocion" src="http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Agregar+imagen" alt="imgPromocion" />
-                                            </div>
-                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 400px; max-height: 300px; line-height: 20px;"></div>
-                                            <div>
-                                             <span class="btn btn-white btn-file">
-                                                 <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Seleccionar imagen</span>
-                                                 <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
-                                                 <input type="file" id="filePromocion" class="default"  name="files" />
-                                             </span>
-                                             <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Eliminar</a>
-                                         </div>
-                                     </div>
+                                <label class="control-label col-md-2">Imagen:</label>
+                                <div class="col-md-10">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload-new thumbnail" style="width: 400px; height: 300px;">
+                                        <img id="imgPromocion" src="http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Agregar+imagen" alt="imgPromocion" />
+                                        </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 400px; max-height: 300px; line-height: 20px;"></div>
+                                    <div>
+                                        <span class="btn btn-white btn-file">
+                                        <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Seleccionar imagen</span>
+                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Cambiar</span>
+                                        <input type="file" id="filePromocion" class="default"  name="files" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Eliminar</a>
+                                    </div>
+                                    </div>
                                  </div>
-                                </div>                    
+                            </div>                    
                         </form>
 
                     
