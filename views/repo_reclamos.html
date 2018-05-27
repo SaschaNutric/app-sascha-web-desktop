@@ -79,16 +79,25 @@
                 </span></header>
                 <div class="panel-body" style="display: block;">
                    <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label">Motivo:</label>
-                        <div class="col-md-12">
-                           <select class="form-control"><option>Todos</option></select></div>
-                       </div>
-                    <div class="form-group">
-                        <label class="control-label">Respuesta:</label>
-                        <div class="col-md-12">
-                           <select class="form-control"><option>Aprobadas</option></select></div>
-                       </div>
+
+                      <div class="form-group">
+                           <label for="selMotivo" class="control-label">Motivo:</label>
+                                    <select id="selMotivo" name="motivo" class="form-control" style="width: 100%">
+                              <option selected="selected" >Todas</option>
+                                    </select>
+                    </div>
+
+
+                        <div class="form-group">
+                           <label for="selRespuesta" class="control-label">Respuesta:</label>
+                                    <select id="selRespuesta" name="respuesta" class="form-control" style="width: 100%">
+                              <option selected="selected" >Seleccionar</option>
+                                    </select>
+                    </div>
+
+
+
+
                        <div class="form-group">
                            <label class="control-label">Fecha:</label>
                            <div class="col-md-12">
@@ -110,8 +119,19 @@
               <div class="panel-body" style="display: block;">
                   <form class="form-horizontal">
                       <div class="form-group">
-                          <label class="control-label" for="selEspecialidad">Especialidad:</label>
-                          <div class="col-md-10"><select id="selEspecialidad" class="form-control"><option>Todas</option></select></div>
+                           <label class="control-label" for="selEspecialidad">Especialidad:</label>
+                                    <select id="selEspecialidad" name="especialidad" class="form-control" style="width: 100%">
+                                          <option value="0" selected="selected" >Todas</option>
+                                    </select>
+                       </div>
+
+                       <div id="especialidadesGeneral" style="display: none;">
+                                 <div class="form-group">
+                                    <label for="selservicio" class="control-label">Servicio:</label>
+                                        <select id="selservicio" name="servicio" class="form-control" style="width: 100%">
+                                        <option value="0" selected="selected" >Todas</option>
+                                        </select>
+                                </div>
                       </div>
                       <div class="form-group">
                           <label class="control-label" for="selPlanSuplemento">Plan de Suplementos:</label>

@@ -1,4 +1,5 @@
 let arregloTipoParametros = [];
+let arregloEspecialidades = [];
 $(document).ready(function() {
 
     /* Caracteristicas del servicio */
@@ -19,29 +20,99 @@ $(document).ready(function() {
         }
     })
 
-    /* llena el select de especialidades */
+
+/**/
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/respuestas/tipomotivo/2',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            res.data.map(function(tipo_motivo) {
+                let option = $(`<option value="${tipo_motivo.id_tipo_respuesta}">${tipo_motivo.descripcion}</option> `)
+                $('#selRespuesta').append(option);
+            })
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+        }
+    })
+/**/
+
+
+/*llenando combo de motivos*/
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/tipomotivo/2',
+
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            res.data.motivos.map(function(tipo_motivo) {
+                let option = $(`<option value="${tipo_motivo.id_motivo}">${tipo_motivo.descripcion}</option> `)
+                $('#selMotivo').append(option);
+            })
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+        }
+    })
+/*fin llenando combo de motivos*/
+
+
+/* llena el select de especialidades */
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/especialidades',
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
-            res.data.map(function(especialidades) {                
+            console.log(res);
+            res.data.map(function(especialidades) {     
+            arregloEspecialidades.push(especialidades);           
                 let optiontipo = $(`<option value="${especialidades.id_especialidad}">${especialidades.nombre}</option>`)
                 $('#selEspecialidad').append(optiontipo);
             })
-
         },
         error: function(res, status, xhr) {
             console.log(res)
             console.log(status)
             const respuesta = JSON.parse(res.responseText);
             mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
-
         }
     })
+$( '#selEspecialidad').on('change',(function(){
+    var str = $("#selEspecialidad").val();
+    console.log(str)
 
-    /* llena el select de plan de suplementos */
-    $.ajax({
+     if(str==0)
+        {
+            $('#especialidadesGeneral').css('display', 'none');
+        }
+        else 
+            $('#especialidadesGeneral').css('display', 'inline');
+        
+ $.ajax({
+        url: 'https://api-sascha.herokuapp.com/servicios/especialidad/'+str,
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            console.log(res);
+            res.data.servicios.map(function(servicio) {
+                let optionservicio = $(`<option value="${servicio.id_servicio}">${servicio.nombre}</option>`)
+                $('#selservicio').append(optionservicio);
+            })
+        },
+        error: function(res, status, xhr) {
+            console.log(res)
+            console.log(status)
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+        }
+    })
+  }))
+/* llena el select de plan de suplementos */
+
+
+
+$.ajax({
         url: 'https://api-sascha.herokuapp.com/plansuplementos',
         contentType: 'application/json',
         type: 'GET',
