@@ -454,7 +454,7 @@ $(document).ready(function () {
 
         if (vm != null && vM != null) {
             if (vM <= vm) {
-                mensaje('#msjParametro', '', 6)
+                mensaje('#msjParametro', 'de valores', 6)
                 return;
             }
 

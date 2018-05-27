@@ -167,7 +167,7 @@
                     </section>
                     <div class="row" style="padding: 30px;">
                         <div class="position-left col-md-6">
-                            <a onclick="cargarAgenda()" href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
+                            <a id="btnAbrirProximaVisita" onclick="cargarAgenda()" href="#proximaVisita" data-toggle="modal" class="btn btn-info">Proxima Visita</a>
                         </div>
                         <div class="pull-right col-md-6" style="text-align: right;">
                             <button type="button" class="btn btn-danger">Cancelar</button>
@@ -413,7 +413,7 @@
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
                     <button id="btnAceptarAlimentos" class="btn btn-primary" type="button">Aceptar</button>
-                    <button hidden id="btnEditarAlimentos" class="btn btn-primary" type="button">Aceptar</button>
+                    <button style="display: none" id="btnEditarAlimentos" class="btn btn-primary" >Aceptar</button>
                     
                 </div>
             </div>
