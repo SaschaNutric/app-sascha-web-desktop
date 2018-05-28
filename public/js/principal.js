@@ -1,8 +1,8 @@
+if(!localStorage.sesion) {
+    window.location.replace("index.html");
+}
 $(document).ready(function (event) {
     
-    if(!localStorage.sesion) {
-        window.location ="index.html";
-    }
     let empleado = JSON.parse(localStorage.getItem('empleado'));
     $('span#username').text(empleado.nombres + ' ' + empleado.apellidos);
 
