@@ -85,11 +85,24 @@
                 </span></header>
                 <div class="panel-body" style="display: block;">
                    <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label ">Respuesta:</label>
-                        <div class="col-md-12">
-                           <select class="form-control"><option>Aprobadas</option></select></div>
-                       </div>
+
+
+                  
+
+                       <div class="form-group">
+                              <label class="control-label" for="selectRespuesta">Respuesta:</label>
+                                    <select id="selRespuesta" name="respuesta" class="form-control" style="width: 100%">
+                                        <option value="0" selected="selected" >Seleccione</option>
+                                        <option value="1" selected="selected" >Aprobado</option>
+                                        <option value="2" selected="selected" >Rechazado, cita agendada </option>
+                                        <option value="3" selected="selected" >rechazado,empleado no trabaja en el dia y horario solicitado</option>
+                                        <option value="4" selected="selected" >Rechazado, por no aceptacion del precio</option>
+                                    </select>
+                            </div>
+
+
+
+
                        <div class="form-group">
                            <label class="control-label">Fecha:</label>
                            <div class="col-md-12">
@@ -105,106 +118,74 @@
         </section>
         <section class="panel">
                 <header class="panel-heading">Características de Servicios
-                 <span class="tools pull-right">
-                  <a href="javascript:;" class="fa fa-chevron-down"></a>
-              </span></header>
+                     <span class="tools pull-right">
+                         <a href="javascript:;" class="fa fa-chevron-down"></a>
+                    </span>
+                </header>
               <div class="panel-body" style="display: block;">
                   <form class="form-horizontal">
-                      <div class="form-group">
-                          <label class="control-label" for="selEspecialidad">Especialidad:</label>
-                          <div class="col-md-10"><select id="selEspecialidad" class="form-control"><option>Todas</option></select></div>
-                      </div>
-                      <div class="form-group">
-                          <label class="control-label" for="selPlanSuplemento">Plan de Suplementos:</label>
-                          <div class="col-md-10"><select  id="selPlanSuplemento" class="form-control"><option>Todos</option></select></div>
-                      </div>
-                      <div class="form-group">
-                       <label class="control-label" for="selPlanDieta">Plan de Dieta:</label>
-                       <div class="col-md-10" ><select  id="selPlanDieta" class="form-control"><option>Todos</option></select></div>
-              
-                   </div>
-                   <div class="form-group">
-                       <label class="control-label" for="selPlanEjercicios">Plan de Ejercicios:</label>
-                       <div class="col-md-10"><select id="selPlanEjercicios" class="form-control"><option>Todos</option></select></div>
-                   </div>
-                   <div class="form-group">
-                      <label class="control-label" for="txtPercio">Precio:</label>
-                      <div class="col-md-12">
-                          <div  class="input-group input-large">
-                              <input id="txtPercio"  type="number" class="form-control" name="min">
-                              <span class="input-group-addon">-</span>
-                              <input type="number" class="form-control" name="max">
-                          </div>
-                      </div>          
-                  </div>
-                  <div class="form-group">
-                      <label class="control-label" for="txtDuracion">Duración:</label>
-                      <div class="col-md-12">
-                          <input class="form-control" type="number" id="txtDuracion">
-                      </div>
-                  </div>
-              </form>
-              </div>
-              </section>
-              <section class="panel">
-                     <header class="panel-heading">Otras Características
-                    <span class="tools pull-right" >
-                      <a href="javascript:;" class="fa fa-chevron-down"></a>
-                  </span></header>
-                  <div class="panel-body" style="display: block;">
-                       <form class="form-horizontal"> 
-                          <div class="form-group">
-                              <label class="control-label" for="selTipoParametro">Tipo parámetro:</label>
-                              <div class="col-md-12"><select id="selTipoParametro" class="form-control"><option>Seleccione</option></select></div>
-                          </div>
-                            <div class="form-group">
-                              <label class="control-label  " for="selParametro">Parámetro:</label>
-                              <div class="row">
-                                  <div class="col-md-10">
-                                        <select id="selParametro" class="form-control"><option>Seleccione</option></select>
-                                  </div>
-                                  <div class="col-md-2">
-                                        <button class="btn btn-info"><i class="fa fa-plus"></i></button>                                      
-                                  </div>
+
+                           <div class="form-group">
+                           <label for="selEspecialidad" class="control-label">Especialidad:</label>
+                                    <select id="selEspecialidad" name="especialidad" class="form-control" style="width: 100%">
+                              <option value="0" selected="selected" >Todas</option>
+                                    </select>
+                            </div>
+
+                            <div id="especialidadesGeneral" style="display: none;">
+                                 <div class="form-group">
+                                    <label for="selservicio" class="control-label">Servicio:</label>
+                                        <select id="selservicio" name="servicio" class="form-control" style="width: 100%">
+                                        <option value="0" selected="selected" >Todas</option>
+                                        </select>
                                 </div>
-                          </div> 
-                      </form>
-                      <table class="table table-striped table-bordered">
-                          <thead>
-                              <tr>
-                                  <th  width="75%">Parámetro</th>
-                                  <th width="10%">Min.</th>
-                                  <th width="10%">Max.</th>
-                                  <th width="5%"></th>                  
-                              </tr>
-                          </thead>
-                          <tbody></tbody>
-                      </table>
-                  </div>
-              
-                 </section>
-    <section class="panel">
+                            </div>
+
+                    </form>
+              </div>
+        </section>
+
+
+
+
+
+     <section class="panel">
         <header class="panel-heading">Características de Clientes
-           <span class="tools pull-right" >
-             <a href="javascript:;" class="fa fa-chevron-down"></a>
-         </span></header>
+               <span class="tools pull-right" >
+                    <a href="javascript:;" class="fa fa-chevron-down"></a>
+               </span>
+         </header>
          <div class="panel-body" style="display: block;">
              <form class="form-horizontal"> 
+
                  <div class="form-group">
                      <label class="control-label" for="selGenero">Género:</label>
-                     <div class=" col-md-12"><select id="selGenero" class="form-control"><option>Todos</option></select></div>
+                           <select id="selGenero" class="form-control">
+                               <option>Todos</option>
+                           </select>
                  </div>
+
+                 
                  <div class="form-group">
                     <label class="control-label " for="selEdoCivil">Estado Civil:</label>
-                    <div class=" col-md-12"><select id="selEdoCivil" class="form-control"><option>Todos</option></select></div>
+                  <select id="selEdoCivil" class="form-control"><option>Todos</option></select>
                 </div>
                 <div class="form-group">
                     <label class="control-label " for="selRangoEdad">Rango de Edad:</label>
-                    <div class=" col-md-12"><select id="selRangoEdad" class="form-control"><option>Todos</option></select></div>
+                  <select id="selRangoEdad" class="form-control"><option>Todos</option></select>
                 </div>
      
             </form>
-        </div></section>
+        </div>
+    </section>
+
+
+
+
+
+ 
+
+
 </div>
 
 
