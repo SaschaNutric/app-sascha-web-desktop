@@ -52,6 +52,7 @@
               <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
+                <th>Funcionalidades</th>
                 <th style="width: 15%">Acciones</th>
               </tr>
             </thead>
@@ -104,77 +105,77 @@
                 <label class="col-md-4 control-label" id="selFuncionalidades">
                   Funcionalidades:</label>
                 <div class="col-md-8">
-                  <select id="ms_funcionalidades" class="form-control" name="funcionalidades">
+                  <select id="ms_funcionalidades" multiple class="form-control" name="funcionalidades">
                     <option value="0" selected disabled></option>
-                    <option value="1">Dashboard</option>
+                    <option value="1-null">Dashboard</option>
                     <optgroup label='Registros Básicos'>
-                      <option value="8">Unidades</option>
-                      <option value="9">Tipos de Parámetros</option>
-                      <option value="10">Tipos de Contacto</option>
-                      <option value="17">Horario</option>
-                      <option value="18">Condiciones de Garantía</option>
-                      <option value="19">Tipos de Valoración</option>
-                      <option value="20">Especialidades</option>
+                      <option value="8-2">Unidades</option>
+                      <option value="9-2">Tipos de Parámetros</option>
+                      <option value="10-2">Tipos de Contacto</option>
+                      <option value="17-2">Horario</option>
+                      <option value="18-2">Condiciones de Garantía</option>
+                      <option value="19-2">Tipos de Valoración</option>
+                      <option value="20-2">Especialidades</option>
                       <optgroup label='->Planes'>
-                        <option value="12">Alimentos</option>
-                        <option value="13">Comidas</option>
-                        <option value="14">Suplementos</option>
-                        <option value="15">Ejercicios</option>
-                        <option value="16">Tipos de Dieta</option>
+                        <option value="12-11-2">Alimentos</option>
+                        <option value="13-11-2">Comidas</option>
+                        <option value="14-11-2">Suplementos</option>
+                        <option value="15-11-2">Ejercicios</option>
+                        <option value="16-11-2">Tipos de Dieta</option>
                       </optgroup>
                     </optgroup>
                     <optgroup label="Configuración">
-                      <option value="21">Parámetros</option>
-                      <option value="28">Servicios</option>
+                      <option value="21-3">Parámetros</option>
+                      <option value="28-3">Servicios</option>
                       <optgroup label="->Sistema">
-                        <option value="23">Motivos y Respuestas</option>
-                        <option value="24">Notificaciones</option>
-                        <option value="25">Agenda</option>
-                        <option value="26">Criterios de Valoracion</option>
-                        <option value="27">Filtros</option>
+                        <option value="23-22-3">Motivos y Respuestas</option>
+                        <option value="24-22-3">Notificaciones</option>
+                        <option value="25-22-3">Agenda</option>
+                        <option value="26-22-3">Criterios de Valoracion</option>
+                        <option value="27-22-3">Filtros</option>
                       </optgroup>
                       <optgroup label="->Planes">
-                        <option value="30">Dietas</option>
-                        <option value="31">Plan de Suplemento</option>
-                        <option value="32">Plan de Entrenamiento</option>
+                        <option value="30-29-3">Dietas</option>
+                        <option value="31-29-3">Plan de Suplemento</option>
+                        <option value="32-29-3">Plan de Entrenamiento</option>
                       </optgroup>
                     </optgroup>
                     <optgroup label="Visitas">
-                      <option value="33">Atender</option>
-                      <option value="35">Incidencias</option>
+                      <option value="33-44">Atender</option>
+                      <option value="35-44">Incidencias</option>
                     </optgroup>
                     <optgroup label="Ofertas y Promociones">
-                      <option value="36">Agregar</option>
-                      <option value="37">Reenviar</option>
+                      <option value="36-5">Agregar</option>
+                      <option value="37-5">Reenviar</option>
                     </optgroup>
                     <optgroup label="Reportes">
                       <optgroup label="Estructurados">
-                        <option value="40">Solicitudes</option>
-                        <option value="41">Servicios</option>
-                        <option value="42">Reclamos</option>
-                        <option value="43">Canal de Escucha</option>
+                        <option value="40-38-6">Solicitudes</option>
+                        <option value="41-38-6">Servicios</option>
+                        <option value="42-38-6">Reclamos</option>
+                        <option value="43-38-6">Canal de Escucha</option>
                       </optgroup>
                       <optgroup label="Estadisticos">
-                        <option value="44">Visitas</option>
-                        <option value="45">Servicios</option>
-                        <option value="46">Clientes</option>
-                        <option value="47">Reclamos</option>
-                        <option value="48">Canal de Escucha</option>
-                        <option value="49">Valoraciones</option>
+                        <option value="44-39-6">Visitas</option>
+                        <option value="45-39-6">Servicios</option>
+                        <option value="46-39-6">Clientes</option>
+                        <option value="47-39-6">Reclamos</option>
+                        <option value="48-39-6">Canal de Escucha</option>
+                        <option value="49-39-6">Valoraciones</option>
                       </optgroup>
                     </optgroup>
                     <optgroup label="Administracion del Sistema">
                       <optgroup label="->Permisologia">
-                        <option value="53">Roles</option>
-                        <option value="54">Usuarios</option>
+                        <option value="53-50-7">Roles</option>
+                        <option value="54-50-7">Usuarios</option>
                       </optgroup>
                       <optgroup label="->Portal Web">
-                        <option value="55">Negocio</option>
-                        <option value="56">Contenido</option>
+                        <option value="55-51-7">Negocio</option>
+                        <option value="56-51-7">Contenido</option>
                       </optgroup>
                       <optgroup label="->Comunicacion">
-                        <option value="57">Reclamos</option>
-                        <option value="58">Canal de Escucha</option>
+                        <option value="57-52-7">Reclamos</option>
+                        <option value="58-52-7">Canal de Escucha</option>
                       </optgroup>
                     </optgroup>
                   </select>
@@ -188,6 +189,7 @@
           <button class="btn btn-cancelar" id="btnCancel" data-dismiss="modal" type="button">
             Cancelar
           </button>
+          <button style="display: none;" id="btnEditar" type="button" class="btn btn-primary">Guardar</button>
           <button id="btnAceptar" class="btn btn-primary" type="button">
             Aceptar
           </button>

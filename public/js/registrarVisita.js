@@ -1243,8 +1243,6 @@ function eliminarParametro(id){
         url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
         type: 'DELETE',
         contentType: 'application/json',
-        data: JSON.stringify(parametro),
-
         success: function (res, status, xhr) {
             mensaje('#msjAlerta', 'Parametro del perfil', 2)
 
@@ -1279,7 +1277,7 @@ function confirmarParametro(id) {
         let parametro = {
             id_parametro : id_parametro,
             valor: valor,
-            id_visita: id_visita
+            id_visita: id_visita_control
         }
         $.ajax({
             url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
