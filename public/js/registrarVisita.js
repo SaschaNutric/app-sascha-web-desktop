@@ -18,7 +18,7 @@ var paramarr = paramstr.split("=");
 var params = {};
 params[paramarr[0]] = paramarr[1];
 const id_agenda = params['id'];
-const meta = false;
+let meta_registrada = false;
 $(document).ready(function () {
 
     $('#proximaVisita').on('shown.bs.modal', function () {
@@ -386,7 +386,7 @@ $(document).ready(function () {
             window.location = 'visitas.html'
             return
         }
-        if(!meta){
+        if(!meta_registrada){
             mensaje("#msjAlerta", 'de la Meta', 5)
             return
         }
@@ -648,7 +648,6 @@ $(document).ready(function () {
             success: function (res, status, xhr) {
                 mensaje('#msjAlerta', 'Meta', 1)
                 addRowMeta(res.data.id_parametro_meta, tp, p_nombre, v)
-                meta =true;
                 console.log(res.data.mensaje)
             },
             error: function (res, status, xhr) {
@@ -1424,6 +1423,8 @@ function resetMultiSelect() {
 }
 
 function addRowMeta(id, tipo_parametro, parametro, valor) {
+    meta_registrada =true;
+    
     let row = $(`<tr>
         <td hidden id="metaTP-${id}">${tipo_parametro}</td>    
         <td id="metaP-${id}">${parametro}</td>

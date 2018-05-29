@@ -43,6 +43,8 @@ var Script = function () {
             }else{
                 let agenda =event.agenda
                 let fecha_cita = moment(event.start).format('DD, MMMM YYYY')
+
+          
                 $('#cliente-nombre').text(agenda.nombre_cliente)
                 $('#servicio-nombre').text(agenda.nombre_servicio)
                 
@@ -117,6 +119,7 @@ function cargarDetalle(id){
         contentType: 'application/json',
         type: 'GET',
         success: function (res, status, xhr) {
+            $('#visita-numero').text("#"+ res.data.numero )
             res.data.detalles.map(function (detalle) {
                 let valor = detalle.valor == null ? '-': detalle.valor + " " + detalle.unidad_abreviatura
                 let row = $(`<tr>   
