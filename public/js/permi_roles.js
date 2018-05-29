@@ -35,7 +35,7 @@ $(document).ready(function () {
         "paging": true
     });
     $.ajax({
-        url: 'https://api-sascha.herokuapp.com//roles',
+        url: 'https://api-sascha.herokuapp.com/roles',
         contentType: 'application/json',
         type: 'GET',
         success: function (res, status, xhr) {
