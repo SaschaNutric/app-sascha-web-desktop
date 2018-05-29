@@ -151,7 +151,7 @@ $(document).ready(function () {
                 $('#servicio-avance-barra').css('width', calcularAvance(realizadas, servicio.numero_visitas));
                 $('#servicio-avance-texto').text(realizadas + ' de ' + servicio.numero_visitas + " visitas");
 
-                if (realizadas == servicio.numero_visitas) {
+                if (realizadas >= servicio.numero_visitas) {
                     $('#btnAbrirProximaVisita').hide()
                     ultima = true;
                 }
@@ -375,7 +375,7 @@ $(document).ready(function () {
 
     //Registrar Visita
     $('#btnRegistrar').on('click', function () {
-        if (id_tipo_cita == 2) {
+        if (id_tipo_cita == 2 && !ultima) {
             if (!proxima) {
                 mensaje('#msjAlerta', '', 5)
                 return
