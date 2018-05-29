@@ -13,17 +13,18 @@ let id_visita_control = null;
 let proxima = false;
 let ultima = false;
 let parametros = []
+var paramstr = window.location.search.substr(1);
+var paramarr = paramstr.split("=");
+var params = {};
+params[paramarr[0]] = paramarr[1];
+const id_agenda = params['id'];
+const meta = false;
 $(document).ready(function () {
 
     $('#proximaVisita').on('shown.bs.modal', function () {
         $("#calendar").fullCalendar('render');
     });
 
-    var paramstr = window.location.search.substr(1);
-    var paramarr = paramstr.split("=");
-    var params = {};
-    params[paramarr[0]] = paramarr[1];
-    const id_agenda = params['id'];
 
     $('#dtSuplementos').DataTable({
         "language": {
@@ -130,7 +131,7 @@ $(document).ready(function () {
                     if ($('#color-icono-visita').hasClass('light-green')) {
                         $('#color-icono-visita').removeClass('light-green')
                     }
-                    if ($('#icono-visita').addClass('fa-stethoscope')) {
+                    if ($('#icono-visita').hasClass('fa-stethoscope')) {
                         $('#icono-visita').removeClass('fa-stethoscope')
                     }
                     $('#color-icono-visita').addClass('turquoise')
@@ -179,9 +180,9 @@ $(document).ready(function () {
                             res.data.map(function (parametro) {
                                 let unidad = parametro.id_unidad
                                 if (unidad == null) {
-                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '', null, agenda.id_tipo_cita)
+                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '', null, agenda.id_tipo_cita , '')
                                 } else {
-                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura, null, agenda.id_tipo_cita)
+                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura, null, agenda.id_tipo_cita, '')
                                 }
                             })
 
@@ -202,9 +203,9 @@ $(document).ready(function () {
                         perfil.map(function (parametro) {
                             let unidad = parametro.unidad
                             if (unidad == null || unidad == undefined) {
-                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, '', parametro.valor, agenda.id_tipo_cita)
+                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, '', parametro.valor, agenda.id_tipo_cita, parametro.id_parametro)
                             } else {
-                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, parametro.unidad_abreviatura, parametro.valor, agenda.id_tipo_cita)
+                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, parametro.unidad_abreviatura, parametro.valor, agenda.id_tipo_cita, parametro.id_parametro)
                             }
                         })
                     }
@@ -385,13 +386,18 @@ $(document).ready(function () {
             window.location = 'visitas.html'
             return
         }
+        if(!meta){
+            mensaje("#msjAlerta", 'de la Meta', 5)
+            return
+        }
+
         let regimen_suplementos = []
         let regimen_ejercicios = []
         let regimen_dietas = []
         //Datos del perfil
 
         if (parametros.length == 0) {
-            mensaje('#msjAgregar', 'en Perfil', 5)
+            mensaje('#msjAlerta', 'en Perfil', 5)
             return
         }
         //Regimen-Suplemento
@@ -642,7 +648,7 @@ $(document).ready(function () {
             success: function (res, status, xhr) {
                 mensaje('#msjAlerta', 'Meta', 1)
                 addRowMeta(res.data.id_parametro_meta, tp, p_nombre, v)
-
+                meta =true;
                 console.log(res.data.mensaje)
             },
             error: function (res, status, xhr) {
@@ -711,7 +717,7 @@ $(document).ready(function () {
         let tp_nombre = $('select[name="tipo_parametro"] option:selected').text()
 
         if (tp == 0 || p == 0 || (tv == 2 && v == '')) {
-            mensaje('#msjMeta', '', 5)
+            mensaje('#msjAlerta', '', 5)
             return
         }
 
@@ -1197,7 +1203,7 @@ function createSelFrecuencia(id, clases, selected, element) {
     document.getElementById(element).appendChild(select)
 }
 
-function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita) {
+function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita, id_parametro) {
     let valor = '';
     if (tipo_valor === 2) {
         valor = `<input id='real-${id}' type="number" class='form-control txtValor' style='width: 70%' value='${valorP == null ? '' : valorP}' ><span> ${unidad}</span>`
@@ -1216,6 +1222,7 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
         <a style='display:none' id='confirmarParametro-${id}' class='btn btn-white' onclick='confirmarParametro(${id})'><i class='fa fa-save' /> </a>
         <a style='display:none' id='cancelarParametro-${id}' class='btn btn-white' onclick='cancelarParametro(${id})'><i class='fa fa-times' /> </a>
         </td>
+        <td hidden id="id_parametro-${id}">${id_parametro}</td>
         </tr>
         `);
     $('#dtPerfil').DataTable().row.add(row).draw();
@@ -1226,6 +1233,81 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
     }
 
 
+}
+
+function eliminarParametro(id){
+    if(id == undefined){
+        return
+    }
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
+        type: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify(parametro),
+
+        success: function (res, status, xhr) {
+            mensaje('#msjAlerta', 'Parametro del perfil', 2)
+
+        },
+        error: function (res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText)
+            mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+            console.log(res)
+
+        }
+    })
+}
+function confirmarParametro(id) {
+    let index = 0
+    for (let i = 0; i < valores_viejos.length; i++) {
+        if (valores_viejos[i].id == id) {
+            index = i;
+        }
+    }
+    valores_viejos.splice(index, 1);
+    let valor = $(`#real-${id}`).val()
+
+    if (valor == '' || valor == undefined) {
+        mensaje("#msjAlerta", "en el valor de parametro", 5)
+        return
+    }
+    if (id_tipo_cita == 2) {
+        let id_parametro = $(`#id_parametro`).text()
+        if (id_visita_control == null) {
+            registrarVisitaControl(id_agenda)
+        }
+        let parametro = {
+            id_parametro : id_parametro,
+            valor: valor,
+            id_visita: id_visita
+        }
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(parametro),
+
+            success: function (res, status, xhr) {
+                mensaje('#msjAlerta', 'Parametro del perfil', 3)
+
+            },
+            error: function (res, status, xhr) {
+                const respuesta = JSON.parse(res.responseText)
+                mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+                console.log(res)
+
+            }
+        })
+    }
+    $(`#editarParametro-${id}`).css('display', 'block')
+    $(`#eliminarParametro-${id}`).css('display', 'block')
+
+    $(`#confirmarParametro-${id}`).css('display', 'none')
+    $(`#cancelarParametro-${id}`).css('display', 'none')
+
+    if (document.getElementById('real-' + id)) {
+        $(`#real-${id}`).prop('disabled', true)
+    }
 }
 
 function perfil(id) {
@@ -1413,25 +1495,28 @@ function eliminarMeta(id) {
 
 
 function cargarAgenda() {
+    let fecha_cita = $('#cita-fecha').text()
+    fecha_cita = moment(fecha_cita)
     document.getElementById('selHoraCita').length = 1
     $('#calendar').fullCalendar('destroy')
-
+    
     /* initialize the calendar
-     -----------------------------------------------------------------*/
+    -----------------------------------------------------------------*/
     let data = {
         fecha_inicio: '2018-05-01',
         fecha_fin: '2019-05-31'
     }
-
+    
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
     let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
-
+    
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
+            center: 'title',
             right: ''
         },
         defaultView: 'month',
@@ -1440,7 +1525,8 @@ function cargarAgenda() {
         dayClick: function (date, jsEvent, view) {
             let fecha = moment(date).format('DD-MM-YYYY')
             let dia = moment(date).day()
-            if (moment(date).isAfter(moment())) {
+
+            if (moment(date).isAfter(fecha_cita)) {
                 document.getElementById('selHoraCita').length = 1
                 let horario = {
                     id_empleado: id_empleado,
@@ -1521,9 +1607,7 @@ function registrarVisitaControl(id_agenda) {
         async: false,
         contentType: 'application/json',
         data: JSON.stringify(visita_control),
-
         success: function (res, status, xhr) {
-            mensaje('#msjAlerta', 'Visista', 1)
             id_visita_control = res.data.id_visita
             console.log(res.data.mensaje)
         },

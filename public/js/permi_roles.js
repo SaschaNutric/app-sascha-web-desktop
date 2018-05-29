@@ -1,23 +1,23 @@
 var datos=[];
 $(document).ready(function() {
     /* Cargar Multiselect */
-    document.getElementById('selFuncionalidades').length = 1;
-    $.ajax({
-        url: 'https://api-sascha.herokuapp.com/funcionalidades',
-        contentType: 'application/json',
-        type: 'GET',
-        success: function(res, status, xhr) {
-            res.data.map(function(funcionalidad) {
-                let option = $(`<option value="${funcionalidad.id_funcionalidad}">${funcionalidad.nombre}</option>`)
-                $('#ms_funcionalidades').append(option);
-                $('#ms_funcionalidades').multiSelect('refresh')
-            })
+    // document.getElementById('selFuncionalidades').length = 1;
+    // $.ajax({
+    //     url: 'https://api-sascha.herokuapp.com/funcionalidades',
+    //     contentType: 'application/json',
+    //     type: 'GET',
+    //     success: function(res, status, xhr) {
+    //         res.data.map(function(funcionalidad) {
+    //             let option = $(`<option value="${funcionalidad.id_funcionalidad}">${funcionalidad.nombre}</option>`)
+    //             $('#ms_funcionalidades').append(option);
+    //             $('#ms_funcionalidades').multiSelect('refresh')
+    //         })
 
-        },
-        error: function(res, status, xhr) {
+    //     },
+    //     error: function(res, status, xhr) {
 
-        }
-    })
+    //     }
+    // })
     /* tabla tipo de parametros */
     const tablaRoles = $('#dtRoles').DataTable({ 
         "language": {
@@ -123,14 +123,22 @@ $(document).ready(function() {
             mensaje('#msjAlertaA', `funcionalidades`, 5);
             return;
         }
+        let func = []
+        datos.map(function(funcionalidad){
+             func.push({
+                id_funcionalidad: funcionalidad
+            })
+        })
+    
 
         let rol = {
             nombre: $('#txtNombre').val(),
-            descripcion: $('#txtDescripcion').val()
+            descripcion: $('#txtDescripcion').val(),
+            funcionalidades: func
         }
 
         $.ajax({
-            url: 'https://api-sascha.herokuapp.com/roles',
+            url: 'http://localhost:5000/roles', //'https://api-sascha.herokuapp.com/roles',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(rol),
@@ -141,7 +149,7 @@ $(document).ready(function() {
                 limpiarRol()
                 mensaje('#msjAlerta', `Tipo Unidad`, 1);
                 addRowRoles(rol1.id_rol,rol1.nombre,rol1.descripcion);
-                agregarFuncionalidades(rol1.id_rol)
+               // agregarFuncionalidades(rol1.id_rol)
                 $('#myModal .close').click();
             },
             error: function(res, status, xhr) {

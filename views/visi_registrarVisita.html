@@ -260,19 +260,21 @@
                         <div class="col-md-12" style="padding: 20px">
                             <button id="btnMeta" href="#definirMeta" data-toggle="modal" class="btn btn-info" style="width: 100%;">Definir Meta</button>
                         </div>
+                        <div class="col-md-12">
+                            <table id="dtMeta" class="display table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th hidden width="0%">Tipo de Parametro</th>
+                                        <th style="width: 50% !important">Parametro</th>
+                                        <th style="width: 40% !important">Valor</th>
+                                        <th style="width: 10% !important"></th>
 
-                        <table id="dtMeta" class="display table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th hidden></th>
-                                    <th>Parametro</th>
-                                    <th>Valor</th>
-                                    <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
 
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
                     </section>
                 </section>
 
@@ -389,7 +391,7 @@
                             <div class="col-md-7">
                                 <input id="txtGrupoAlimenticioId" type="text" hidden>
                                 <input id="txtIdRegimen" type="text" hidden>
-                                
+
                                 <input class="form-control" type="text" disabled="disabled" id='txtGrupoAlimenticio' /> </div>
                         </div>
                         <div class="form-group">
@@ -413,8 +415,8 @@
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
                     <button id="btnAceptarAlimentos" class="btn btn-primary" type="button">Aceptar</button>
-                    <button style="display: none" id="btnEditarAlimentos" class="btn btn-primary" >Aceptar</button>
-                    
+                    <button style="display: none" id="btnEditarAlimentos" class="btn btn-primary">Aceptar</button>
+
                 </div>
             </div>
         </div>
