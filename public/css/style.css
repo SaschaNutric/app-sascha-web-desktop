@@ -21,9 +21,6 @@ body {
 ul, .list-unstyled {
     padding-left: 30px;
 }
-ul li {
-    /*list-style:none;*/
-}
 
 .btn-sub-menu
 { 
@@ -190,7 +187,7 @@ a,a:hover,a:focus {
 #sidebar {
     width:240px;
     height:100%;
-    font-color:#FFFFFF;
+    color:#FFFFFF;
     position:fixed;
     background:#858580;
     -webkit-transition:all .3s ease-in-out;
@@ -1069,8 +1066,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     margin-bottom:-15px;
     display:inline-block;
 }
-.chart-tittle .title {
-}
+
 .panel.green-chart .chart-tittle .value {
     float:right;
     color:#c0f080;
@@ -1204,9 +1200,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     position:relative;
     margin-bottom:30px;
 }
-.timeline .time-show.first {
-    /*margin-top:-80px;*/
-}
+
 .time-show .btn {
     width:150px;
 }
@@ -1679,8 +1673,7 @@ ul.ft-link li a i {
 .post-info .desk.yellow h3 {
     color:#f8d347;
 }
-.post-btn {
-}
+
 .post-btn a {
     float:left;
     margin-right:8px;
