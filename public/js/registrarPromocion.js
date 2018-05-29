@@ -68,22 +68,46 @@ $(document).ready(function() {
                 mensaje('#msjAlerta', '', 5);
                 return;
             }
-            let ofertaPromo = {
+            let promocion = {
                 nombre: $('#txtNombrePromo').val(),
-                id_servicio: $('#selServicios').val(),
+                id_servicio: $('#selServicios').val()== 'null' ? null : $('#selServicios').val(),
                 descripcion: $('#txtDescripcionPromo').val(),
                 descuento: $('#txtDescuento').val(),
                 valido_desde: $('#dpValidoDesde').val(),
                 valido_hasta: $('#dpValidoHasta').val(),
-
             }
+            const div = document.getElementsByClassName('fileupload-preview')[0]
+            let url_imagen = ''
+            if (div.firstChild != null) {
+                url_imagen = div.firstChild.src
+            }
+           // console.log(promocion)
+        if (oldPromocion.nombre == promocion.nombre && oldPromocion.servicio == promocion.servicio && oldPromocion.descripcion == promocion.descripcion && oldPromocion.descuento == promocion.descuento && oldPromocion.valido_desde == promocion.valido_desde && oldPromocion.valido_hasta == promocion.valido_hasta && url_imagen == '') {
+            mensaje('#msjAlerta', '', 4);
+            return;
+
+        }
+        console.log(promocion)
+        var file_data = $("#filePromocion").prop("files")[0];   // Getting the properties of file from file field
+        var form_data = new FormData();                  // Creating object of FormData class
+        form_data.append('nombre', promocion.nombre);
+        form_data.append('id_servicio', promocion.id_servicio);
+        form_data.append('descripcion', promocion.descripcion);
+        form_data.append('descuento', promocion.descuento);
+        form_data.append('valido_desde', promocion.valido_desde);
+        form_data.append('valido_hasta', promocion.valido_hasta);
+        if (url_imagen != '') {
+            form_data.append('imagen', file_data);
+        }
 
             $.ajax({
                 url: "https://api-sascha.herokuapp.com/promocion/" + id,
                 cache: false,
-                contentType: 'application/json',
+                contentType: false,
+                processData: false,
+                method: 'PUT',
                 type: 'PUT',
-                data: JSON.stringify(ofertaPromo),                         // Setting the data attribute of ajax with file_data
+                data: form_data,    
                 success: function (res, status, xhr) {
                     
                 },
@@ -96,77 +120,8 @@ $(document).ready(function() {
         });
     }     
      
-
-// Guarda informacion basica de la promocion
-  /*   $('#btnRegistrar').on('click', function() {
-        if(!validate()){
-            mensaje('#msjAlerta', '', 5);
-            return;
-        }
-      
-
-        if($('#txtNombrePromo').val() == ""){
-            $('#txtNombrePromo').css('border', '1px solid red');
-            return;
-        }
-        if($('#selServicios').val() == "")
-        {
-            $('#selServicios').css('border', '1px solid red');
-            return;
-        }
-
-        if($('#txtDescripcionPromo').val() == "") {
-            $('#txtDescripcionPromo').css('border', '1px solid red');
-            return;
-        }
-        if($('#txtDescuento').val() == ""){
-            $('#txtDescuento').css('border', '1px solid red');
-            return;
-        }
-        if($('#dpValidoDesde').val() == ""){
-            $('#dpValidoDesde').css('border', '1px solid red');
-            return;
-        }
-        if($('#dpValidoHasta').val() == ""){
-            $('#dpValidoHasta').css('border', '1px solid red');
-            return;
-        }
-
-        let ofertaPromo= {
-            nombre: $('#txtNombrePromo').val(),
-            id_servicio: $('#selServicios').val(),
-            descripcion: $('#txtDescripcionPromo').val(),
-            descuento: $('#txtDescuento').val(),
-            valido_desde: $('#dpValidoDesde').val(),
-            valido_hasta: $('#dpValidoHasta').val()
-        }
-
-        $.ajax({
-            url: 'https://api-sascha.herokuapp.com/promociones',
-            contentType: 'application/json',
-            type: 'POST',
-            data: JSON.stringify(ofertaPromo),
-            success: function(res, status, xhr) {
-                $('#txtNombrePromo').val('');
-                $('#selServicios').val('');
-                $('#txtDescripcionPromo').val('');
-                $('#txtDescuento').val('');
-                $('#dpValidoDesde').val('');
-                $('#dpValidoHasta').val('');
-                document.getElementById('promocion').selectedIndex = 0
-                verpromocion();
-            },
-            error: function(res, status, xhr) {
-                const respuesta = JSON.parse(res.responseText);
-                mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
-            }
-        })
-
-    })
- */
-
    
-//Agregar nuevo servicio
+//Agregar nuevo promocion
 $('#btnRegistrar').on('click', function () {
 
     if (!validate()) {
@@ -185,7 +140,7 @@ $('#btnRegistrar').on('click', function () {
         id_genero: $('#selGenero').val(),
         id_estado_civil: $('#selEstadoCivil').val(),
         valido_desde: valido_desde.split("-").reverse().join("-"),
-        valido_hasta: valido_hasta.split("-").reverse().join("-")
+        valido_hasta: valido_hasta.split("-").reverse().join("-"),
 
     }
 
@@ -391,7 +346,7 @@ $('#btn-regis').on('click', function () {
 
     if (vm != null && vM != null) {
         if (vM <= vm) {
-            mensaje('#msjParametro', '', 6)
+            mensaje('#msjAlerta', '', 6)
             return;
         }
 

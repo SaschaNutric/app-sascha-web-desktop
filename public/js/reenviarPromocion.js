@@ -24,13 +24,13 @@ $(document).ready(function () {
         success: function (res, status, xhr) {
             res.data.map(function (promocion) {
                 let row = $(`<tr>
-                    <td> </td>
+                    <td class='text-center'> <input id='checkboxReenviar-${promocion.id_promocion}' type="checkbox" class='align-center'></td> 
                     <td id="nombre-${promocion.id_promocion}">${promocion.nombre}</td>
                     <td id="servicio-${promocion.id_promocion}">${promocion.servicio.nombre}</td>
                     <td id="descripcion-${promocion.id_promocion}">${promocion.descripcion}</td>
                     <td id="descuento-${promocion.id_promocion}">${promocion.descuento}</td>
-                    <td id="valido_desde-${promocion.id_promocion}">${promocion.valido_desde}</td>
-                    <td id="valido_hasta-${promocion.id_promocion}">${promocion.valido_hasta}</td>
+                    <td id="valido_desde-${promocion.id_promocion}">${promocion.valido_desde.split("-").reverse().join("-")}</td>
+                    <td id="valido_hasta-${promocion.id_promocion}">${promocion.valido_hasta.split("-").reverse().join("-")}</td>
                     <td>
                         <a onclick="editarPromo(${promocion.id_promocion})"  class='edit btn  btn-stransparent' title='Editar'><i class='fa fa-pencil'></i></a>
                         <button onclick="abrirModalEliminarPromo(${promocion.id_promocion})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
@@ -109,7 +109,7 @@ $(document).ready(function () {
 
 
 });
-
+//LLeva a la pantalla de Reenviar Promocion luego de haber editado una
 function editarPromo(id) {
 
     var params = {

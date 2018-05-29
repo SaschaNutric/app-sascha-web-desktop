@@ -28,10 +28,10 @@
     <div class="row">
         <div class="col-md-3">
             <div class="mini-stat clearfix">
-                <a id="modalVisitaDiagnostico" href="#visitaDiagnostico" data-toggle="modal">
+                <a id="modalVisitaDiagnostico" href="#visitaDiagnostico" data-toggle="modal" onclick="cargarModalVisitasD() ">
                 <span class="mini-stat-icon light-green"><i class="fa  fa-stethoscope"></i></span>
                 <div class="mini-stat-info">
-                    <span>3</span>
+                    <span>2</span>
                     Visitas Diagnóstico
                 </div>
                 </a>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-md-3">
             <div class="mini-stat clearfix">
-                <a id="modalVisitaControl" href="#visitaControl" data-toggle="modal">
+                <a id="modalVisitaControl" href="#visitaControl" data-toggle="modal" onclick="cargarModalVisitasC() ">
                 <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
                 <div class="mini-stat-info">
                     <span>5</span>
@@ -51,7 +51,7 @@
         </div>
         <div class="col-md-3">
             <div class="mini-stat clearfix">
-                <a id="modalMisClientes" href="#clientes" data-toggle="modal">
+                <a id="modalMisClientes" href="#clientes" data-toggle="modal" onclick="cargarModalMisClientes()">
                 <span class="mini-stat-icon dark-green"><i class="fa fa-medkit"></i></span>
                 <div class="mini-stat-info">
                     <span>50</span>
@@ -193,7 +193,7 @@
 </div>
 
     <!-- Modal visita diagnostico -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaDiagnostico" class="modal fade">
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaDiagnostico" class="modal fade"> 
             <div class="modal-dialog">
                 <div class="modal-content modal-dashboard">
                     <div class="modal-header">
@@ -216,10 +216,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
+        
                 </div>
             </div>
         </div>
@@ -249,10 +246,6 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -281,10 +274,6 @@
                                 </table>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -339,7 +328,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 <script src="js/calendar/moment-2.2.1.js"></script>
 
-
+<script type="text/javascript" language="javascript" src="js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
 
 <script src="js/evnt.calendar.init.js"></script>
 <script src="js/jvector-map/jquery-jvectormap-1.2.2.min.js"></script>
@@ -350,6 +340,7 @@
 <!--Sparkline Chart-->
 <script src="js/sparkline/jquery.sparkline.js"></script>
 <!--Morris Chart-->
+<script src="js/mensaje.js"></script>
 
 <!--jQuery Flot Chart-->
 <script src="js/dashboard.js"></script>
