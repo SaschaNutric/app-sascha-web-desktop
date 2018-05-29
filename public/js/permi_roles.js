@@ -106,10 +106,7 @@ $(document).ready(function () {
     });
 
     $('#btnAceptar').on('click', function () {
-        let func =  limpiarFuncionalidad();
-        console.log(func)
-        return
- 
+        
         if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
             return;
@@ -128,7 +125,9 @@ $(document).ready(function () {
             mensaje('#msjAlertaA', `funcionalidades`, 5);
             return;
         }
-      
+        
+        let func =  limpiarFuncionalidad();
+        console.log(func)
 
         let rol = {
             nombre: $('#txtNombre').val(),
@@ -153,7 +152,7 @@ $(document).ready(function () {
                     nombres_f.push(funcion.id_nombre)
                 })
                 limpiarRol()
-                mensaje('#msjAlerta', `Tipo Unidad`, 1);
+                mensaje('#msjAlerta', `Rol`, 1);
                 addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, ids_f,nombres_f);
                 // agregarFuncionalidades(rol1.id_rol)
                 $('#myModal .close').click();
@@ -275,8 +274,6 @@ function limpiarRol() {
     $('#txtDescripcion').val('');
     $('#txtNombreE').val('');
     $('#txtDescripcionE').val('');
-    $('#ms_funcionalidades').empty();
-    $('#ms_funcionalidades').multiSelect('refresh')
 
 }
 function editarRoles(id) {
@@ -323,13 +320,14 @@ function limpiarFuncionalidad(){
     let func =[]
     datos.map(function (funcionalidad) {
         let enc = false
+
         for(let i = 0; i<func.length ; i++){
             if (func[i].id_funcionalidad == funcionalidad) {
                 enc = true;
                 break;
             }
         }
-        if (!enc) {
+        if (!enc && funcionalidad != "0") {
             func.push({
                 id_funcionalidad: funcionalidad
             })
