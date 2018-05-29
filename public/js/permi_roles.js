@@ -35,7 +35,7 @@ $(document).ready(function () {
         "paging": true
     });
     $.ajax({
-        url: 'http://localhost:3000/roles',
+        url: 'https://api-sascha.herokuapp.com//roles',
         contentType: 'application/json',
         type: 'GET',
         success: function (res, status, xhr) {
@@ -138,7 +138,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: 'http://localhost:3000/roles', //'https://api-sascha.herokuapp.com/roles',
+            url: 'https://api-sascha.herokuapp.com/roles', //'https://api-sascha.herokuapp.com/roles',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(rol),
