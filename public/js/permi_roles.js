@@ -41,13 +41,14 @@ $(document).ready(function () {
         success: function (res, status, xhr) {
             res.data.map(function (roles) {
                 console.log(res.data)
-                let ids_f= []
+                let ids_f = []
                 let nombres_f = []
-                roles.funcionalidades.map(function(funcion){
+                roles.funcionalidades.map(function (funcion) {
                     ids_f.push(funcion.id_funcionalidad)
                     nombres_f.push(funcion.nombre)
                 })
-                addRowRoles(roles.id_rol, roles.nombre, roles.descripcion, ids_f, nombres_f)
+                let funciones_multiselect = convertirFunciones(nombres_f)
+                addRowRoles(roles.id_rol, roles.nombre, roles.descripcion, funciones_multiselect, nombres_f)
             })
 
         },
@@ -88,17 +89,17 @@ $(document).ready(function () {
             this.qs2.cache();
             console.log(values)
             let ids = values[0].split('-')
-            for(let i=0;i<ids.length; i++){           
-                    datos.push(ids[i])
+            for (let i = 0; i < ids.length; i++) {
+                datos.push(ids[i])
             }
         },
         afterDeselect: function (values) {
             this.qs1.cache();
             this.qs2.cache();
-            let ids = values[0].split('-')            
-            for(let i=0;i<ids.length; i++){
+            let ids = values[0].split('-')
+            for (let i = 0; i < ids.length; i++) {
                 let index = datos.indexOf(ids[i])
-                if( index != -1){
+                if (index != -1) {
                     datos.splice(index, 1)
                 }
             }
@@ -106,7 +107,7 @@ $(document).ready(function () {
     });
 
     $('#btnAceptar').on('click', function () {
-        
+
         if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
             return;
@@ -125,8 +126,8 @@ $(document).ready(function () {
             mensaje('#msjAlertaA', `funcionalidades`, 5);
             return;
         }
-        
-        let func =  limpiarFuncionalidad();
+
+        let func = limpiarFuncionalidad();
         console.log(func)
 
         let rol = {
@@ -145,15 +146,15 @@ $(document).ready(function () {
                 console.log(res.data);
                 console.log(status);
                 const rol1 = res.data
-                let ids_f= []
+                let ids_f = []
                 let nombres_f = []
-                rol1.funcionalidades.map(function(funcion){
+                rol1.funcionalidades.map(function (funcion) {
                     ids_f.push(funcion.id_funcionalidad)
                     nombres_f.push(funcion.id_nombre)
                 })
                 limpiarRol()
                 mensaje('#msjAlerta', `Rol`, 1);
-                addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, ids_f,nombres_f);
+                addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, ids_f, nombres_f);
                 // agregarFuncionalidades(rol1.id_rol)
                 $('#myModal .close').click();
             },
@@ -168,7 +169,7 @@ $(document).ready(function () {
     })
 
     $('#btnEditar').on('click', function () {
-        if ($('#txtNombre').val() == "" ) {
+        if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
             mensaje('#msjAlertaA', '', 5)
             return;
@@ -179,7 +180,7 @@ $(document).ready(function () {
         if ($('#txtDescripcion').val() == "") {
             $('#txtDescripcion').css('border', '1px solid red');
             mensaje('#msjAlertaA', '', 5)
-            
+
             return;
         } else {
             $('#txtDescripcionE').css('border', '1px solid #858580');
@@ -274,7 +275,7 @@ function limpiarRol() {
     $('#txtDescripcion').val('');
     $('#txtNombreE').val('');
     $('#txtDescripcionE').val('');
-
+    $('#ms_funcionalidades').multiSelect('deselect_all')
 }
 function editarRoles(id) {
     $('#txtNombre').val($(`#nombre-${id}`).text());
@@ -282,6 +283,8 @@ function editarRoles(id) {
     $('#txtIdRol').val(id);
     $('#btnAceptar').css('display', 'none');
     $('#btnEditar').css('display', 'inline');
+    let ids = $(`#id_funcionalidades-${id}`).text().split(',')
+    $('#ms_funcionalidades').multiSelect('select', ids)
 }
 
 function abrirModalEliminarRoles(id) {
@@ -316,12 +319,12 @@ function eliminarRoles(id) {
 
 
 
-function limpiarFuncionalidad(){
-    let func =[]
+function limpiarFuncionalidad() {
+    let func = []
     datos.map(function (funcionalidad) {
         let enc = false
 
-        for(let i = 0; i<func.length ; i++){
+        for (let i = 0; i < func.length; i++) {
             if (func[i].id_funcionalidad == funcionalidad) {
                 enc = true;
                 break;
@@ -334,4 +337,17 @@ function limpiarFuncionalidad(){
         }
     })
     return func
+}
+
+function convertirFunciones(ids) {
+    let ids_f = []
+    for (let i = 0; i < ids.length; i++) {
+        let opcion = $('#ms_funcionalidades option:contains(' + ids[i] + ')')
+        if(opcion.text() == ids[i]){
+            ids_f.push(opcion.val())
+        }
+
+    }
+
+    return ids_f;
 }

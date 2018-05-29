@@ -2,9 +2,9 @@ $(document).ready(function (event) {
     let empleado = JSON.parse(localStorage.getItem('empleado'));
     console.log(empleado.menu)
 
-    if (empleado.menu.length == 0) {
+    if (!empleado.menu || empleado.menu.length == 0) {
         alert("Disculpa, no tienes acceso a Sascha Intranet")
-        window.location.replace('index.htmtl')
+        window.location.replace('index.html')
     } else {
         let menu = document.createElement('ul');
         menu.className = "sidebar-menu";
