@@ -1,24 +1,5 @@
-var datos = [];
 $(document).ready(function () {
-    /* Cargar Multiselect */
-    // document.getElementById('selFuncionalidades').length = 1;
-    // $.ajax({
-    //     url: 'https://api-sascha.herokuapp.com/funcionalidades',
-    //     contentType: 'application/json',
-    //     type: 'GET',
-    //     success: function(res, status, xhr) {
-    //         res.data.map(function(funcionalidad) {
-    //             let option = $(`<option value="${funcionalidad.id_funcionalidad}">${funcionalidad.nombre}</option>`)
-    //             $('#ms_funcionalidades').append(option);
-    //             $('#ms_funcionalidades').multiSelect('refresh')
-    //         })
 
-    //     },
-    //     error: function(res, status, xhr) {
-
-    //     }
-    // })
-    /* tabla tipo de parametros */
     const tablaRoles = $('#dtRoles').DataTable({
         "language": {
             "lengthMenu": "",
@@ -40,14 +21,13 @@ $(document).ready(function () {
         type: 'GET',
         success: function (res, status, xhr) {
             res.data.map(function (roles) {
-                console.log(res.data)
-                let ids_f= []
+                let ids_f = []
                 let nombres_f = []
-                roles.funcionalidades.map(function(funcion){
+                roles.funcionalidades.map(function (funcion) {
                     ids_f.push(funcion.id_funcionalidad)
                     nombres_f.push(funcion.nombre)
                 })
-                addRowRoles(roles.id_rol, roles.nombre, roles.descripcion, ids_f, nombres_f)
+                addRowRoles(roles.id_rol, roles.nombre, roles.descripcion, nombres_f)
             })
 
         },
@@ -59,6 +39,7 @@ $(document).ready(function () {
     $('#ms_funcionalidades').multiSelect({
         selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
         selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
+        selectableOptgroup: true ,
         afterInit: function (ms) {
 
             var that = this,
@@ -86,30 +67,21 @@ $(document).ready(function () {
         afterSelect: function (values) {
             this.qs1.cache();
             this.qs2.cache();
-            console.log(values)
-            let ids = values[0].split('-')
-            for(let i=0;i<ids.length; i++){           
-                    datos.push(ids[i])
-            }
+
         },
         afterDeselect: function (values) {
             this.qs1.cache();
             this.qs2.cache();
-            let ids = values[0].split('-')            
-            for(let i=0;i<ids.length; i++){
-                let index = datos.indexOf(ids[i])
-                if( index != -1){
-                    datos.splice(index, 1)
-                }
-            }
+
         }
     });
 
     $('#btnAceptar').on('click', function () {
-        let func =  limpiarFuncionalidad();
-        console.log(func)
-        return
- 
+
+        if ($('#ms_funcionalidades').val().length == '0') {
+            mensaje('#msjAlertaA', `funcionalidades`, 5);
+            return;
+        }
         if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
             return;
@@ -123,12 +95,8 @@ $(document).ready(function () {
         } else {
             $('#txtDescripcion').css('border', '1px solid #858580');
         }
-        console.log(datos.length)
-        if (datos.length == '0') {
-            mensaje('#msjAlertaA', `funcionalidades`, 5);
-            return;
-        }
-      
+
+        let func = limpiarFuncionalidad();
 
         let rol = {
             nombre: $('#txtNombre').val(),
@@ -138,23 +106,20 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: 'https://api-sascha.herokuapp.com/roles', //'https://api-sascha.herokuapp.com/roles',
+            url: 'https://api-sascha.herokuapp.com/roles',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(rol),
             success: function (res, status, xhr) {
-                console.log(res.data);
-                console.log(status);
                 const rol1 = res.data
-                let ids_f= []
+                console.log(rol1)
                 let nombres_f = []
-                rol1.funcionalidades.map(function(funcion){
-                    ids_f.push(funcion.id_funcionalidad)
-                    nombres_f.push(funcion.id_nombre)
+                rol1.funcionalidades.map(function (funcion) {
+                    nombres_f.push(funcion.nombre)
                 })
                 limpiarRol()
-                mensaje('#msjAlerta', `Tipo Unidad`, 1);
-                addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, ids_f,nombres_f);
+                mensaje('#msjAlerta', `Rol`, 1);
+                addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, nombres_f);
                 // agregarFuncionalidades(rol1.id_rol)
                 $('#myModal .close').click();
             },
@@ -168,8 +133,18 @@ $(document).ready(function () {
 
     })
 
+    
+    $('#btnAgregarRolNuevo').on('click', function(){
+        estatusCampos(false)
+        $('#btnAceptar').css('display', 'inline');
+        $('#btnEditar').css('display', 'none');
+        $('#btnCancelar').html('Cancelar');
+        
+
+    })
+
     $('#btnEditar').on('click', function () {
-        if ($('#txtNombre').val() == "" ) {
+        if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
             mensaje('#msjAlertaA', '', 5)
             return;
@@ -180,7 +155,7 @@ $(document).ready(function () {
         if ($('#txtDescripcion').val() == "") {
             $('#txtDescripcion').css('border', '1px solid red');
             mensaje('#msjAlertaA', '', 5)
-            
+
             return;
         } else {
             $('#txtDescripcionE').css('border', '1px solid #858580');
@@ -194,7 +169,6 @@ $(document).ready(function () {
         // }
 
         let func = limpiarFuncionalidad()
-
         let rol = {
             nombre: $('#txtNombreE').val(),
             descripcion: $('#txtDescripcionE').val(),
@@ -209,9 +183,12 @@ $(document).ready(function () {
             type: 'PUT',
             data: JSON.stringify(rol),
             success: function (res, status, xhr) {
-                console.log(res);
-                console.log(status);
-                editRowRoles(id, rol.nombre, rol.descripcion)
+                console.log(res.data)
+                let nombres = []
+                res.data.funcionalidades.map(function (f) {
+                    nombres.push(f.nombre)
+                })
+                editRowRoles(id, res.data.nombre, res.data.descripcion, nombres)
                 limpiarRol()
                 mensaje('#msjAlerta', `Rol`, 3);
             },
@@ -224,77 +201,77 @@ $(document).ready(function () {
         })
     })
 
-
+    $('#myModal').modal('hide')
 
 });
 
-function agregarFuncionalidades(id) {
 
-    datos.map(function (funcionalidad) {
-        let rol = {
-            id_rol: id,
-            id_funcionalidad: funcionalidad
-        }
-        console.log(funcionalidad)
-
-        $.ajax({
-            url: 'https://api-sascha.herokuapp.com/rolfuncionalidades',
-            contentType: 'application/json',
-            type: 'POST',
-            data: JSON.stringify(rol),
-            success: function (res, status, xhr) {
-                console.log(res);
-                console.log(status);
-            },
-            error: function (res, status, xhr) {
-                console.log(res);
-                console.log(status);
-            }
-        })
-    });
-}
-
-function addRowRoles(id, nombre, descripcion, ids_f, nombres_f) {
+function addRowRoles(id, nombre, descripcion, nombres_f) {
     let row = $(`<tr>
         <td id="nombre-${id}">${nombre}</td>
         <td id="descripcion-${id}">${descripcion}</td>
-        <td id="funcionalidades-${id}">${nombres_f}</td>
+        <td hidden id="funcionalidades-${id}">${nombres_f}</td>
         <td>
+        <button onclick="verRoles(${id})" type='button' class='btn  btn-stransparent' data-toggle="modal" data-target="#myModal"  title='Ver'><i class='fa fa-eye'></i></button>        
             <button onclick="editarRoles(${id})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#myModal"  title='Editar'><i class='fa fa-pencil'></i></button>
             <button onclick="abrirModalEliminarRoles(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarRoles" title='Eliminar'><i class="fa fa-trash-o"></i></button>
-        </td>
-        <td hidden id="id_funcionalidades-${id}">${ids_f}</td>
-        
+        </td>        
         </tr>
         `);
     $('#dtRoles').DataTable().row.add(row).draw();
 }
 
+function verRoles(id){
+    $('#txtNombre').val($(`#nombre-${id}`).text());
+    $('#txtDescripcion').val($(`#descripcion-${id}`).text());
+    $('#txtIdRol').val(id);
+    estatusCampos(true);
+    $('#btnAceptar').css('display', 'none');
+    $('#btnEditar').css('display', 'none');
+    $('#btnCancelar').html("Cerrar");
+    let nombres_f = $(`#funcionalidades-${id}`).text().split(',')
+    let ids = convertirFunciones(nombres_f)
+    $('#ms_funcionalidades').multiSelect('select', ids)
+    $('#ms_funcionalidades').attr('disabled', true)
+    
+
+}
+
+function estatusCampos(estado){
+    $('#txtNombre').attr('disabled',estado)
+    $('#txtDescripcion').attr('disabled',estado)
+}
+
 function limpiarRol() {
+    estatusCampos(false)
     $('#txtNombre').val('');
     $('#txtDescripcion').val('');
     $('#txtNombreE').val('');
     $('#txtDescripcionE').val('');
-    $('#ms_funcionalidades').empty();
-    $('#ms_funcionalidades').multiSelect('refresh')
-
+    $('#ms_funcionalidades').multiSelect('deselect_all')
 }
 function editarRoles(id) {
+    estatusCampos(false)
     $('#txtNombre').val($(`#nombre-${id}`).text());
     $('#txtDescripcion').val($(`#descripcion-${id}`).text());
     $('#txtIdRol').val(id);
     $('#btnAceptar').css('display', 'none');
     $('#btnEditar').css('display', 'inline');
+    $('#btnCancelar').html("Cancelar");
+    let nombres_f = $(`#funcionalidades-${id}`).text().split(',')
+    let ids = convertirFunciones(nombres_f)
+    $('#ms_funcionalidades').multiSelect('select', ids)
 }
 
 function abrirModalEliminarRoles(id) {
     $('#txtIdRolEliminar').val(id);
 }
 
-function editRowRoles(id, nombre, descripcion) {
+function editRowRoles(id, nombre, descripcion, nombres) {
 
     $(`#nombre-${id}`).text(nombre);
     $(`#descripcion-${id}`).text(descripcion);
+    $(`#funcionalidades-${id}`).text(nombres);
 
 }
 
@@ -319,21 +296,38 @@ function eliminarRoles(id) {
 
 
 
-function limpiarFuncionalidad(){
-    let func =[]
-    datos.map(function (funcionalidad) {
+function limpiarFuncionalidad() {
+    let valores = $('#ms_funcionalidades').val()
+    let aux = []
+    valores.map(function (v) {
+        let prueba = v.split('-')
+        aux = aux.concat(prueba)
+    })
+    let func = []
+    aux.map(function (funcionalidad) {
         let enc = false
-        for(let i = 0; i<func.length ; i++){
+        for (let i = 0; i < func.length; i++) {
             if (func[i].id_funcionalidad == funcionalidad) {
                 enc = true;
                 break;
             }
         }
-        if (!enc) {
+        if (!enc && funcionalidad != "0") {
             func.push({
                 id_funcionalidad: funcionalidad
             })
         }
     })
     return func
+}
+
+function convertirFunciones(ids) {
+    let ids_f = []
+    ids.map(function (nombre) {
+        let opcion = $('#ms_funcionalidades option:contains(' + nombre + ')')
+        if (opcion.text() == nombre) {
+            ids_f.push(opcion.val())
+        }
+    })
+    return ids_f;
 }
