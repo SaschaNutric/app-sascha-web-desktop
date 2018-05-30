@@ -92,3 +92,9 @@ border-color: #17aa8b;
         min-width: 30px !important
         
     }
+
+    .mini-stat-info.detalle span {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+    }

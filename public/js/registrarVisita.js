@@ -11,17 +11,20 @@ let id_orden_servicio = null;
 let visita = {};
 let id_visita_control = null;
 let proxima = false;
+let ultima = false;
+let parametros = []
+var paramstr = window.location.search.substr(1);
+var paramarr = paramstr.split("=");
+var params = {};
+params[paramarr[0]] = paramarr[1];
+const id_agenda = params['id'];
+let meta_registrada = false;
 $(document).ready(function () {
 
     $('#proximaVisita').on('shown.bs.modal', function () {
         $("#calendar").fullCalendar('render');
     });
 
-    var paramstr = window.location.search.substr(1);
-    var paramarr = paramstr.split("=");
-    var params = {};
-    params[paramarr[0]] = paramarr[1];
-    const id_agenda = params['id'];
 
     $('#dtSuplementos').DataTable({
         "language": {
@@ -116,7 +119,7 @@ $(document).ready(function () {
                 let plan_dieta = servicio.plan_dieta;
                 let plan_suplemento = servicio.plan_suplemento;
                 let plan_ejercicio = servicio.plan_ejercicio;
-                // agenda.id_tipo_cita = 2 //BORRAAAAR
+
                 //Datos de la cita
                 moment.locale('es')
                 id_tipo_cita = agenda.id_tipo_cita
@@ -128,7 +131,7 @@ $(document).ready(function () {
                     if ($('#color-icono-visita').hasClass('light-green')) {
                         $('#color-icono-visita').removeClass('light-green')
                     }
-                    if ($('#icono-visita').addClass('fa-stethoscope')) {
+                    if ($('#icono-visita').hasClass('fa-stethoscope')) {
                         $('#icono-visita').removeClass('fa-stethoscope')
                     }
                     $('#color-icono-visita').addClass('turquoise')
@@ -148,6 +151,10 @@ $(document).ready(function () {
                 $('#servicio-avance-barra').css('width', calcularAvance(realizadas, servicio.numero_visitas));
                 $('#servicio-avance-texto').text(realizadas + ' de ' + servicio.numero_visitas + " visitas");
 
+                if (realizadas >= servicio.numero_visitas) {
+                    $('#btnAbrirProximaVisita').hide()
+                    ultima = true;
+                }
                 $('#servicio-plan-dieta').text(plan_dieta.nombre)
                 $('#servicio-plan-ejercicio').text(plan_ejercicio.nombre == null ? 'No incluye' : plan_ejercicio.nombre)
                 $('#servicio-plan-suplemento').text(plan_suplemento.nombre == null ? 'No incluye' : plan_suplemento.nombre)
@@ -173,9 +180,9 @@ $(document).ready(function () {
                             res.data.map(function (parametro) {
                                 let unidad = parametro.id_unidad
                                 if (unidad == null) {
-                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '', null, agenda.id_tipo_cita)
+                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '', null, agenda.id_tipo_cita , '')
                                 } else {
-                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura, null, agenda.id_tipo_cita)
+                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura, null, agenda.id_tipo_cita, '')
                                 }
                             })
 
@@ -196,9 +203,9 @@ $(document).ready(function () {
                         perfil.map(function (parametro) {
                             let unidad = parametro.unidad
                             if (unidad == null || unidad == undefined) {
-                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, '', parametro.valor, agenda.id_tipo_cita)
+                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, '', parametro.valor, agenda.id_tipo_cita, parametro.id_parametro)
                             } else {
-                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, parametro.unidad_abreviatura, parametro.valor, agenda.id_tipo_cita)
+                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, parametro.unidad_abreviatura, parametro.valor, agenda.id_tipo_cita, parametro.id_parametro)
                             }
                         })
                     }
@@ -366,42 +373,32 @@ $(document).ready(function () {
 
     })
 
-
-
-
     //Registrar Visita
     $('#btnRegistrar').on('click', function () {
-        if (id_tipo_cita == 2) {
+        if (id_tipo_cita == 2 && !ultima) {
             if (!proxima) {
                 mensaje('#msjAlerta', '', 5)
                 return
             }
-            if(id_visita_control == null){
+            if (id_visita_control == null) {
                 registrarVisitaControl()
             }
             window.location = 'visitas.html'
             return
         }
-        let parametros = []
+        if(!meta_registrada){
+            mensaje("#msjAlerta", 'de la Meta', 5)
+            return
+        }
+
         let regimen_suplementos = []
         let regimen_ejercicios = []
         let regimen_dietas = []
         //Datos del perfil
-        let parametro_perfil = document.getElementsByClassName('icheckbox_flat-green checked');
-        for (let i = 0; i < parametro_perfil.length; i++) {
-            let id_parametro = parametro_perfil[i].firstChild.getAttribute('id').split('-')[1];
-            let valor = $('#real-' + id_parametro).val();
-            if (valor == '') {
-                mensaje('#msjAlerta', '', 5)
-                return
-            }
-            parametros.push(
-                {
-                    id_parametro: Number.parseInt(id_parametro),
-                    id_cliente: id_cliente,
-                    valor: valor == undefined ? null : Number.parseInt(valor)
-                }
-            )
+
+        if (parametros.length == 0) {
+            mensaje('#msjAlerta', 'en Perfil', 5)
+            return
         }
         //Regimen-Suplemento
         let input_suplementos = document.getElementsByClassName('input-suplemento');
@@ -411,7 +408,7 @@ $(document).ready(function () {
             let cantidadS = input_suplementos[s].value
             let frecuenciaS = select_suplementos[s].value
             if (cantidadS == undefined || frecuenciaS == 0) {
-                mensaje('#msjAlerta', '', 5)
+                mensaje('#msjAlerta', 'en Plan de Suplemento', 5)
                 return
             }
             regimen_suplementos.push({
@@ -429,7 +426,7 @@ $(document).ready(function () {
             let cantidadE = input_ejercicios[e].value
             let frecuenciaE = select_ejercicios[e].value
             if (cantidadE == undefined || frecuenciaE == 0) {
-                mensaje('#msjAlerta', '', 5)
+                mensaje('#msjAlerta', 'en Plan de Entrenamiento', 5)
                 return
             }
             regimen_ejercicios.push({
@@ -449,7 +446,7 @@ $(document).ready(function () {
             let cantidadD = cantidad_dieta[d].innerHTML;
             let alimentosD = id_alimentos_dieta[d].innerHTML.split(',');
             if (cantidadD == '' || alimentosD.length == 0 || cantidadD == undefined || alimentosD == undefined) {
-                mensaje('#msjAlerta', '', 5)
+                mensaje('#msjAlerta', 'en Dieta', 5)
                 return
 
             }
@@ -480,9 +477,8 @@ $(document).ready(function () {
 
 
 
-        if (!visita.id_empleado) {
-            mensaje('#msjAlerta', '', 5)
-
+        if ((!visita.fecha || !visita.id_bloque_horario || visita.fecha == '' || visita.id_bloque_horario == 0) && !ultima) {
+            mensaje('#msjAlerta', 'de Proxima Visita', 5)
             return
         }
 
@@ -495,11 +491,13 @@ $(document).ready(function () {
             data: JSON.stringify(visita),
 
             success: function (res, status, xhr) {
-                alert("LO LOGRAMOS AMIGOS")
+                window.location = 'visitas.html'
+
                 console.log(res.data.mensaje)
             },
             error: function (res, status, xhr) {
-                alert("error!")
+                const respuesta = JSON.parse(res.responseText)
+                mensaje('#msjAlerta', respuesta.data.mensaje, 0)
                 console.log(res)
 
             }
@@ -650,7 +648,6 @@ $(document).ready(function () {
             success: function (res, status, xhr) {
                 mensaje('#msjAlerta', 'Meta', 1)
                 addRowMeta(res.data.id_parametro_meta, tp, p_nombre, v)
-
                 console.log(res.data.mensaje)
             },
             error: function (res, status, xhr) {
@@ -719,7 +716,7 @@ $(document).ready(function () {
         let tp_nombre = $('select[name="tipo_parametro"] option:selected').text()
 
         if (tp == 0 || p == 0 || (tv == 2 && v == '')) {
-            mensaje('#msjMeta', '', 5)
+            mensaje('#msjAlerta', '', 5)
             return
         }
 
@@ -1205,7 +1202,7 @@ function createSelFrecuencia(id, clases, selected, element) {
     document.getElementById(element).appendChild(select)
 }
 
-function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita) {
+function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita, id_parametro) {
     let valor = '';
     if (tipo_valor === 2) {
         valor = `<input id='real-${id}' type="number" class='form-control txtValor' style='width: 70%' value='${valorP == null ? '' : valorP}' ><span> ${unidad}</span>`
@@ -1215,7 +1212,7 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
         <td id="nombreParametro-${id}">${nombre}</td>
         <td class='text-center' id="tipo_valor-${id}">${valor}</td>
         <td ${tipo_cita == 1 ? '' : 'hidden'}>
-        <input id='parametro-${id}' type="checkbox" > 
+        <input onchange='perfil(${id})' id='parametro-${id}' class="chk-perfil" type="checkbox" > 
         </td>
         <td ${tipo_cita == 2 ? '' : 'hidden'}>
         <a style='display: ${tipo_valor == 1 ? 'none' : 'inline'}' id='editarParametro-${id}' class='btn btn-white' onclick='editarParametro(${id})'><i class='fa fa-pencil' /> </a>
@@ -1224,14 +1221,10 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
         <a style='display:none' id='confirmarParametro-${id}' class='btn btn-white' onclick='confirmarParametro(${id})'><i class='fa fa-save' /> </a>
         <a style='display:none' id='cancelarParametro-${id}' class='btn btn-white' onclick='cancelarParametro(${id})'><i class='fa fa-times' /> </a>
         </td>
+        <td hidden id="id_parametro-${id}">${id_parametro}</td>
         </tr>
         `);
     $('#dtPerfil').DataTable().row.add(row).draw();
-
-    $(`#parametro-${id}`).iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green',
-    });
 
     if (tipo_cita == 2) {
         $(`#real-${id}`).prop('disabled', true)
@@ -1239,6 +1232,111 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
     }
 
 
+}
+
+function eliminarParametro(id){
+    if(id == undefined){
+        return
+    }
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
+        type: 'DELETE',
+        contentType: 'application/json',
+        success: function (res, status, xhr) {
+            mensaje('#msjAlerta', 'Parametro del perfil', 2)
+
+        },
+        error: function (res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText)
+            mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+            console.log(res)
+
+        }
+    })
+}
+function confirmarParametro(id) {
+    let index = 0
+    for (let i = 0; i < valores_viejos.length; i++) {
+        if (valores_viejos[i].id == id) {
+            index = i;
+        }
+    }
+    valores_viejos.splice(index, 1);
+    let valor = $(`#real-${id}`).val()
+
+    if (valor == '' || valor == undefined) {
+        mensaje("#msjAlerta", "en el valor de parametro", 5)
+        return
+    }
+    if (id_tipo_cita == 2) {
+        let id_parametro = $(`#id_parametro`).text()
+        if (id_visita_control == null) {
+            registrarVisitaControl(id_agenda)
+        }
+        let parametro = {
+            id_parametro : id_parametro,
+            valor: valor,
+            id_visita: id_visita_control
+        }
+        $.ajax({
+            url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(parametro),
+
+            success: function (res, status, xhr) {
+                mensaje('#msjAlerta', 'Parametro del perfil', 3)
+
+            },
+            error: function (res, status, xhr) {
+                const respuesta = JSON.parse(res.responseText)
+                mensaje('#msjAlerta', respuesta.data.mensaje, 0);
+                console.log(res)
+
+            }
+        })
+    }
+    $(`#editarParametro-${id}`).css('display', 'block')
+    $(`#eliminarParametro-${id}`).css('display', 'block')
+
+    $(`#confirmarParametro-${id}`).css('display', 'none')
+    $(`#cancelarParametro-${id}`).css('display', 'none')
+
+    if (document.getElementById('real-' + id)) {
+        $(`#real-${id}`).prop('disabled', true)
+    }
+}
+
+function perfil(id) {
+    if ($(`#parametro-${id}`).attr('checked')) {
+        console.log('chao')
+        let id_parametro = $(`#parametro-${id}`).attr('id').split('-')[1]
+        let valor = $('#real-' + id_parametro).val();
+        if (valor == '') {
+            mensaje('#msjAlerta', 'para el valor del parametro', 5)
+            $(`#parametro-${id}`).attr('checked', false)
+            return
+        }
+        parametros.push(
+            {
+                id_parametro: Number.parseInt(id_parametro),
+                id_cliente: id_cliente,
+                valor: valor == undefined ? null : Number.parseInt(valor)
+            }
+        )
+        console.log(parametros)
+    } else {
+        console.log('hola')
+        let index = 0
+        for (let i = 0; i < parametros.length; i++) {
+            if (parametros[i].id_parametro == $(`#parametro-${id}`).attr('id')) {
+                index = i;
+            }
+        }
+        parametros.splice(index, 1)
+        console.log(parametros)
+
+    }
 }
 
 function editarParametro(id) {
@@ -1253,7 +1351,6 @@ function editarParametro(id) {
     $(`#confirmarParametro-${id}`).css('display', 'inline')
     $(`#cancelarParametro-${id}`).css('display', 'inline')
 
-    $(`#parametro-${id}`).iCheck('enable')
     if (document.getElementById('real-' + id)) {
         $(`#real-${id}`).prop('disabled', false)
     }
@@ -1326,6 +1423,8 @@ function resetMultiSelect() {
 }
 
 function addRowMeta(id, tipo_parametro, parametro, valor) {
+    meta_registrada =true;
+    
     let row = $(`<tr>
         <td hidden id="metaTP-${id}">${tipo_parametro}</td>    
         <td id="metaP-${id}">${parametro}</td>
@@ -1395,38 +1494,28 @@ function eliminarMeta(id) {
 
 
 function cargarAgenda() {
+    let fecha_cita = $('#cita-fecha').text()
+    fecha_cita = moment(fecha_cita)
     document.getElementById('selHoraCita').length = 1
     $('#calendar').fullCalendar('destroy')
-    //Llenando los bloques horarios para la proxima visita
-    $.ajax({
-        url: 'https://api-sascha.herokuapp.com/bloquehorarios',
-        contentType: 'application/json',
-        type: 'GET',
-        success: function (res, status, xhr) {
-            res.data.map(function (bloque) {
-                let option = $(`<option value="${bloque.id_bloque_horario}">${bloque.hora_inicio.substr(0, 5)}-${bloque.hora_fin.substr(0, 5)}</option>`)
-                $('#selHoraCita').append(option);
-            })
-        },
-        error: function (res, status, xhr) {
-            console.log(res)
-        }
-    });
+    
     /* initialize the calendar
-     -----------------------------------------------------------------*/
+    -----------------------------------------------------------------*/
     let data = {
         fecha_inicio: '2018-05-01',
         fecha_fin: '2019-05-31'
     }
-
+    
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-
+    let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
+    
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
+            center: 'title',
             right: ''
         },
         defaultView: 'month',
@@ -1434,18 +1523,45 @@ function cargarAgenda() {
         droppable: false, // this allows things to be dropped onto the calendar !!!
         dayClick: function (date, jsEvent, view) {
             let fecha = moment(date).format('DD-MM-YYYY')
-            if (moment(date).isAfter(moment())){
-                $('#txtFechaCita').val(fecha)
-            }else{
-                $('#txtFechaCita').val(moment().format('DD-MM-YYYY'))
-                
+            let dia = moment(date).day()
+
+            if (moment(date).isAfter(fecha_cita)) {
+                document.getElementById('selHoraCita').length = 1
+                let horario = {
+                    id_empleado: id_empleado,
+                    id_dia_laborable: dia
+                }
+                $.ajax({
+                    url: `https://api-sascha.herokuapp.com/horarioporempleadoydia`,
+                    contentType: 'application/json',
+                    type: 'POST',
+                    data: JSON.stringify(horario),
+                    success: function (res, status, xhr) {
+                        $('#txtFechaCita').val(fecha)
+                        res.data.bloques_horarios.map(function (bloque) {
+                            if (bloque.id_bloque_horario) {
+                                let option = $(`<option value="${bloque.id_bloque_horario}">${bloque.hora_inicio.substr(0, 5)}-${bloque.hora_fin.substr(0, 5)}</option>`)
+                                $('#selHoraCita').append(option);
+                            }
+                        })
+                    },
+                    error: function (res, status, xhr) {
+                        console.log(res)
+                        const respuesta = JSON.parse(res.responseText);
+                        mensaje('#msjProximaVisita', respuesta.data.mensaje, 0)
+
+                    },
+                })
+
+            } else {
+                mensaje('#msjProximaVisita', 'La fecha de la visita debe ser mayor a la de hoy.', 14)
+                $('#txtFechaCita').val('')
             }
         }
 
     });
 
     let events = [];
-    let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
     $.ajax({
         url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
         contentType: 'application/json',
@@ -1487,11 +1603,10 @@ function registrarVisitaControl(id_agenda) {
     $.ajax({
         url: `https://api-sascha.herokuapp.com/visitascontrol`,
         type: 'POST',
+        async: false,
         contentType: 'application/json',
         data: JSON.stringify(visita_control),
-
         success: function (res, status, xhr) {
-            mensaje('#msjAlerta', 'Visista', 1)
             id_visita_control = res.data.id_visita
             console.log(res.data.mensaje)
         },
@@ -1502,4 +1617,9 @@ function registrarVisitaControl(id_agenda) {
     })
 
 
+}
+
+function idDiaLaborable(dia) {
+    let id = 0;
+    return id
 }

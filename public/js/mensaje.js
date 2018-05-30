@@ -24,7 +24,15 @@ function mensaje(id, entidad, accion){
         break;
         case 5: 
         tipo= "alert alert-danger";
-        texto = `<strong>Error!</strong> Rellena los campos obligatorios.`;
+        texto = `<strong>Error!</strong> Rellena los campos obligatorios ${entidad}.`;
+        break;
+        case 6:
+        tipo= "alert alert-danger";
+        texto = `<strong>Error!</strong> Rangos invalidos ${entidad}.`;
+        break;
+        case 7:
+        tipo= "alert alert-info";
+        texto = `<strong>Info!</strong> Se debe registrar ${entidad}.`;
         break;
         case 10:
         tipo= "alert alert-info";
@@ -40,8 +48,17 @@ function mensaje(id, entidad, accion){
         break;
         case 13:
         tipo= "alert alert-danger";
-        texto= `<strong>Error!</strong>.`;
+        texto= `<strong>Error!</strong> ${entidad}`;
         break;
+        case 14:
+        tipo= "alert alert-info";
+        texto= `<strong>Info!</strong> ${entidad}`;
+        break;
+        case 15:
+        tipo= "alert alert-success";
+        texto= `<strong>Éxito!</strong> ${entidad}`;
+        break;
+
 
     }
     $(id).removeClass();

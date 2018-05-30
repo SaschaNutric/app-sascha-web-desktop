@@ -31,6 +31,9 @@ $(document).ready(function() {
         "ordering": true,
         "paging": true
     });
+
+
+
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/tipovaloraciones',
         contentType: 'application/json',
@@ -49,6 +52,10 @@ $(document).ready(function() {
 
         }
     })
+
+
+
+
 
     $('#btnAceptarEscala').on('click', function() {
 

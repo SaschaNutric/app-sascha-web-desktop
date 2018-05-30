@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="favicon2.ico">
 
     <title>Sascha</title>
 
@@ -114,14 +114,31 @@
                                 <label class="control-label">Nombre:</label>
                                 <div class="col-md-12"><select id="selServicios" class="form-control"><option>Seleccione</option></select></div>
                             </div>
-                    <div class="form-group">
-                        <label class="control-label" for="selEspecialidad">Especialidad:</label>
-                        <div class="col-md-12">
-                            <select id="selEspecialidad" class="form-control">
-                                <option>Todas</option>
-                            </select>
-                        </div>
-                    </div>
+
+                            
+                     <form class="form-horizontal">
+                      <div class="form-group">
+                           <label class="control-label" for="selEspecialidad">Especialidad:</label>
+                                    <select id="selEspecialidad" name="especialidad" class="form-control" style="width: 100%">
+                                          <option value="0" selected="selected" >Todas</option>
+                                    </select>
+                       </div>
+
+                       <div id="especialidadesGeneral" style="display: none;">
+                                 <div class="form-group">
+                                    <label for="selservicio" class="control-label">Servicio:</label>
+                                        <select id="selservicio" name="servicio" class="form-control" style="width: 100%">
+                                        <option value="0" selected="selected" >Todas</option>
+                                        </select>
+                                </div>
+                      </div>
+
+
+
+
+
+
+
                     <div class="form-group">
                         <label class="control-label" for="selPlanSuplemento">Plan de Suplementos:</label>
                         <div class="col-md-12">

@@ -37,10 +37,14 @@ $(document).ready(function(event) {
                 localStorage.removeItem('token');             
                 localStorage.removeItem('empleado');
                 localStorage.setItem('empleado', JSON.stringify(res.data));
+                localStorage.removeItem('sesion');
+                localStorage.setItem('sesion',true);
                 window.location = 'principal.html';
             },
             error: function(res, status, xhr) {
                 console.log(res)
+                localStorage.removeItem('sesion');
+                localStorage.setItem('sesion',false);
                 const respuesta = JSON.parse(res.responseText);
                 mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
             }
