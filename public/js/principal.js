@@ -4,12 +4,12 @@ if(!localStorage.sesion) {
 $(document).ready(function (event) {
     
     let empleado = JSON.parse(localStorage.getItem('empleado'));
-    console.log(empleado.menu)
 
-    if (!empleado.menu || empleado.menu.length == 0) {
-        alert("Disculpa, no tienes acceso a Sascha Intranet")
-        window.location.replace('index.html')
+    if (empleado == null || !empleado.menu || empleado.menu.length == 0) {
+        window.location.replace('500.html')
     } else {
+        $('#error').hide()        
+        $('#sascha').show()
         let menu = document.createElement('ul');
         menu.className = "sidebar-menu";
         menu.id = "nav-accordion";
@@ -48,6 +48,8 @@ $(document).ready(function (event) {
     $('#btnCerrarSesion').on('click', function (event) {
         localStorage.removeItem('empleado');
         localStorage.removeItem('token');
+        localStorage.removeItem('sesion');
+        
         window.location = 'index.html';
     })
 })
