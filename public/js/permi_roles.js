@@ -106,7 +106,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: 'http://localhost:5000/roles', //'https://api-sascha.herokuapp.com/roles',
+            url: 'https://api-sascha.herokuapp.com/roles',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(rol),
@@ -178,7 +178,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: `http://localhost:5000/role/${id}`,
+            url: `https://api-sascha.herokuapp.com/role/${id}`,
             contentType: 'application/json',
             type: 'PUT',
             data: JSON.stringify(rol),
