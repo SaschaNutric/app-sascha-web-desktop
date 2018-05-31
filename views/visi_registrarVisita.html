@@ -126,7 +126,7 @@
                                         <h4 id="plan-suplemento-nombre"></h4>
                                     </div>
                                     <div style="padding-top: 20px">
-                                        <table id="dtSuplementos" class="display table table-bordered table-striped">
+                                        <table id="dtSuplementos" class="table">
                                             <thead>
                                                 <tr>
                                                     <th width="35%">Suplemento</th>
@@ -261,13 +261,14 @@
                             <button id="btnMeta" href="#definirMeta" data-toggle="modal" class="btn btn-info" style="width: 100%;">Definir Meta</button>
                         </div>
                         <div class="col-md-12">
-                            <table id="dtMeta" class="display table table-bordered table-striped">
+                            <table id="dtMeta" class="display table">
                                 <thead>
                                     <tr>
                                         <th hidden width="0%">Tipo de Parametro</th>
-                                        <th style="width: 50% !important">Parametro</th>
-                                        <th style="width: 40% !important">Valor</th>
-                                        <th style="width: 10% !important"></th>
+                                        <th hidden width="0%">Signo</th>                                        
+                                        <th hidden style="width: 50% !important">Parametro</th>
+                                        <th hidden style="width: 40% !important">Valor</th>
+                                        <th didden style="width: 10% !important"></th>
 
                                     </tr>
                                 </thead>
@@ -339,25 +340,33 @@
                     <input type="text" hidden id="txtIdMeta">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="selTipoParametroMeta" class="col-md-5 control-label">Tipo de Parametro:</label>
-                            <div class="col-md-4">
+                            <label for="selTipoParametroMeta" class="col-md-3 control-label">Tipo de Parametro:</label>
+                            <div class="col-md-7">
                                 <select id="selTipoParametroMeta" name="tipo_parametro_meta" class="form-control">
                                     <option value="0">Seleccione</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-5 control-label" for="selParametroMeta">Parametro:</label>
-                            <div class="col-md-4">
+                            <label class="col-md-3 control-label" for="selParametroMeta">Parametro:</label>
+                            <div class="col-md-7">
                                 <select id="selParametroMeta" class="form-control" name="parametro_meta">
                                     <option value="0">Seleccione</option>
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label class="col-md-5 control-label" for="txtValorMeta">Valor:</label>
+                            <label class="col-md-3 control-label" for="txtValorMeta">Valor:</label>
                             <div class="col-md-4">
-                                <input id="txtValorMeta" type="number" class="form-control" />
+                                <select id="selSignoMeta" class="form-control" name="signo_meta">
+                                    <option value="null">Seleccione</option>
+                                    <option value="0">Disminuir a</option>
+                                    <option value="1">Aumentar a</option>             
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="txtValorMeta" type="number" min="0" class="form-control" />
                             </div>
                             <div class="col-md-2">
                                 <span id="parametro-meta-unidad"></span>
