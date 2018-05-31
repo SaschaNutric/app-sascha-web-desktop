@@ -146,7 +146,8 @@ $(document).ready(function() {
 });
 
 function editarMotivo(id){
-    $('#selTipoMotivo option:contains('+ $(`#tipomotivo-${id}`).text() + ')').prop('selected',true);
+    $('#selTipoMotivo option:contains('+ $(`#tipomotivo-${id}`).text().trim() + ')').prop('selected',true);
+    console.log($('select[name="tipo_motivo"] option:selected').text())
     $('#txtDescripcionMotivo').val($(`#descripcionMotivo-${id}`).text());
     $('#txtIdMotivo').val(id);
     $('#btnAceptarMotivo').css('display', 'none');

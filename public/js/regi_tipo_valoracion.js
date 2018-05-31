@@ -168,6 +168,7 @@ $(document).ready(function() {
                 const nombre_tipo_valoracion = $('select[name="tipo_valoracion"] option:selected').text()
                 addRowValor(valor.id_valoracion, valor.nombre, nombre_tipo_valoracion);               
                 limpiarValor();
+                $('#agregarValor .close').click();
             },
             error: function(res, status, xhr) {
                 console.log(res)
