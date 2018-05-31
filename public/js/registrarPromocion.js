@@ -1,7 +1,35 @@
 let registrado = null;
 
-$(document).ready(function() {
+   //Busqueda del id de la promocion a editar
+   var paramstr = window.location.search.substr(1);
+   var paramarr = paramstr.split("?");
+   let prueba = {}
+   paramarr.map(function(param){
+    let p = param.split('=')
+    prueba[p[0]] = p[1]
+   })
+   const id = prueba['id'];
+   const url = prueba['url'];
+   let oldPromocion = {};
 
+$(document).ready(function() {
+    const tablaparametros = $('#dtParametros').DataTable({
+        "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron Ofertas y Promociones",
+            "zeroRecords": "No se encontraron Ofertas y Promociones"
+        },
+        "searching": true,
+        "ordering": true,
+        "paging": true
+    });
+
+    
 //////////////////TAP DE INFORMACION BASICA/////////////////
 
     // Carga el Combo del servicio
@@ -24,13 +52,68 @@ $(document).ready(function() {
         }
     })
 
-    //Busqueda del id de la promocion a editar
-    var paramstr = window.location.search.substr(1);
-    var paramarr = paramstr.split("=");
-    var params = {};
-    params[paramarr[0]] = paramarr[1];
-    const id = params['id'];
-    let oldPromocion = {};
+// Carga el Combo del Estado civil
+$.ajax({
+    url: 'https://api-sascha.herokuapp.com/estadociviles',
+    contentType: 'application/json',
+    type: 'GET',
+    success: function(res, status, xhr) {
+        res.data.map(function(estado_civil) {
+            let option = $(`<option value="${estado_civil.id_estado_civil}">${estado_civil.nombre}</option>`)
+            $('#selEstadoCivil').append(option);
+            
+        })
+
+    },
+    error: function(res, status, xhr) {
+        const respuesta = JSON.parse(res.responseText);
+        mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+        
+    }
+})
+// Carga el Combo del Rango de Edad
+$.ajax({
+    url: 'https://api-sascha.herokuapp.com/rangoedades',
+    contentType: 'application/json',
+    type: 'GET',
+    async: false,
+    success: function(res, status, xhr) {
+        res.data.map(function(rango_edad) {
+            let option = $(`<option value="${rango_edad.id_rango_edad}">${rango_edad.nombre}</option>`)
+            $('#selRangoEdad').append(option);
+            
+        })
+
+    },
+    error: function(res, status, xhr) {
+        const respuesta = JSON.parse(res.responseText);
+        mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+        
+    }
+})
+ 
+// Carga el Combo del Genero
+$.ajax({
+    url: 'https://api-sascha.herokuapp.com/generos',
+    contentType: 'application/json',
+    type: 'GET',
+    success: function(res, status, xhr) {
+        res.data.map(function(genero) {
+            let option = $(`<option value="${genero.id_genero}">${genero.nombre}</option>`)
+            $('#selGenero').append(option);
+            
+        })
+
+    },
+    error: function(res, status, xhr) {
+        const respuesta = JSON.parse(res.responseText);
+        mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+        
+    }
+})
+
+
+ 
 
     //Llena el formulario con informacion de la a editar
     if (id != undefined) {
@@ -52,11 +135,15 @@ $(document).ready(function() {
                 $('#txtDescuento').val(promocion.descuento);
                 $('#dpValidoDesde').val(promocion.valido_desde);
                 $('#dpValidoHasta').val(promocion.valido_hasta);
+                $('#selselEstadoCivil').val(promocion.id_estado_civil);
+                $('#selRangoEdad').val(promocion.id_rango_edad);
+                $('#selGenero').val(promocion.id_genero);
                 $('#imgPromocion').attr("src", promocion.url_imagen);
                 promocion.parametros.map(function(parametro){
                     addRowParametro(parametro.id_parametro_promocion, parametro.nombre, parametro)
                 })
             },
+            
             error: function (res, status, xhr) {
                 const respuesta = JSON.parse(res.responseText);
                 mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
@@ -73,8 +160,11 @@ $(document).ready(function() {
                 id_servicio: $('#selServicios').val()== 'null' ? null : $('#selServicios').val(),
                 descripcion: $('#txtDescripcionPromo').val(),
                 descuento: $('#txtDescuento').val(),
-                valido_desde: $('#dpValidoDesde').val(),
-                valido_hasta: $('#dpValidoHasta').val(),
+                valido_desde: moment($('#dpValidoDesde').val()).format('YYYY-MM-DD'),
+                valido_hasta: moment($('#dpValidoHasta').val(),'DD-MM-YYYY').format('YYYY-MM-DD'),
+                id_estado_civil: $('#selEstadoCivil').val()=='null'? null : $('#selEstadoCivil').val(),
+                id_rango_edad:$('#selRangoEdad').val()== 'null' ? null : $('#selRangoEdad').val(),
+                id_genero: $('#selGenero').val()== 'null' ? null : $('#selGenero').val(),
             }
             const div = document.getElementsByClassName('fileupload-preview')[0]
             let url_imagen = ''
@@ -82,12 +172,12 @@ $(document).ready(function() {
                 url_imagen = div.firstChild.src
             }
            // console.log(promocion)
-        if (oldPromocion.nombre == promocion.nombre && oldPromocion.servicio == promocion.servicio && oldPromocion.descripcion == promocion.descripcion && oldPromocion.descuento == promocion.descuento && oldPromocion.valido_desde == promocion.valido_desde && oldPromocion.valido_hasta == promocion.valido_hasta && url_imagen == '') {
+        if (oldPromocion.nombre == promocion.nombre && oldPromocion.servicio == promocion.servicio && oldPromocion.descripcion == promocion.descripcion && oldPromocion.descuento == promocion.descuento && oldPromocion.valido_desde == promocion.valido_desde && oldPromocion.valido_hasta == promocion.valido_hasta && oldPromocion.estado_civil == promocion.estado_civil && oldPromocion.rango_edad == promocion.rango_edad && oldPromocion.genero == promocion.genero && url_imagen == '') {
             mensaje('#msjAlerta', '', 4);
             return;
 
         }
-        console.log(promocion)
+        
         var file_data = $("#filePromocion").prop("files")[0];   // Getting the properties of file from file field
         var form_data = new FormData();                  // Creating object of FormData class
         form_data.append('nombre', promocion.nombre);
@@ -96,9 +186,13 @@ $(document).ready(function() {
         form_data.append('descuento', promocion.descuento);
         form_data.append('valido_desde', promocion.valido_desde);
         form_data.append('valido_hasta', promocion.valido_hasta);
+        form_data.append('estato_civil', promocion.estado_civil);
+        form_data.append('rango_edad', promocion.rango_edad);
+        form_data.append('genero', promocion.genero);
         if (url_imagen != '') {
             form_data.append('imagen', file_data);
         }
+        console.log(promocion)
 
             $.ajax({
                 url: "https://api-sascha.herokuapp.com/promocion/" + id,
@@ -109,7 +203,9 @@ $(document).ready(function() {
                 type: 'PUT',
                 data: form_data,    
                 success: function (res, status, xhr) {
-                    
+                    console.log(res.data)
+                    limpiarCampos();
+                
                 },
                 error: function (res, status, xhr) {
                     const respuesta = JSON.parse(res.responseText);
@@ -122,6 +218,11 @@ $(document).ready(function() {
      
    
 //Agregar nuevo promocion
+//if (id != undefined) {
+  //  $('#btnGuardar').css('display', 'none');
+  //  $('#btnRegistrar').css('display', 'none');
+   // $('#btnCerrar')
+
 $('#btnRegistrar').on('click', function () {
 
     if (!validate()) {
@@ -130,7 +231,7 @@ $('#btnRegistrar').on('click', function () {
     }
 
     const valido_desde = $('#dpValidoDesde').val();
-    const valido_hasta = $('#dpValidoHasta').val()
+    const valido_hasta = $('#dpValidoHasta').val();
     let promocion = {
         nombre: $('#txtNombrePromo').val(),
         descripcion: $('#txtDescripcionPromo').val(),
@@ -177,6 +278,7 @@ $('#btnRegistrar').on('click', function () {
             const serv = res.data;
             registrado = serv.id_promocion;
             mensaje('#msjAlerta', 'Servicio', 1);
+            limpiarCampos();
         },
         error: function (res, status, xhr) {
             console.log(res);
@@ -186,70 +288,32 @@ $('#btnRegistrar').on('click', function () {
         }
     })
 });
+
+
 });
+
+
 function verpromocion(){
-    window.location='ofertasYPromocionesRegistrar.html';
+    
+    window.location= url;
 }
 
 
+function limpiarCampos() {
+    $('#txtNombrePromo').val('');
+    $('#txtDescripcionPromo').val('');
+    $('#txtDescuento').val('');
+    document.getElementById("selServicios").length=1;
+    document.getElementById("selEstadoCivil").length=1;
+    document.getElementById("selRangoEdad").length=1;
+    document.getElementById("selGenero").length=1;
+    $('#dpValidoDesde').val('');
+    $('#dpValidoHasta').val('');
+    $('#imgPromocion').attr('src', 'http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Agregar+imagen');
+   
+}
+
 //////////////////TAP DE CARACTERISTICAS//////////////////
-
-// Carga el Combo del Estado civil
-$.ajax({
-    url: 'https://api-sascha.herokuapp.com/estadociviles',
-    contentType: 'application/json',
-    type: 'GET',
-    success: function(res, status, xhr) {
-        res.data.map(function(estado_civil) {
-            let option = $(`<option value="${estado_civil.id_estado_civil}">${estado_civil.nombre}</option>`)
-            $('#selEstadoCivil').append(option);
-            
-        })
-
-    },
-    error: function() {
-        
-    }
-})
-// Carga el Combo del Rango de Edad
-$.ajax({
-    url: 'https://api-sascha.herokuapp.com/rangoedades',
-    contentType: 'application/json',
-    type: 'GET',
-    success: function(res, status, xhr) {
-        res.data.map(function(rango_edad) {
-            let option = $(`<option value="${rango_edad.id_rango_edad}">${rango_edad.nombre}</option>`)
-            $('#selRangoEdad').append(option);
-            
-        })
-
-    },
-    error: function(res, status, xhr) {
-        const respuesta = JSON.parse(res.responseText);
-        mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
-        
-    }
-})
- 
-// Carga el Combo del Genero
-$.ajax({
-    url: 'https://api-sascha.herokuapp.com/generos',
-    contentType: 'application/json',
-    type: 'GET',
-    success: function(res, status, xhr) {
-        res.data.map(function(genero) {
-            let option = $(`<option value="${genero.id_genero}">${genero.nombre}</option>`)
-            $('#selGenero').append(option);
-            
-        })
-
-    },
-    error: function(res, status, xhr) {
-        const respuesta = JSON.parse(res.responseText);
-        mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
-        
-    }
-})
 
 
 /// empieza el modal de Registar Tipo de parametro segun un parametro 
@@ -423,29 +487,6 @@ function eliminarParametro(id) {
 
 
 
-$(document).ready(function() {
-  
-
-	$('#dtParametros').DataTable( {
-        "aoColumnDefs": [
-            { "bSortable": false, "aTargets": [2] }
-            ],
-            "language": {
-                "lengthMenu": "",
-                "search": "Buscar:",
-                "paginate": {
-                    "previous": "Anterior",
-                    "next": "Siguiente"
-                },
-                "emptyTable": "No se encontraron parametros",
-                "zeroRecords": "No se encontraron parametros"
-            },
-            "searching": true,
-            "ordering": true,
-            "paging": true
-        })
-});
-
 function addRowParametro(id, nombre_parametro, ps){
     let vm = ps.valor_minimo;
     let vM = ps.valor_maximo;
@@ -460,7 +501,7 @@ function addRowParametro(id, nombre_parametro, ps){
     <td id="minimo-${id}">${vm}</td>
     <td id="maximo-${id}">${vM}</td>
     <td>
-    <button onclick="abrirModalEliminarParametro(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#modal-confirmar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+    <button onclick="abrirModalEliminarParametro(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
     </td>
     </tr>
     `);
