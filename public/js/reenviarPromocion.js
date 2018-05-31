@@ -32,6 +32,7 @@ $(document).ready(function () {
                     <td id="valido_desde-${promocion.id_promocion}">${promocion.valido_desde.split("-").reverse().join("-")}</td>
                     <td id="valido_hasta-${promocion.id_promocion}">${promocion.valido_hasta.split("-").reverse().join("-")}</td>
                     <td>
+                        <button onclick="abrirModalDifundirPromocion(${promocion.id_promocion})" type="button" class="btn btn-stransparent" data-toggle='modal' data-target="#modal-confirmar-difusion" title="Difundir"><i class="fa fa-bullhorn"></i></button>
                         <a onclick="editarPromo(${promocion.id_promocion})"  class='edit btn  btn-stransparent' title='Editar'><i class='fa fa-pencil'></i></a>
                         <button onclick="abrirModalEliminarPromo(${promocion.id_promocion})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
                     </td>
@@ -109,6 +110,24 @@ $(document).ready(function () {
 
 
 });
+
+function difundirPromo(id) {
+
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/difundir/promocion/' + id,
+        type: 'GET',
+        success: function(res, status, xhr) {
+            console.log(res);
+            mensaje('#msjAlerta', 'Promoción difundida satisfactoriamente', 15);
+        },
+        error: function (res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText);
+            console.error(respuesta);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+        }
+    });
+}
+
 //LLeva a la pantalla de Reenviar Promocion luego de haber editado una
 function editarPromo(id) {
 
@@ -121,6 +140,10 @@ function editarPromo(id) {
 
 function abrirModalEliminarPromo(id) {
     $('#txtIdPromoEliminar').val(id);
+}
+
+function abrirModalDifundirPromocion(id) {
+    $('#txtIdPromoDifundir').val(id);
 }
 
 function eliminarPromo(id) {
