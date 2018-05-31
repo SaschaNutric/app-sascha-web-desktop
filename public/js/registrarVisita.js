@@ -979,9 +979,7 @@ function calcularAvance(realizadas, total) {
 function addRowEjercicios(id, ejercicio, cantidad, frecuencia, id_regimen) {
     let row = $(`<tr>
     <td id="ejercicio-${id}">${ejercicio}</td>
-    <td class='text-center'>
-    <input class='form-control input-ejercicio' id='cantidadE-${id}' type="number" value='${cantidad}'>
-    </td>
+   
     <td id='colE-${id}'>  
     </td>
     <td style='display: ${id_tipo_cita == 2 ? 'block' : 'none'}'>

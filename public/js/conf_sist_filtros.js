@@ -21,6 +21,9 @@ $(document).ready(function() {
         "paging": true
     });
 
+
+
+
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/tipoparametros',
         contentType: 'application/json',
@@ -40,6 +43,10 @@ $(document).ready(function() {
         }
     })
 });
+
+
+
+
 
 function addRowTipoParametro(id, nombre, filtrable){
     let row = '';
