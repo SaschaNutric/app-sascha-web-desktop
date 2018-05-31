@@ -4,7 +4,47 @@ if(!localStorage.sesion) {
 $(document).ready(function (event) {
     
     let empleado = JSON.parse(localStorage.getItem('empleado'));
-
+    let cantidadNotificaciones = 0;
+    let getNotificaciones = setInterval(function(){
+        $.ajax({
+            url: 'https://api-sascha.herokuapp.com/notificaciones/usuario/' + empleado.id_usuario,
+            type: 'GET',
+            success: function(res, status, xhr) {
+                console.log(res);
+                let data = res.data;
+                if(data.length != cantidadNotificaciones) {
+                    cantidadNotificaciones = data.length;
+                    data.map(function(notificacion) {
+                        Push.create(notificacion.titulo, {
+                            body: notificacion.mensaje,
+                            icon: '/images/comentario-icono.png',
+                            requireInteraction: true,
+                            onClick: function () {
+                                window.focus();
+                                this.close();
+                            },
+                            onClose() {
+                                $.ajax({
+                                    url: 'https://api-sascha.herokuapp.com/notificacion/' + notificacion.id_notificacion,
+                                    type: 'DELETE',
+                                    success: function (res, status, xhr) {
+                                        console.log(res);
+                                    },
+                                    error: function(res, status, xhr) {
+                                        console.error(res);
+                                    }
+                                });
+                            }
+                        });
+                    })
+                }    
+            },
+            error: function(res, status, xhr) {
+                console.error(res);
+            }
+        });
+    }, 15000);
+    
     if (empleado == null || !empleado.menu || empleado.menu.length == 0) {
         window.location.replace('500.html')
     } else {
@@ -49,7 +89,7 @@ $(document).ready(function (event) {
         localStorage.removeItem('empleado');
         localStorage.removeItem('token');
         localStorage.removeItem('sesion');
-        
+        clearInterval(getNotificaciones);
         window.location = 'index.html';
     })
 })
