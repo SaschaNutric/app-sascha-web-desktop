@@ -497,7 +497,7 @@ $(document).ready(function () {
             data: JSON.stringify(visita),
 
             success: function (res, status, xhr) {
-             //   window.location = 'visitas.html'
+               window.location = 'visitas.html'
 
                 console.log(res.data.mensaje)
             },
