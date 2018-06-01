@@ -162,8 +162,8 @@ $.ajax({
                 descuento: $('#txtDescuento').val(),
                 valido_desde: moment($('#dpValidoDesde').val()).format('YYYY-MM-DD'),
                 valido_hasta: moment($('#dpValidoHasta').val(),'DD-MM-YYYY').format('YYYY-MM-DD'),
-                id_estado_civil: $('#selEstadoCivil').val()=='null'? null : $('#selEstadoCivil').val(),
-                id_rango_edad:$('#selRangoEdad').val()== 'null' ? null : $('#selRangoEdad').val(),
+                id_estado_civil: $('#selEstadoCivil').val() =='null'? null : $('#selEstadoCivil').val(),
+                id_rango_edad:$('#selRangoEdad').val() == 'null' ? null : $('#selRangoEdad').val(),
                 id_genero: $('#selGenero').val()== 'null' ? null : $('#selGenero').val(),
             }
             const div = document.getElementsByClassName('fileupload-preview')[0]
@@ -171,7 +171,7 @@ $.ajax({
             if (div.firstChild != null) {
                 url_imagen = div.firstChild.src
             }
-           // console.log(promocion)
+            console.log(promocion)
         if (oldPromocion.nombre == promocion.nombre && oldPromocion.servicio == promocion.servicio && oldPromocion.descripcion == promocion.descripcion && oldPromocion.descuento == promocion.descuento && oldPromocion.valido_desde == promocion.valido_desde && oldPromocion.valido_hasta == promocion.valido_hasta && oldPromocion.estado_civil == promocion.estado_civil && oldPromocion.rango_edad == promocion.rango_edad && oldPromocion.genero == promocion.genero && url_imagen == '') {
             mensaje('#msjAlerta', '', 4);
             return;
@@ -186,9 +186,15 @@ $.ajax({
         form_data.append('descuento', promocion.descuento);
         form_data.append('valido_desde', promocion.valido_desde);
         form_data.append('valido_hasta', promocion.valido_hasta);
-        form_data.append('estato_civil', promocion.estado_civil);
-        form_data.append('rango_edad', promocion.rango_edad);
-        form_data.append('genero', promocion.genero);
+        if (promocion.id_estado_civil != null) {
+            form_data.append('id_estado_civil', promocion.id_estado_civil);
+        }
+        if (promocion.id_rango_edad != null) {
+            form_data.append('id_rango_edad', promocion.id_rango_edad);
+        }
+        if (promocion.id_genero != null) {
+            form_data.append('id_genero', promocion.id_genero);
+        }
         if (url_imagen != '') {
             form_data.append('imagen', file_data);
         }
@@ -204,10 +210,12 @@ $.ajax({
                 data: form_data,    
                 success: function (res, status, xhr) {
                     console.log(res.data)
-                    limpiarCampos();
+                    window.location = url
+                  //  limpiarCampos();
                 
                 },
                 error: function (res, status, xhr) {
+                    console.log(res)
                     const respuesta = JSON.parse(res.responseText);
                     mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
                 }

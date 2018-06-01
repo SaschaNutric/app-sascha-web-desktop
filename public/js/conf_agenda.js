@@ -58,7 +58,7 @@ $(document).ready(function()
         console.log(horarioempleados);
         console.log(JSON.stringify(horarioempleados));
         $.ajax({
-            url: 'http://api-sascha.herokuapp.com/horarioempleados',
+            url: 'https://api-sascha.herokuapp.com/horarioempleados',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(horarioempleados),

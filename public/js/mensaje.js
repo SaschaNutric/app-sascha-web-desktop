@@ -34,6 +34,10 @@ function mensaje(id, entidad, accion){
         tipo= "alert alert-info";
         texto = `<strong>Info!</strong> Se debe registrar ${entidad}.`;
         break;
+        case 8:
+        tipo= "alert alert-success";
+        texto = `<strong>Info!</strong>Reporte ${entidad} generado.`;
+        break;
         case 10:
         tipo= "alert alert-info";
         texto = `<strong>${entidad}</strong>  No encontrado.`;
