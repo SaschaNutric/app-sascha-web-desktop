@@ -1,4 +1,21 @@
 $(document).ready(function() {
+    $('#dtDetalle').DataTable({
+        "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron detalles",
+            "zeroRecords": "No se encontraron detalles"
+        },
+        "pageLength": 5,
+        "searching": true,
+        "ordering": true,
+        "paging": true
+    });
+
     $('#dtVisitaDiagnostico').DataTable({ 
           "language": {
               "lengthMenu": "",
@@ -65,27 +82,27 @@ $(document).ready(function() {
             console.log(res.data)
             let dashboard = res.data;
             let clientes_hoy = dashboard.agendas;
-            console.log(fecha_actual)
             $('#fecha_actual').text(fecha_actual);
             $('#VisitaDiagnostico').text(dashboard.visita_diagnostico);
             $('#VisitaControl').text(dashboard.visita_control);
             $('#misClientes').text(dashboard.clientes);
-
+            if(clientes_hoy.length == 0){
+                $('#listaClientes').append(`<li>No hay visitas registradas</li>`)
+                $('#promocion').css('display', 'inline');
+            }
             for(let i = 0; i < clientes_hoy.length; i++){
                 $('#listaClientes').append(`<li id="cliente-${i}">${clientes_hoy[i].horario}`+` - `+`${clientes_hoy[i].nombre_cliente}`
                        +`<a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#"><i class="fa fa-ellipsis-v"></i></a>
                     <ul class="dropdown-menu">
                     <li><a onclick="" href="visi_registrarVisita.html?id=${clientes_hoy[i].id_agenda}"><i class=" fa fa-medkit"></i>Atender</a></li>
-                    <li><a href="#"><i class="fa fa-warning"></i>Registrar incidencia</a></li>
+                    <li><a onclick="registrarIncidencia(${clientes_hoy.id_agenda})" data-toggle="modal" data-target="#registrarIncidencia"><i class="fa fa-warning"></i>Registrar incidencia</a></li>
                     </ul>
                 </li>`)
                 if(i==0){
                     $('#nombre-cliente').text(clientes_hoy[i].nombre_cliente);
                     $('#servicio-cliente').text(clientes_hoy[i].nombre_servicio);
                     $('#cliente-nombre').text(clientes_hoy[i].nombre_cliente)
-                    $('#servicio-nombre').text(clientes_hoy[i].nombre_servicio)
-                
-                
+                    $('#servicio-nombre').text(clientes_hoy[i].nombre_servicio)             
 
                     let datos = {
                         id_cliente: clientes_hoy[i].id_cliente,
@@ -100,19 +117,28 @@ $(document).ready(function() {
                         success: function(res, status, xhr) {
                             console.log(res.data);
                             let proximoCliente = res.data;
+                            $('#proximo-cliente').css('display', 'inline');
+                            $('#lblServicio').css('display', 'inline');
+                            $('#lblVisitas').css('display','inline');
                             $('#historialVisita').text('Historial de Visitas')
+                            $('#pagination').css('display', 'inline');
                             proximoCliente.map(function(visita){
-                                $('#cita-fecha').text(visita.fecha_atencion)
-                                $('#cita-tipo').text(visita.numero)
-                                $('#ulHistorialVisitas').append(`<li id="visita-${visita.numero}">${visita.fecha_atencion}
-                                    <a onclick="cargardetalle(${visita.id_visita})" data-toggle="modal" data-target="#modalDetalle"></a>
-                                </li>`)
+                                $('#Visitas').text(proximoCliente.length + `/` + visita.numero_visitas)
+                                $('#cita-fecha').text(moment(visita.fecha_atencion, 'YYYY-MM-DD').format('DD-MM-YYYY'))
+                                if(visita.numero == 1){
+                                    $('#cita-tipo').text('Diagnóstico')
+                                }else{$('#cita-tipo').text('Control')}
+                                $('#ulHistorialVisitas').append(`<a onclick="cargarDetalle(${visita.id_visita})" data-toggle="modal" data-target="#modalDetalle">
+                                <li id="visita-${visita.numero}" style="background: #3da3cb">${moment(visita.fecha_atencion, 'YYYY-MM-DD').format('DD-MM-YYYY')}
+                                </li></a>`)
                             })
 
                         },
                         error: function(res, status, xhr) {
                             console.log(res.responseText)
                             const respuesta = JSON.parse(res.responseText);
+                            $('#proximo-cliente').css('display', 'inline');
+                            $('#lblServicio').css('display', 'inline');
                             if(res.responseText == '{"error":true,"data":{"mensaje":"Aun no tiene visitas registradas"}}'){
                                 $('#historialVisita').text('Aún no tiene visitas registradas')
                             }
@@ -159,6 +185,16 @@ function cargarDetalle(id){
 
         }
     })
+}
+
+//registrar incidencia
+function registrarIncidencia(id){
+    $('#txtIdCita').val($(`#idCita-${id}`).text());
+    $('#txtIdAgenda').val(id);
+}
+
+function reenviarpromocion(){
+    window.location='ofertasYPromocionesReenviar.html';
 }
 
 // Carga  los datos en la tabla Visitas Diagnosticos
