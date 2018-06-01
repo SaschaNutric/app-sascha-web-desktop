@@ -52,8 +52,8 @@
                         </div>
                     <div class=" btn-group pull-right" style="padding: 20px" >
                      <button type="button" class="btn btn-info"><i class="fa fa-download"></i> Exportar</button>
-                     <button type="button" class="btn btn-danger">Limpiar</button>
-                     <button type="button" class="btn btn-primary">Consultar</button>  
+                     <button type="button" class="btn btn-danger" onclick="limpiartabla()" sss>Limpiar</button>
+                     <button type="button" class="btn btn-primary" id="btnConsultarSolicitudes">Consultar</button>  
                  </div>
                  <div style="padding: 20px">
                  <table id="dtSolicitud" class="table table-bordered table-striped" >
@@ -87,16 +87,21 @@
                    <form class="form-horizontal">
 
 
-                  
+                     <div class="form-group">
+                           <label for="selMotivo" class="control-label">Motivo:</label>
+                                    <select id="selMotivoSolicitud" name="motivo" class="form-control" style="width: 100%">
+                              <option value="0"  >Todos</option>
+                                    </select>
+                    </div>
 
                        <div class="form-group">
                               <label class="control-label" for="selectRespuesta">Respuesta:</label>
                                     <select id="selRespuesta" name="respuesta" class="form-control" style="width: 100%">
-                                        <option value="0" selected="selected" >Seleccione</option>
-                                        <option value="1" selected="selected" >Aprobado</option>
-                                        <option value="2" selected="selected" >Rechazado, cita agendada </option>
-                                        <option value="3" selected="selected" >rechazado,empleado no trabaja en el dia y horario solicitado</option>
-                                        <option value="4" selected="selected" >Rechazado, por no aceptacion del precio</option>
+                                    <option value="0" selected="selected">Todos</option>
+                                        <option value="1"  >Aprobado</option>
+                                        <option value="2"  >Rechazado, cita agendada </option>
+                                        <option value="3"  >rechazado,empleado no trabaja en el dia y horario solicitado</option>
+                                        <option value="4"  >Rechazado, por no aceptacion del precio</option>
                                     </select>
                             </div>
 
@@ -107,9 +112,9 @@
                            <label class="control-label">Fecha:</label>
                            <div class="col-md-12">
                             <div class="input-group input-large" data-date="13/04/2018" data-date-format="mm/dd/yyyy">
-                                <input type="text" class="form-control dpd1" name="from">
+                                <input type="text" class="form-control dpd1" name="from" id="fechaInicial">
                                 <span class="input-group-addon">-</span>
-                                <input type="text" class="form-control dpd2" name="to">
+                                <input type="text" class="form-control dpd2" name="to" id="fechaFinal">
                             </div>
                         </div>
                     </div>
@@ -136,7 +141,7 @@
                                  <div class="form-group">
                                     <label for="selservicio" class="control-label">Servicio:</label>
                                         <select id="selservicio" name="servicio" class="form-control" style="width: 100%">
-                                        <option value="0" selected="selected" >Todas</option>
+                                        <option value="0"  selected="selected" >Todas</option>
                                         </select>
                                 </div>
                             </div>
@@ -160,19 +165,19 @@
 
                  <div class="form-group">
                      <label class="control-label" for="selGenero">Género:</label>
-                           <select id="selGenero" class="form-control">
-                               <option>Todos</option>
+                           <select id="selGenero" name="genero" class="form-control">
+                               <option value="0" >Todos</option>
                            </select>
                  </div>
 
                  
                  <div class="form-group">
                     <label class="control-label " for="selEdoCivil">Estado Civil:</label>
-                  <select id="selEdoCivil" class="form-control"><option>Todos</option></select>
+                  <select id="selEdoCivil" name="estadoCivil"  class="form-control"><option value="0" selected="selected" >Todos</option></select>
                 </div>
                 <div class="form-group">
                     <label class="control-label " for="selRangoEdad">Rango de Edad:</label>
-                  <select id="selRangoEdad" class="form-control"><option>Todos</option></select>
+                  <select id="selRangoEdad" name="edad"  class="form-control"><option value="0" selected="selected">Todos</option></select>
                 </div>
      
             </form>
@@ -214,6 +219,9 @@
 <script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
 
 
 <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
