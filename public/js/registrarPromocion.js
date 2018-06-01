@@ -160,7 +160,7 @@ $.ajax({
                 id_servicio: $('#selServicios').val()== 'null' ? null : $('#selServicios').val(),
                 descripcion: $('#txtDescripcionPromo').val(),
                 descuento: $('#txtDescuento').val(),
-                valido_desde: moment($('#dpValidoDesde').val()).format('YYYY-MM-DD'),
+                valido_desde: moment($('#dpValidoDesde').val(),'DD-MM-YYYY').format('YYYY-MM-DD'),
                 valido_hasta: moment($('#dpValidoHasta').val(),'DD-MM-YYYY').format('YYYY-MM-DD'),
                 id_estado_civil: $('#selEstadoCivil').val() =='null'? null : $('#selEstadoCivil').val(),
                 id_rango_edad:$('#selRangoEdad').val() == 'null' ? null : $('#selRangoEdad').val(),

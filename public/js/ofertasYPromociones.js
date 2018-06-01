@@ -18,7 +18,7 @@ $(document).ready(function() {
 
       // Carga  las promociones en la tabla 
       $.ajax({
-        url: 'https://api-sascha.herokuapp.com/promociones',
+        url: 'https://api-sascha.herokuapp.com/promociones/todas',
         contentType: 'application/json',
         type: 'GET',
         success: function (res, status, xhr) {

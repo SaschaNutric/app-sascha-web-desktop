@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     // Carga  las promociones en la tabla 
     $.ajax({
-        url: 'https://api-sascha.herokuapp.com/promociones',
+        url: 'https://api-sascha.herokuapp.com/promociones/todas',
         contentType: 'application/json',
         type: 'GET',
         success: function (res, status, xhr) {
@@ -111,7 +111,7 @@ $(document).ready(function () {
 
         let id = $('#txtIdPromo').val();
         $.ajax({
-            url: `https://api-sascha.herokuapp.com/promociones/`,
+            url: `https://api-sascha.herokuapp.com/promociones`,
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(ofertaPromo),
@@ -151,7 +151,7 @@ function difundirPromo(id) {
         error: function (res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);
             console.error(respuesta);
-            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 13);
         }
     });
 }
