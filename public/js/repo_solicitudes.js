@@ -114,7 +114,6 @@ $("#btnLimpiarSolicitud").on('click', function(){
 });
 
 function limpiartabla(){
-    alert("hola");
     $('#dtSolicitud').DataTable().clear().draw();
      $('#dtSolicitud').DataTable().clear();
 }
