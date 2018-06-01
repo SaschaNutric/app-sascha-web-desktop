@@ -852,7 +852,7 @@ function crearTabla(id, grupos, body) {
         + "<th width='25%'>Grupo Alimenticio</th>"
         + "<th width='25%'>Cantidad</th>"
         + "<th width='10%'>Unidad</th>"
-        + "<th width='30%'>Alimentos</th>"
+        + "<th width='30%' style= 'max-width = 30px !important'>Alimentos</th>"
         + "<th width='10%'>Editar</th>"
         + "<th hidden></th>"
         + "</tr>"
@@ -867,6 +867,7 @@ function crearTabla(id, grupos, body) {
         let cant = row.insertCell(1);
         let unidad = row.insertCell(2);
         let alimentos = row.insertCell(3);
+        alimentos.style ="word-break: break-all"
         let editar = row.insertCell(4);
         let id_alimentos = row.insertCell(5);
         let arreglo_alimentos_id = []
