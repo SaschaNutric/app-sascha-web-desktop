@@ -76,11 +76,11 @@
     <div class="row">
         <div class="col-md-8">
             <div class="event-calendar clearfix">
-                <div class="col-md-7 calendar-block">
+                <div class="col-md-6 calendar-block">
                     <div class="cal1 ">
                     </div>
                 </div>
-                <div class="col-md-5 event-list-block">
+                <div class="col-md-6 event-list-block">
                     <div class="cal-day">
                         <span id="fecha_actual"></span>
                         Visitas
@@ -130,19 +130,19 @@
                             </div>
                         </div>                     
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" id="proximo-cliente" style="display: none;">
                 <div class="panel">
                     <header class="panel-heading">Próximo Cliente <span class="tools pull-right"></span>
                     </header>
                     <div class="panel-body">
                         <h3 id="nombre-cliente" style="text-align: center;"></h3>
                         <div class="info-cliente row">
-                           <label class="control-label col-md-3 ">Servicio:</label>
+                           <label class="control-label col-md-3" id="lblServicio" style="display: none;">Servicio:</label>
                            <div class="col-md-9"><span id="servicio-cliente"></span></div>
                         </div>
                        <div class="info-cliente row">
-                           <label class="control-label col-md-3 ">Visitas:</label>
-                           <div class="col-md-9"><span id="Visitas">3/10</span> </div>
+                           <label id="lblVisitas" class="control-label col-md-3" style="display: none;">Visitas:</label>
+                           <div class="col-md-9"><span id="Visitas"></span> </div>
                        </div>
                        <span id="historialVisita"></span>
                        <ul class="event-list" id="ulHistorialVisitas">
@@ -170,7 +170,7 @@
 
                      </li> -->
                  </ul>
-                 <div class="text-center">
+                 <div class="text-center" id="pagination" style="display: none;">
                     <ul class="pagination pagination-sm">
                         <li><a href="#">«</a></li>
                         <li><a class="active" href="#">1</a></li>
@@ -178,9 +178,20 @@
                     </ul>
                 </div>
             </div>
-
-
-
+        </div>
+    </div>
+    <div class="col-md-4" id="promocion" style="display: none;">
+        <div class="mini-stat clearfix">
+            <a onclick="reenviarpromocion()" >
+                <div class="row">
+                    <span class="mini-stat-icon pink" style="margin-left: 40%;"><i class="fa fa-bullhorn"></i></span>
+                </div>
+                <br>
+                <div class="mini-stat-info text-center">
+                    Hoy no tienes muchos clientes 
+                    <span>¿Por qué no difundes una Promoción?</span>
+                </div>
+            </a>
         </div>
     </div>
 </div>
@@ -256,6 +267,44 @@
         </div>
       </div>
       <!--fin de la modal detalle visita -->
+
+      <!-- Modal Agregar registrar incidencia -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="registrarIncidencia" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" >×</button>
+                        <h4 class="modal-title">Registrar Incidencia</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="frmIncidencia">
+                            <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+                            <input type="text" class="form-control" id="txtIdCita" style="display: none;">
+                            <input type="text" class="form-control" id="txtIdAgenda" style="display: none;">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Motivo:</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="selMotivo" name="motivo">
+                                        <option value="0">Seleccione</option>
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Descripción:</label>
+                                <div class="col-md-9">
+                                    <textarea id="txtDescipcion" type="text" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnRegistrar" type="button" class="btn btn-aceptar">Registrar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin Modal registara incidecnia -->
 
     <!-- Modal visita diagnostico -->
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaDiagnostico" class="modal fade"> 
@@ -408,9 +457,10 @@
 <script src="js/sparkline/jquery.sparkline.js"></script>
 <!--Morris Chart-->
 <script src="js/mensaje.js"></script>
-
+<script src="js/registrarIncidencia.js"></script>
 <!--jQuery Flot Chart-->
 <script src="js/dashboard.js"></script>
+
 <script src="js/jquery.customSelect.min.js" ></script>
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
