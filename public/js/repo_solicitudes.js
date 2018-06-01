@@ -89,6 +89,7 @@ $("#btnConsultarSolicitudes").on('click',function(){
             type: 'POST',
             data: JSON.stringify(filtros),
             success: function(res, status, xhr) {
+                mensaje('#msjAlerta', 'de solicitudes', 8)
                 console.log(res);
                 console.log(status);
                         var cont = 0;
