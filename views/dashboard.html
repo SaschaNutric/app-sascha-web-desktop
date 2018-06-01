@@ -31,7 +31,7 @@
                 <a id="modalVisitaDiagnostico" href="#visitaDiagnostico" data-toggle="modal" onclick="cargarModalVisitasD() ">
                 <span class="mini-stat-icon light-green"><i class="fa  fa-stethoscope"></i></span>
                 <div class="mini-stat-info">
-                    <span>2</span>
+                    <span id="VisitaDiagnostico"></span>
                     Visitas Diagnóstico
                 </div>
                 </a>
@@ -42,7 +42,7 @@
                 <a id="modalVisitaControl" href="#visitaControl" data-toggle="modal" onclick="cargarModalVisitasC() ">
                 <span class="mini-stat-icon tar"><i class="fa fa-eye"></i></span>
                 <div class="mini-stat-info">
-                    <span>5</span>
+                    <span id="VisitaControl"></span>
                     Visitas de Control
                 </div>
                 </a>
@@ -54,7 +54,7 @@
                 <a id="modalMisClientes" href="#clientes" data-toggle="modal" onclick="cargarModalMisClientes()">
                 <span class="mini-stat-icon dark-green"><i class="fa fa-medkit"></i></span>
                 <div class="mini-stat-info">
-                    <span>50</span>
+                    <span id="misClientes"></span>
                     Mis Clientes
                 </div>
                 </a>
@@ -82,14 +82,14 @@
                 </div>
                 <div class="col-md-5 event-list-block">
                     <div class="cal-day">
-                        <span>Hoy</span>
+                        <span id="fecha_actual"></span>
                         Visitas
                     </div>
-                    <ul class="event-list">
-                        <li class="blue">
+                    <ul id="listaClientes" class="event-list">
+                        <!-- <li class="blue">
                             <div class="row">
                                 <div class="col-md-10" style="padding-right: 0px">
-                                    <span>2:00 pm - Ana Victoria De Palma </span>
+                                    <span id="horario-nombre">2:00 pm - Ana Victoria De Palma </span>
                                 </div>
                                 <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
                                     <i class="fa fa-ellipsis-v"></i></a>
@@ -125,7 +125,7 @@
                                                 <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
                                             </ul>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>                     
@@ -135,25 +135,18 @@
                     <header class="panel-heading">Próximo Cliente <span class="tools pull-right"></span>
                     </header>
                     <div class="panel-body">
-                        <h3 style="text-align: center;">María Perez</h3>
-
+                        <h3 id="nombre-cliente" style="text-align: center;"></h3>
                         <div class="info-cliente row">
-                           <label class="control-label col-md-3 ">Motivo:</label>
-                           <div class="col-md-9"><span >Adelgazar</span> </div>
-                       </div>
-                       <div class="info-cliente row">
                            <label class="control-label col-md-3 ">Servicio:</label>
-                           <div class="col-md-9"><span >Alcanza tu peso ideal</span> </div>
-                       </div>
+                           <div class="col-md-9"><span id="servicio-cliente"></span></div>
+                        </div>
                        <div class="info-cliente row">
                            <label class="control-label col-md-3 ">Visitas:</label>
-                           <div class="col-md-9"><span >3/10</span> </div>
+                           <div class="col-md-9"><span id="Visitas">3/10</span> </div>
                        </div>
-
-
-                       <span>Historial de Visitas</span>
-                       <ul class="event-list">
-                        <li style="background: #3da3cb" >
+                       <span id="historialVisita"></span>
+                       <ul class="event-list" id="ulHistorialVisitas">
+                        <!-- <li style="background: #3da3cb" >
                          <div class="row" >
                              <div class="col-md-7"><a class="a-visita" href="#">19 Abril 2018 </a></div>
                              <div class="col-md-5" style="text-align: center">No Valorada</div>
@@ -175,7 +168,7 @@
 
                          </div>
 
-                     </li>
+                     </li> -->
                  </ul>
                  <div class="text-center">
                     <ul class="pagination pagination-sm">
@@ -191,6 +184,78 @@
         </div>
     </div>
 </div>
+
+      <!--inicio de la modal detalle visita -->
+  <div class="modal fade bs-example-modal-sm" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="gridSystemModalLabel">
+                <i></i><span id="visita-numero"></span> Detalle de Visita</h4>
+            </div>
+            <div class="modal-body">
+          
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="mini-stat clearfix">
+                        <span id="color-icono-visita" class="mini-stat-icon light-green">
+                          <i id="icono-visita" class="fa fa-stethoscope"></i>
+                        </span>
+                        <div id="cita-info" class="mini-stat-info detalle">
+                          <span id="cita-fecha"></span>
+                          <h5 id="cita-tipo"></h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mini-stat clearfix">
+                        <span class="mini-stat-icon medium-green">
+                          <i class="fa fa-user"></i>
+                        </span>
+                        <div id="cliente-info" class="mini-stat-info detalle">
+                          <span id="cliente-nombre"></span>
+                          <h5 >Cliente</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mini-stat clearfix">
+                        <span class="mini-stat-icon dark-green">
+                          <i class="fa fa-medkit"></i>
+                        </span>
+                        <div id="servicio-info" class="mini-stat-info detalle">
+                          <span id="servicio-nombre"></span>
+                          <h5 >Servicio</h5>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              
+              <div class="row" style="padding: 20px">
+                <table class="display table table-bordered table-striped" id="dtDetalle">
+                  <thead>
+                    <tr>
+                      <th width= "30%">Tipo de Parámetro</th>
+                      <th width="50%">Parametro</th>
+                      <th width="20%">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+    
+              </div>
+    
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--fin de la modal detalle visita -->
 
     <!-- Modal visita diagnostico -->
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaDiagnostico" class="modal fade"> 
@@ -222,13 +287,13 @@
         </div>
         <!-- fin Modal visita diagnostico -->
 
-        <!-- Modal visita Control -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaControl" class="modal fade">
+        <!-- Modal visita diagnostico -->
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaControl" class="modal fade"> 
             <div class="modal-dialog">
                 <div class="modal-content modal-dashboard">
                     <div class="modal-header">
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Visita Control</h4>
+                        <h4 class="modal-title">Visita Diagnóstico</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" role="form">  
@@ -246,10 +311,12 @@
                             </div>
                         </form>
                     </div>
+        
                 </div>
             </div>
         </div>
-        <!-- fin Modal visita control -->
+        <!-- fin Modal visita diagnostico -->
+
 
         <!-- Modal mis clientes -->
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="clientes" class="modal fade">
