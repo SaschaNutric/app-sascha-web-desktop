@@ -260,6 +260,9 @@ function editarParametro(id){
     console.log(arregloTipoUnidades)
         arregloTipoUnidades.map(function(tipounidad){
         if(tipounidad.id_tipo_unidad == tipounidades){
+            $('#selUnidad').empty();
+            let optiontipo = $(`<option value="0">Seleccione</option>`)
+            $('#selUnidad').append(optiontipo);
             tipounidad.unidades.map(function(unidad) {
                 let optionunidad = $(`<option value="${unidad.id_unidad}">${unidad.nombre}</option>`)
                 $('#selUnidad').append(optionunidad);
@@ -304,13 +307,13 @@ function eliminarParametro(id){
 }
 
 function limpiarParametro(){
- $('#txtNombreParametro').val('');
- $('#txtIdParametro').val('');
- $('#selTipoParametro option:contains(Seleccione)').prop('selected',true);
- $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
- $('#selUnidad option:contains(Seleccione)').prop('selected',true);
- $('#selTipoValor option:contains(Seleccione)').prop('selected',true);
-$('#real').css('display','none')
+    $('#txtNombreParametro').val('');
+    $('#txtIdParametro').val('');
+    $('#selTipoParametro option:contains(Seleccione)').prop('selected',true);
+    $('#selTipoUnidad option:contains(Seleccione)').prop('selected',true);
+    $('#selUnidad option:contains(Seleccione)').prop('selected',true);
+    $('#selTipoValor option:contains(Seleccione)').prop('selected',true);
+    $('#real').css('display','none')
 }
 
 function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, tipo_unidad) {
