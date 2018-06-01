@@ -144,7 +144,7 @@
                     <div id="msjAlertaRedes" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
                         <div class="adv-table ">
                         <div class="btn-group pull-right" >
-                            <a href="#agregarRedsocial" data-toggle="modal" class="btn btn-primary" data-target="#agregarRedsocial">
+                            <a href="#agregarRedsocial1" data-toggle="modal" class="btn btn-primary" data-target="#agregarRedsocial1">
                                 Agregar
                             </a>
                         </div>
@@ -169,6 +169,61 @@
             </section>
         </section>
     </section>
+
+
+        <div class="modal fade" id="agregarRedsocial1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="limpiarModalRedSocial()" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Agregar Red Social</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                <input type="text" class="form-control" id="txtIdRedSocial" style="display:none" >
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Nombre de Red Social</label>
+                        <div class="col-md-8"><input class="form-control" type="text"  name="" id="txtNombreRed1"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Usuario de la red Social</label>
+                        <div class="col-md-8"><input class="form-control" type="text"  name="" id="txtUsuario1"/> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Icono</label>
+                        <div class="col-md-9">
+                            <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden" value="" name="">
+                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" id="vistaImagenRedsocial">
+                                </div>
+                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 10px;"></div>
+                                <div>
+                                 <span class="btn btn-white btn-file">
+                                     <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Subir Imagen</span>
+                                     <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                     <input type="file" class="default" name="" id="imagenRedsocial1" >
+                                 </span>
+                                 <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                    <label class="col-md-3 control-label">Enlace</label>
+                    <div class="col-md-8">
+                    <input class="form-control" type="text" id="txtEnlace1" /> </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-danger" type="button" onclick="limpiarModalRedSocial()">Cancelar</button>
+            <button class="btn btn-primary" type="button" id="btnGuardarRedSocial1">Guardar</button>
+
+        </div>
+    </div>
+</div>
+</div>
 
     <!--Modal agregar redes sociales -->
 
@@ -220,7 +275,7 @@
         <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-danger" type="button" onclick="limpiarModalRedSocial()">Cancelar</button>
             <button class="btn btn-primary" type="button" id="btnGuardarRedSocial">Guardar</button>
-            <button class="btn btn-primary" id="btnEditarRedSocial" type="button" style="display: none;">Aceptar editar</button>
+            <button class="btn btn-primary" id="btnEditarRedSocial" type="button" style="display: none;">Aceptar</button>
         </div>
     </div>
 </div>

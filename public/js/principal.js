@@ -40,7 +40,8 @@ $(document).ready(function (event) {
                 }    
             },
             error: function(res, status, xhr) {
-                console.error(res);
+                if (res.status != 404)
+                    console.error(res);
             }
         });
     }, 15000);

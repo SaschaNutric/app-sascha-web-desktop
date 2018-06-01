@@ -17,7 +17,7 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: 'http://localhost:3000/comentarios',
+    url: 'http://api-sascha.herokuapp.com/comentarios',
     contentType: 'application/json',
     type: 'GET',
     success: function (res, status, xhr) {

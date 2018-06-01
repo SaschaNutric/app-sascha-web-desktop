@@ -71,16 +71,16 @@ $(document).ready(function(){
     })
 })
 
-      $('#btnGuardarRedSocial').on('click', function() {
-
+      $('#btnGuardarRedSocial1').on('click', function() {
+console.log($('#txtEnlace1').val());
     let redsocial = {
-            nombre: $('#txtNombreRed').val(),
-            url_base: $('#txtEnlace').val(),
-            usuario:  $('#txtUsuario').val(),
+            nombre: $('#txtNombreRed1').val(),
+            url_base: $('#txtEnlace1').val(),
+            usuario:  $('#txtUsuario1').val(),
         }
 
 
-    var file_data = $("#imagenRedsocial").prop("files")[0];   // Getting the properties of file from file field
+    var file_data = $("#imagenRedsocial1").prop("files")[0];   // Getting the properties of file from file field
     var form_data = new FormData();                  // Creating object of FormData class
     form_data.append( 'nombre', redsocial.nombre);
     form_data.append('usuario', redsocial.usuario);
@@ -98,7 +98,8 @@ $(document).ready(function(){
                     console.log(res);
                      mensaje('#msjAlertaRedes', `Red Social`, 1);
                        const redSocial = res.data;
-                 addRowRedesSociales( redSocial.id_red_social, redSocial.nombre, redSocial.url_logo, redSocial.url_base) 
+                       console.log(redSocial.url_base);
+                 addRowRedesSociales( redSocial.id_red_social, redSocial.nombre, redSocial.url_logo, redSocial.usuario, redSocial.url_base);
                 },
                 error: function(res, status, xhr){
                     console.log(res);
@@ -107,7 +108,7 @@ $(document).ready(function(){
                     
                 }
             })
- $('#agregarRedsocial').modal('hide');
+ $('#agregarRedsocial1').modal('hide');
 })
 
 $('#btnguardarNosotros').on('click', function() {
@@ -118,7 +119,7 @@ $('#btnguardarNosotros').on('click', function() {
             objetivo:  $('#textObjetivos').val()
         }
   $.ajax({
-        url: `https://api-sascha.herokuapp.com/negocio/8`,
+        url: `https://api-sascha.herokuapp.com/negocio/7`,
         contentType: 'application/json',
         type: 'PUT',
         data: JSON.stringify(negocio),
@@ -156,7 +157,7 @@ let negocio = {
      console.log(form_data);
 
   $.ajax({
-        url: "https://api-sascha.herokuapp.com/negocio/8",
+        url: "https://api-sascha.herokuapp.com/negocio/7",
           type:"PUT",
         processData:false,
         contentType: false,
