@@ -199,9 +199,9 @@ $(document).ready(function () {
                 mensaje('#msjAlerta', respuesta.data.mensaje, 0);
             }
         })
+        $('#myModal').modal('hide')
     })
 
-    $('#myModal').modal('hide')
 
 });
 
