@@ -121,7 +121,7 @@ function cargarDetalle(id){
         success: function (res, status, xhr) {
             $('#visita-numero').text("#"+ res.data.numero )
             res.data.detalles.map(function (detalle) {
-                let valor = detalle.valor == null ? '-': detalle.valor + " " + detalle.unidad_abreviatura
+                let valor = detalle.valor == null ? '-':Number.parseFloat(detalle.valor).toFixed(2) + " " + detalle.unidad_abreviatura
                 let row = $(`<tr>   
                 <td>${detalle.tipo_parametro}</td>
                 <td>${detalle.nombre}</td>

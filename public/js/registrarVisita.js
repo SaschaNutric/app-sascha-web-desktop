@@ -500,6 +500,9 @@ $(document).ready(function () {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(visita),
+            beforeSend: function () {
+                $('#btnRegistrar').prop('disabled', true)
+            },
 
             success: function (res, status, xhr) {
                 window.location = 'visitas.html'
@@ -507,6 +510,7 @@ $(document).ready(function () {
                 console.log(res.data.mensaje)
             },
             error: function (res, status, xhr) {
+                $('#btnRegistrar').prop('disabled', false)
                 const respuesta = JSON.parse(res.responseText)
                 mensaje('#msjAlerta', respuesta.data.mensaje, 0)
                 console.log(res)
@@ -1229,7 +1233,7 @@ function createSelFrecuencia(id, clases, selected, element) {
 function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita, id_parametro) {
     let valor = '';
     if (tipo_valor === 2) {
-        valor = `<input id='real-${id}' type="number" min="0" class='form-control txtValor' style='width: 70%' value='${valorP == null ? '' : valorP}' ><span> ${unidad}</span>`
+        valor = `<input id='real-${id}' type="number" min="0" class='form-control txtValor' style='width: 70%' value='${valorP == null ? '' : Number.parseFloat(valorP).toFixed(2)}' ><span> ${unidad}</span>`
     }
     let row = $(`<tr>
         <td id="tipo_parametro-${id}">${tipo_parametro}</td>
@@ -1258,6 +1262,7 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
 }
 
 function eliminarParametro(id) {
+
     if (id == undefined) {
         return
     }
@@ -1267,6 +1272,8 @@ function eliminarParametro(id) {
         contentType: 'application/json',
         success: function (res, status, xhr) {
             mensaje('#msjAlerta', 'Parametro del perfil', 2)
+            $('#dtPerfil').DataTable().row($(`#nombreParametro-${id}`).parent()).remove().draw();
+            
 
         },
         error: function (res, status, xhr) {
@@ -1278,6 +1285,10 @@ function eliminarParametro(id) {
     })
 }
 function confirmarParametro(id) {
+    if (!proxima) {
+        mensaje('#msjAlerta', 'de Proxima Visita', 5)
+        return
+    }
     let index = -1
     for (let i = 0; i < valores_viejos.length; i++) {
         if (valores_viejos[i].id == id) {
@@ -1372,7 +1383,10 @@ function perfil(id) {
 
 
 function editarParametro(id) {
-
+    if (!proxima) {
+        mensaje('#msjAlerta', 'de Proxima Visita', 5)
+        return
+    }
     valores_viejos.push({
         id: id,
         valor: $(`#real-${id}`).val(),
@@ -1629,6 +1643,7 @@ function registrarVisitaControl(id_agenda) {
     if (id_tipo_cita != 2) {
         return
     }
+
     let visita_control = {
         id_agenda: Number.parseInt(id_agenda),
         numero: realizadas,
@@ -1655,7 +1670,13 @@ function registrarVisitaControl(id_agenda) {
 
 }
 
-function idDiaLaborable(dia) {
-    let id = 0;
-    return id
+
+function abrirAgregarParametro() {
+    if (id_tipo_cita == 2) {
+        if (!proxima) {
+            mensaje('#msjAlerta', 'de Proxima Visita', 5)
+            return
+        }
+    }
+    $('#agregarParametro').modal('show')
 }
