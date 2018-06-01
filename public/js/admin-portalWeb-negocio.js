@@ -23,7 +23,7 @@ $(document).ready(function(){
     });
 
      $.ajax({
-          url: 'https://api-sascha.herokuapp.com/negocio/8',
+          url: 'https://api-sascha.herokuapp.com/negocio/7',
           contentType: 'application/json',
           type: 'GET',
           success: function (res, status, xhr) {
@@ -165,7 +165,6 @@ let negocio = {
             success: function(res, status, xhr){
                     console.log(res);
                      console.log(status);
-                    alert("list");
                     mensaje('#msjAlerta', `Seccion Nosotros`, 3);
                      },
                 error: function(res, status, xhr){

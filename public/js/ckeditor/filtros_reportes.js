@@ -22,26 +22,7 @@ $(document).ready(function() {
 
 
 
-/*llenando combo de motivos de solicitud*/
-$.ajax({
-    url: 'https://api-sascha.herokuapp.com/tipomotivo/1',
-
-    contentType: 'application/json',
-    type: 'GET',
-    success: function(res, status, xhr) {
-        res.data.motivos.map(function(tipo_motivo) {
-            let option = $(`<option value="${tipo_motivo.id_motivo}">${tipo_motivo.descripcion}</option> `)
-            $('#selMotivoSolicitud').append(option);
-        })
-    },
-    error: function(res, status, xhr) {
-        console.log(res);
-    }
-})
-
-
-/*llenando combo de motivos de reclamos*/
-
+/*llenando combo de motivos*/
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/tipomotivo/2',
 

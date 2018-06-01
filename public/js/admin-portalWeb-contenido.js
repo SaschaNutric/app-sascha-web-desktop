@@ -450,8 +450,6 @@ $('#btnEditarContenido').on('click', function(){
         }
            let id = $('#txtIdContenido').val();
            imagen = $('.fileupload-exists img').attr('src');
-           alert(id);
-           alert(contenido.titulo);
            if(contenido.titulo == $(`#recomendacion-${id}`).text() && contenido.texto == $(`#texto-${id}`).text() && imagen === undefined  ){
        mensaje('#msjAlertaContenido', 'Recomendacion' , 4);
         $('#editarContenido').modal('hide');
