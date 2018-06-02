@@ -27,7 +27,7 @@ $(document).ready(function () {
                     ids_f.push(funcion.id_funcionalidad)
                     nombres_f.push(funcion.nombre)
                 })
-                addRowRoles(roles.id_rol, roles.nombre, roles.descripcion, nombres_f)
+                addRowRoles(roles.id_rol, roles.nombre, roles.descripcion, nombres_f, roles.dashboard)
             })
 
         },
@@ -39,7 +39,7 @@ $(document).ready(function () {
     $('#ms_funcionalidades').multiSelect({
         selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
         selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='buscar...'>",
-        selectableOptgroup: true ,
+        selectableOptgroup: true,
         afterInit: function (ms) {
 
             var that = this,
@@ -77,11 +77,7 @@ $(document).ready(function () {
     });
 
     $('#btnAceptar').on('click', function () {
-
-        if ($('#ms_funcionalidades').val().length == '0') {
-            mensaje('#msjAlertaA', `funcionalidades`, 5);
-            return;
-        }
+        
         if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
             return;
@@ -95,14 +91,27 @@ $(document).ready(function () {
         } else {
             $('#txtDescripcion').css('border', '1px solid #858580');
         }
+        
+        if ($('#ms_funcionalidades').val().length == '0') {
+            mensaje('#msjAlertaA', `funcionalidades`, 5);
+            return;
+        }
+        if ($('input[name="tipo_dashboard"]:checked').val() == undefined) {
+            mensaje('#msjAlertaA', ' de tipo de dashboard', 5)
+            return
 
+        }
         let func = limpiarFuncionalidad();
+
+        let dashboard = $('input[name="tipo_dashboard"]:checked').val()
 
         let rol = {
             nombre: $('#txtNombre').val(),
             descripcion: $('#txtDescripcion').val(),
             funcionalidades: func,
+            dashboard: dashboard
         }
+
 
 
         $.ajax({
@@ -119,7 +128,7 @@ $(document).ready(function () {
                 })
                 limpiarRol()
                 mensaje('#msjAlerta', `Rol`, 1);
-                addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, nombres_f);
+                addRowRoles(rol1.id_rol, rol1.nombre, rol1.descripcion, nombres_f, rol1.dashboard);
                 // agregarFuncionalidades(rol1.id_rol)
                 $('#myModal .close').click();
             },
@@ -133,13 +142,13 @@ $(document).ready(function () {
 
     })
 
-    
-    $('#btnAgregarRolNuevo').on('click', function(){
+
+    $('#btnAgregarRolNuevo').on('click', function () {
         estatusCampos(false)
         $('#btnAceptar').css('display', 'inline');
         $('#btnEditar').css('display', 'none');
         $('#btnCancelar').html('Cancelar');
-        
+
 
     })
 
@@ -161,19 +170,25 @@ $(document).ready(function () {
             $('#txtDescripcionE').css('border', '1px solid #858580');
         }
 
+        if ($('input[name="tipo_dashboard"]:checked').val() == undefined) {
+            mensaje('#msjAlertaA', ' de tipo de dashboard', 5)
+            return
+
+        }
+
         let id = $('#txtIdRol').val();
-        // if ($('#txtDescripcionE').val() == $(`#descripcion-${id}`).text() && $('#txtNombreE').val() == $(`#nombre-${id}`).text()) {
-        //     mensaje('#msjAlerta', ``, 4);
-        //     $('#editarRoles').modal('hide');
-        //     return;
-        // }
 
         let func = limpiarFuncionalidad()
+
+        let dashboard = $('input[name="tipo_dashboard"]:checked').val()
+
         let rol = {
-            nombre: $('#txtNombreE').val(),
-            descripcion: $('#txtDescripcionE').val(),
-            funcionalidades: func
+            nombre: $('#txtNombre').val(),
+            descripcion: $('#txtDescripcion').val(),
+            funcionalidades: func,
+            dashboard: dashboard
         }
+
 
 
 
@@ -188,7 +203,7 @@ $(document).ready(function () {
                 res.data.funcionalidades.map(function (f) {
                     nombres.push(f.nombre)
                 })
-                editRowRoles(id, res.data.nombre, res.data.descripcion, nombres)
+                editRowRoles(id, res.data.nombre, res.data.descripcion, nombres, res.data.dashboard)
                 limpiarRol()
                 mensaje('#msjAlerta', `Rol`, 3);
             },
@@ -206,11 +221,12 @@ $(document).ready(function () {
 });
 
 
-function addRowRoles(id, nombre, descripcion, nombres_f) {
+function addRowRoles(id, nombre, descripcion, nombres_f, dashboard) {
     let row = $(`<tr>
         <td id="nombre-${id}">${nombre}</td>
         <td id="descripcion-${id}">${descripcion}</td>
         <td hidden id="funcionalidades-${id}">${nombres_f}</td>
+        <td hidden id="dashboard-${id}">${dashboard}</td>        
         <td>
         <button onclick="verRoles(${id})" type='button' class='btn  btn-stransparent' data-toggle="modal" data-target="#myModal"  title='Ver'><i class='fa fa-eye'></i></button>        
             <button onclick="editarRoles(${id})" type='button' class='edit btn  btn-stransparent' data-toggle="modal" data-target="#myModal"  title='Editar'><i class='fa fa-pencil'></i></button>
@@ -221,7 +237,7 @@ function addRowRoles(id, nombre, descripcion, nombres_f) {
     $('#dtRoles').DataTable().row.add(row).draw();
 }
 
-function verRoles(id){
+function verRoles(id) {
     $('#txtNombre').val($(`#nombre-${id}`).text());
     $('#txtDescripcion').val($(`#descripcion-${id}`).text());
     $('#txtIdRol').val(id);
@@ -233,13 +249,13 @@ function verRoles(id){
     let ids = convertirFunciones(nombres_f)
     $('#ms_funcionalidades').multiSelect('select', ids)
     $('#ms_funcionalidades').attr('disabled', true)
-    
+
 
 }
 
-function estatusCampos(estado){
-    $('#txtNombre').attr('disabled',estado)
-    $('#txtDescripcion').attr('disabled',estado)
+function estatusCampos(estado) {
+    $('#txtNombre').attr('disabled', estado)
+    $('#txtDescripcion').attr('disabled', estado)
 }
 
 function limpiarRol() {
@@ -252,9 +268,11 @@ function limpiarRol() {
 }
 function editarRoles(id) {
     estatusCampos(false)
+    limpiarRol()
     $('#txtNombre').val($(`#nombre-${id}`).text());
     $('#txtDescripcion').val($(`#descripcion-${id}`).text());
     $('#txtIdRol').val(id);
+    $('input[name="tipo_dashboard"][value="' + $(`#dashboard-${id}`).text().trim() + '"]').prop('checked', true);
     $('#btnAceptar').css('display', 'none');
     $('#btnEditar').css('display', 'inline');
     $('#btnCancelar').html("Cancelar");
@@ -267,11 +285,13 @@ function abrirModalEliminarRoles(id) {
     $('#txtIdRolEliminar').val(id);
 }
 
-function editRowRoles(id, nombre, descripcion, nombres) {
+function editRowRoles(id, nombre, descripcion, nombres, dashboard) {
 
     $(`#nombre-${id}`).text(nombre);
     $(`#descripcion-${id}`).text(descripcion);
     $(`#funcionalidades-${id}`).text(nombres);
+    $(`#dashboard-${id}`).text(dashboard);
+
 
 }
 
@@ -304,6 +324,9 @@ function limpiarFuncionalidad() {
         aux = aux.concat(prueba)
     })
     let func = []
+    func.push({
+        id_funcionalidad: "1"
+    })
     aux.map(function (funcionalidad) {
         let enc = false
         for (let i = 0; i < func.length; i++) {

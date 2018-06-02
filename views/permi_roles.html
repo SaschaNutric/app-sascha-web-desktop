@@ -101,12 +101,27 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="col-sm-4 control-label">Dashboard: </label>
+
+                <div class="col-sm-8 icheck minimal">
+                    <div class="radio ">
+                        <input tabindex="3" name="tipo_dashboard" type="radio"  value="0">
+                        <label>Personalizado</label>
+                    </div>
+
+                    <div class="radio ">
+                        <input tabindex="3" name="tipo_dashboard" type="radio" value="1">
+                        <label>General</label>
+                    </div>
+
+                </div>
+            </div>
+              <div class="form-group">
                 <label class="col-md-4 control-label" id="selFuncionalidades">
                   Funcionalidades:</label>
                 <div class="col-md-8">
                   <select id="ms_funcionalidades" multiple="multiple" class="form-control" name="funcionalidades">
                     <option value="0" selected disabled></option>
-                    <option value="1-0">Dashboard</option>
                     <optgroup label='Registros Básicos'>
                       <option value="8-2">Unidades</option>
                       <option value="9-2">Tipos de Parámetro</option>
