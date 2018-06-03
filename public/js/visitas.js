@@ -94,7 +94,7 @@ var Script = function () {
             agenda: agenda,
             start: agenda.fecha_inicio,
             end: agenda.fecha_fin,
-            color: (agenda.id_tipo_cita ==1 ? '#7ab740': '#3da3cb'),
+            color: (agenda.id_visita != null ? '#858580': (agenda.id_tipo_cita ==1 ?'#7ab740': '#3da3cb') ),
             url_agenda: `visi_registrarVisita.html?id=${agenda.id_agenda}`
         }
         events.push(event);
@@ -121,7 +121,7 @@ function cargarDetalle(id){
         success: function (res, status, xhr) {
             $('#visita-numero').text("#"+ res.data.numero )
             res.data.detalles.map(function (detalle) {
-                let valor = detalle.valor == null ? '-': detalle.valor + " " + detalle.unidad_abreviatura
+                let valor = detalle.valor == null ? '-':Number.parseFloat(detalle.valor).toFixed(2) + " " + detalle.unidad_abreviatura
                 let row = $(`<tr>   
                 <td>${detalle.tipo_parametro}</td>
                 <td>${detalle.nombre}</td>

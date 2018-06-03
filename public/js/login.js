@@ -28,7 +28,7 @@ $(document).ready(function(event) {
         }
 
         $.ajax({
-            url: 'https://api-sascha.herokuapp.com/login/intranet',
+            url:  'https://api-sascha.herokuapp.com/login/intranet',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(credenciales),

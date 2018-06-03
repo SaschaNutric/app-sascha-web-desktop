@@ -90,7 +90,7 @@
                             <div id="perfil" class="tab-pane active">
                                 <div class="pull-right">
                                     <!-- modal agregar tipo parametro -->
-                                    <a style="display: none" id="btnAgregarParametro" href="#agregarParametro" data-toggle="modal" class="btn btn-info">
+                                    <a style="display: none" id="btnAgregarParametro" onclick="abrirAgregarParametro()" class="btn btn-info">
                                         Agregar
                                     </a>
                                 </div>
@@ -130,8 +130,8 @@
                                             <thead>
                                                 <tr>
                                                     <th width="35%">Suplemento</th>
-                                                    <th width="25%">Cantidad</th>
-                                                    <th width="30%">Dosis</th>
+                                                    <th width="25%">Dosis</th>
+                                                    <th width="30%">Frecuencia</th>
                                                     <th width="10%" id=acciones-s></th>
 
                                                 </tr>
@@ -152,7 +152,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="35%">Ejercicio</th>
-                                                <th width="25%">Cantidad</th>
+                                                <th width="25%">Duración</th>
                                                 <th width="30%">Frecuencia</th>
                                                 <th width="10%" id=acciones-e></th>
 
@@ -375,7 +375,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                    <button data-dismiss="modal" onclick="limpiarDefinirMeta()" class="btn btn-danger" type="button">Cancelar</button>
                     <button id="btnAceptarMeta" class="btn btn-primary" type="button">Aceptar</button>
                     <button style="display: none" id="btnEditarMeta" class="btn btn-primary" type="button">Aceptar</button>
 
@@ -469,7 +469,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-danger" type="button">Cancelar</button>
+                    <button data-dismiss="modal" onclick="limpiarAgregarParametro()" class="btn btn-danger" type="button">Cancelar</button>
                     <button id="btnAceptarParametro" class="btn btn-primary" type="button">Aceptar</button>
                 </div>
             </div>
