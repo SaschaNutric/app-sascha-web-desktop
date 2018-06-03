@@ -1,6 +1,7 @@
+let arreglo_Valoracion = []
 $(document).ready(function() {
 
-    /* tabla parametros */
+    /* tabla tipo criterio */
     const tablaCriterio = $('#dtCriterios').dataTable({ 
         "aoColumnDefs": [
         { "bSortable": false, "aTargets": [3] }
@@ -20,6 +21,33 @@ $(document).ready(function() {
             "ordering" :true,
             "oPaginate" : true      
     });
+ /* fin tabla tipo criterio */
+
+
+/* tabla seleccionando tipo Valoración*/
+    const tablaValoracion = $('#dtCriterioTipoValoración').dataTable({ 
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [1] }
+        ],               
+        "sDom": "ftp",
+        "Language": {
+            "LengthMenu": "",
+            "Search": "Buscar:",
+            "Paginate": {
+                "Previous": "Anterior",
+                "Next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron criterios y valoraciones asociadas",
+            "zeroRecords": "No se encontraron criterios y valoraciones asociadas"
+        }, 
+            "searching" :true, 
+            "ordering" :true,
+            "oPaginate" : true      
+    });
+/* fin tabla seleccionando tipo Valoración*/
+
+
+
 /*llenando tipo de criterio*/
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/tipocriterios',
@@ -36,6 +64,48 @@ $(document).ready(function() {
         }
     })
 /*fin llenando tipo de criterio*/
+
+
+/*comienza el cargado de la tabla tipo de criterio con valoracion */
+  $.ajax({
+        url: 'https://api-sascha.herokuapp.com/tipocriterios',
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            res.data.map(function(criterio_valoracion) {
+                addRowCriterioValoracion(criterio_valoracion.id_tipo_criterio, criterio_valoracion.nombre, criterio_valoracion.tipo_valoracion.id_tipo_valoracion
+
+                    );
+            })                   
+        },
+        error: function(res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+        }
+    })
+ /*fin del cargado de la tabla tipo de criterio con valoracion */
+
+
+
+/*llenando tipo de Valoraciones*/
+    $.ajax({
+        url: 'https://api-sascha.herokuapp.com/tipovaloraciones',
+        type: 'GET',
+         async: false,
+             contentType: 'application/json',
+             success: function (res, status, xhr) {
+                res.data.map(function(valoracion) {
+                arreglo_Valoracion.push({id_tipo_valoracion: valoracion.id_tipo_valoracion,
+                                valoracion: valoracion.nombre
+                            })
+                        })
+                    },
+                    error: function (res, status, xhr) {
+                        alert("error!")
+                    }
+                })
+/*fin llenando tipo de Valoraciones*/
+/*comienza el cargado de la tabla tipo de criterio*/
   $.ajax({
         url: 'https://api-sascha.herokuapp.com/criterios',
         contentType: 'application/json',
@@ -50,6 +120,9 @@ $(document).ready(function() {
             mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
         }
     })
+ /*fin del cargado de la tabla tipo de criterio*/
+
+
 
          $('#btnAceptarCriterio').on('click', function() {
         if($('#txtNombreCriterio').val() == "")
@@ -159,8 +232,58 @@ $(document).ready(function() {
     $('#modal-agregar-valoracion').modal('hide');
 
 })
-
+ 
 });
+
+/*------------------------------------------------------------------------------------------------*/
+ function Selvaloracion(id){
+
+    console.log(id);
+    let id_tipo_valoracion = $('#' + id).val()
+    let id_tipo_criterio = id.split('-')[1];
+    console.log(JSON.stringify(id_tipo_valoracion));
+     $.ajax({
+        url: `https://api-sascha.herokuapp.com/tipocriterio/${id_tipo_criterio}`,
+        contentType: 'application/json',
+        type: 'PUT',
+        data: JSON.stringify({id_tipo_valoracion:id_tipo_valoracion}),
+        success: function(res, status, xhr) {
+            console.log(res.data)
+            let crite = res.data
+            mensaje('#msjAlerta', `Criterio`, 3);
+        },
+        error: function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta',`${respuesta.data.mensaje}`, 0);
+        }
+    })  
+}
+/*-------------------------------------------------------------------------------------------*/
+function createSelValoracion(id, clases, selected, element) {
+    console.log('mira este valor '+id)
+    let select = document.createElement("select");   
+    select.setAttribute('onchange',`Selvaloracion('${id}')`); 
+    select.id = id;
+    select.className = clases
+    let defecto = document.createElement('option');
+    defecto.value = 0;
+    defecto.innerHTML = "Seleccione";
+    defecto.setAttribute("selected","selected")
+    select.appendChild(defecto);
+    arreglo_Valoracion.map(function (valoracion) {
+        let option = document.createElement('option');
+        option.value = valoracion.id_tipo_valoracion;
+        //option.onClick= "alert('¡Has hecho clic!')";
+        //option.setAttribute('onchange',"alert('¡Has hecho clic!');");
+        option.innerHTML = valoracion.valoracion;
+        select.appendChild(option);
+    })
+    console.log(selected)
+    select.value = selected
+    document.getElementById(element).appendChild(select)
+}
 
 function editarCriterio(id){
     $('#txtNombreCriterio').val($(`#nombreCriterio-${id}`).text());
@@ -206,8 +329,6 @@ function limpiarCriterio(){
    
 
 function addRowCriterio(id, nombre, descripcion, tipo_criterio) {
-    
-
     let row = $(`<tr>
         <td id="nombreCriterio-${id}">${nombre}</td>
         <td id="descripcionCriterio-${id}">${descripcion}</td>
@@ -223,6 +344,27 @@ function addRowCriterio(id, nombre, descripcion, tipo_criterio) {
     $('#dtCriterios').DataTable().row.add(row).draw();
 }
 
+
+/*funcion que hace que me cargue la pantalla en el tag de criterios*/
+ function addRowCriterioValoracion(id, nombre, tipo_valoracion) {
+    let row = $(`<tr>
+        <td id="nombreCriterio-${id}">${nombre}</td>
+        <td id='colE-${id}'>  
+        </td>
+        </tr>
+        `);
+
+    $('#dtCriterioTipoValoración').DataTable().row.add(row).draw();
+    createSelValoracion(`selvaloracionE-${id}`, 'form-control select-Valoracion', tipo_valoracion, 'colE-' + id)
+    }  
+ /*fin de la funcion que hace que me cargue la pantalla en el tag de criterios*/
+
+
+ /*editando el tipo de valoracion al presionar el select*/
+ $('#seltipoValoracion').on('change', function () {
+        $('#seltipoValoracion option:contains('+ $(`#tipo_valoracion-${id}`).text() + ')').prop('selected',true);
+    })
+ /* fin editando el tipo de valoracion al presionar el select*/
 function editRowCriterio(id, nombre, descripcion, tipo_valoracion, tipo_criterio)
 {
     $(`#nombreCriterio-${id}`).text(nombre)

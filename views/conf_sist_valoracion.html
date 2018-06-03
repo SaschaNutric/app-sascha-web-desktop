@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-    <link rel="shortcut icon" href="favicon2.ico">
-
+    <link rel="shortcut icon" href="images/favicon.png">
     <title>Sascha</title>
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -22,13 +21,29 @@
     <section id="container" >
         <h3>Configuración de Criterios de Valoración</h3>        
         <!-- Inicio pagina Criterios -->
-        <div class="row">
-            <div class="col-sm-12">
-                <section class="panel">
-                    <div class="panel-body" style="display: block">
+        <section class="panel">
+
+        <!--Comienzo Tab-->   
+                <header class="panel-heading tab-bg-dark-navy-blue ">
+                <ul class="nav nav-justified">
+                    <li class="active">
+                        <a id="btnAgregarMensajeMotivo" data-toggle="tab" href="#tabTipoCriterio" aria-expanded="false">Criterios</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabcriterio" aria-expanded="false">Tipo de Criterios</a>
+                    </li>
+                </ul>
+                </header>
+        <!--fin Tab-->
+        <section class="panel-body">
+                <div class="tab-content">
+
                     <div id="msjAlerta" class="alert alert-dismissible" style="display: none;"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+
+
+                    <div id="tabTipoCriterio" class="tab-pane active">
                         <!-- Tabla de Criterios -->
-                            <div class="adv-table">
+                            <div class="">
                                     <div class="pull-right">
                                     <a id="btnAgregarCriterios" onclick="abrirAgregarCriterio()" href="#modal-agregar-valoracion" onclick="limpiarCriterio()" data-toggle="modal" class="btn btn-agregar">
                                             Configurar
@@ -43,17 +58,29 @@
                                         <th class="ancho-columna">Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
                             </table>
+
                         </div>
                     </div>
-                </section>
+
+                <div id="tabcriterio" class="tab-pane">
+                        <!-- Tabla de Criterios -->
+                     <div class="">
+
+                            <table class="display table table-bordered table-striped dataTable" id="dtCriterioTipoValoración">
+                                <thead>
+                                    <tr>
+                                        <th >Criterio</th>
+                                        <th style=" width: 50%!important; text-align: center">Tipo de Valoración</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                </div>
             </div>
-        </div>
-    </section>
-        <!-- Fin pagina Notificaciones Criterios-->
-        <!-- Inicio de Modales -->
-        <!-- Modal Agregar Criterio de Valoracion -->
+     </section>
+ </section>
+ <!-- Modal Agregar Criterio de Valoracion -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-agregar-valoracion" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -95,8 +122,9 @@
                 </div>
             </div>
         </div>
-        <!-- fin Modal agregar Criterio de Valoracion -->
-              <!--inicio de la modal eliminar -->
+ <!-- fin Modal agregar Criterio de Valoracion -->
+
+ <!--inicio de la modal eliminar -->
 <div class="modal fade bs-example-modal-sm" id="eliminarcriterio" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
@@ -116,6 +144,9 @@
 </div>
 </div>
 <!--fin de la modal eliminar -->
+</section>
+
+
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="bs3/js/bootstrap.min.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
