@@ -83,50 +83,9 @@
                 <div class="col-md-6 event-list-block">
                     <div class="cal-day">
                         <span id="fecha_actual"></span>
-                        Visitas
+                        <h3 id="titVisitas"></h3>
                     </div>
-                    <ul id="listaClientes" class="event-list">
-                        <!-- <li class="blue">
-                            <div class="row">
-                                <div class="col-md-10" style="padding-right: 0px">
-                                    <span id="horario-nombre">2:00 pm - Ana Victoria De Palma </span>
-                                </div>
-                                <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
-                                    <i class="fa fa-ellipsis-v"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="visi_registrarVisita.html"><i class=" fa fa-medkit"></i> Atender</a></li>
-                                        <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
-                                    </ul>          
-                                </div>
-                            </li>
-                            <li class="blue">
-                                <div class="row">
-                                    <div class="col-md-10" style="padding-right: 0px">
-                                        <span>3:00 pm - Juan Pérez </span>
-                                    </div>
-                                    <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
-                                        <i class="fa fa-ellipsis-v"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#"><i class=" fa fa-medkit"></i> Atender</a></li>
-                                            <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
-                                        </ul>
-
-                                    </div>
-                                </li>                        
-                                <li class="blue">
-                                    <div class="row">
-                                        <div class="col-md-10" style="padding-right: 0px">
-                                            <span>3:30 pm - David Colmenarez </span>
-                                        </div>
-                                        <a  data-toggle="dropdown" class="dropdown-toggl pull-right" style="color: white !important" href="#">
-                                            <i class="fa fa-ellipsis-v"></i></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#"><i class=" fa fa-medkit"></i> Atender</a></li>
-                                                <li><a href="#"><i class="fa fa-warning"></i> Registrar incidencia</a></li>
-                                            </ul>
-                                        </div>
-                                    </li> -->
-                                </ul>
+                    <ul id="listaClientes" class="event-list"></ul>
                             </div>
                         </div>                     
             </div>
@@ -145,31 +104,7 @@
                            <div class="col-md-9"><span id="Visitas"></span> </div>
                        </div>
                        <span id="historialVisita"></span>
-                       <ul class="event-list" id="ulHistorialVisitas">
-                        <!-- <li style="background: #3da3cb" >
-                         <div class="row" >
-                             <div class="col-md-7"><a class="a-visita" href="#">19 Abril 2018 </a></div>
-                             <div class="col-md-5" style="text-align: center">No Valorada</div>
-                         </div>
-
-                     </li>
-                     <li style="background: #3da3cb" >
-                         <div class="row" >
-                             <div class="col-md-7"><a class="a-visita" href="#">12 Abril 2018 </a></div>
-                             <div class="col-md-5" style="text-align: center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-
-                         </div>
-
-                     </li>
-                     <li style="background: #3da3cb" >
-                         <div class="row" >
-                             <div class="col-md-7"><a class="a-visita" href="#">8 Abril 2018 </a></div>
-                             <div class="col-md-5" style="text-align: center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-
-                         </div>
-
-                     </li> -->
-                 </ul>
+                       <ul class="event-list" id="ulHistorialVisitas"></ul>
                  <div class="text-center" id="pagination" style="display: none;">
                     <ul class="pagination pagination-sm">
                         <li><a href="#">«</a></li>
@@ -194,6 +129,23 @@
             </a>
         </div>
     </div>
+    <div class="col-md-4" id="reclamos" style="display: none;">
+        <div class="panel">
+            <header class="panel-heading">Reclamos<span class="tools pull-right"></span>
+            </header>
+            <div class="panel-body">
+                <h3 id="nombre-cliente" style="text-align: center;"></h3>
+               <ul class="event-list" id="ulreclamo"></ul>
+                <div class="text-center" id="pagination" style="display: none;">
+                <ul class="pagination pagination-sm">
+                <li><a href="#">«</a></li>
+                <li><a class="active" href="#">1</a></li>
+                <li><a href="#">»</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 
       <!--inicio de la modal detalle visita -->
@@ -305,6 +257,41 @@
             </div>
         </div>
         <!-- fin Modal registara incidecnia -->
+
+        <!--inicio de la modal detalle visita -->
+  <div class="modal fade bs-example-modal-sm" id="modalReclamo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Reclamos por Atender</h4>
+        </div>
+        <div class="modal-body">
+                <form class="form-horizontal" id="frmReclamo">
+                        <input type="text" class="form-control" id="txtIdReclamo" style="display: none;">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Cliente:</label>
+                            <div class="col-md-9"><input id="txtCliente" class="form-control" readonly type="text" name="" value=""/> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Servicio:</label>
+                            <div class="col-md-9"><input id="txtServicio" class="form-control" readonly type="text" name="" value=""/> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Motivo:</label>
+                            <div class="col-md-9"><input id="txtMotivo" class="form-control" readonly type="text" name="" value=""/> </div>
+                        </div>
+                    </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--fin de la modal detalle visita -->
 
     <!-- Modal visita diagnostico -->
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="visitaDiagnostico" class="modal fade"> 
