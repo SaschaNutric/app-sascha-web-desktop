@@ -149,11 +149,17 @@ $(document).ready(function() {
             $('#txtNombreValor').css('border', '1px solid red');
             return;
         }
+        
+        if ($('#txtValor').val() == "") {
+            $('#txtValor').css('border', '1px solid red');
+            return;
+        }
 
 
         let valor = {
             nombre: $('#txtNombreValor').val(),
-            id_tipo_valoracion: $('select[name=tipo_valoracion]').val()
+            valor: $('#txtValor').val(),
+            id_tipo_valoracion: $('select[name=tipo_valoracion]').val()        
         }
 
         $.ajax({
@@ -166,7 +172,7 @@ $(document).ready(function() {
                 const valor = res.data;
                 mensaje('#msjAlerta', `Valor`, 1);
                 const nombre_tipo_valoracion = $('select[name="tipo_valoracion"] option:selected').text()
-                addRowValor(valor.id_valoracion, valor.nombre, nombre_tipo_valoracion);               
+                addRowValor(valor.id_valoracion, valor.nombre, valor.valor, nombre_tipo_valoracion);               
                 limpiarValor();
                 $('#agregarValor .close').click();
             },
@@ -186,14 +192,17 @@ $(document).ready(function() {
             return;
         }
         if($('#txtNombreValor').val() == ""){
-           console.log($('select[name=tipo_valoracion]').val());
            $('#txtNombreValor').css('border', '1px solid red');
            return;
        }
-
+        if ($('#txtValor').val() == "") {
+            $('#txtNombreValor').css('border', '1px solid red');
+            return;
+        }
 
     let valor = {
         nombre: $('#txtNombreValor').val(),
+        valor: $('#txtValor').val(),
         id_tipo_valoracion: $('select[name=tipo_valoracion]').val()
     }
 
@@ -201,12 +210,14 @@ $(document).ready(function() {
 
     let id = $('#txtIdValor').val();
 
-    if(valor.nombre == $(`#nombreValor-${id}`).text() && nombre_tipo_valoracion == $(`#tipo_valoracion-${id}`).text()){
+    if(valor.nombre == $(`#nombreValor-${id}`).text() 
+        && valor.valor == $(`#valor-${id}`).text()
+        && nombre_tipo_valoracion == $(`#tipo_valoracion-${id}`).text()){
         mensaje('#msjAlerta', ``, 4);
-    $('#agregarValor').modal('hide');
-        
+        $('#agregarValor').modal('hide');
         return;
     }
+   
     $.ajax({
         url: `https://api-sascha.herokuapp.com/valoracion/${id}`,
         contentType: 'application/json',
@@ -215,7 +226,7 @@ $(document).ready(function() {
         success: function(res, status, xhr) {
             console.log(valor)
             mensaje('#msjAlerta', `Valor`, 3);
-            editRowValor(id, valor.nombre, nombre_tipo_valoracion)
+            editRowValor(id, valor.nombre, valor.valor, nombre_tipo_valoracion)
             limpiarValor();
         },
         error: function(res, status, xhr) {
@@ -281,6 +292,7 @@ function eliminarEscala(id){
 
 function editarValor(id){
     $('#txtNombreValor').val($(`#nombreValor-${id}`).text());
+    $('#txtValor').val($(`#valor-${id}`).text());    
     $('#selTipoValoracion option:contains('+ $(`#tipo_valoracion-${id}`).text() + ')').prop('selected',true);
     $('#txtIdValor').val(id);
     $('#btnAceptarValor').css('display', 'none');
@@ -321,6 +333,7 @@ function eliminarValor(id){
 
 function limpiarValor(){
    $('#txtNombreValor').val('');
+   $('#txtValor').val('');   
    $('#txtIdValor').val('');
    $('#selTipoValoracion option:contains(Seleccione)').prop('selected',true);
 }
@@ -345,9 +358,10 @@ function addRowEscala(id, nombre){
  $('#dtTipoValoracion').DataTable().row.add(row).draw();
 }
 
-function addRowValor(id, nombre, tipo_valoracion) {
+function addRowValor(id, nombre, valor, tipo_valoracion) {
     let row = $(`<tr>
         <td id="nombreValor-${id}">${nombre}</td>
+        <td id="valor-${id}">${valor}</td>        
         <td id="tipo_valoracion-${id}">${tipo_valoracion}</td>
         <td>
         <button onclick="editarValor(${id})" type='button' class='edit btn  btn-transparente' data-toggle="modal" data-target="#agregarValor"  title='Editar'><i class='fa fa-pencil'></i></button>
@@ -363,11 +377,10 @@ function editRowEscala(id, nombre){
 
 }
 
-function editRowValor(id, nombre, tipo_valoracion){
+function editRowValor(id, nombre, valor, tipo_valoracion){
     $(`#nombreValor-${id}`).text(nombre)
+    $(`#valor-${id}`).text(valor)    
     $(`#tipo_valoracion-${id}`).text(tipo_valoracion)
-
-
 }
 
 
@@ -396,7 +409,7 @@ function cargarValores(){
         type: 'GET',
         success: function(res, status, xhr) {
             res.data.map(function(valor) {
-                addRowValor(valor.id_valoracion, valor.nombre, valor.tipo_valoracion.nombre)
+                addRowValor(valor.id_valoracion, valor.nombre, valor.valor, valor.tipo_valoracion.nombre)
             })
 
         },
