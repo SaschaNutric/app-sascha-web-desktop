@@ -177,7 +177,7 @@ $(document).ready(function() {
     }else{
         let dia = moment().day() + 1;
         $.ajax({
-            url: `http://localhost:3000/agendas/dashboard`,
+            url: `https://api-sascha.herokuapp.com/agendas/dashboard`,
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(fecha),
@@ -327,7 +327,7 @@ function cargarModalVisitasD() {
     })
     }else{
         $.ajax({
-            url: `http://localhost:3000/agendas/dashboard`,
+            url: `https://api-sascha.herokuapp.com/agendas/dashboard`,
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(fecha),
@@ -392,7 +392,7 @@ function cargarModalVisitasC() {
     })
     }else{
         $.ajax({
-            url: `http://localhost:3000/agendas/dashboard`,
+            url: `https://api-sascha.herokuapp.com/agendas/dashboard`,
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(fecha),
@@ -462,7 +462,7 @@ function cargarModalMisClientes() {
 
     }else{
         $.ajax({
-            url: `http://localhost:3000/agendas/dashboard`,
+            url: `https://api-sascha.herokuapp.com/agendas/dashboard`,
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(fecha),
