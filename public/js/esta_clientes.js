@@ -40,7 +40,7 @@ $(document).ready(function () {
             id_servicio: $('#selServicio').val() == 0 ? null : $('#selServicio').val(),
             id_especialidad: $('#selEspecialidad').val() == 0 ? null : $('#selEspecialidad').val(),
             fecha_inicial: $('#dpMinimo').val() != '' ? moment($('#dpMinimo').val()).format('YYYY-MM-DD') : null,
-            fecha_final: $('#dpMaximo').val() != '' ? moment($('#dpMaximo').val()).format('YYYY-MM-DD') : null,
+            fecha_final: $('#dpMaximo').val() != '' ? moment($('#dpMaximo').val()).format('YYYY-MM-DD') : null
 
         }
 

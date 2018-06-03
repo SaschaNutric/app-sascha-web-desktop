@@ -43,7 +43,7 @@
     <div class="row">
 
         <div class="col-md-12">
-            <h3>Resumen de visitas atendidas</h3>
+            <h3>Resumen de visitas atendidas por Nutricionista</h3>
             <div class="row">
                 <div class="pull-left" style="padding: 20px">
                     <div class="toggle-right-box">
@@ -51,8 +51,8 @@
                     </div>
                 </div>
                 <div class=" btn-group pull-right" style="padding: 20px">
-                    <button type="button" class="btn btn-danger">Limpiar</button>
-                    <button type="button" class="btn btn-primary">Generar</button>
+                    <button id="btnLimpiar" type="button" class="btn btn-danger">Limpiar</button>
+                    <button id="btnGenerar" type="button" class="btn btn-primary">Generar</button>
                 </div>
             </div>
             <section class="panel">
@@ -65,27 +65,36 @@
                     </div>
                 </div>
             </section>
-            <section class="panel">
+            <section class="panel" id="datos" hidden>
                 <div class="panel-body">
-                    <span>Total de Visitas:</span> <span><strong> 30</strong></span>
+                    <span>Total de Visitas:</span>
+                    <span id="total-visitas">
+                        <strong> </strong>
+                    </span>
+                    <div class="row">
+                        <div class="col-md-4" id="especialidad">
+                            <label class="control-label" for="txtEspecialidad">Especialidad: </label>
+                            <span id="txtEspecialidad"></span>
+                        </div>
+                        <div class="col-md-4" id="fecha-inicio">
+                            <label class="control-label" for="txtFechaInicio">Desde: </label>
+                            <span id="txtFechaInicio"></span>
+                        </div>
+                        <div class="col-md-4" id="fecha-fin">
+                            <label class="control-label" for="txtFechaFin">Hasta: </label>
+                            <span id="txtFechaFin"></span>
+                        </div>
+                    </div>
                     <div class="row" style="padding: 20px">
                         <table class="display table table-bordered table-striped " id="dtEstaVisitas">
                             <thead>
                                 <tr>
-                                    <th style="width: 20%;">Completadas</th>
-                                    <th style="width: 20%;">Reprogramadas</th>
-                                    <th style="width: 20%;">No Completadas</th>
+                                    <th width: '50%'>Nutricionista</th>
+                                    <th width: '50%'>Cantidad de Visitas</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    
-                                    <td>37.5%</td>
-                                    <td>25%</td>
-                                    <td>37.5%</td>
-
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -95,144 +104,26 @@
         </div>
     </div>
     <div style="padding:10px" class="right-sidebar">
-        <section class="panel">
-            <header class="panel-heading">Características de la Visita
-                <span class="tools pull-right">
-                    <a href="javascript:;" class="fa fa-chevron-down"></a>
-                </span>
-            </header>
-            <div class="panel-body" style="display: block;">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="selNutricionista" class="control-label">Nutricionista:</label>
-                        <div class="col-md-12">
-                            <select id="selNutricionista" name="nutricionista" class="form-control">
-                                <option>Todos</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="selTipoVisitas" class="control-label">Tipo:</label>
-                        <div class="col-md-12">
-                            <select id="selTipoVisitas" name="tipovisita" class="form-control">
-                                <option>Seleccione</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Fecha:</label>
-                        <div class="col-md-12">
-                            <div class="input-group input-large" data-date="13/04/2018" data-date-format="mm/dd/yyyy">
-                                <input type="text" class="form-control dpd1" name="from">
-                                <span class="input-group-addon">-</span>
-                                <input type="text" class="form-control dpd2" name="to">
-                            </div>
-                        </div>
-                    </div>
-                </form>
+        <form class="form-horizontal" style="padding: 20px">
+            <div class="form-group">
+                <label for="selTipoVisitas" class="control-label">Especialidad:</label>
+                <div class="col-md-12">
+                    <select id="selEspecialidad" name="tipovisita" class="form-control">
+                        <option value="0">Seleccione</option>
+                    </select>
+                </div>
             </div>
-        </section>
-        <section class="panel">
-            <header class="panel-heading">Características de Servicios
-                <span class="tools pull-right">
-                    <a href="javascript:;" class="fa fa-chevron-down"></a>
-                </span>
-            </header>
-            <div class="panel-body" style="display: block;">
-                <form class="form-horizontal">
-                      <div class="form-group">
-                           <label class="control-label" for="selEspecialidad">Especialidad:</label>
-                                    <select id="selEspecialidad" name="especialidad" class="form-control" style="width: 100%">
-                                          <option value="0" selected="selected" >Todas</option>
-                                    </select>
-                       </div>
-
-                       <div id="especialidadesGeneral" style="display: none;">
-                                 <div class="form-group">
-                                    <label for="selservicio" class="control-label">Servicio:</label>
-                                        <select id="selservicio" name="servicio" class="form-control" style="width: 100%">
-                                        <option value="0" selected="selected" >Todas</option>
-                                        </select>
-                                </div>
-                      </div>
-
-
-
-
-                    <div class="form-group">
-                        <label class="control-label" for="selPlanDieta">Plan de Dieta:</label>
-                        <div class="col-md-10">
-                            <select id="selPlanDieta" class="form-control">
-                                <option>Todos</option>
-                            </select>
-                        </div>
-
+            <div class="form-group">
+                <label class="control-label">Fecha:</label>
+                <div class="col-md-12">
+                    <div class="input-group input-large" data-date="moment()" data-date-format="dd/mm/yyyy">
+                        <input id="dpMinimo" type="text" class="form-control dpd1" name="from">
+                        <span class="input-group-addon">-</span>
+                        <input id="dpMaximo" type="text" class="form-control dpd2" name="to">
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="selPlanEjercicios">Plan de Ejercicios:</label>
-                        <div class="col-md-10">
-                            <select id="selPlanEjercicios" class="form-control">
-                                <option>Todos</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="txtPercio">Precio:</label>
-                        <div class="col-md-12">
-                            <div class="input-group input-large">
-                                <input id="txtPercio" type="number" class="form-control" name="min">
-                                <span class="input-group-addon">-</span>
-                                <input type="number" class="form-control" name="max">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="txtDuracion">Duración:</label>
-                        <div class="col-md-12">
-                            <input class="form-control" type="number" id="txtDuracion">
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
-        </section>
-        <section class="panel">
-            <header class="panel-heading">Características de Clientes
-                <span class="tools pull-right">
-                    <a href="javascript:;" class="fa fa-chevron-down"></a>
-                </span>
-            </header>
-            <div class="panel-body" style="display: block;">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label" for="selGenero">Género:</label>
-                        <div class=" col-md-12">
-                            <select id="selGenero" class="form-control">
-                                <option>Todos</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label " for="selEdoCivil">Estado Civil:</label>
-                        <div class=" col-md-12">
-                            <select id="selEdoCivil" class="form-control">
-                                <option>Todos</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label " for="selRangoEdad">Rango de Edad:</label>
-                        <div class=" col-md-12">
-                            <select id="selRangoEdad" class="form-control">
-                                <option>Todos</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </section>
+        </form>
     </div>
 
     <!-- Placed js at the end of the document so the pages load faster -->
@@ -260,10 +151,13 @@
     <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
 
+    <script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+    <script src="js/mensaje.js" type="text/javascript"></script>
     <script src="js/filtros_reportes.js" type="text/javascript"></script>
     <!--script for this page only-->
     <script src="js/repo_estadisticos.js" type="text/javascript"></script>
