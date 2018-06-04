@@ -43,7 +43,7 @@
     <div class="row">
 
         <div class="col-md-12">
-            <h3>Resumen de visitas atendidas por Nutricionista</h3>
+            <h3>Nutricionistas con mas clientes</h3>
             <div class="row">
                 <div class="pull-left" style="padding: 20px">
                     <div class="toggle-right-box">
@@ -54,6 +54,9 @@
                     <button id="btnLimpiar" type="button" class="btn btn-danger">Limpiar</button>
                     <button id="btnGenerar" type="button" class="btn btn-primary">Generar</button>
                 </div>
+            </div>
+            <div id="msjAlerta" class="alert alert-dismissible" style="display: none;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <section class="panel">
                 <div class="panel-body" style="display: block;">
@@ -67,11 +70,11 @@
             </section>
             <section class="panel" id="datos" hidden>
                 <div class="panel-body">
-                    <span>Total de Visitas:</span>
-                    <span id="total-visitas">
+                    <span>Total de Clientes:</span>
+                    <span id="total-clientes">
                         <strong> </strong>
                     </span>
-                    <div class="row">
+                    <div class="row" style="margin-top: 10px; margin-left: 10px">
                         <div class="col-md-4" id="especialidad">
                             <label class="control-label" for="txtEspecialidad">Especialidad: </label>
                             <span id="txtEspecialidad"></span>
@@ -90,7 +93,7 @@
                             <thead>
                                 <tr>
                                     <th width: '50%'>Nutricionista</th>
-                                    <th width: '50%'>Cantidad de Visitas</th>
+                                    <th width: '50%'>Cantidad de Clientes</th>
 
                                 </tr>
                             </thead>
@@ -106,7 +109,7 @@
     <div style="padding:10px" class="right-sidebar">
         <form class="form-horizontal" style="padding: 20px">
             <div class="form-group">
-                <label for="selTipoVisitas" class="control-label">Especialidad:</label>
+                <label for="selEspecialidad" class="control-label">Especialidad:</label>
                 <div class="col-md-12">
                     <select id="selEspecialidad" name="tipovisita" class="form-control">
                         <option value="0">Seleccione</option>

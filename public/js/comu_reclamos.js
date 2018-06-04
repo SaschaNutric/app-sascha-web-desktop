@@ -127,6 +127,8 @@ function actualizarReclamos(){
         success: function (res, status, xhr) {
             console.log(res)   
             $('#dtreclamos1').DataTable().row($(`#cliente-${numeroReclamo}`).parent()).remove().draw();
+            mensaje('#msjAlerta', `Su reclamo fue respodido con éxito`, 15);
+            
         },
         error: function (res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);

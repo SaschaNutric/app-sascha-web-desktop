@@ -25,6 +25,7 @@ $(document).ready(function () {
     $('#btnGenerar').on('click', function () {
         $('#dtEstaVisitas').DataTable().clear();
         if ($('#dpMinimo').val() == '' && $('#dpMaximo').val() != '' || $('#dpMinimo').val() != '' && $('#dpMaximo').val() == '') {
+            mensaje('#msjAlerta', ' de fecha', 6)                        
             return;
         }
         let campos = {
@@ -91,22 +92,22 @@ function llenarTabla(data) {
     let total = 0;
     data.map(function (empleado) {
         console.log(empleado)
-        total += Number.parseInt(empleado.cantidad_visitas)
+        total += Number.parseInt(empleado.cantidad_clientes)
         grafica.push({
             x: empleado.nombre_empleado,
-            y: empleado.cantidad_visitas
+            y: empleado.cantidad_clientes
         })
 
         let row = $(`<tr>
     <td >${empleado.nombre_empleado}</td>
-    <td> ${empleado.cantidad_visitas}</td>
+    <td> ${empleado.cantidad_clientes}</td>
     </tr>
     `);
         $('#dtEstaVisitas').DataTable().row.add(row).draw();
 
     })
     llenarGrafica(grafica)
-    $('#total-visitas').text(total)
+    $('#total-clientes').text(total)
     $('#datos').show()
 
 }
@@ -118,7 +119,7 @@ function llenarGrafica(data){
         data: data,
         xkey: 'x',
         ykeys: ['y'],
-        labels: ['Cantidad de Visitas'],
+        labels: ['Cantidad de Clientes'],
         barColors: ['#cfdd3f']
     
     

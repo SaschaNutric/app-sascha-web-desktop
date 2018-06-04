@@ -68,7 +68,7 @@ $.ajax({
         success: function(res, status, xhr) {
             res.data.map(function(empleado) {
                 let option = $(`<option value="${empleado.id_empleado}">${empleado.nombres+" "+empleado.apellidos}</option> `)
-                $('#selNutricionista').append(option);
+                $('#selEmpleado').append(option);
             })
         },
         error: function(res, status, xhr) {

@@ -68,9 +68,54 @@
             </section>
             <section class="panel" hidden id="datos" style="padding: 20px">
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6" id="servicios-div">
+                            <span id="servicios">Servicio:</span>
+                            <div class="row" style="margin-top: 10px">
+                                <div class="col-md-6" id="especialidad">
+                                    <label class="control-label">Especialidad:</label>
+                                    <span id="txtEspecialidad"> Prueba</span>
+                                </div>
+                                <div class="col-md-6" id="servicio">
+                                    <label class="control-label">Servicio:</label>
+                                    <span id="txtServicio"> Prueba</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="cliente-div">
+                            <span id="cliente">Clientes:</span>
+                            <div class="row" style="margin-top: 10px">
+                                <div class="col-md-4" id="rango-edad">
+                                    <label class="control-label">Rgo de Edad:</label>
+                                    <span id="txtRangoEdad"> </span>
+                                </div>
+                                <div class="col-md-4" id="estado-civil">
+                                    <label class="control-label">Edo Civil:</label>
+                                    <span id="txtEstadoCivil"> </span>
+                                </div>
+                                <div class="col-md-4" id="genero">
+                                    <label class="control-label">Genero:</label>
+                                    <span id="txtGenero"> </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" id="fechas" style="margin-top: 10px">
+                            <div class="col-md-6" id="fecha-inicio">
+                                    <label class="control-label" for="txtFechaInicio">Desde: </label>
+                                    <span id="txtFechaInicio"></span>
+                                </div>
+                                <div class="col-md-6" id="fecha-fin">
+                                    <label class="control-label" for="txtFechaFin">Hasta: </label>
+                                    <span id="txtFechaFin"></span>
+                                </div>
+                    </div>
                     <div class="row" style="padding: 20px">
                         <div class="col-sm-12">
-                            <span>Total de Clientes: </span>  <span id="total-clientes"> </span>
+                            <span>Total de Clientes: </span>
+                            <span id="total-clientes"> </span>
                             <table id="dtMotivosPreferidos" class="display table table-bordered table-striped " id="dtEstaVisitas">
                                 <thead>
                                     <tr>
