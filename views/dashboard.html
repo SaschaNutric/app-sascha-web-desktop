@@ -63,13 +63,11 @@
         
         <div class="col-md-3">
             <div class="mini-stat clearfix">
-                <a id="modalValoracionClientes" href="#valoracionCliente" data-toggle="modal">
                 <span class="mini-stat-icon medium-green"><i class="fa fa-star"></i></span>
                 <div class="mini-stat-info">
-                    <span>4.3/5</span>
+                    <span id="calificacion"></span>
                     Valoración de los Clientes
                 </div>
-            </a>
             </div>
         </div>
     </div>
@@ -213,7 +211,7 @@
     
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -273,20 +271,20 @@
                         <input type="text" class="form-control" id="txtIdReclamo" style="display: none;">
                         <div class="form-group">
                             <label class="col-md-3 control-label">Cliente:</label>
-                            <div class="col-md-9"><input id="txtCliente" class="form-control" readonly type="text" name="" value=""/> </div>
+                            <div class="col-md-7"><input id="txtCliente" class="form-control" readonly type="text" name="" value=""/> </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Servicio:</label>
-                            <div class="col-md-9"><input id="txtServicio" class="form-control" readonly type="text" name="" value=""/> </div>
+                            <div class="col-md-7"><input id="txtServicio" class="form-control" readonly type="text" name="" value=""/> </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Motivo:</label>
-                            <div class="col-md-9"><input id="txtMotivo" class="form-control" readonly type="text" name="" value=""/> </div>
+                            <div class="col-md-7"><input id="txtMotivo" class="form-control" readonly type="text" name="" value=""/> </div>
                         </div>
                     </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -307,9 +305,10 @@
                                 <table id="dtVisitaDiagnostico" class="display table table-bordered table-striped"  >
                                     <thead>
                                         <tr>
-                                            <th width="35%">Cliente</th>
-                                            <th width="35%">Fecha de Visita</th>
-                                            <th width="30%">Servicio</th>
+                                            <th width="25%">Cliente</th>
+                                            <th width="25%">Fecha de Visita</th>
+                                            <th width="25%">Servicio</th>
+                                            <th width="25%">Nutricionista</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -337,9 +336,10 @@
                                 <table id="dtVisitaControl" class="display table table-bordered table-striped"  >
                                     <thead>
                                         <tr>
-                                            <th width="35%">Cliente</th>
-                                            <th width="35%">Fecha de Visita</th>
-                                            <th width="30%">Servicio</th>
+                                            <th >Cliente</th>
+                                            <th>Fecha de Visita</th>
+                                            <th >Servicio</th>
+                                            <th >Nutricionista</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -368,9 +368,10 @@
                                 <table id="dtMisClientes" class="display table table-bordered table-striped"  >
                                     <thead>
                                         <tr>
-                                            <th width="35%">Cliente</th>
-                                            <th width="35%">Fecha de Visita</th>
-                                            <th width="30%">Servicio</th>
+                                            <th width="25%">Cliente</th>
+                                            <th width="25%">Fecha de Visita</th>
+                                            <th width="25%">Servicio</th>
+                                            <th width="25%">Nutricionista</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -382,39 +383,6 @@
             </div>
         </div>
         <!-- fin Modal Mis clientes -->
-
-        <!-- Modal valoracion de clientes -->
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="valoracionCliente" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content modal-dashboard">
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">Valoración de Clientes</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">  
-                            <div class="form-group">
-                                <table id="dtValoracionClientes" class="display table table-bordered table-striped"  >
-                                    <thead>
-                                        <tr>
-                                            <th width="35%">Cliente</th>
-                                            <th width="35%">Fecha de Visita</th>
-                                            <th width="30%">Servicio</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnCancelar" type="button" class="btn btn-cancelar">Cancelar</button>
-                        <button id="btnAceptar" type="button" class="btn btn-aceptar">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin Modal Valoracion Clientes -->
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
