@@ -173,7 +173,22 @@ $(document).ready(function() {
             const respuesta = JSON.parse(res.responseText);
             mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
         }
-    })    
+    }) 
+    
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/calificacion/empleado/${id_empleado}`,
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            let promedio = res.data.promedio;
+            $('#calificacion').text(promedio)    
+        },
+        error: function(res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0); 
+        }
+    })
+    
     }else{
         let dia = moment().day() + 1;
         $.ajax({
@@ -235,7 +250,19 @@ $(document).ready(function() {
         }
     })
     
-
+    $.ajax({
+        url: `https://api-sascha.herokuapp.com/calificacion/dashboard`,
+        contentType: 'application/json',
+        type: 'GET',
+        success: function(res, status, xhr) {
+            let promedio = res.data.promedio;
+            $('#calificacion').text(promedio)    
+        },
+        error: function(res, status, xhr) {
+            const respuesta = JSON.parse(res.responseText);
+            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0); 
+        }
+    })
     }
     
 });
@@ -275,11 +302,6 @@ function reclamo(id,cliente,servicio,motivo){
     $('#txtServicio').val(servicio);
     $('#txtMotivo').val(motivo);
 }
-//registrar incidencia
-function registrarIncidencia(id){
-    $('#txtIdCita').val($(`#idCita-${id}`).text());
-    $('#txtIdAgenda').val(id);
-}
 
 function reenviarpromocion(){
     window.location='ofertasYPromocionesReenviar.html';
@@ -296,6 +318,7 @@ function cargarModalVisitasD() {
         fecha_fin: "2019-05-31"
     }
     if(dashboard == 0){
+        $('#dtVisitaDiagnostico').DataTable().column(3).visible(false);
         $.ajax({
             url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
             contentType: 'application/json',
@@ -303,17 +326,16 @@ function cargarModalVisitasD() {
             data: JSON.stringify(fecha),
             success: function (res, status, xhr) {
                 console.log(res.data)
-    
                 res.data.map(function (visita_diagnostico) {
                     if(visita_diagnostico.id_tipo_cita == 1 && visita_diagnostico.id_visita == null){
                     
               let row = $(`<tr>
-                    <td id="cliente-${visita_diagnostico.id_agenda}">${visita_diagnostico.nombre_cliente}</td>
-                    <td id="fecha_inicio-${visita_diagnostico.id_agenda}">${moment(visita_diagnostico.fecha_inicio).format('DD-MM-YYYY')}</td>
-                    <td id="servicio-${visita_diagnostico.id_agenda}">${visita_diagnostico.nombre_servicio}</td>
+                    <td id="cliente-${visita_diagnostico.id_agenda}" style="width: 26%">${visita_diagnostico.nombre_cliente}</td>
+                    <td id="fecha_inicio-${visita_diagnostico.id_agenda}" style="width: 20%">${moment(visita_diagnostico.fecha_inicio).format('DD-MM-YYYY')}</td>
+                    <td id="servicio-${visita_diagnostico.id_agenda}" style="width: 24%">${visita_diagnostico.nombre_servicio}</td>
+                    <td style="width: 0%"></td>
                     </tr>
                     `);
-                   
                     $('#dtVisitaDiagnostico').DataTable().row.add(row).draw();
               }
                 
@@ -340,6 +362,7 @@ function cargarModalVisitasD() {
                     <td id="cliente-${visita_diagnostico.id_agenda}">${visita_diagnostico.nombre_cliente}</td>
                     <td id="fecha_inicio-${visita_diagnostico.id_agenda}">${moment(visita_diagnostico.fecha_inicio).format('DD-MM-YYYY')}</td>
                     <td id="servicio-${visita_diagnostico.id_agenda}">${visita_diagnostico.nombre_servicio}</td>
+                    <td id="empleado-${visita_diagnostico.id_agenda}">${visita_diagnostico.nombre_empleado}</td>
                     </tr>
                     `);
                     $('#dtVisitaDiagnostico').DataTable().row.add(row).draw();
@@ -367,6 +390,7 @@ function cargarModalVisitasC() {
         fecha_fin: "2019-05-31"
     }
     if(dashboard == 0){
+        $('#dtVisitaControl').DataTable().column(3).visible(false);
         $.ajax({
             url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
             contentType: 'application/json',
@@ -376,9 +400,10 @@ function cargarModalVisitasC() {
                 res.data.map(function (visita_control) {
                     if(visita_control.id_tipo_cita == 2 && visita_control.id_visita == null){
                         let row = $(`<tr>
-                                <td id="cliente-${visita_control.id_agenda}">${visita_control.nombre_cliente}</td>
-                                <td id="fecha_inicio-${visita_control.id_agenda}">${moment(visita_control.fecha_inicio).format('DD-MM-YYYY')}</td>
-                                <td id="servicio-${visita_control.id_agenda}">${visita_control.nombre_servicio}</td>
+                                <td id="cliente-${visita_control.id_agenda}" style="width: 26%">${visita_control.nombre_cliente}</td>
+                                <td id="fecha_inicio-${visita_control.id_agenda}" style="width: 20%">${moment(visita_control.fecha_inicio).format('DD-MM-YYYY')}</td>
+                                <td id="servicio-${visita_control.id_agenda}" style="width: 24%">${visita_control.nombre_servicio}</td>
+                                <td style="width: 0%"></td>
                                 </tr>
                                 `);
                                 $('#dtVisitaControl').DataTable().row.add(row).draw();
@@ -403,6 +428,7 @@ function cargarModalVisitasC() {
                                 <td id="cliente-${visita_control.id_agenda}">${visita_control.nombre_cliente}</td>
                                 <td id="fecha_inicio-${visita_control.id_agenda}">${moment(visita_control.fecha_inicio).format('DD-MM-YYYY')}</td>
                                 <td id="servicio-${visita_control.id_agenda}">${visita_control.nombre_servicio}</td>
+                                <td id="empleado-${visita_control.id_agenda}">${visita_control.nombre_empleado}</td>
                                 </tr>
                                 `);
                                 $('#dtVisitaControl').DataTable().row.add(row).draw();
@@ -430,6 +456,7 @@ function cargarModalMisClientes() {
         fecha_fin: "2019-05-31"
     }
     if(dashboard == 0){
+        $('#dtMisClientes').DataTable().column(3).visible(false);
         $.ajax({
             url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
             contentType: 'application/json',
@@ -442,9 +469,10 @@ function cargarModalMisClientes() {
                     if( visita_clientes.id_visita == null){
                     
               let row = $(`<tr>
-                    <td id="cliente-${visita_clientes.id_agenda}">${visita_clientes.nombre_cliente}</td>
-                    <td id="fecha_inicio-${visita_clientes.id_agenda}">${moment(visita_clientes.fecha_inicio).format('DD-MM-YYYY')}</td>
-                    <td id="servicio-${visita_clientes.id_agenda}">${visita_clientes.nombre_servicio}</td>
+                    <td id="cliente-${visita_clientes.id_agenda}" style="width: 26%">${visita_clientes.nombre_cliente}</td>
+                    <td id="fecha_inicio-${visita_clientes.id_agenda}" style="width: 20%">${moment(visita_clientes.fecha_inicio).format('DD-MM-YYYY')}</td>
+                    <td id="servicio-${visita_clientes.id_agenda}" style="width: 24%">${visita_clientes.nombre_servicio}</td>
+                    <td style="width: 0%"></td>
                     </tr>
                     `);
                    
@@ -476,6 +504,7 @@ function cargarModalMisClientes() {
                     <td id="cliente-${visita_clientes.id_agenda}">${visita_clientes.nombre_cliente}</td>
                     <td id="fecha_inicio-${visita_clientes.id_agenda}">${moment(visita_clientes.fecha_inicio).format('DD-MM-YYYY')}</td>
                     <td id="servicio-${visita_clientes.id_agenda}">${visita_clientes.nombre_servicio}</td>
+                    <td id="empleado-${visita_clientes.id_agenda}">${visita_clientes.nombre_empleado}</td>
                     </tr>
                     `);
                    

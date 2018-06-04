@@ -23,7 +23,6 @@ $(document).ready(function() {
     contentType: 'application/json',
     type: 'GET',
     success: function(res, status, xhr) {
-        console.log(res);
         res.data.motivos.map(function(motivos) {
             let option = $(`<option value="${motivos.id_motivo}">${motivos.descripcion}</option>`)
             $('#selMotivo').append(option);
@@ -163,7 +162,6 @@ var Script = function () {
         }
 
         let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
-        console.log(id_empleado)
         $.ajax({
           url: `https://api-sascha.herokuapp.com/agendas/empleado/${id_empleado}`,
           contentType: 'application/json',
