@@ -57,7 +57,28 @@ $.ajax({
             console.log(res);
         }
     })
+    
 /*fin llenando combo de motivos*/
+
+/*llenando combo de repuesta de reclamos*/
+
+$.ajax({
+    url: 'https://api-sascha.herokuapp.com/respuestas/tipomotivo/2',
+
+    contentType: 'application/json',
+    type: 'GET',
+    success: function(res, status, xhr) {
+        res.data.map(function(respuesta) {
+            let option = $(`<option value="${respuesta.id_respuesta}">${respuesta.descripcion}</option> `)
+            $('#selRespuestaReclamo').append(option);
+        })
+    },
+    error: function(res, status, xhr) {
+        console.log(res);
+    }
+})
+
+/*fin llenando combo de respuestas*/
 
 
 /*llenando combo de Nutricionista*/
