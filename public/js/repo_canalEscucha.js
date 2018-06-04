@@ -98,7 +98,7 @@ $("#btnConsultarContacto").on('click',function(){
 
     $('#dtCanalEscucha').DataTable().clear();
 
-        let     id_contacto = $('select[name=conctacto]').val();
+        let     id_tipo_motivo = $('select[name=conctacto]').val();
         let     id_motivo  = $('select[name=motivo]').val();
         let     id_respuesta = $('select[name=respuestareclamo]').val();
         let     id_genero =          $('select[name=genero]').val();
@@ -108,8 +108,8 @@ $("#btnConsultarContacto").on('click',function(){
         let     fecha_final = $('#fechaFinal').val();
 
 
-        if(id_contacto == "0"){
-            id_contacto = null;
+        if(id_tipo_motivo == "0"){
+            id_tipo_motivo = null;
         }
         if(id_motivo == "0"){
             id_motivo = null;
@@ -142,7 +142,7 @@ $("#btnConsultarContacto").on('click',function(){
 
 
      let filtros = {
-            id_contacto: id_contacto,
+            id_tipo_motivo: id_tipo_motivo,
             id_motivo: id_motivo,
             id_respuesta: id_respuesta,
             id_genero:           id_genero,
@@ -166,7 +166,7 @@ $("#btnConsultarContacto").on('click',function(){
                  res.data.map(function(comentario) {
                 cont = cont + 1;
                 addRowReporteReclamo(cont, comentario.id_comentario, comentario.nombre_cliente, comentario.tipo_motivo
-                , comentario.motivo_descripcion, comentario.id_respuesta,comentario.fecha_creacion);
+                , comentario.motivo_descripcion, comentario.respuesta,comentario.fecha_creacion);
             })
               
             },
@@ -191,14 +191,27 @@ function limpiartabla(){
 
 
 function addRowReporteReclamo(nro, id, cliente, contacto, motivo, respuesta, fecha){
-   let row = $(`<tr>
+    let row;
+    if(respuesta == null){
+        row = $(`<tr>
                              <td>${nro}</td>
                              <td>${cliente}</td>
                              <td>${contacto}</th>
                              <td>${motivo}</td>
-                             <td>${respuesta}</td>
+                             <td></td>
                              <td>${moment(fecha).format('DD-MM-YYYY')}</td>
                          </tr>
     `);
+    }else{
+        row = $(`<tr>
+                                  <td>${nro}</td>
+                                  <td>${cliente}</td>
+                                  <td>${contacto}</th>
+                                  <td>${motivo}</td>
+                                  <td>${respuesta}</td>
+                                  <td>${moment(fecha).format('DD-MM-YYYY')}</td>
+                              </tr>
+         `);
+    }
    $('#dtCanalEscucha').DataTable().row.add(row).draw();
 }
