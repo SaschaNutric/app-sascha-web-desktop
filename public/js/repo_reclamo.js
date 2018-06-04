@@ -84,7 +84,7 @@ $("#btnConsultarReclamos").on('click',function(){
 
         console.log(filtros);
          $.ajax({
-            url: 'http://localhost:3000/reclamos/reporte',
+            url: 'https://api-sascha.herokuapp.com/reclamos/reporte',
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(filtros),
