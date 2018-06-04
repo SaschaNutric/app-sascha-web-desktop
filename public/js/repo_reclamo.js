@@ -81,7 +81,10 @@ $("#btnConsultarReclamos").on('click',function(){
             fecha_inicial:  fecha_inicial,
             fecha_final: fecha_final
         }
-
+        let fecha_actual = moment().format('YYYY-MM-DD');
+        if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
+            return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
+        }
         console.log(filtros);
          $.ajax({
             url: 'https://api-sascha.herokuapp.com/reclamos/reporte',
@@ -89,15 +92,20 @@ $("#btnConsultarReclamos").on('click',function(){
             type: 'POST',
             data: JSON.stringify(filtros),
             success: function(res, status, xhr) {
-                mensaje('#msjAlerta', 'de reclamos', 8)
-                console.log(res);
-                console.log(status);
-                var cont = 0;
-                 res.data.map(function(reclamo) {
-                cont = cont + 1;
-                addRowReporteReclamo(cont, reclamo.id_reclamo, reclamo.nombre_cliente, reclamo.nombre_servicio
-                , reclamo.motivo_descripcion, reclamo.respuesta_descripcion,reclamo.fecha_creacion);
-            })
+                limpiartabla()
+                if(res.data.length == 0){
+                    return mensaje('#msjAlerta', 'No se encontraron registros', 14);
+                }else{
+                    mensaje('#msjAlerta', 'de reclamos', 8)
+                    console.log(res);
+                    console.log(status);
+                    var cont = 0;
+                     res.data.map(function(reclamo) {
+                    cont = cont + 1;
+                    addRowReporteReclamo(cont, reclamo.id_reclamo, reclamo.nombre_cliente, reclamo.nombre_servicio
+                    , reclamo.motivo_descripcion, reclamo.respuesta_descripcion,reclamo.fecha_creacion);
+                })
+                }
               
             },
             error: function(res, status, xhr) {
@@ -110,13 +118,10 @@ $("#btnConsultarReclamos").on('click',function(){
 
 });
 
-$("#btnLimpiarReclamo").on('click', function(){
-  $('#dtReclamo').DataTable().clear();
-});
+
 
 function limpiartabla(){
     $('#dtReclamo').DataTable().clear().draw();
-     $('#dtReclamo').DataTable().clear();
 }
 
 

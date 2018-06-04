@@ -127,11 +127,11 @@ $("#btnConsultarContacto").on('click',function(){
             id_rango_edad = null;
         }
         console.log(fecha_final);
-                if(fecha_final.length)
+        if(fecha_final.length)
         {
           fecha_final =  moment(fecha_final).format('YYYY-MM-DD');
         }
-         if(fecha_inicial.length)
+        if(fecha_inicial.length)
         {
           fecha_inicial =  moment(fecha_inicial).format('YYYY-MM-DD');
         }
@@ -139,7 +139,8 @@ $("#btnConsultarContacto").on('click',function(){
             fecha_final = null;
             fecha_inicial = null;
         }
-
+        
+        let fecha_actual = moment().format('YYYY-MM-DD');
 
      let filtros = {
             id_tipo_motivo: id_tipo_motivo,
@@ -152,6 +153,9 @@ $("#btnConsultarContacto").on('click',function(){
             fecha_final: fecha_final
         }
 
+        if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
+            return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
+        }
         console.log(filtros);
          $.ajax({
             url: 'https://api-sascha.herokuapp.com/comentarios/reporte',
@@ -159,16 +163,20 @@ $("#btnConsultarContacto").on('click',function(){
             type: 'POST',
             data: JSON.stringify(filtros),
             success: function(res, status, xhr) {
-                mensaje('#msjAlerta', 'de Canal de Escucha', 8)
-                console.log(res);
-                console.log(status);
-                var cont = 0;
-                 res.data.map(function(comentario) {
-                cont = cont + 1;
-                addRowReporteReclamo(cont, comentario.id_comentario, comentario.nombre_cliente, comentario.tipo_motivo
-                , comentario.motivo_descripcion, comentario.respuesta,comentario.fecha_creacion);
-            })
-              
+                limpiartabla()
+                if(res.data.length == 0){
+                    return mensaje('#msjAlerta', 'No se encontraron registros', 14);
+                }else{
+                    mensaje('#msjAlerta', 'de Canal de Escucha', 8)
+                    console.log(res);
+                    console.log(status);
+                    var cont = 0;
+                     res.data.map(function(comentario) {
+                    cont = cont + 1;
+                    addRowReporteReclamo(cont, comentario.id_comentario, comentario.nombre_cliente, comentario.tipo_motivo
+                    , comentario.motivo_descripcion, comentario.respuesta,comentario.fecha_creacion);
+                })
+                }
             },
             error: function(res, status, xhr) {
                console.log(res);
@@ -180,13 +188,8 @@ $("#btnConsultarContacto").on('click',function(){
 
 });
 
-$("#btnLimpiarContacto").on('click', function(){
-  $('#dtCanalEscucha').DataTable().clear();
-});
-
 function limpiartabla(){
     $('#dtCanalEscucha').DataTable().clear().draw();
-     $('#dtCanalEscucha').DataTable().clear();
 }
 
 

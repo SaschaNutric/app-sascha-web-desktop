@@ -81,7 +81,10 @@ $("#btnConsultarSolicitudes").on('click',function(){
             fecha_inicial:  fecha_inicial,
             fecha_final: fecha_final
         }
-
+        let fecha_actual = moment().format('YYYY-MM-DD');
+        if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
+            return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
+        }
         console.log(filtros);
          $.ajax({
             url: 'https://api-sascha.herokuapp.com/solicitudes/reporte',
@@ -89,15 +92,20 @@ $("#btnConsultarSolicitudes").on('click',function(){
             type: 'POST',
             data: JSON.stringify(filtros),
             success: function(res, status, xhr) {
-                mensaje('#msjAlerta', 'de solicitudes', 8)
-                console.log(res);
-                console.log(status);
-                        var cont = 0;
-                 res.data.map(function(solicitud) {
-                cont = cont + 1;
-                addRowReporteSolicitud(cont, solicitud.id_solicitud_servicio, solicitud.nombre_cliente, solicitud.nombre_servicio
-, solicitud.fecha_creacion, solicitud.respuesta);
-            })
+                limpiartabla()
+                if(res.data.length == 0){
+                    return mensaje('#msjAlerta', 'No se encontraron registros', 14);
+                }else{                    
+                    mensaje('#msjAlerta', 'de solicitudes', 8)
+                    console.log(res);
+                    console.log(status);
+                            var cont = 0;
+                     res.data.map(function(solicitud) {
+                    cont = cont + 1;
+                    addRowReporteSolicitud(cont, solicitud.id_solicitud_servicio, solicitud.nombre_cliente, solicitud.nombre_servicio
+                    , solicitud.fecha_creacion, solicitud.respuesta);
+                    })
+                }
               
             },
             error: function(res, status, xhr) {
@@ -110,13 +118,8 @@ $("#btnConsultarSolicitudes").on('click',function(){
 
 });
 
-$("#btnLimpiarSolicitud").on('click', function(){
-  $('#dtSolicitud').DataTable().clear();
-});
-
 function limpiartabla(){
     $('#dtSolicitud').DataTable().clear().draw();
-     $('#dtSolicitud').DataTable().clear();
 }
 
 
