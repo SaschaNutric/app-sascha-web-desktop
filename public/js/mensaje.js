@@ -36,7 +36,7 @@ function mensaje(id, entidad, accion){
         break;
         case 8:
         tipo= "alert alert-success";
-        texto = `<strong>Info!</strong>Reporte ${entidad} generado.`;
+        texto = `<strong>Info!</strong> Reporte ${entidad} generado.`;
         break;
         case 10:
         tipo= "alert alert-info";

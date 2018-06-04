@@ -17,32 +17,35 @@ $(document).ready(function () {
         $('#selGenero').val(0)
         $('#selEdoCivil').val(0)
         $('#selRangoEdad').val(0)
-        $('#selServicio').val(0)
+        $('#selservicio').val(0)
         $('#selEspecialidad').val(0)
         $('#dpMinimo').val('')
         $('#dpMaximo').val('')
         $('#datos').hide()
         $('#graph-donut').hide()
-        
-        
+
+
 
     })
 
     $('#btnGenerar').on('click', function () {
         $('#dtMotivosPreferidos').DataTable().clear();
         if ($('#dpMinimo').val() == '' && $('#dpMaximo').val() != '' || $('#dpMinimo').val() != '' && $('#dpMaximo').val() == '') {
+            mensaje('#msjAlerta', ' de fecha', 6)
             return;
         }
         let campos = {
             id_genero: $('#selGenero').val() == 0 ? null : $('#selGenero').val(),
             id_estado_civil: $('#selEdoCivil').val() == 0 ? null : $('#selEdoCivil').val(),
             id_rango_edad: $('#selRangoEdad').val() == 0 ? null : $('#selRangoEdad').val(),
-            id_servicio: $('#selServicio').val() == 0 ? null : $('#selServicio').val(),
+            id_servicio: $('#selservicio').val() == 0 ? null : $('#selservicio').val(),
             id_especialidad: $('#selEspecialidad').val() == 0 ? null : $('#selEspecialidad').val(),
             fecha_inicial: $('#dpMinimo').val() != '' ? moment($('#dpMinimo').val()).format('YYYY-MM-DD') : null,
-            fecha_final: $('#dpMaximo').val() != '' ? moment($('#dpMaximo').val()).format('YYYY-MM-DD') : null,
+            fecha_final: $('#dpMaximo').val() != '' ? moment($('#dpMaximo').val()).format('YYYY-MM-DD') : null
 
         }
+
+        mostrarFiltros(campos);
 
         $.ajax({
             url: 'https://api-sascha.herokuapp.com/estadisticos/clientes',
@@ -54,7 +57,7 @@ $(document).ready(function () {
                 console.log(status);
                 let data = res.data;
                 llenarTabla(data)
-                mensaje('#msjAlerta', `de motivos preferidos`, 8);
+                mensaje('#msjAlerta', `de empleados`, 8);
             },
             error: function (res, status, xhr) {
                 console.log(res);
@@ -82,7 +85,7 @@ function llenarGrafica(data) {
         ],
         formatter: function (x, data) { return data.formatted; }
     });
-    
+
 }
 
 function llenarTabla(data) {
@@ -108,6 +111,34 @@ function llenarTabla(data) {
 function calcularPorcentaje(realizadas, total) {
     let porc = realizadas * 100 / total
     return Number.parseInt(porc) + '%'
+}
+
+function mostrarFiltros(campos) {
+
+    if (campos.id_especialidad != null) { $('#especialidad').show(); $('#txtEspecialidad').text($('#selEspecialidad option:selected').text()); $('#servicios').show() } else {
+        $('#especialidad').hide();
+    }
+    if (campos.id_servicio != null) { $('#servicio').show(); $('#txtServicio').text($('#selservicio option:selected').text()); $('#servicios').show() } else {
+        $('#servicio').hide()
+    }
+
+    if (campos.id_rango_edad != null) { $('#rango-edad').show(); $('#txtRangoEdad').text($('#selRangoEdad option:selected').text()); $('#cliente').show() } else {
+        $('#rango-edad').hide()
+    }
+    if (campos.id_estado_civil != null) { $('#estado-civil').show(); $('#txtEstadoCivil').text($('#selEdoCivil option:selected').text()); $('#cliente').show() } else {
+        $('#estado-civil').hide()
+    }
+    if (campos.id_genero != null) { $('#genero').show(); $('#txtGenero').text($('#selGenero option:selected').text()); $('#cliente').show() } else {
+        $('#genero').hide()
+    }
+
+    if (campos.fecha_inicial != null) { $('#fecha-inicio').show(); $('#txtFechaInicio').text(moment($('#dpMinimo').val()).format('DD-MM-YYYY')) } else {
+        $('#fecha-inicio').hide()
+    }
+    if (campos.fecha_final != null) { $('#fecha-fin').show(); $('#txtFechaFin').text(moment($('#dpMaximo').val()).format('DD-MM-YYYY')) } else {
+        $('#fecha-fin').hide()
+    }
+
 }
 
 $(function () {
