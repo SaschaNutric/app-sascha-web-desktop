@@ -119,8 +119,24 @@ $("#btnConsultarSolicitudes").on('click',function(){
 
 });
 
+
+function limpiar(){
+    $('select[name=motivo]').val(0)
+    $('select[name=respuesta]').val(0)
+    $('#select[name=motivo]').val(0) 
+    $('select[name=especialidad]').val(0)
+    $('#selservicio').val(0)   
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('select[name=edad]').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
+   
+}
+
 function limpiartabla(){
     $('#dtSolicitud').DataTable().clear().draw();
+    limpiar()
 }
 
 
