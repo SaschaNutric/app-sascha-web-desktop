@@ -82,6 +82,7 @@ $("#btnConsultarReclamos").on('click',function(){
             fecha_final: fecha_final
         }
         let fecha_actual = moment().format('YYYY-MM-DD');
+       
         if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
             return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
         }
@@ -102,7 +103,7 @@ $("#btnConsultarReclamos").on('click',function(){
                     var cont = 0;
                      res.data.map(function(reclamo) {
                     cont = cont + 1;
-                    addRowReporteReclamo(cont, reclamo.id_reclamo, reclamo.nombre_cliente, reclamo.nombre_servicio
+                    addRowReporteReclamo(cont, reclamo.id_reclamo, reclamo.nombre_cliente, reclamo.nombre_empleado, reclamo.nombre_servicio
                     , reclamo.motivo_descripcion, reclamo.respuesta_descripcion,reclamo.fecha_creacion);
                 })
                 }
@@ -117,18 +118,28 @@ $("#btnConsultarReclamos").on('click',function(){
 
 
 });
-
-
-
+function limpiar(){
+    $('select[name=motivo]').val(0)
+    $('select[name=respuestareclamo]').val(0)
+    $('select[name=especialidad]').val(0) 
+    $('select[name=servicio]').val(0)
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('select[name=edad]').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
+   
+}
 function limpiartabla(){
     $('#dtReclamo').DataTable().clear().draw();
+    limpiar()
 }
 
-
-function addRowReporteReclamo(nro, id, cliente, servicio, motivo, respuesta, fecha){
+function addRowReporteReclamo(nro, id, cliente, empleado, servicio, motivo, respuesta, fecha){
    let row = $(`<tr>
-                             <td>${nro}</td>
+                             <td>${id}</td>
                              <td>${cliente}</td>
+                             <td>${empleado}</td>
                              <td>${servicio}</th>
                              <td>${motivo}</td>
                              <td>${respuesta}</td>
