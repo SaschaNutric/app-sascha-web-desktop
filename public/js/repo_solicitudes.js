@@ -131,7 +131,7 @@ function adjuntarArchivoSQL(query) {
     let btnExportar = document.getElementById('btnExportarSQL');
     btnExportar.download = 'reporte-solicitudes.sql';
     btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
-
+}
 function limpiar(){
     $('select[name=motivo]').val(0)
     $('select[name=respuesta]').val(0)
