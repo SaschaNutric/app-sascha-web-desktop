@@ -285,7 +285,7 @@ $('#btnRegistrar').on('click', function () {
             console.log(res)
             const serv = res.data;
             registrado = serv.id_promocion;
-            mensaje('#msjAlerta', 'Servicio', 1);
+            mensaje('#msjAlerta', 'Promoción', 1);
             limpiarCampos();
         },
         error: function (res, status, xhr) {
