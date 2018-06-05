@@ -50,11 +50,14 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="gridSystemModalLabel">
-                      <i></i>
                       Respuestas Y Comentarios
+                      <span id="numeroRespuesta" name="numeroRespuesta"></span>
                     </h4>
                   </div>
                   <div class="modal-body">
+                    <div id="msjAlertaModal" class="alert alert-dismissible" style="display: none;"> 
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          </div>
                     <form class="form-horizontal" id="frmRespuestaComentario">
                       <div class="form-group">
                         <div class="col-md-6" style="text-align: left;"> 
@@ -67,6 +70,14 @@
                           <input class="form-control" type="text" name=""  value="" disabled="disabled" id="txtCliente"/>
                         </div>
                       </div>
+
+                       <div class="form-group">
+                        <label class="control-label col-md-3">Motivo:</label>
+                        <div class="col-md-6" style="text-align: left;"> 
+                          <textarea class="form-control" type="text" name=""  value="" disabled="disabled" id="txtMotivo"></textarea>
+                        </div>
+                      </div>
+
                       <div class="form-group">
                         <label class="control-label col-md-3">Comentario:</label>
                         <div class="col-md-9">
@@ -75,9 +86,9 @@
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Respuesta:</label>
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                           <select  class="form-control" id="selRespuesta" name="selRespuesta">
-                            <option value="Respuesta-1" selected>Seleccionar</option>
+                            <option value="0" selected>Seleccionar</option>
                           </select>
                         </div>
                       </div>
