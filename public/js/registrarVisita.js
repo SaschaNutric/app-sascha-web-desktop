@@ -1338,7 +1338,7 @@ function confirmarParametro(id) {
             id_orden_servicio: id_orden_servicio
         }
         $.ajax({
-            url: `http://localhost:5001/parametrocliente/${id}`,
+            url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(parametro),
