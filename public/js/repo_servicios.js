@@ -118,7 +118,7 @@ $("#btnConsultarServicio").on('click',function(){
                     if(orden.estado == 3){
                         estado = "Concluida";
                     }
-                   addRowReporteServicio(cont, orden.id_orden_servicio, orden.nombre_cliente, orden.nombre_empleado, orden.nombre_servicio, orden.tipo_orden, estado, orden.fecha_emision);
+                   addRowReporteServicio( orden.id_orden_servicio, orden.nombre_cliente, orden.nombre_empleado, orden.nombre_servicio, orden.tipo_orden, estado, orden.fecha_emision);
                 })
                 }
              },
@@ -132,10 +132,10 @@ $("#btnConsultarServicio").on('click',function(){
 
 });
 
-function addRowReporteServicio(nro, id, cliente, empleado, servicio, orden, estado, fecha){
+function addRowReporteServicio( id, cliente, empleado, servicio, orden, estado, fecha){
    let row = $(`<tr>
 
-                             <td>${nro}</td>
+                             <td>${id}</td>
                              <td>${cliente}</td>
                              <td>${empleado}</td>                             
                              <td>${servicio}</td>

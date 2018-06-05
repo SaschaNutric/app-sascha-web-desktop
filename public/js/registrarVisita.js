@@ -119,7 +119,7 @@ $(document).ready(function () {
                 let plan_dieta = servicio.plan_dieta;
                 let plan_suplemento = servicio.plan_suplemento;
                 let plan_ejercicio = servicio.plan_ejercicio;
-
+                console.log(metas)
                 //Datos de la cita
                 moment.locale('es')
                 id_tipo_cita = agenda.id_tipo_cita
@@ -172,7 +172,7 @@ $(document).ready(function () {
                 //Metas
                 if (metas.length > 0) {
                     metas.map(function (meta) {
-                        addRowMeta(meta.id_parametro_meta, meta.tipo_parametro, meta.parametro, meta.valor_minimo, meta.signo == 0 ? 'fa-minus' : 'fa-plus')
+                        addRowMeta(meta.id_parametro_meta, meta.id_tipo_parametro, meta.parametro, meta.valor_minimo, meta.signo == 0 ? 'fa-minus' : 'fa-plus')
                     })
                 }
 
@@ -399,13 +399,16 @@ $(document).ready(function () {
 
     //Registrar Visita
     $('#btnRegistrar').on('click', function () {
+        console.log("-----id visita:")
+        console.log(id_tipo_cita)
+        console.log(ultima)
         if (id_tipo_cita == 2) {
             if (!ultima && !proxima) {
                 mensaje('#msjAlerta', ' de Próxima Visita', 5)
                 return
             }
             if (id_visita_control == null) {
-                registrarVisitaControl()
+                registrarVisitaControl(id_agenda)
             }
             if (id_visita_control != null) {
                 window.location = 'visitas.html'
@@ -785,6 +788,13 @@ $(document).ready(function () {
             }
         })
 
+    })
+    $('#btnAbrirProximaVisita').on('click', function () {
+        if (proxima) {
+            $('#proximaVisita').modal('hide');
+            mensaje('#msjAgregar', 'Ya has registrado una próxima visita', 14);
+
+        }
     })
 
     $('#btnProximaVisita').on('click', function () {
@@ -1498,7 +1508,7 @@ function addRowMeta(id, tipo_parametro, parametro, valor, signo) {
 
     let row = $(`<tr>
         <td hidden id="metaTP-${id}">${tipo_parametro}</td> 
-        <td id="metaS-"${id} ><i class="fa ${signo}"></i> </td>   
+        <td id="metaS-${id}" ><i class="fa ${signo}"></i> </td>   
         <td id="metaP-${id}">${parametro}</td>
         <td id="metaV-${id}">${valor}</td>
         <td style='display: ${id_tipo_cita == 1 ? 'block' : 'none'}'>
@@ -1522,8 +1532,9 @@ function editarMeta(id) {
     $('#btnAceptarMeta').css('display', 'none')
     $('#btnEditarMeta').css('display', 'inline')
     $('#txtIdMeta').val(id)
-    $('#selTipoParametroMeta option:contains(' + $(`#metaTP-${id}`).text() + ')').prop('selected', true);
+    $('#selTipoParametroMeta').val($(`#metaTP-${id}`).text());
     let tp = $('#selTipoParametroMeta').val()
+    console.log(tp)
     document.getElementById('selParametroMeta').length = 1;
     arregloTipoParametros.map(function (tipoparametro) {
         if (tipoparametro.id_tipo_parametro == tp) {
@@ -1537,6 +1548,7 @@ function editarMeta(id) {
     })
     $('#selParametroMeta option:contains(' + $(`#metaP-${id}`).text() + ')').prop('selected', true);
     $('#txtValorMeta').val(Number.parseInt($(`#metaV-${id}`).text()))
+    
 
 
 }
