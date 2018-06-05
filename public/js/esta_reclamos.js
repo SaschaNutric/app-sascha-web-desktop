@@ -15,18 +15,7 @@ $(document).ready(function () {
     });
 
     $('#btnLimpiar').on('click', function () {
-        $('#selGenero').val(0)
-        $('#selEdoCivil').val(0)
-        $('#selRangoEdad').val(0)
-        $('#selEmpleado').val(0)
-        $('#selservicio').val(0)
-        $('#selEspecialidad').val(0)
-        $('#dpMinimo').val('')
-        $('#dpMaximo').val('')
-        $('#datos').hide()
-        $('#graph-bar').hide()
-
-
+limpiar()
 
     })
 
@@ -59,6 +48,11 @@ $(document).ready(function () {
                 console.log(res);
                 console.log(status);
                 let data = res.data;
+                if(data.rows.length ==0){
+                    mensaje('#msjAlerta', 'No hay datos que mostrar', 14)
+                    limpiar()
+                    return
+                }
                 llenarTabla(data)
                 mensaje('#msjAlerta', `de reclamos`, 8);
             },
@@ -75,6 +69,21 @@ $(document).ready(function () {
     })
 
 });
+
+function limpiar(){
+    $('#selGenero').val(0)
+    $('#selEdoCivil').val(0)
+    $('#selRangoEdad').val(0)
+    $('#selEmpleado').val(0)
+    $('#selservicio').val(0)
+    $('#selEspecialidad').val(0)
+    $('#dpMinimo').val('')
+    $('#dpMaximo').val('')
+    $('#datos').hide()
+    $('#graph-bar').hide()
+
+
+}
 
 function llenarGrafica(data) {
     $('#graph-bar').show()

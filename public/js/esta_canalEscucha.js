@@ -13,14 +13,7 @@ $(document).ready(function () {
     });
 
     $('#btnLimpiar').on('click', function () {
-        $('#selGenero').val(0)
-        $('#selTipocontacto').val(0)
-        $('#selEdoCivil').val(0)
-        $('#selRangoEdad').val(0)
-        $('#dpMinimo').val('')
-        $('#dpMaximo').val('')
-        $('#datos').hide()
-        $('#graph-bar').hide()
+        limpiar()
     })
 
     $('#btnGenerar').on('click', function () {
@@ -54,6 +47,11 @@ $(document).ready(function () {
                 console.log(res);
                 console.log(status);
                 let data = res.data;
+                if (data.length == 0) {
+                    mensaje('#msjAlerta', 'No hay datos que mostrar', 14)
+                    limpiar()
+                    return
+                }
                 llenarTabla2(data)
                 mensaje('#msjAlerta', `de contacto `, 8);
             },
@@ -70,6 +68,18 @@ $(document).ready(function () {
     })
 
 });
+
+function limpiar() {
+    $('#selGenero').val(0)
+    $('#selTipocontacto').val(0)
+    $('#selEdoCivil').val(0)
+    $('#selRangoEdad').val(0)
+    $('#dpMinimo').val('')
+    $('#dpMaximo').val('')
+    $('#datos').hide()
+    $('#graph-bar').hide()
+
+}
 
 function llenarGrafica(data) {
     document.getElementById('graph-bar').innerHTML = '';

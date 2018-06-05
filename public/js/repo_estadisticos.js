@@ -12,20 +12,16 @@ $(document).ready(function () {
     })
 
     $('#btnLimpiar').on('click', function () {
-        $('#selEspecialidad').val(0)
-        $('#dpMinimo').val('')
-        $('#dpMaximo').val('')
-        $('#datos').hide()
-        $('#graph-bar').hide()
-        
-        
+        limpiar()
+
+
 
     })
 
     $('#btnGenerar').on('click', function () {
         $('#dtEstaVisitas').DataTable().clear();
         if ($('#dpMinimo').val() == '' && $('#dpMaximo').val() != '' || $('#dpMinimo').val() != '' && $('#dpMaximo').val() == '') {
-            mensaje('#msjAlerta', ' de fecha', 6)                        
+            mensaje('#msjAlerta', ' de fecha', 6)
             return;
         }
         let campos = {
@@ -35,28 +31,28 @@ $(document).ready(function () {
 
         }
 
-        if(campos.id_especialidad == null){
+        if (campos.id_especialidad == null) {
             $('#especialidad').hide()
-        }else{
+        } else {
             $('#txtEspecialidad').text($('#selEspecialidad option:selected').text());
             $('#especialidad').show()
-            
-        }
-        
-        if(campos.fecha_inicial == null){
-            $('#fecha-inicio').hide()
-        }else{
-            $('#txtFechaInicio').text($('#dpMinimo').val());
-            $('#fecha-inicio').show()
-            
+
         }
 
-        if(campos.fecha_final == null){
+        if (campos.fecha_inicial == null) {
+            $('#fecha-inicio').hide()
+        } else {
+            $('#txtFechaInicio').text($('#dpMinimo').val());
+            $('#fecha-inicio').show()
+
+        }
+
+        if (campos.fecha_final == null) {
             $('#fecha-fin').hide()
-        }else{
+        } else {
             $('#txtFechaFin').text($('#dpMaximo').val());
             $('#fecha-fin').show()
-            
+
         }
 
         $.ajax({
@@ -68,8 +64,13 @@ $(document).ready(function () {
                 console.log(res.data);
                 console.log(status);
                 let data = res.data;
+                if (data.length == 0) {
+                    mensaje('#msjAlerta', 'No hay datos que mostrar', 14)
+                    limpiar()
+                    return
+                }
                 llenarTabla(data)
-                mensaje('#msjAlerta', `de motivos preferidos`, 8);
+                mensaje('#msjAlerta', `de empleados`, 8);
             },
             error: function (res, status, xhr) {
                 console.log(res);
@@ -84,10 +85,16 @@ $(document).ready(function () {
 
 })
 
-
+function limpiar() {
+    $('#selEspecialidad').val(0)
+    $('#dpMinimo').val('')
+    $('#dpMaximo').val('')
+    $('#datos').hide()
+    $('#graph-bar').hide()
+}
 function llenarTabla(data) {
     $('#graph-bar').show()
-    
+
     let grafica = []
     let total = 0;
     data.map(function (empleado) {
@@ -112,7 +119,7 @@ function llenarTabla(data) {
 
 }
 
-function llenarGrafica(data){
+function llenarGrafica(data) {
     document.getElementById('graph-bar').innerHTML = '';
     Morris.Bar({
         element: 'graph-bar',
@@ -121,8 +128,8 @@ function llenarGrafica(data){
         ykeys: ['y'],
         labels: ['Cantidad de Clientes'],
         barColors: ['#cfdd3f']
-    
-    
+
+
     });
 }
 
