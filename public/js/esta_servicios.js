@@ -12,13 +12,7 @@ $(document).ready(function () {
     })
 
     $('#btnLimpiar').on('click', function () {
-        $('#selEspecialidad').val(0)
-        $('#selservicio').val(0)
-        $('#dpMinimo').val('')
-        $('#dpMaximo').val('')
-        $('#datos').hide()
-        $('#graph-donut').hide()
-
+        limpiar()
 
 
     })
@@ -36,6 +30,7 @@ $(document).ready(function () {
             fecha_final: $('#dpMaximo').val() != '' ? moment($('#dpMaximo').val()).format('YYYY-MM-DD') : null
 
         }
+        console.log(campos);
         mostrarFiltros(campos);
 
         $.ajax({
@@ -48,7 +43,6 @@ $(document).ready(function () {
                 console.log(status);
                 let data = res.data;
                 llenarTabla(data)
-                mensaje('#msjAlerta', `de efectividad del servicio`, 8);
             },
             error: function (res, status, xhr) {
                 console.log(res);
@@ -62,11 +56,24 @@ $(document).ready(function () {
     })
 
 })
+function limpiar(){
+    $('#selEspecialidad').val(0)
+    $('#selservicio').val(0)
+    $('#dpMinimo').val('')
+    $('#dpMaximo').val('')
+    $('#datos').hide()
+    $('#graph-donut').hide()
 
+}
 
 function llenarTabla(data) {
     let grafica = []
     data.map(function (metas) {
+        if(metas.todas == null){
+            mensaje('#msjAlerta', 'No hay datos que mostrar', 14)
+            limpiar()
+            return
+        }
         let todas = Number.parseInt(metas.todas)
         let cumplida = Number.parseInt(metas.cumplida)
         let no_cumplida = todas - cumplida
@@ -80,6 +87,8 @@ function llenarTabla(data) {
         $('#total').text(metas.todas)
         $('#dtServicios').DataTable().row.add(row).draw();
         $('#datos').show()
+        mensaje('#msjAlerta', `de efectividad del servicio`, 8);
+        
 
     })
     llenarGrafica(grafica);
