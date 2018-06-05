@@ -21,8 +21,6 @@ $(document).ready(function() {
 $("#btnConsultarServicio").on('click',function(){
 
     $('#dtServicio').DataTable().clear();
-
-     //    let     id_motivo  = $('select[name=motivo]').val();
            let     id_tipo_orden = $('select[name=tipoorden]').val();
            let     id_especialidad = $('select[name=especialidad]').val();
            let     id_servicio = $('select[name=servicio]').val();
@@ -31,8 +29,6 @@ $("#btnConsultarServicio").on('click',function(){
            let     estado =     $('select[name=estadoOrden]').val();
            let     fecha_inicial = $('#fechaInicial').val();
            let     fecha_final = $('#fechaFinal').val();
-
-
 
       //    if(id_motivo == "0"){
       //      id_motivo = null;
@@ -89,7 +85,7 @@ $("#btnConsultarServicio").on('click',function(){
         if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
             return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
         }
- $('#dtServicio').DataTable().clear();
+    $('#dtServicio').DataTable().clear();
         console.log(filtros);
          $.ajax({
             url: 'https://api-sascha.herokuapp.com/ordenservicios/reporte',
@@ -104,7 +100,8 @@ $("#btnConsultarServicio").on('click',function(){
                     mensaje('#msjAlerta', 'de Servicio', 8);
                     console.log(res);
                     console.log(status);
-                                  $('#dtServicio').DataTable().clear().draw();
+                    $('#dtServicio').DataTable().clear().draw();
+                    adjuntarArchivoSQL(res.query);
                                  var cont = 0;
                      res.data.map(function(orden) {
                         console.log(orden.id_orden_servicio);
@@ -146,7 +143,15 @@ function addRowReporteServicio(nro, id, cliente, servicio, orden, estado, fecha)
    $('#dtServicio').DataTable().row.add(row).draw();
 }
 
-function limpiartabla(){
-    $('#dtServicio').DataTable().clear().draw();
+function adjuntarArchivoSQL(query) {
+    let btnExportar = document.getElementById('btnExportarSQL');
+    btnExportar.download = 'reporte-ordenes-servicios.sql';
+    btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
+}
 
+function limpiartabla() {
+    let btnExportar = $('#btnExportarSQL');
+    btnExportar.attr('download', '');
+    btnExportar.attr('href', '');
+    $('#dtServicio').DataTable().clear().draw();    
 }

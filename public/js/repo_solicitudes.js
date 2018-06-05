@@ -18,6 +18,8 @@ $(document).ready(function() {
 
 });
 
+let query = '';
+
 $("#btnConsultarSolicitudes").on('click',function(){
 
     $('#dtSolicitud').DataTable().clear();
@@ -99,8 +101,10 @@ $("#btnConsultarSolicitudes").on('click',function(){
                     mensaje('#msjAlerta', 'de solicitudes', 8)
                     console.log(res);
                     console.log(status);
-                            var cont = 0;
-                     res.data.map(function(solicitud) {
+                    var cont = 0;
+                    query = res.query;
+                    adjuntarArchivoSQL(query);
+                    res.data.map(function(solicitud) {
                     cont = cont + 1;
                     addRowReporteSolicitud(cont, solicitud.id_solicitud_servicio, solicitud.nombre_cliente, solicitud.nombre_servicio
                     , solicitud.fecha_creacion, solicitud.respuesta);
@@ -118,19 +122,32 @@ $("#btnConsultarSolicitudes").on('click',function(){
 
 });
 
+$('#btnExportarSQL').on('click', function() {
+    
+})
+
+function adjuntarArchivoSQL(query) {
+    let btnExportar = document.getElementById('btnExportarSQL');
+    btnExportar.download = 'reporte-solicitudes.sql';
+    btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
+}
+
 function limpiartabla(){
+    query = '';
+    let btnExportar = $('#btnExportarSQL');
+    btnExportar.attr('download','');
+    btnExportar.attr('href', '');
     $('#dtSolicitud').DataTable().clear().draw();
 }
 
 
 function addRowReporteSolicitud(nro, id, cliente, servicio, fecha, respuesta){
    let row = $(`<tr>
-                             <td>${nro}</td>
-                             <td>${cliente}</td>
-                             <td>${servicio}</th>
-                             <td>${moment(fecha).format('DD-MM-YYYY')}</td>
-                             <td>${respuesta}</td>
-                         </tr>
-    `);
+            <td>${nro}</td>
+            <td>${cliente}</td>
+            <td>${servicio}</th>
+            <td>${moment(fecha).format('DD-MM-YYYY')}</td>
+            <td>${respuesta}</td>
+        </tr>`);
    $('#dtSolicitud').DataTable().row.add(row).draw();
 }
