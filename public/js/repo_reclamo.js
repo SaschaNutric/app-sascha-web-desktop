@@ -118,13 +118,22 @@ $("#btnConsultarReclamos").on('click',function(){
 
 
 });
-
-
-
+function limpiar(){
+    $('select[name=motivo]').val(0)
+    $('select[name=respuestareclamo]').val(0)
+    $('select[name=especialidad]').val(0) 
+    $('select[name=servicio]').val(0)
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('select[name=edad]').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
+   
+}
 function limpiartabla(){
     $('#dtReclamo').DataTable().clear().draw();
+    limpiar()
 }
-
 
 function addRowReporteReclamo(nro, id, cliente, empleado, servicio, motivo, respuesta, fecha){
    let row = $(`<tr>

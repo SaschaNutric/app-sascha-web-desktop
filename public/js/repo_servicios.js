@@ -147,7 +147,33 @@ function addRowReporteServicio( id, cliente, empleado, servicio, orden, estado, 
    $('#dtServicio').DataTable().row.add(row).draw();
 }
 
+
+
+
+  //    let     id_motivo  = $('select[name=motivo]').val();
+           let     id_tipo_orden = $('select[name=tipoorden]').val();
+           let     id_especialidad = $('select[name=especialidad]').val();
+           let     id_servicio = $('select[name=servicio]').val();
+           let     id_genero =          $('select[name=genero]').val();
+           let     id_estado_civil =    $('select[name=estadoCivil]').val();
+           let     estado =     $('select[name=estadoOrden]').val();
+           let     fecha_inicial = $('#fechaInicial').val();
+           let     fecha_final = $('#fechaFinal').val();
+
+function limpiar(){
+    $('select[name=especialidad]').val(0) 
+    $('#selservicio').val(0)
+    $('select[name=tipoorden]').val(0) 
+    $('select[name=estadoOrden]').val(0)
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('#selRangoEdad').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
+   
+}
 function limpiartabla(){
     $('#dtServicio').DataTable().clear().draw();
+    limpiar()
 
 }
