@@ -1285,7 +1285,7 @@ function eliminarParametro(id) {
     })
 }
 function confirmarParametro(id) {
-    if (!proxima) {
+    if (!proxima && !ultima) {
         mensaje('#msjAlerta', 'de Proxima Visita', 5)
         return
     }
@@ -1313,10 +1313,11 @@ function confirmarParametro(id) {
         let parametro = {
             id_parametro: id_parametro,
             valor: valor,
-            id_visita: id_visita_control
+            id_visita: id_visita_control,
+            id_orden_servicio: id_orden_servicio
         }
         $.ajax({
-            url: `https://api-sascha.herokuapp.com/parametrocliente/${id}`,
+            url: `http://localhost:5001/parametrocliente/${id}`,
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(parametro),
@@ -1383,7 +1384,7 @@ function perfil(id) {
 
 
 function editarParametro(id) {
-    if (!proxima) {
+    if (!proxima && !ultima) {
         mensaje('#msjAlerta', 'de Proxima Visita', 5)
         return
     }
@@ -1673,7 +1674,7 @@ function registrarVisitaControl(id_agenda) {
 
 function abrirAgregarParametro() {
     if (id_tipo_cita == 2) {
-        if (!proxima) {
+        if (!proxima && !ultima) {
             mensaje('#msjAlerta', 'de Proxima Visita', 5)
             return
         }
