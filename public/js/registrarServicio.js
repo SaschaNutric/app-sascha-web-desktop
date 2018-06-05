@@ -206,6 +206,7 @@ $(document).ready(function () {
     if (id != undefined) {
         $('#btnGuardar').css('display', 'inline');
         $('#btnRegistrar').css('display', 'none');
+        
 
         $('#btnGuardarCondicion').css('display', 'none');
         $('#btnEditarCondicion').css('display', 'inline');

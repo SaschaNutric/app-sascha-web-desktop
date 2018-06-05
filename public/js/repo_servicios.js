@@ -115,7 +115,7 @@ $("#btnConsultarServicio").on('click',function(){
                     if(orden.estado == 3){
                         estado = "Concluida";
                     }
-                   addRowReporteServicio(cont, orden.id_orden_servicio, orden.nombre_cliente, orden.nombre_servicio, orden.tipo_orden, estado, orden.fecha_emision);
+                   addRowReporteServicio( orden.id_orden_servicio, orden.nombre_cliente, orden.nombre_empleado, orden.nombre_servicio, orden.tipo_orden, estado, orden.fecha_emision);
                 })
                 }
              },
@@ -129,11 +129,12 @@ $("#btnConsultarServicio").on('click',function(){
 
 });
 
-function addRowReporteServicio(nro, id, cliente, servicio, orden, estado, fecha){
+function addRowReporteServicio( id, cliente, empleado, servicio, orden, estado, fecha){
    let row = $(`<tr>
 
-                             <td>${nro}</td>
+                             <td>${id}</td>
                              <td>${cliente}</td>
+                             <td>${empleado}</td>                             
                              <td>${servicio}</td>
                              <td>${orden}</td>
                              <td>${estado}</td>
@@ -148,10 +149,22 @@ function adjuntarArchivoSQL(query) {
     btnExportar.download = 'reporte-ordenes-servicios.sql';
     btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
 }
+function limpiar() {
+    $('select[name=especialidad]').val(0)
+    $('#selservicio').val(0)
+    $('select[name=tipoorden]').val(0)
+    $('select[name=estadoOrden]').val(0)
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('#selRangoEdad').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
 
+}
 function limpiartabla() {
     let btnExportar = $('#btnExportarSQL');
     btnExportar.attr('download', '');
     btnExportar.attr('href', '');
-    $('#dtServicio').DataTable().clear().draw();    
+    $('#dtServicio').DataTable().clear().draw();  
+    limpiar()  
 }

@@ -187,9 +187,21 @@ $("#btnConsultarContacto").on('click',function(){
 
 
 });
+function limpiar(){
+    $('select[name=respuestareclamo]').val(0)
+    $('select[name=conctacto]').val(0)
+    $('#select[name=motivo]').val(0)    
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('select[name=edad]').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
+}
+
 
 function limpiartabla(){
     $('#dtCanalEscucha').DataTable().clear().draw();
+    limpiar()
 }
 
 
@@ -197,7 +209,7 @@ function addRowReporteReclamo(nro, id, cliente, contacto, motivo, respuesta, fec
     let row;
     if(respuesta == null){
         row = $(`<tr>
-                             <td>${nro}</td>
+                             <td>${id}</td>
                              <td>${cliente}</td>
                              <td>${contacto}</th>
                              <td>${motivo}</td>

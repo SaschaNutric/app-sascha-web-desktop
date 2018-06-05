@@ -112,13 +112,11 @@ $.ajax({
     }
 })
 
-
- 
-
     //Llena el formulario con informacion de la a editar
     if (id != undefined) {
         $('#btnGuardar').css('display', 'inline');
         $('#btnRegistrar').css('display', 'none');
+        
 
         $.ajax({
             url: 'https://api-sascha.herokuapp.com/promocion/' + id,
@@ -285,7 +283,7 @@ $('#btnRegistrar').on('click', function () {
             console.log(res)
             const serv = res.data;
             registrado = serv.id_promocion;
-            mensaje('#msjAlerta', 'Servicio', 1);
+            mensaje('#msjAlerta', 'Promoción', 1);
             limpiarCampos();
         },
         error: function (res, status, xhr) {
@@ -400,7 +398,7 @@ $(document).ready(function () {
 //Abrir modal parametro
 $('#agregarParametroPromo').on('click', function () {
     if (registrado = null) { // para probar sin la validacion hay que agregar "!"
-        mensaje('#msjAlerta', 'Servicio', 7);
+        mensaje('#msjAlerta', 'Promoción', 7);
         return;
     }
     $('#modalParametroPromo').modal('show');
@@ -481,7 +479,7 @@ function eliminarParametro(id) {
         success: function (res, status, xhr) {
             $('#dtParametros').DataTable().row($(`#parametro-${id}`).parent()).remove().draw();
             $('#txtIdEliminarParametro').val('');
-            mensaje('#msjAlerta', `Parametro`, 2);
+            mensaje('#msjAlerta', `Parámetro`, 2);
 
         },
         error: function (res, status, xhr) {

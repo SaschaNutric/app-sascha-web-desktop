@@ -84,6 +84,7 @@ $("#btnConsultarSolicitudes").on('click',function(){
             fecha_final: fecha_final
         }
         let fecha_actual = moment().format('YYYY-MM-DD');
+        
         if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
             return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
         }
@@ -130,6 +131,19 @@ function adjuntarArchivoSQL(query) {
     let btnExportar = document.getElementById('btnExportarSQL');
     btnExportar.download = 'reporte-solicitudes.sql';
     btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
+
+function limpiar(){
+    $('select[name=motivo]').val(0)
+    $('select[name=respuesta]').val(0)
+    $('#select[name=motivo]').val(0) 
+    $('select[name=especialidad]').val(0)
+    $('#selservicio').val(0)   
+    $('select[name=genero]').val(0)
+    $('select[name=estadoCivil]').val(0)
+    $('select[name=edad]').val(0)
+    $('#fechaInicial').val('')
+    $('#fechaFinal').val('')
+   
 }
 
 function limpiartabla(){
@@ -138,16 +152,18 @@ function limpiartabla(){
     btnExportar.attr('download','');
     btnExportar.attr('href', '');
     $('#dtSolicitud').DataTable().clear().draw();
+    limpiar()
 }
 
 
 function addRowReporteSolicitud(nro, id, cliente, servicio, fecha, respuesta){
    let row = $(`<tr>
-            <td>${nro}</td>
-            <td>${cliente}</td>
-            <td>${servicio}</th>
-            <td>${moment(fecha).format('DD-MM-YYYY')}</td>
-            <td>${respuesta}</td>
-        </tr>`);
+                             <td>${id}</td>
+                             <td>${cliente}</td>
+                             <td>${servicio}</th>
+                             <td>${respuesta}</td>
+                             <td>${moment(fecha).format('DD-MM-YYYY')}</td>
+                         </tr>
+    `);
    $('#dtSolicitud').DataTable().row.add(row).draw();
 }

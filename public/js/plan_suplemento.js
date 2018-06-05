@@ -172,10 +172,10 @@ $(document).ready(function() {
                 res.data.suplementos.map(function(suplemento) {
                     suplementos.push({ 
                         id_suplemento: suplemento,
-                        nombre: $(`option[value="${suplemento}"]`).text()
+                        nombre: $(`#ms_suplementos option[value="${suplemento}"]`).text()
                     })
                 });
-                
+                console.log(suplementos)
                 addRowPlan(res.data.id_plan_suplemento, res.data.nombre, res.data.descripcion, suplementos)
                 limpiarPlanSuplemento();
                 mensaje('#msjAlerta', `Plan de Suplementos`, 1);
