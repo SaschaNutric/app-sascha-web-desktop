@@ -69,7 +69,7 @@ $(document).ready(function () {
                 console.log(status);
                 let data = res.data;
                 llenarTabla(data)
-                mensaje('#msjAlerta', `de motivos preferidos`, 8);
+                mensaje('#msjAlerta', `de empleados`, 8);
             },
             error: function (res, status, xhr) {
                 console.log(res);

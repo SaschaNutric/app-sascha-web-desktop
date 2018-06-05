@@ -19,8 +19,7 @@
     <link href="css/style-responsive.css" rel="stylesheet" />
 </head>
 
-<body>
-
+<body  style="overflow-y: hidden" >
     <div>
         <aside id='sidebar' style="overflow-y: auto;">
             <div class="nav-collapse">
@@ -75,10 +74,6 @@
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <li>
-                                <a href="#">
-                                    <i class=" fa fa-user"></i>Mi Cuenta</a>
-                            </li>
-                            <li>
                                 <a id="btnCerrarSesion">
                                     <i class="fa fa-key"></i>Salir</a>
                             </li>
@@ -91,7 +86,7 @@
         </header>
         <!--header end-->
 
-        <section id="main-content">
+        <section id="main-content" style="overflow-y: hidden !important">
             <section class="wrapper">
                 <iframe id="content" name="content" src="dashboard.html" scrolling="auto"></iframe>
             </section>
