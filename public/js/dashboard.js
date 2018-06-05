@@ -15,7 +15,22 @@ $(document).ready(function() {
         "ordering": true,
         "paging": true
     });
-
+    $('#dtMeta').DataTable({
+        "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron metas",
+            "zeroRecords": "No se encontraron metas"
+        },
+        "searching": false,
+        "ordering": false,
+        "paging": false,
+        "info": false
+    });
     $('#dtVisitaDiagnostico').DataTable({ 
           "language": {
               "lengthMenu": "",
@@ -128,7 +143,8 @@ $(document).ready(function() {
                             id_cliente: clientes_hoy[i].id_cliente,
                             id_orden_servicio: clientes_hoy[i].id_orden_servicio
                         }
-    
+                        console.log("HOLAAA-----")
+                        console.log(datos)
                         $.ajax({
                             url: 'https://api-sascha.herokuapp.com/cliente/visitas',
                             contentType: 'application/json',
@@ -148,7 +164,7 @@ $(document).ready(function() {
                                     if(visita.numero == 1){
                                         $('#cita-tipo').text('Diagnóstico')
                                     }else{$('#cita-tipo').text('Control')}
-                                    $('#ulHistorialVisitas').append(`<a onclick="cargarDetalle(${visita.id_visita})" data-toggle="modal" data-target="#modalDetalle">
+                                    $('#ulHistorialVisitas').append(`<a onclick="cargarDetalle(${visita.id_visita} ,${datos.id_orden_servicio})" data-toggle="modal" data-target="#modalDetalle">
                                     <li id="visita-${visita.numero}" style="background: #3da3cb">${moment(visita.fecha_atencion, 'YYYY-MM-DD').format('DD-MM-YYYY')}
                                     </li></a>`)
                                 })
@@ -180,7 +196,7 @@ $(document).ready(function() {
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
-            let promedio = Number.parseFloat(res.data.promedio).toFixed(2);
+            let promedio = Number.parseFloat(res.data.promedio? res.data.promedio:0).toFixed(2);
             $('#calificacion').text(promedio + '/5')    
         },
         error: function(res, status, xhr) {
@@ -269,16 +285,22 @@ $(document).ready(function() {
 
 
 //detalle de visitas
-function cargarDetalle(id){
+function cargarDetalle(id, orden_servicio){
     $('#dtDetalle').DataTable().clear()
+    console.log(orden_servicio)
+    let dato ={
+        id_orden_servicio: orden_servicio
+    }
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/detalles/visita/'+id,
         contentType: 'application/json',
-        type: 'GET',
+        type: 'POST',
+        data: JSON.stringify(dato),
         success: function (res, status, xhr) {
+            console.log(res.data)
             $('#visita-numero').text("#"+ res.data.numero )
             res.data.detalles.map(function (detalle) {
-                let valor = detalle.valor == null ? '-': detalle.valor + " " + detalle.unidad_abreviatura
+                let valor = detalle.valor == null ? '-':Number.parseFloat(detalle.valor).toFixed(2) + " " + detalle.unidad_abreviatura
                 let row = $(`<tr>   
                 <td>${detalle.tipo_parametro}</td>
                 <td>${detalle.nombre}</td>
@@ -287,14 +309,35 @@ function cargarDetalle(id){
                 `);
             $('#dtDetalle').DataTable().row.add(row).draw();
             })
+            res.data.metas.map(function (meta) {
+                addRowMeta( meta.parametro, meta.valor, meta.signo, meta.unidad_abreviatura);
+            })
 
         },
         error: function (res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);
-            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
+
         }
     })
 }
+
+function addRowMeta( parametro, valor, signo, unidad) {
+    let icono = ""
+    if(signo==0){
+        icono = 'fa-minus'
+    }else{
+        icono= 'fa-plus'
+    }
+    let row = $(`<tr>
+        <td><i class="fa ${icono}"></i> </td>   
+        <td>${parametro}</td>
+        <td >${valor} ${unidad}</td>
+        </tr>
+        `);
+    $('#dtMeta').DataTable().row.add(row).draw();
+
+}
+
 
 function reclamo(id,cliente,servicio,motivo){
     console.log('yes')

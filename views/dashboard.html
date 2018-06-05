@@ -147,75 +147,92 @@
 </div>
 
       <!--inicio de la modal detalle visita -->
-  <div class="modal fade bs-example-modal-sm" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title" id="gridSystemModalLabel">
-                <i></i><span id="visita-numero"></span> Detalle de Visita</h4>
-            </div>
-            <div class="modal-body">
-          
-              <div class="row">
-                  <div class="col-md-4">
-                      <div class="mini-stat clearfix">
-                        <span id="color-icono-visita" class="mini-stat-icon light-green">
-                          <i id="icono-visita" class="fa fa-stethoscope"></i>
-                        </span>
-                        <div id="cita-info" class="mini-stat-info detalle">
-                          <span id="cita-fecha"></span>
-                          <h5 id="cita-tipo"></h5>
+      <div class="modal fade bs-example-modal-sm" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="gridSystemModalLabel">
+                    <i></i>
+                    <span id="visita-numero"></span> Detalle de Visita</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="mini-stat clearfix">
+                            <span id="color-icono-visita" class="mini-stat-icon light-green">
+                              <i id="icono-visita" class="fa fa-stethoscope"></i>
+                            </span>
+                            <div id="cita-info" class="mini-stat-info detalle">
+                              <span id="cita-fecha"></span>
+                              <h5 id="cita-tipo"></h5>
+                            </div>
+                          </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="mini-stat clearfix">
+                            <span class="mini-stat-icon medium-green">
+                              <i class="fa fa-user"></i>
+                            </span>
+                            <div id="cliente-info" class="mini-stat-info detalle">
+                              <span id="cliente-nombre"></span>
+                              <h5>Cliente</h5>
+                            </div>
+                          </div>
+                        </div>
+        
+                      </div>
+                      <div class="row" style="padding: 20px">
+                        <table class="display table table-bordered table-striped" id="dtDetalle">
+                          <thead>
+                            <tr>
+                              <th width="30%">Tipo de Parámetro</th>
+                              <th width="50%">Parametro</th>
+                              <th width="20%">Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+        
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="mini-stat clearfix">
-                        <span class="mini-stat-icon medium-green">
-                          <i class="fa fa-user"></i>
-                        </span>
-                        <div id="cliente-info" class="mini-stat-info detalle">
-                          <span id="cliente-nombre"></span>
-                          <h5 >Cliente</h5>
+                      <div class="row">
+                        <div class="mini-stat clearfix">
+                          <span class="mini-stat-icon dark-green">
+                            <i class="fa fa-medkit"></i>
+                          </span>
+                          <div id="servicio-info" class="mini-stat-info detalle">
+                            <span id="servicio-nombre"></span>
+                            <h5>Servicio</h5>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mini-stat clearfix">
-                        <span class="mini-stat-icon dark-green">
-                          <i class="fa fa-medkit"></i>
-                        </span>
-                        <div id="servicio-info" class="mini-stat-info detalle">
-                          <span id="servicio-nombre"></span>
-                          <h5 >Servicio</h5>
-                        </div>
+                      <div class="row">
+                        <table id="dtMeta" class="display table">
+                          <thead>
+                            <tr>
+                              <th  width="10%">Metas</th>
+                              <th hidden style="width: 50% !important">Parametro</th>
+                              <th hidden style="width: 40% !important">Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
               </div>
-              
-              <div class="row" style="padding: 20px">
-                <table class="display table table-bordered table-striped" id="dtDetalle">
-                  <thead>
-                    <tr>
-                      <th width= "30%">Tipo de Parámetro</th>
-                      <th width="50%">Parametro</th>
-                      <th width="20%">Valor</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-    
-              </div>
-    
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cerrar</button>
             </div>
           </div>
-        </div>
-      </div>
       <!--fin de la modal detalle visita -->
 
       <!-- Modal Agregar registrar incidencia -->
