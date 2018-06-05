@@ -62,6 +62,10 @@ function mensaje(id, entidad, accion){
         tipo= "alert alert-success";
         texto= `<strong>Éxito!</strong> ${entidad}`;
         break;
+        case 16:
+        tipo= "alert alert-success";
+        texto= `<strong>Éxito!</strong> Respuesta enviada.`;
+        break;
 
 
     }
