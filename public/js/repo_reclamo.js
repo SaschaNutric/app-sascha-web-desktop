@@ -100,8 +100,9 @@ $("#btnConsultarReclamos").on('click',function(){
                     mensaje('#msjAlerta', 'de reclamos', 8)
                     console.log(res);
                     console.log(status);
+                    adjuntarArchivoSQL(res.query);                                        
                     var cont = 0;
-                     res.data.map(function(reclamo) {
+                    res.data.map(function(reclamo) {
                     cont = cont + 1;
                     addRowReporteReclamo(cont, reclamo.id_reclamo, reclamo.nombre_cliente, reclamo.nombre_empleado, reclamo.nombre_servicio
                     , reclamo.motivo_descripcion, reclamo.respuesta_descripcion,reclamo.fecha_creacion);
@@ -115,9 +116,8 @@ $("#btnConsultarReclamos").on('click',function(){
 
             }
         })
-
-
 });
+
 function limpiar(){
     $('select[name=motivo]').val(0)
     $('select[name=respuestareclamo]').val(0)
@@ -127,10 +127,19 @@ function limpiar(){
     $('select[name=estadoCivil]').val(0)
     $('select[name=edad]').val(0)
     $('#fechaInicial').val('')
-    $('#fechaFinal').val('')
-   
+    $('#fechaFinal').val('')  
 }
+
+function adjuntarArchivoSQL(query) {
+    let btnExportar = document.getElementById('btnExportarSQL');
+    btnExportar.download = 'reporte-reclamos.sql';
+    btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
+}
+
 function limpiartabla(){
+    let btnExportar = $('#btnExportarSQL');
+    btnExportar.attr('download', '');
+    btnExportar.attr('href', '');
     $('#dtReclamo').DataTable().clear().draw();
     limpiar()
 }

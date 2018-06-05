@@ -132,6 +132,7 @@ function adjuntarArchivoSQL(query) {
     btnExportar.download = 'reporte-solicitudes.sql';
     btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
 }
+
 function limpiar(){
     $('select[name=motivo]').val(0)
     $('select[name=respuesta]').val(0)
@@ -157,13 +158,12 @@ function limpiartabla(){
 
 
 function addRowReporteSolicitud(nro, id, cliente, servicio, fecha, respuesta){
-   let row = $(`<tr>
-                             <td>${id}</td>
-                             <td>${cliente}</td>
-                             <td>${servicio}</th>
-                             <td>${respuesta}</td>
-                             <td>${moment(fecha).format('DD-MM-YYYY')}</td>
-                         </tr>
-    `);
-   $('#dtSolicitud').DataTable().row.add(row).draw();
+    let row = $(`<tr>
+        <td>${id}</td>
+        <td>${cliente}</td>
+        <td>${servicio}</th>
+        <td>${respuesta}</td>
+        <td>${moment(fecha).format('DD-MM-YYYY')}</td>
+    </tr>`);
+    $('#dtSolicitud').DataTable().row.add(row).draw();
 }

@@ -164,14 +164,16 @@ $("#btnConsultarContacto").on('click',function(){
             data: JSON.stringify(filtros),
             success: function(res, status, xhr) {
                 limpiartabla()
-                if(res.data.length == 0){
+                if (res.data.length == 0) {
                     return mensaje('#msjAlerta', 'No se encontraron registros', 14);
-                }else{
+                }
+                else {
                     mensaje('#msjAlerta', 'de Canal de Escucha', 8)
                     console.log(res);
                     console.log(status);
+                    adjuntarArchivoSQL(res.query);                    
                     var cont = 0;
-                     res.data.map(function(comentario) {
+                    res.data.map(function(comentario) {
                     cont = cont + 1;
                     addRowReporteReclamo(cont, comentario.id_comentario, comentario.nombre_cliente, comentario.tipo_motivo
                     , comentario.motivo_descripcion, comentario.respuesta,comentario.fecha_creacion);
@@ -184,8 +186,6 @@ $("#btnConsultarContacto").on('click',function(){
 
             }
         })
-
-
 });
 function limpiar(){
     $('select[name=respuestareclamo]').val(0)
@@ -198,8 +198,16 @@ function limpiar(){
     $('#fechaFinal').val('')
 }
 
+function adjuntarArchivoSQL(query) {
+    let btnExportar = document.getElementById('btnExportarSQL');
+    btnExportar.download = 'reporte-canal-escucha.sql';
+    btnExportar.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(query);
+}
 
 function limpiartabla(){
+    let btnExportar = $('#btnExportarSQL');
+    btnExportar.attr('download', '');
+    btnExportar.attr('href', '');
     $('#dtCanalEscucha').DataTable().clear().draw();
     limpiar()
 }
