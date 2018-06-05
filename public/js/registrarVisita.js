@@ -183,13 +183,31 @@ $(document).ready(function () {
                         contentType: 'application/json',
                         type: 'GET',
                         success: function (res, status, xhr) {
+                            console.log(res.data)
+                            let agregados = []
+                            perfil.map(function (parametro_perfil) {
+                                let unidad = parametro_perfil.unidad
+
+                                agregados.push(parametro_perfil.id_parametro)
+                                if (unidad == null || unidad == undefined) {
+                                    addRowParametro(parametro_perfil.id_parametro, parametro_perfil.parametro, parametro_perfil.tipo_parametro, parametro_perfil.tipo_valor, '', parametro_perfil.valor, agenda.id_tipo_cita, '', true)
+                                } else {
+                                    addRowParametro(parametro_perfil.id_parametro, parametro_perfil.parametro, parametro_perfil.tipo_parametro, parametro_perfil.tipo_valor, parametro_perfil.unidad_abreviatura, parametro_perfil.valor, agenda.id_tipo_cita, '', true)
+                                }
+
+                            })
                             res.data.map(function (parametro) {
                                 let unidad = parametro.id_unidad
-                                if (unidad == null) {
-                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '', null, agenda.id_tipo_cita, '')
-                                } else {
-                                    addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura, null, agenda.id_tipo_cita, '')
+                                if (agregados.indexOf(parametro.id_parametro) == -1) {
+                                    if (unidad == null) {
+                                        addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, '', null, agenda.id_tipo_cita, '', false)
+                                    } else {
+                                        addRowParametro(parametro.id_parametro, parametro.nombre, parametro.tipo_parametro.nombre, parametro.tipo_valor, parametro.unidad.abreviatura, null, agenda.id_tipo_cita, '', false)
+                                    }
                                 }
+
+
+
                             })
 
                         },
@@ -209,9 +227,9 @@ $(document).ready(function () {
                         perfil.map(function (parametro) {
                             let unidad = parametro.unidad
                             if (unidad == null || unidad == undefined) {
-                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, '', parametro.valor, agenda.id_tipo_cita, parametro.id_parametro)
+                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, '', parametro.valor, agenda.id_tipo_cita, parametro.id_parametro, false)
                             } else {
-                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, parametro.unidad_abreviatura, parametro.valor, agenda.id_tipo_cita, parametro.id_parametro)
+                                addRowParametro(parametro.id_parametro_cliente, parametro.parametro, parametro.tipo_parametro, parametro.tipo_valor, parametro.unidad_abreviatura, parametro.valor, agenda.id_tipo_cita, parametro.id_parametro, false)
                             }
                         })
                     }
@@ -754,7 +772,7 @@ $(document).ready(function () {
 
             success: function (res, status, xhr) {
                 mensaje('#msjAlerta', 'Parametro', 1)
-                addRowParametro(res.data.id_parametro_cliente, p_nombre, tp_nombre, tv, u, v, 2)
+                addRowParametro(res.data.id_parametro_cliente, p_nombre, tp_nombre, tv, u, v, 2, false)
                 console.log(res.data.mensaje)
                 limpiarAgregarParametro()
                 $('#agregarParametro').modal('hide')
@@ -1230,7 +1248,7 @@ function createSelFrecuencia(id, clases, selected, element) {
     document.getElementById(element).appendChild(select)
 }
 
-function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita, id_parametro) {
+function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP, tipo_cita, id_parametro, es_perfil) {
     let valor = '';
     if (tipo_valor === 2) {
         valor = `<input id='real-${id}' type="number" min="0" class='form-control txtValor' style='width: 70%' value='${valorP == null ? '' : Number.parseFloat(valorP).toFixed(2)}' ><span> ${unidad}</span>`
@@ -1240,7 +1258,7 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
         <td id="nombreParametro-${id}">${nombre}</td>
         <td class='text-center' id="tipo_valor-${id}">${valor}</td>
         <td ${tipo_cita == 1 ? '' : 'hidden'}>
-        <input onchange='perfil(${id})' id='parametro-${id}' class="chk-perfil" type="checkbox" > 
+        <input style="display: ${es_perfil ? 'none' : 'inline'}" onchange='perfil(${id})' id='parametro-${id}' class="chk-perfil" type="checkbox" > 
         </td>
         <td ${tipo_cita == 2 ? '' : 'hidden'}>
         <a style='display: ${tipo_valor == 1 ? 'none' : 'inline'}' id='editarParametro-${id}' class='btn btn-white' onclick='editarParametro(${id})'><i class='fa fa-pencil' /> </a>
@@ -1252,7 +1270,10 @@ function addRowParametro(id, nombre, tipo_parametro, tipo_valor, unidad, valorP,
         </tr>
         `);
     $('#dtPerfil').DataTable().row.add(row).draw();
+    if (es_perfil) {
+        $(`#real-${id}`).prop('disabled', true)
 
+    }
     if (tipo_cita == 2) {
         $(`#real-${id}`).prop('disabled', true)
         $(`#thEditar`).css('display', 'inline')
@@ -1273,7 +1294,7 @@ function eliminarParametro(id) {
         success: function (res, status, xhr) {
             mensaje('#msjAlerta', 'Parametro del perfil', 2)
             $('#dtPerfil').DataTable().row($(`#nombreParametro-${id}`).parent()).remove().draw();
-            
+
 
         },
         error: function (res, status, xhr) {
@@ -1605,7 +1626,7 @@ function cargarAgenda() {
                 })
 
             } else {
-                mensaje('#msjProximaVisita', 'La fecha de la visita debe ser mayor a la de hoy.', 14)
+                mensaje('#msjProximaVisita', 'La fecha de la visita debe ser mayor a la de la visita actual.', 14)
                 $('#txtFechaCita').val('')
             }
         }

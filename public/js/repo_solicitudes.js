@@ -82,6 +82,7 @@ $("#btnConsultarSolicitudes").on('click',function(){
             fecha_final: fecha_final
         }
         let fecha_actual = moment().format('YYYY-MM-DD');
+        
         if(filtros.fecha_final < filtros.fecha_inicial || filtros.fecha_final > fecha_actual){
             return mensaje('#msjAlerta', 'Debe seleccionar un rango de fechas valido', 13);
         }
@@ -128,8 +129,8 @@ function addRowReporteSolicitud(nro, id, cliente, servicio, fecha, respuesta){
                              <td>${nro}</td>
                              <td>${cliente}</td>
                              <td>${servicio}</th>
-                             <td>${moment(fecha).format('DD-MM-YYYY')}</td>
                              <td>${respuesta}</td>
+                             <td>${moment(fecha).format('DD-MM-YYYY')}</td>
                          </tr>
     `);
    $('#dtSolicitud').DataTable().row.add(row).draw();

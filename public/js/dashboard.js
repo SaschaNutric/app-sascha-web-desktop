@@ -180,8 +180,8 @@ $(document).ready(function() {
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
-            let promedio = res.data.promedio;
-            $('#calificacion').text(promedio)    
+            let promedio = Number.parseFloat(res.data.promedio).toFixed(2);
+            $('#calificacion').text(promedio + '/5')    
         },
         error: function(res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);
@@ -255,8 +255,8 @@ $(document).ready(function() {
         contentType: 'application/json',
         type: 'GET',
         success: function(res, status, xhr) {
-            let promedio = res.data.promedio;
-            $('#calificacion').text(promedio)    
+            let promedio = Number.parseFloat(res.data.promedio).toFixed(2);
+            $('#calificacion').text(promedio+ '/5')    
         },
         error: function(res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);

@@ -16,6 +16,24 @@ var Script = function () {
         "ordering": true,
         "paging": true
     });
+
+
+    $('#dtMeta').DataTable({
+        "language": {
+            "lengthMenu": "",
+            "search": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            },
+            "emptyTable": "No se encontraron metas",
+            "zeroRecords": "No se encontraron metas"
+        },
+        "searching": false,
+        "ordering": false,
+        "paging": false,
+        "info": false
+    });
     /* initialize the calendar
     -----------------------------------------------------------------*/
     let data = {
@@ -44,7 +62,7 @@ var Script = function () {
                 let agenda =event.agenda
                 let fecha_cita = moment(event.start).format('DD, MMMM YYYY')
 
-          
+                console.log(event)
                 $('#cliente-nombre').text(agenda.nombre_cliente)
                 $('#servicio-nombre').text(agenda.nombre_servicio)
                 
@@ -70,7 +88,7 @@ var Script = function () {
                     $('#color-icono-visita').addClass('light-green')
                     $('#icono-visita').addClass('fa-stethoscope')
                 }
-                cargarDetalle(event.id_visita)
+                cargarDetalle(event.id_visita, event.id_orden_servicio)
                 
                 $('#modalDetalle').modal()
             }
@@ -87,10 +105,10 @@ var Script = function () {
       data: JSON.stringify(data),
       success: function(res, status, xhr){
         res.data.map(function(agenda) {
-
          let event = {
             title: agenda.horario + " - " + agenda.nombre_cliente,
             id_visita: agenda.id_visita,
+            id_orden_servicio: agenda.id_orden_servicio,
             agenda: agenda,
             start: agenda.fecha_inicio,
             end: agenda.fecha_fin,
@@ -112,13 +130,18 @@ var Script = function () {
 
 }();
 
-function cargarDetalle(id){
+function cargarDetalle(id, orden_servicio){
     $('#dtDetalle').DataTable().clear()
+    let data ={
+        id_orden_servicio: orden_servicio
+    }
     $.ajax({
         url: 'https://api-sascha.herokuapp.com/detalles/visita/'+id,
         contentType: 'application/json',
-        type: 'GET',
+        type: 'POST',
+        data: JSON.stringify(data),
         success: function (res, status, xhr) {
+            console.log(res.data)
             $('#visita-numero').text("#"+ res.data.numero )
             res.data.detalles.map(function (detalle) {
                 let valor = detalle.valor == null ? '-':Number.parseFloat(detalle.valor).toFixed(2) + " " + detalle.unidad_abreviatura
@@ -130,12 +153,31 @@ function cargarDetalle(id){
                 `);
             $('#dtDetalle').DataTable().row.add(row).draw();
             })
+            res.data.metas.map(function (meta) {
+                addRowMeta( meta.parametro, meta.valor, meta.signo, meta.unidad_abreviatura);
+            })
 
         },
         error: function (res, status, xhr) {
             const respuesta = JSON.parse(res.responseText);
-            mensaje('#msjAlerta', `${respuesta.data.mensaje}`, 0);
 
         }
     })
+}
+
+function addRowMeta( parametro, valor, signo, unidad) {
+    let icono = ""
+    if(signo==0){
+        icono = 'fa-minus'
+    }else{
+        icono= 'fa-plus'
+    }
+    let row = $(`<tr>
+        <td><i class="fa ${icono}"></i> </td>   
+        <td>${parametro}</td>
+        <td >${valor} ${unidad}</td>
+        </tr>
+        `);
+    $('#dtMeta').DataTable().row.add(row).draw();
+
 }
