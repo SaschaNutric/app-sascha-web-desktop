@@ -609,7 +609,7 @@ function addRowParametro(id, nombre_parametro, ps) {
     <td id="minimo-${id}">${vm}</td>
     <td id="maximo-${id}">${vM}</td>
     <td>
-    <button onclick="abrirModalEliminarParametro(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarParametro" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+    <button onclick="abrirModalEliminarParametro(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarParametro" title='Eliminar'><i class="fa fa-trash-o"></i></button>
     </td>
     </tr>
     `);

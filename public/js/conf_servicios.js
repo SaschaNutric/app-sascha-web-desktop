@@ -39,8 +39,8 @@ $(document).ready(function () {
                     <td style="display: none" id="planEjercicio-${servicio.id_servicio}">${planE}</td>
                     <td style="display: none" id="planSuplemento-${servicio.id_servicio}">${planS}</td>
                     <td>
-                    <a onclick="verServicio(${servicio.id_servicio})"  class='ver btn  btn-stransparent' data-toggle='modal' data-target="#verServicio" title='Ver Más'><i class='fa fa-eye'></i></a>
-                    <a onclick="editarServicio(${servicio.id_servicio})"  class='edit btn  btn-stransparent' title='Editar'><i class='fa fa-pencil'></i></a>
+                    <button onclick="verServicio(${servicio.id_servicio})" type="button" class='ver btn  btn-stransparent' data-toggle='modal' data-target="#verServicio" title='Ver Más'><i class='fa fa-eye'></i></button>
+                    <button onclick="editarServicio(${servicio.id_servicio})" type="button" class='edit btn  btn-stransparent' title='Editar'><i class='fa fa-pencil'></i></button>
                     <button onclick="abrirModalEliminarServicio(${servicio.id_servicio})" type="button" class='ver btn  btn-stransparent' data-toggle='modal' data-target="#modal-confirmar" title='Eliminar'><i class="fa fa-trash-o"></i></button>
                     </td>
                     </tr>
