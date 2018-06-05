@@ -128,7 +128,7 @@ function limpiartabla(){
 
 function addRowReporteReclamo(nro, id, cliente, empleado, servicio, motivo, respuesta, fecha){
    let row = $(`<tr>
-                             <td>${nro}</td>
+                             <td>${id}</td>
                              <td>${cliente}</td>
                              <td>${empleado}</td>
                              <td>${servicio}</th>
