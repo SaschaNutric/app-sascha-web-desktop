@@ -248,7 +248,7 @@ $(document).ready(function()
             }
             </td>
             <td>
-            <button onclick="abrirModalEliminarPlanSuplemento(${id})" type='button' class='ver btn  btn-transparente' data-toggle='modal' data-target="#eliminarPlan" title='Eliminar'><i class="fa fa-trash-o"></i></button>
+            <button onclick="abrirModalEliminarPlanSuplemento(${id})" type='button' class='ver btn  btn-stransparent' data-toggle='modal' data-target="#eliminarPlan" title='Eliminar'><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>`);
         $('#dtAgendaNutricionista').DataTable().row.add(row).draw();

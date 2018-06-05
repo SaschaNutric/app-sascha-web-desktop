@@ -33,7 +33,7 @@ $(document).ready(function () {
                     <td id="valido_hasta-${promocion.id_promocion}">${moment(promocion.valido_hasta,'YYYY-MM-DD').format('DD-MM-YYYY')} </td>
                     <td>
                         <button onclick="abrirModalDifundirPromocion(${promocion.id_promocion})" type="button" class="btn btn-stransparent" data-toggle='modal' data-target="#modal-confirmar-difusion" title="Difundir"><i class="fa fa-bullhorn"></i></button>
-                        <a onclick="editarPromo(${promocion.id_promocion})"  class='edit btn  btn-stransparent' title='Editar'><i class='fa fa-pencil'></i></a>
+                        <button onclick="editarPromo(${promocion.id_promocion})"  class='edit btn  btn-stransparent' title='Editar'><i class='fa fa-pencil'></i></button>
                         
                     </td>
                     </tr>
