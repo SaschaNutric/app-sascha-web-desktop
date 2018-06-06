@@ -118,6 +118,22 @@ $.ajax({
 
 
 $('#btnguardarSlider').on('click', function() {
+    if($('#txtTituloSlider1').val() == ""){
+            $('#txtTituloSlider1').css('border', '1px solid red');
+            return;
+        }
+
+if($('#txtDescripcionSlider1').val() == ""){
+            $('#txtDescripcionSlider1').css('border', '1px solid red');
+            return;
+        }
+
+if($('#txtOrden1').val() == ""){
+            $('#txtOrden1').css('border', '1px solid red');
+            return;
+        }
+
+
 
      let slider = {
             titulo: $('#txtTituloSlider1').val(),
@@ -176,6 +192,15 @@ $('#btnguardarSlider').on('click', function() {
 })
 
  $('#btnguardarContenido').on('click', function() {
+         if($('#tituloContenido').val() == ""){
+            $('#tituloContenido').css('border', '1px solid red');
+            return;
+        }
+
+         if($('#contenidoContenido').val() == ""){
+            $('#contenidoContenido').css('border', '1px solid red');
+            return;
+        }
 
      let contenido = {
             titulo: $('#tituloContenido').val(),
@@ -198,7 +223,7 @@ $('#btnguardarSlider').on('click', function() {
         data: form_data,
             success: function(res, status, xhr){
                     console.log(res);
-                     mensaje('#msjAlertaContenido', `Pregunta Frecuente`, 1);
+                     mensaje('#msjAlertaContenido', `Recomenacion`, 1);
                        const contenido = res.data;
                  addRowRecomendaciones( contenido.id_contenido ,contenido.titulo, contenido.texto, contenido.url_imagen);
                 },
@@ -305,6 +330,20 @@ $('#btnguardarSlider').on('click', function() {
                   $("#vistaPreliminarE").attr("src", $(`#imagen-${id}`).attr('src'));
                   $("#imagenContenidoE").val($(`#imagen-${id}`).attr('src'));
  }
+
+ function limpiarPregunta(){
+     $('#textPregunta').val(" ");
+    $('#textRespuesta').val(" ");
+    $('#textPregunta').css('border', '1px solid #ccc');
+             $('#textRespuesta').css('border', '1px solid #ccc');
+}
+
+function limpiarContenido(){
+    $('#tituloContenido').val(" ");
+    $('#contenidoContenido').val(" ");
+    $('#tituloContenido').css('border', '1px solid #ccc');
+    $('#contenidoContenido').css('border', '1px solid #ccc');
+}
 
  function abrirModalEliminarPregunta(id){
 
@@ -544,13 +583,6 @@ $('#btnEditarPregunta').on('click', function() {
          $('#agregarPregunta').modal('hide');
 })
 
-
-function limpiarPregunta(){
-     $('#textPregunta').val(" ");
-    $('#textRespuesta').val(" ");
-    $('#textPregunta').css('border', '1px solid #ccc');
-             $('#textRespuesta').css('border', '1px solid #ccc');
-}
 
 
 

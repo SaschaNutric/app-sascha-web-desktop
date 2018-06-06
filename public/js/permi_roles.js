@@ -80,6 +80,8 @@ $(document).ready(function () {
         
         if ($('#txtNombre').val() == "") {
             $('#txtNombre').css('border', '1px solid red');
+            mensaje('#msjAlertaA', '', 5)
+            
             return;
         }
         else {

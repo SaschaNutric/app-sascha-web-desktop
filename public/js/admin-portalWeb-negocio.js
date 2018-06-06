@@ -73,6 +73,22 @@ $(document).ready(function(){
 
       $('#btnGuardarRedSocial1').on('click', function() {
 console.log($('#txtEnlace1').val());
+
+if($('#txtNombreRed1').val() == ""){
+            $('#txtNombreRed1').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtEnlace1').val() == ""){
+            $('#txtEnlace1').css('border', '1px solid red');
+            return;
+        }
+
+        if($('#txtUsuario1').val() == ""){
+            $('#txtUsuario1').css('border', '1px solid red');
+            return;
+        }
+
     let redsocial = {
             nombre: $('#txtNombreRed1').val(),
             url_base: $('#txtEnlace1').val(),
