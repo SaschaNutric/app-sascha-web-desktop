@@ -426,6 +426,8 @@ function cargarModalVisitasD() {
 function cargarModalVisitasC() {
       
     $('#dtVisitaControl').DataTable().clear();
+    $('#dtMeta').DataTable().clear()
+    
     let id_empleado = JSON.parse(localStorage.getItem('empleado')).id_empleado;
     let dashboard = JSON.parse(localStorage.getItem('empleado')).dashboard;
     let fecha ={

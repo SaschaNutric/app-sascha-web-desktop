@@ -131,7 +131,9 @@ var Script = function () {
 }();
 
 function cargarDetalle(id, orden_servicio){
+    $('#dtMeta').DataTable().clear()
     $('#dtDetalle').DataTable().clear()
+    
     let data ={
         id_orden_servicio: orden_servicio
     }
