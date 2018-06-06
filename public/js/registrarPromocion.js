@@ -11,6 +11,7 @@ let registrado = null;
    const id = prueba['id'];
    const url = prueba['url'];
    let oldPromocion = {};
+   console.log(prueba)
 
 $(document).ready(function() {
     const tablaparametros = $('#dtParametros').DataTable({
@@ -284,7 +285,8 @@ $('#btnRegistrar').on('click', function () {
             const serv = res.data;
             registrado = serv.id_promocion;
             mensaje('#msjAlerta', 'Promoción', 1);
-            limpiarCampos();
+            $('#btnRegistrar').hide()
+           //limpiarCampos();
         },
         error: function (res, status, xhr) {
             console.log(res);
@@ -300,7 +302,7 @@ $('#btnRegistrar').on('click', function () {
 
 
 function verpromocion(){
-    
+    console.log(url)
     window.location= url;
 }
 
