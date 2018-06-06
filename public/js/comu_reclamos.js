@@ -131,6 +131,7 @@ function actualizarReclamos(){
             
         },
         error: function (res, status, xhr) {
+            console.log(res)
             const respuesta = JSON.parse(res.responseText);
             mensaje('#msjAlerta', `${respuesta.mensaje}`, 0);
         }
